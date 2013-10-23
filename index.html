@@ -22,7 +22,7 @@
 			.fl-page .jumbotron { margin-top: 2em; }
 
 			.fl-page .btn-default { vertical-align: bottom; }
-			.fl-page .btn-lg { float: right;}
+			.fl-page .btn-group { float: right;}
 			.fl-page .btn-lg span { font-size: 0.7em; }
 			.fl-page .footer { margin-top: 3em; color: #999;}
 
@@ -46,12 +46,21 @@
 	</head>
 	<body class="fl-page">
 		<div class="container">
-
 			<div class="jumbotron">
 				<h1>Featherlight<i>.js</i><span> The ultra slim lightbox.</span></h1>
 				<p class="lead">Featherlight is a very leightweight jQuery lightbox.</p>
 				<p class="example">
-					<a class="btn btn-lg btn-success" href="#">Download <span>(compressed 2KB)</span></a>
+					<div class="btn-group">
+						<a class="btn btn-lg btn-info" href="https://github.com/noelboss/featherlight/">
+							<i class="glyphicon glyphicon-eye-open"></i>
+							github
+						</a>
+						<a class="btn btn-lg btn-success" href="https://github.com/noelboss/featherlight/archive/master.zip">
+							<i class="glyphicon glyphicon-arrow-down"></i>
+							Download <span>(compressed 2KB)</span>
+						</a>
+					</div>
+
 
 					<a class="btn btn-default" href="#" data-featherlight="#fl1">Featherlight Default</a>
 
