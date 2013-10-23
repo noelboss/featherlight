@@ -1,0 +1,8 @@
+/**
+* Featherlight – ultra slim jQuery lightbox
+* https://github.com/noelboss/featherlight
+*
+* Copyright 2012, Noel Bossart
+* MIT Licensed.
+*/
+@media all{.featherlight{display:none;position:fixed;top:0;bottom:0;left:0;right:0;z-index:9999;height:100%;cursor:pointer;background-color:rgba(0,0,0,0.8);}.featherlight .featherlight-close{position:absolute;z-index:9999;right:0;top:0;line-height:25px;width:25px;cursor:pointer;text-decoration:none;text-align:center;font:Arial bold;background:#fff;color:#000;}.featherlight .featherlight-content{position:absolute;cursor:auto;padding:2%;left:19%;top:19%;width:60%;background:#fff;}.featherlight .featherlight-contentiframe{border:none;position:absolute;top:0;bottom:0;left:0;right:0;height:100%;width:100%;}}

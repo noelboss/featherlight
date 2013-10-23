@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Featherlight – ultra slim jquery lightbox</title>
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+		<link type="text/css" rel="stylesheet" href="src/featherlight.css" title="Featherlight Styles" charset="utf-8">
+		<style type="text/css" media="screen">
+			.lightbox { display: none; }
+			.fl-page h1,
+			.fl-page h3,
+			.fl-page h4 {
+				font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+				font-weight: 100;
+				letter-spacing: 1px;
+			}
+			.fl-page h1 { font-size: 110px; margin-bottom: 0.5em; }
+			.fl-page h1 i { font-style: normal; color: #ddd; }
+			.fl-page h1 span { font-size: 30px; color: #333;}
+			.fl-page h3 { text-align: right; }
+			.fl-page h3 { font-size: 15px; }
+			.fl-page h4 { font-size: 2em; }
+			.fl-page .jumbotron { margin-top: 2em; }
+
+			.fl-page .btn-default { vertical-align: bottom; }
+			.fl-page .btn-lg { float: right;}
+			.fl-page .btn-lg span { font-size: 0.7em; }
+			.fl-page .footer { margin-top: 3em; color: #999;}
+
+			/* override default feather style... */
+			.fixwith {
+				background: rgba(256,256,256, 0.8);
+			}
+			.fixwith .featherlight-content {
+				top: 50%; margin-top: -125px;
+				left: 50%; margin-left: -250px;
+				width: 500px;
+				height: 250px;
+				color: #fff;
+				background: #111;
+			}
+			.fixwith .featherlight-close {
+				color: #fff;
+				background: #333;
+			}
+		</style>
+	</head>
+	<body class="fl-page">
+		<div class="container">
+
+			<div class="jumbotron">
+				<h1>Featherlight<i>.js</i><span> The ultra slim lightbox.</span></h1>
+				<p class="lead">Featherlight is a very leightweight jQuery lightbox.</p>
+				<p class="example">
+					<a class="btn btn-lg btn-success" href="#">Download <span>(compressed 2KB)</span></a>
+
+					<a class="btn btn-default" href="#" data-featherlight="#fl1">Featherlight Default</a>
+
+					<a class="btn btn-default" href="#" data-featherlight="#fl2" data-featherlight-variant="fixwith">Featherbox with custom styles</a>
+
+					<a class="btn btn-default" href="#" data-featherlight="#fl3">Featherlight with iFrame</a>
+				</p>
+			</div>
+
+			<div class="row marketing text-center">
+				<div class="col-lg-4">
+					<h4>Very lightweight</h4>
+					<p>Featherlight is very, very, very lightweight. The CSS only consist of 4 definitions and is only 770 bytes and the JavaScript is only 1.3KB when compressed. To start, only add the following data-attribute to a any element containing the selector of an other element you want to turn into a lightbox.
+					</p>
+				</div>
+				<div class="col-lg-4">
+					<h4>For the Pro</h4>
+					<p>Many lightbox plugins try to handle everything for you. Event the ones called lightweight. Featherlight is different. It's for the pro who knows what he’s doing and needs a barebones plugin that is highly customizable. Thanks to very low specific css selectors and no inline styles as well as the name-spacing, you can override everything with ease – if you ever need to.
+					</p>
+				</div>
+				<div class="col-lg-4">
+					<h4>Customizable</h4>
+					<p>Featherlight comes with a range of configuration options to adapt it to your needs. You can specify the selectors that trigger the lightbox, the triggering events, and even override the whole close and open functions. And since it's so lightweight – Featherlight is easy to understand and to completely rewrite if you need to.
+					</p>
+				</div>
+			</div>
+
+			<div class="footer text-right">
+				<p>&copy; Noël Bossart</p>
+			</div>
+		</div>
+
+		<div class="lightbox" id="fl1">
+			<h2>Featherlight Default</h2>
+			<p>
+				This is a default featherlight lightbox. It's flexible in height and width. Everything that is used to display and style the box can be found in the featherlight.css file which is pretty simple.
+			</p>
+		</div>
+
+		<div class="lightbox" id="fl2">
+			<h2>Featherlight with custom styles</h2>
+			<p>It's easy to override the styling of Featherligh. All you need to do is specify an additional class in the data-featherlight-variant of the triggering element. This class will be added and you can then override everything. You can even change the namespace of all the classes by providing a namespace when inizialising the triggering element:
+				$('.special').featherlight({namespace: "mycssisnicer"});
+			</p>
+		</div>
+
+		<iframe class="lightbox" src="//player.vimeo.com/video/33110953" width="500" height="281" id="fl3" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="src/featherlight.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
