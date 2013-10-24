@@ -123,14 +123,14 @@ This is the close function used to close the lightbox. It receives the event obj
 		targetAttr: 'href'
 	});
 
-## Open Image in Featherlight
+## Open Image with Featherlight
 	<a href="myimage.jpg" class="fl" title="Feather">Open Image</a>
 
 	$('a.fl').each(function(){
 		$.featherlight('<img src="'+this.href+'" alt="'+this.title+'" />');
 	});
 
-## Use ligtbox with ajax
+## Open lightbox after loading data from ajax
 Use Featherlight with ajax.
 
 	$('a.ajax').click(function(){
@@ -150,4 +150,6 @@ Add class to override styling. For a full example check out the index.html
 	});
 
 You can also use a data attribute:
+
 	<a href="#" data-featherlight="#myLightbox" data-featherlight-variant="blingbling">Special Lightbox</a>
+
