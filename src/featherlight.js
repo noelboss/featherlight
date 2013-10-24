@@ -76,10 +76,10 @@
 	// featherlight defaults
 	$.fn.featherlight.defaults = {
 		selector:     '[data-featherlight]',  // elements that trigger the lightbox
+		context:      'body',                 // context used to search for the lightbox content and triggers
 		targetAttr:   'data-featherlight',    // attribut of the triggered element that contains the selector to the lightbox content
 		openTrigger:  'click',                // event that triggers the lightbox
 		closeTrigger: 'click',                // event that triggers the closing of the lightbox
-		context:      'body',                 // context used to search for the lightbox content and triggers
 		namespace:    'featherlight',         // name of the events and css class prefix
 		clickBgClose: true,                   // close lightbox on click on the background
 		bg: null,                             // custom DOM for the background, wrapper and the closebutton
