@@ -76,6 +76,9 @@ Events that are used to open or close the lightbox. The close event is bound to 
 	namespace – String:  'featherlight'
 All functions bound to elements are namespaced. This is also used to prefix all CSS classes for the background, the content-wrapper and the close button.
 
+	variant – String:  null
+Pass your own CSS class to adjust the styling of the lightbox according to your need. You can also use the  `data-featherlight-variant` attribute on the element triggering the lightbox.
+
 	clickBgClose – Boolean: true
 If true, the close event is also bound to the background
 
@@ -96,6 +99,7 @@ This is the open function used to open the lightbox. It receives the event objec
 		if(e) e.preventDefault();
 	}
 
+
 	close – Function
 This is the close function used to close the lightbox. It receives the event object. "this" is an object and contains the triggering DOM element (if existing) and the related Featherbox objects:
 *$fl* – Containing the whole lightbox: background, content wrapper, close button and content.
@@ -108,3 +112,42 @@ This is the close function used to close the lightbox. It receives the event obj
 		});
 		if (e) e.preventDefault();
 	}
+
+# Examples
+
+## Use link-hashtags to open lightbox
+	<a href="#targetElement" class="fl">Open</a>
+	<div id="targetElement">Lightbox</div>
+
+	$('a.fl').featherlight({
+		targetAttr: 'href'
+	});
+
+## Open Image in Featherlight
+	<a href="myimage.jpg" class="fl" title="Feather">Open Image</a>
+
+	$('a.fl').each(function(){
+		$.featherlight('<img src="'+this.href+'" alt="'+this.title+'" />');
+	});
+
+## Use ligtbox with ajax
+Use Featherlight with ajax.
+
+	$('a.ajax').click(function(){
+		$.ajax(this.href, {
+			success: function(data){
+				$.featherlight(data);
+			}
+		});
+		return false;
+	});
+
+## Featherlight your own style
+Add class to override styling. For a full example check out the index.html
+
+	$('a.fl').featherlight({
+		variant: 'myCssClass'
+	});
+
+You can also use a data attribute:
+	<a href="#" data-featherlight="#myLightbox" data-featherlight-variant="blingbling">Special Lightbox</a>
