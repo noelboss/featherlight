@@ -1,6 +1,6 @@
 /**
 * Featherlight – ultra slim jQuery lightbox
-* Version 0.1.0 – https://github.com/noelboss/featherlight
+* Version 0.1.1 – https://github.com/noelboss/featherlight
 *
 * Copyright 2012, Noel Bossart
 * MIT Licensed.
@@ -11,7 +11,7 @@
 	var setupFeatherlight = function(c, $content){
 		var t = this,
 			$t = $(this),
-			variant = $t.attr('data-'+c.namespace+'-variant'),
+			variant = $t.attr('data-'+c.namespace+'-variant') || c.variant,
 			$bg = $(c.bg || '<div class="'+c.namespace+'"><div class="'+c.namespace+'-content"><span class="'+c.namespace+'-close">X</span></div></div>');
 
 		if($content.length < 1){
@@ -25,6 +25,7 @@
 			t.$fl = $bg.clone();
 
 			// add css class to override styles
+
 			if(variant){
 				t.$fl.addClass(variant);
 			}
@@ -81,6 +82,7 @@
 		openTrigger:  'click',                // event that triggers the lightbox
 		closeTrigger: 'click',                // event that triggers the closing of the lightbox
 		namespace:    'featherlight',         // name of the events and css class prefix
+		variant:      null,                   // class that will be added to change look of the lightbox instance
 		clickBgClose: true,                   // close lightbox on click on the background
 		bg: null,                             // custom DOM for the background, wrapper and the closebutton
 		autostart:    true,                   // initialize all links with that match "selector" on document ready
