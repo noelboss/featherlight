@@ -60,6 +60,8 @@ In cases where you don't want an Element to act as Trigger you can call Featherl
 
 Featherbox comes with a bunch of configuration-options which make it very flexible. Pass this options in an object to the function call or override $.fn.featherlight.defaults.
 
+============
+
 	selector – String: '[data-featherlight]'
 Selector used to collect triggering elements when document is ready.
 
