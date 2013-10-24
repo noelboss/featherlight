@@ -19,14 +19,14 @@ http://noelboss.github.io/featherlight/
 
 All styling is done using CSS so you'll want to include the Featherlight CSS in your head.
 
-	<link type="text/css" rel="stylesheet" href="src/featherlight.css" title="Featherlight Styles" />
+	<link type="text/css" rel="stylesheet" href="src/featherlight.min.css" title="Featherlight Styles" />
 
 Be aware that Featherlight uses very unspecific CSS selectors to help you override every aspact. This means in turn, that if you're not following a modularized approach to write CSS (which you should! It's terrific!) and have many global and specific definitions (read ID's and such – which you shouldn't), these definitions can break the Featherbox styling.
 
 Featherlight requires jQuery version 1.7.0 or higher. It's recommended to include the javascript at the bottom of the page before the closing `</body>` tag.
 
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script src="js/featherlight.js" type="text/javascript" charset="utf-8"></script>
+	<script src="src/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
 
 # Usage
