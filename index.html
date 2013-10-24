@@ -1,46 +1,55 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<title>Featherlight – ultra slim jquery lightbox</title>
 		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
-		<link type="text/css" rel="stylesheet" href="src/featherlight.css" title="Featherlight Styles" charset="utf-8">
-		<style type="text/css" media="screen">
-			.lightbox { display: none; }
-			.fl-page h1,
-			.fl-page h3,
-			.fl-page h4 {
-				font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-				font-weight: 100;
-				letter-spacing: 1px;
-			}
-			.fl-page h1 { font-size: 110px; margin-bottom: 0.5em; }
-			.fl-page h1 i { font-style: normal; color: #ddd; }
-			.fl-page h1 span { font-size: 30px; color: #333;}
-			.fl-page h3 { text-align: right; }
-			.fl-page h3 { font-size: 15px; }
-			.fl-page h4 { font-size: 2em; }
-			.fl-page .jumbotron { margin-top: 2em; }
+		<link type="text/css" rel="stylesheet" href="src/featherlight.css" title="Featherlight Styles" />
+		<style type="text/css">
+			@media all {
+				.lightbox { display: none; }
+				.fl-page h1,
+				.fl-page h3,
+				.fl-page h4 {
+					font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+					font-weight: 100;
+					letter-spacing: 1px;
+				}
+				.fl-page h1 { font-size: 110px; margin-bottom: 0.5em; }
+				.fl-page h1 i { font-style: normal; color: #ddd; }
+				.fl-page h1 span { font-size: 30px; color: #333;}
+				.fl-page h3 { text-align: right; }
+				.fl-page h3 { font-size: 15px; }
+				.fl-page h4 { font-size: 2em; }
+				.fl-page .jumbotron { margin-top: 2em; }
 
-			.fl-page .btn-default { vertical-align: bottom; }
-			.fl-page .btn-group { float: right;}
-			.fl-page .btn-lg span { font-size: 0.7em; }
-			.fl-page .footer { margin-top: 3em; color: #999;}
+				.fl-page .btn-download { float: right; }
+				.fl-page .btn-default { vertical-align: bottom; }
 
-			/* override default feather style... */
-			.fixwidth {
-				background: rgba(256,256,256, 0.8);
+				.fl-page .btn-lg span { font-size: 0.7em; }
+				.fl-page .footer { margin-top: 3em; color: #999;}
+
+				/* override default feather style... */
+				.fixwidth {
+					background: rgba(256,256,256, 0.8);
+				}
+				.fixwidth .featherlight-content {
+					top: 50%; margin-top: -125px;
+					left: 50%; margin-left: -250px;
+					width: 500px;
+					height: 250px;
+					color: #fff;
+					background: #111;
+				}
+				.fixwidth .featherlight-close {
+					color: #fff;
+					background: #333;
+				}
+
 			}
-			.fixwidth .featherlight-content {
-				top: 50%; margin-top: -125px;
-				left: 50%; margin-left: -250px;
-				width: 500px;
-				height: 250px;
-				color: #fff;
-				background: #111;
-			}
-			.fixwidth .featherlight-close {
-				color: #fff;
-				background: #333;
+			@media(max-width: 768px){
+				.fl-page h1 span { display: block; }
+				.fl-page .btn-download { float: none; margin-bottom: 1em; }
 			}
 		</style>
 	</head>
@@ -49,25 +58,22 @@
 			<div class="jumbotron">
 				<h1>Featherlight<i>.js</i><span> The ultra slim lightbox.</span></h1>
 				<p class="lead">Featherlight is a very leightweight jQuery lightbox.</p>
-				<p class="example">
-					<div class="btn-group">
-						<a class="btn btn-lg btn-info" href="https://github.com/noelboss/featherlight/">
-							<i class="glyphicon glyphicon-eye-open"></i>
-							github
-						</a>
-						<a class="btn btn-lg btn-success" href="https://github.com/noelboss/featherlight/archive/master.zip">
-							<i class="glyphicon glyphicon-arrow-down"></i>
-							Download <span>(compressed 2KB)</span>
-						</a>
-					</div>
-
-
-					<a class="btn btn-default" href="#" data-featherlight="#fl1">Featherlight Default</a>
-
-					<a class="btn btn-default" href="#" data-featherlight="#fl2" data-featherlight-variant="fixwidth">Featherbox with custom styles</a>
-
-					<a class="btn btn-default" href="#" data-featherlight="#fl3">Featherlight with iFrame</a>
-				</p>
+				<div class="btn-group btn-download">
+					<a class="btn btn-lg btn-info" href="https://github.com/noelboss/featherlight/">
+						<i class="glyphicon glyphicon-eye-open"></i>
+						github
+					</a>
+					<a class="btn btn-lg btn-success" href="https://github.com/noelboss/featherlight/archive/master.zip">
+						<i class="glyphicon glyphicon-arrow-down"></i>
+						Download <span>(compressed 2KB)</span>
+					</a>
+				</div>
+				<div class="btn-group">
+					<a class="btn btn-default" href="#" data-featherlight="#fl1">Default</a>
+					<a class="btn btn-default" href="#" data-featherlight="#fl2" data-featherlight-variant="fixwidth">Custom styles</a>
+					<a class="btn btn-default" href="#" data-featherlight="#fl3">With iFrame</a>
+					<a class="btn btn-default featherlightAjax" href="index.html">Ajax</a>
+				</div>
 			</div>
 
 			<div class="row marketing text-center">
@@ -107,9 +113,28 @@
 			</p>
 		</div>
 
-		<iframe class="lightbox" src="//player.vimeo.com/video/33110953" width="500" height="281" id="fl3" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+		<iframe class="lightbox" src="//player.vimeo.com/video/33110953" width="500" height="281" id="fl3" style="border:none;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+		<div class="lightbox ajaxcontent">
+			<h2>This Ligthbox was loaded using ajax</h2>
+			<p>With little code, you can build lightboxes that use custom content loaded with ajax...</p>
+		</div>
 
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script src="src/featherlight.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			(function($) {
+				$(document).ready(function(){
+					$('.featherlightAjax').click(function(){
+						$.ajax(this.href, {
+							success: function(data){
+								$.featherlight($(data).filter('.ajaxcontent'));
+							}
+						});
+						return false;
+					});
+				});
+			}(jQuery));
+		</script>
 	</body>
 </html>
