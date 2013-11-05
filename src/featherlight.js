@@ -31,7 +31,7 @@
 		},
 		methods: { /* you can access and override all methods using $.featherlight.methods */
 			setup: function(config, content){
-				var $elm = $(this),
+				var $elm = $(this) || $(),
 					c = $.extend({}, fl.defaults, config),
 					variant = $elm.attr('data-'+c.namespace+'-variant') || c.variant,
 					css = !c.resetCss ? c.namespace : c.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
