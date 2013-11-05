@@ -3,7 +3,7 @@ Featherlight – ultra slim jQuery lightbox
 
 Featherlight is a very lightweight jQuery lightbox plugin.
 
-* simple but flexible
+* simple yet flexible
 * minimal css
 * no inline css
 * name-spaced
