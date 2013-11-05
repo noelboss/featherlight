@@ -60,14 +60,14 @@ It will then look for the "targetAttr" (by default "data-featherlight") on this 
 
 ***configuration*** – Object: Object to configure certain aspects of the plugin. See configuration.
 
-***$content*** – jQuery Object or String: You can manually pass a jQuery Object or a String with containing HTML Code to be opened in the ligthbox.
+***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string containing HTML Code to be opened in the ligthbox.
 
 ## Manual calling of Featherlight
 In cases where you don't want an Element to act as Trigger you can call Featherlight manually. You can use this for example in an ajax callback to display the response data.
 
 	$.featherlight($content, configuration);
 
-***$content*** – jQuery Object or String: You can manually pass a jQuery Object or a String with containing HTML Code to be opened in the ligthbox.
+***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string containing HTML Code to be opened in the ligthbox.
 
 ***configuration*** – Object: Object to configure certain aspects of the plugin. See configuration.
 
