@@ -49,7 +49,7 @@ it also works with links using href and the 'image' and 'ajax' keywords:
 	<a href="myimage.png" data-featherlight="image">Open image in lightbox</a>
 	<a href="myhtml.html .selector" data-featherlight="ajax">Open ajax content in lightbox</a>
 
-By default, Featherbox initializes all elements found with the configured selector on document ready. If you want to prevent this, set $.featherlight.defaults.autostart to false before the DOM is ready.
+By default, Featherbox initializes all elements matching defaults.selector on document ready. If you want to prevent this, set $.featherlight.defaults.autostart to false before the DOM is ready.
 
 ## Bind Featherlight
 You can bind the Featherlight events on any element using the following code:
