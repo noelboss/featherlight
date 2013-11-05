@@ -38,12 +38,18 @@ By default, featherlight acts on all elements using the 'data-featherlight' attr
 	<a herf="#" data-featherlight="#mylightbox">Open elemnt in lightbox</a>
 	<div id="mylightbox">This div will be opened in a lightbox</div>
 
-'data-featherlight' can also contain a link to an image or the name of an attribute thats used as selector or even DOM code:
+Featherlight is smart. 'data-featherlight' can also contain a link to an image, an ajax-url or even DOM code:
 
-	<a name="myimage.png" data-featherlight="href">Open image in lightbox</a>
-	<span data-featherlight="<p>Fanxy DOM Lightbox!</p>">Open some DOM in lightbox</span>
+	<span data-featherlight="myimage.png">Open image in lightbox</a>
+	<span data-featherlight="myhtml.html .selector">Open ajax content in lightbox</a>
+	<span data-featherlight="<p>Fancy DOM Lightbox!</p>">Open some DOM in lightbox</span>
+	
+it also works with links using href and the 'image' and 'ajax' keywords:
 
-By default, Featherbox initializes all elements found with the configured selector on document ready. If you want to prevent this, set $.featherlight.defaults.autostart to false before the DOM is ready.
+	<a href="myimage.png" data-featherlight="image">Open image in lightbox</a>
+	<a href="myhtml.html .selector" data-featherlight="ajax">Open ajax content in lightbox</a>
+
+By default, Featherbox initializes all elements matching defaults.selector on document ready. If you want to prevent this, set $.featherlight.defaults.autostart to false before the DOM is ready.
 
 ## Bind Featherlight
 You can bind the Featherlight events on any element using the following code:
@@ -52,18 +58,18 @@ You can bind the Featherlight events on any element using the following code:
 
 It will then look for the "targetAttr" (by default "data-featherlight") on this element and use its value to find the content that will be opened as lightbox when you click on the element.
 
-***configuration*** – Object: Object to configure certain aspects of the plugin. See configuration.
+***configuration*** – Object: Object to configure certain aspects of the plugin. See [Configuration](#configuration).
 
-***$content*** – jQuery Object or String: You can manually pass a jQuery Object or a String with containing HTML Code to be opened in the ligthbox.
+***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string containing HTML Code to be opened in the ligthbox.
 
 ## Manual calling of Featherlight
 In cases where you don't want an Element to act as Trigger you can call Featherlight manually. You can use this for example in an ajax callback to display the response data.
 
 	$.featherlight($content, configuration);
 
-***$content*** – jQuery Object or String: You can manually pass a jQuery Object or a String with containing HTML Code to be opened in the ligthbox.
+***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string containing HTML Code to be opened in the ligthbox.
 
-***configuration*** – Object: Object to configure certain aspects of the plugin. See configuration.
+***configuration*** – Object: Object to configure certain aspects of the plugin. See [Configuration](#configuration).
 
 # Configuration
 
@@ -96,6 +102,11 @@ All functions bound to elements are namespaced. This is also used to prefix all 
 
 ================================================
 
+	resetCss – Boolean: false
+Set this to true to remove all default css and start from designing scratch.
+
+================================================
+
 	variant – String:  null
 Pass your own CSS class to adjust the styling of the lightbox according to your need. You can also use the  `data-featherlight-variant` attribute on the element triggering the lightbox.
 
@@ -106,7 +117,7 @@ If true, the close event is also bound to the background
 
 ================================================
 
-	clickBgClose – DOM String: null
+	bg – DOM String: null
 You can provide the wrapping DOM. This is a bit tricky and just for the advanced users. It's recommended to study the plugin code. But you need to provide an element with a "{namespace}-close" class: the content of the lightbox will be added *after* this element.
 
 ================================================
