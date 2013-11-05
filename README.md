@@ -9,7 +9,7 @@ Featherlight is a very lightweight jQuery lightbox plugin.
 * iframe support
 * minimal css
 * name-spaced
-* responsible
+* responsive
 * completely customizable via config object
 * call with custom content
 
