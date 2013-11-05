@@ -15,9 +15,9 @@
 		right: 0;
 		z-index: 9999;
 		height: 100%;
+		text-align: center;
 		cursor: pointer;
 		background-color: rgba(0, 0, 0, 0.8);
-
 	}
 
 	.featherlight .featherlight-close {
@@ -35,23 +35,41 @@
 		color: #000;
 	}
 
+	.featherlight:before {
+		content: '';
+		display: inline-block;
+		height: 100%;
+		vertical-align: middle;
+		margin-right: -0.25em;
+	}
+
 	.featherlight .featherlight-content {
-		position: absolute;
+		text-align: left;
+		display: inline-block;
+		vertical-align: middle;
+		position: relative;
 		cursor: auto;
 		padding: 2%;
-		left: 19%;
-		top: 19%;
 		width: 60%;
-		height: 60%;
+		max-height: 95%;
+		overflow: hidden;
 		background: #fff;
 	}
 
-	.featherlight .featherlight-content iframe {
+	.featherlight-iframe .featherlight-content {
+		min-height: 60%;
+	}
+
+	.featherlight iframe {
 		border: none;
 		position: absolute;
 		top: 0; bottom: 0;
 		left: 0; right: 0;
 		height: 100%;
+		width: 100%;
+	}
+
+	.featherlight .featherlight-image {
 		width: 100%;
 	}
 }
