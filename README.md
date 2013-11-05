@@ -42,7 +42,7 @@ Featherlight is smart. 'data-featherlight' can also contain a link to an image, 
 
 	<span data-featherlight="myimage.png">Open image in lightbox</a>
 	<span data-featherlight="myhtml.html .selector">Open ajax content in lightbox</a>
-	<span data-featherlight="<p>Fanxy DOM Lightbox!</p>">Open some DOM in lightbox</span>
+	<span data-featherlight="<p>Fancy DOM Lightbox!</p>">Open some DOM in lightbox</span>
 	
 it also works with links using href and the 'image' and 'ajax' keywords:
 
