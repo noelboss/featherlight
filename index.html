@@ -35,10 +35,8 @@
 					background: rgba(256,256,256, 0.8);
 				}
 				.fixwidth .featherlight-content {
-					top: 50%; margin-top: -125px;
-					left: 50%; margin-left: -250px;
 					width: 500px;
-					height: 250px;
+					padding: 25px;
 					color: #fff;
 					background: #111;
 				}
@@ -72,15 +70,16 @@
 				<div class="btn-group">
 					<a class="btn btn-default" href="#" data-featherlight="#fl1">Default</a>
 					<a class="btn btn-default" href="#" data-featherlight="#fl2" data-featherlight-variant="fixwidth">Custom styles</a>
-					<a class="btn btn-default" href="#" data-featherlight="#fl3">With iFrame</a>
+					<a class="btn btn-default" href="http://farm5.staticflickr.com/4069/4563624740_93430bb907_b.jpg" data-featherlight="href">Image</a>
+					<a class="btn btn-default" href="#" data-featherlight="#fl3">iFrame</a>
 					<a class="btn btn-default featherlightAjax" href="index.html">Ajax</a>
 				</div>
 			</div>
 
 			<div class="row marketing text-center">
 				<div class="col-lg-4">
-					<h4>Very lightweight</h4>
-					<p>Featherlight is very, very, very lightweight. The CSS consist of 4 definitions and is less then 800 bytes and the minified javascript weights about 1.8kB. To start, simply add the 'data-featherlight' attribute to an element with the selector of an other element you want to open as lightbox as value. <a href="https://github.com/noelboss/featherlight/#usage">It's that simple.</a>
+					<h4>Lightweight still Powerful</h4>
+					<p>Featherlight is very very very lightweight. In fact, it's less than 3.5kB – including CSS. Get you started, simply add the <em>data-featherlight</em> attribute to an element with the selector of an other element you want to open as lightbox as value. <a href="https://github.com/noelboss/featherlight/#usage">It's that simple.</a> Then again, it supports images and iframes out of the box.
 				</div>
 				<div class="col-lg-4">
 					<h4>For the Pro</h4>
@@ -134,7 +133,7 @@
 					$('.featherlightAjax').click(function(){
 						$.ajax(this.href, {
 							success: function(data){
-								$.featherlight($(data).filter('.ajaxcontent'));
+								$.featherlight($(data).filter('.ajaxcontent').html());
 							}
 						});
 						return false;
