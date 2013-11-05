@@ -28,7 +28,10 @@
 
 				.fl-page .btn-lg span { font-size: 0.7em; }
 				.fl-page .footer { margin-top: 3em; color: #999;}
-				.fl-page .marketing a {  color: #999; }
+				.fl-page .footer a { color: #999; text-decoration: none; }
+				.fl-page .github { margin: 2em 0; }
+				.fl-page .github a { vertical-align: top; }
+				.fl-page .marketing a { color: #999; }
 
 				/* override default feather style... */
 				.fixwidth {
@@ -69,38 +72,42 @@
 				</div>
 				<div class="btn-group">
 					<a class="btn btn-default" href="#" data-featherlight="#fl1">Default</a>
-					<a class="btn btn-default" href="#" data-featherlight="#fl2" data-featherlight-variant="fixwidth">Custom styles</a>
-					<a class="btn btn-default" href="http://farm5.staticflickr.com/4069/4563624740_93430bb907_b.jpg" data-featherlight="href">Image</a>
+					<a class="btn btn-default" href="#" data-featherlight="#fl2" data-featherlight-variant="fixwidth">Custom Styles</a>
+					<a class="btn btn-default" href="http://farm5.staticflickr.com/4069/4563624740_93430bb907_b.jpg" data-featherlight="image">Image</a>
 					<a class="btn btn-default" href="#" data-featherlight="#fl3">iFrame</a>
-					<a class="btn btn-default featherlightAjax" href="index.html">Ajax</a>
+					<a class="btn btn-default" href="index.html .ajaxcontent" data-featherlight="ajax">Ajax</a>
 				</div>
 			</div>
-
+			<div class="row github text-center">
+				<iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=noelboss&amp;repo=Featherlight&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+				<iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=noelboss&amp;repo=Featherlight&amp;type=fork&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="102px" height="20px"></iframe>
+				<a href="https://twitter.com/share">Tweet</a>
+			</div>
 			<div class="row marketing text-center">
 				<div class="col-lg-4">
-					<h4>Lightweight still Powerful</h4>
-					<p>Featherlight is very very very lightweight. In fact, it's less than 3.5kB – including CSS. Get you started, simply add the <em>data-featherlight</em> attribute to an element with the selector of an other element you want to open as lightbox as value. <a href="https://github.com/noelboss/featherlight/#usage">It's that simple.</a> Then again, it supports images and iframes out of the box.
+					<h4>Lightweight</h4>
+					<p>Featherlight is very, very, very lightweight. Everything together weights less than 3.7kB and only counts about 150 lines of JavaScript code. To get started, simply add the <em>"data-featherlight"</em> attribute with a selector, an image- or an ajax-url. <a href="https://github.com/noelboss/featherlight/#usage">It's that simple.</a>
 				</div>
+
 				<div class="col-lg-4">
 					<h4>For the Pro</h4>
-					<p>Many lightbox plugins try to handle everything for you. Event the ones called "simple" or "lightweight". Featherlight is different. It's for the pro who knows what he’s doing and just needs a barebones plugin that is highly customizable. Thanks to very low specific css selectors and no inline styles as well as the name-spacing, you can override everything with ease – if you ever need to.
+					<p>Many lightbox plugins try to handle everything for you. Even the ones called «simple» or «lightweight». Featherlight is different. It's for the pro who knows what he’s doing and just needs a barebones plugin. Thanks to very low specific css selectors and little code, it's easy to customize and to understand.
 					</p>
-
 					<p>
 						<a class="doc btn btn-lg btn-default" href="https://github.com/noelboss/featherlight/#installation">
 							View Documentation
 						</a>
 					</p>
 				</div>
+
 				<div class="col-lg-4">
-					<h4>Customizable</h4>
-					<p>While Featherlight is very leightweight, it's also very flexible. Thanks to a range of <a href="https://github.com/noelboss/featherlight/#configuration">configuration options</a>, you can adapt it to your needs. You can specify the selectors that trigger the lightbox, the triggering events, and you can even override the whole close and open functions. And since it's so lightweight – Featherlight is easy to understand and to completely rewrite if you need to.
-					</p>
+					<h4>Simple yet Powerful</h4>
+					<p>Don't be fooled by Featherlights small footprint! Featherlight is very flexible and surprisingly smart. It's responsive, supports images, ajax and iframes out of the box and thanks to a range of <a href="https://github.com/noelboss/featherlight/#configuration">configuration options</a>, you can adapt it to your needs. Without rewriting anything.
 				</div>
 			</div>
 
 			<div class="footer text-right">
-				<p>&copy; Noël Bossart</p>
+				<p><a href="//noelboss.com">&copy; Noël Bossart</a></p>
 			</div>
 		</div>
 
@@ -120,26 +127,12 @@
 
 		<iframe class="lightbox" src="//player.vimeo.com/video/33110953" width="500" height="281" id="fl3" style="border:none;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
-		<div class="lightbox ajaxcontent">
+		<div class="ajaxcontent lightbox">
 			<h2>This Ligthbox was loaded using ajax</h2>
 			<p>With little code, you can build lightboxes that use custom content loaded with ajax...</p>
 		</div>
 
-		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
 		<script src="src/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			(function($) {
-				$(document).ready(function(){
-					$('.featherlightAjax').click(function(){
-						$.ajax(this.href, {
-							success: function(data){
-								$.featherlight($(data).filter('.ajaxcontent').html());
-							}
-						});
-						return false;
-					});
-				});
-			}(jQuery));
-		</script>
 	</body>
 </html>
