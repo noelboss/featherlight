@@ -1,5 +1,5 @@
 Featherlight – ultra slim jQuery lightbox
-============
+================================================
 
 Featherlight is a very lightweight jQuery lightbox plugin.
 
@@ -13,7 +13,7 @@ Featherlight is a very lightweight jQuery lightbox plugin.
 
 http://noelboss.github.io/featherlight/
 
-============
+================================================
 
 # Installation
 
@@ -62,52 +62,52 @@ In cases where you don't want an Element to act as Trigger you can call Featherl
 
 Featherbox comes with a bunch of configuration-options which make it very flexible. Pass this options in an object to the function call or override $.fn.featherlight.defaults.
 
-============
+================================================
 
 	selector – String: '[data-featherlight]'
 Selector used to collect triggering elements when document is ready.
 
-============
+================================================
 
 	context – String: 'body'
 Context used for selecting elements matching "selector". Usefull of you only want to bind featherbox to parts of the DOM, for example in content loaded via ajax.
 
-============
+================================================
 
 	targetAttr – String:  'data-featherlight'
 Attribute on the triggering element pointing to the target element that will be opened in the lightbox
 
-============
+================================================
 
 	openTrigger & closeTrigger – String:  'click'
 Events that are used to open or close the lightbox. The close event is bound to the close button and to the lightbox background (if enabled)
 
-============
+================================================
 
 	namespace – String:  'featherlight'
 All functions bound to elements are namespaced. This is also used to prefix all CSS classes for the background, the content-wrapper and the close button.
 
-============
+================================================
 
 	variant – String:  null
 Pass your own CSS class to adjust the styling of the lightbox according to your need. You can also use the  `data-featherlight-variant` attribute on the element triggering the lightbox.
 
-============
+================================================
 
 	clickBgClose – Boolean: true
 If true, the close event is also bound to the background
 
-============
+================================================
 
 	clickBgClose – DOM String: null
 You can provide the wrapping DOM. This is a bit tricky and just for the advanced users. It's recommended to study the plugin code. But you need to provide an element with a "{namespace}-close" class: the content of the lightbox will be added *after* this element.
 
-============
+================================================
 
 	autostart – Boolean: true
 By default, Featherbox finds all elements that match "selector" and binds the open and close functions. To disable, set $.fn.featherlight.defaults.autostart = false; before the document ready event is fired.
 
-============
+================================================
 
 	 open – Function
 This is the open function used to open the lightbox. It receives the event object. "this" is an object and contains the triggering DOM element (if existing) and the related Featherbox objects:
@@ -120,7 +120,7 @@ This is the open function used to open the lightbox. It receives the event objec
 		if(e) e.preventDefault();
 	}
 
-============
+================================================
 
 	close – Function
 This is the close function used to close the lightbox. It receives the event object. "this" is an object and contains the triggering DOM element (if existing) and the related Featherbox objects:

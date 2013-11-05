@@ -1,0 +1,39 @@
+{
+	"name": "featherlight",
+	"title": "Featherlight",
+	"description": "The ultra slim lightbox.",
+	"keywords": [
+		"lightbox",
+		"modal",
+		"dialog",
+		"slim",
+		"leightweight",
+		"html5",
+		"customizable",
+		"ui",
+		"image",
+		"jquery",
+		"ajax",
+		"fancy",
+		"popup",
+		"window"
+	],
+	"version": "0.1.3",
+	"author": {
+		"name": "Noël Raoul Bossart",
+		"url": "http://www.noelboss.com"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://raw.github.com/noelboss/featherlight/master/LICENSE"
+		}
+	],
+	"bugs": "https://github.com/noelboss/featherlight/issues",
+	"homepage": "http://noelboss.github.io/featherlight/",
+	"docs": "https://github.com/noelboss/featherlight/blob/master/README.md",
+	"download": "https://github.com/noelboss/featherlight/archive/master.zip",
+	"dependencies": {
+		"jquery": ">=1.7"
+	}
+}

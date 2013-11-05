@@ -1,8 +1,8 @@
 /**
 * Featherlight – ultra slim jQuery lightbox
-* Version 0.1.1 – https://github.com/noelboss/featherlight
+* Version 0.1.3 – https://github.com/noelboss/featherlight
 *
-* Copyright 2012, Noel Bossart
+* Copyright 2013, Noel Bossart
 * MIT Licensed.
 */
 (function($) {
@@ -13,6 +13,9 @@
 			$t = $(this),
 			variant = $t.attr('data-'+c.namespace+'-variant') || c.variant,
 			$bg = $(c.bg || '<div class="'+c.namespace+'"><div class="'+c.namespace+'-content"><span class="'+c.namespace+'-close">X</span></div></div>');
+
+		/* remap config for access in methods */
+		t.c = c;
 
 		if($content.length < 1){
 			t.$content = $($t.attr(c.targetAttr), c.context);
@@ -32,13 +35,10 @@
 
 			// bind close function on close button
 			t.$fl.find('.'+c.namespace+'-close')
-				.on(c.closeTrigger+'.'+c.namespace, $.proxy(c.close, t))
 				.after(t.$content.show()); // add content after closebutton
 
 			// close when click on background
-			if(c.clickBgClose){
-				t.$fl.on(c.closeTrigger+'.'+c.namespace, $.proxy(c.close, t));
-			}
+			t.$fl.on(c.closeTrigger+'.'+c.namespace, $.proxy(c.close, t));
 
 			// bind open function
 			if(t.hasOwnProperty('nodeName')){
@@ -49,6 +49,7 @@
 		}
 	};
 
+	// featherlight object
 	var fl = {
 		featherlight: function($content, config) {
 			var c = $.extend({}, $.fn.featherlight.defaults, config),
@@ -63,9 +64,10 @@
 		}
 	};
 
+	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
 	$.extend($, fl);
 
-	// extend jQuery
+	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlight = function(config, $content) {
 		var c = $.extend({}, $.fn.featherlight.defaults, config),
 				$content = $content || $();
@@ -92,10 +94,16 @@
 			if(e) e.preventDefault();
 		},
 		close: function(e){                    // closes the lightbox "this" contains $fl with the lightbox, and c with the configuration
-			var t = this;
-			t.$fl.fadeOut(function(){
-				t.$fl.detach();
-			});
+			var t = this,
+				c = t.c,
+				$t = $(e.target),
+				close = (c.clickBgClose && $t.is('.'+c.namespace)) || $t.is('.'+c.namespace+'-close');
+
+			if(close){
+				t.$fl.fadeOut(function(){
+					t.$fl.detach();
+				});
+			}
 			if (e) e.preventDefault();
 		}
 	};
