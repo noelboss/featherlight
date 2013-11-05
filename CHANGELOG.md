@@ -1,11 +1,22 @@
 Featherlight – Changelog
 ===================================
 
-0.1.5 - 2013-11-??
+0.1.6 - 2013-11-05
 -----------------------------------
 ### Features
-* Added support for image link
-* Added support for image links
+* Added support for ajax using data-featherlight="ajax" and a href attribute
+* Added support for ajax using data-featherlight="url.html .jQuery-selector"
+* Modified the way how images are handeled to match ajax method using data-featherlight="image"
+* Added $.featherlight.methods so all methods are accessible
+
+### Maintenance/Fixes
+* Improved JS code
+* Moved defaults to $.featherlight.defaults
+
+0.1.5 - 2013-11-05
+-----------------------------------
+### Features
+* Added support for images
 * Added option to reset css – { resetCss: true }
 
 ### Maintenance/Fixes

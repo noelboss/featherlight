@@ -4,12 +4,13 @@ Featherlight – ultra slim jQuery lightbox
 Featherlight is a very lightweight jQuery lightbox plugin.
 
 * simple yet flexible
-* minimal css
-* no inline css
-* name-spaced
-* completely customizable via config object
 * image support
+* ajax support
 * iframe support
+* minimal css
+* name-spaced
+* responsible
+* completely customizable via config object
 * call with custom content
 
 http://noelboss.github.io/featherlight/
@@ -42,7 +43,7 @@ By default, featherlight acts on all elements using the 'data-featherlight' attr
 	<a name="myimage.png" data-featherlight="href">Open image in lightbox</a>
 	<span data-featherlight="<p>Fanxy DOM Lightbox!</p>">Open some DOM in lightbox</span>
 
-By default, Featherbox initializes all elements found with the configured selector on document ready. If you want to prevent this, set $.fn.featherlight.defaults.autostart to false before the DOM is ready.
+By default, Featherbox initializes all elements found with the configured selector on document ready. If you want to prevent this, set $.featherlight.defaults.autostart to false before the DOM is ready.
 
 ## Bind Featherlight
 You can bind the Featherlight events on any element using the following code:
@@ -66,7 +67,7 @@ In cases where you don't want an Element to act as Trigger you can call Featherl
 
 # Configuration
 
-Featherbox comes with a bunch of configuration-options which make it very flexible. Pass this options in an object to the function call or override $.fn.featherlight.defaults.
+Featherbox comes with a bunch of configuration-options which make it very flexible. Pass this options in an object to the function call or override $.featherlight.defaults.
 
 ================================================
 
@@ -111,7 +112,7 @@ You can provide the wrapping DOM. This is a bit tricky and just for the advanced
 ================================================
 
 	autostart – Boolean: true
-By default, Featherbox finds all elements that match "selector" and binds the open and close functions. To disable, set $.fn.featherlight.defaults.autostart = false; before the document ready event is fired.
+By default, Featherbox finds all elements that match "selector" and binds the open and close functions. To disable, set $.featherlight.defaults.autostart = false; before the document ready event is fired.
 
 ================================================
 
@@ -121,9 +122,7 @@ This is the open function used to open the lightbox. It receives the event objec
 *$content* – The content thats wrapped with the background and prepended with the close button.
 
 	open: function(e){
-		var t = this;
-		t.$fl.prependTo('body').fadeIn();
-		if(e) e.preventDefault();
+		$.proxy($.featherlight.methods.open, this, e)();
 	}
 
 ================================================
@@ -134,11 +133,7 @@ This is the close function used to close the lightbox. It receives the event obj
 *$content* – The content thats wrapped with the background and prepended with the close button.
 
 	close: function(e){
-		var t = this;
-		t.$fl.fadeOut(function(){
-			t.$fl.detach();
-		});
-		if (e) e.preventDefault();
+		$.proxy($.featherlight.methods.close, this, e)();
 	}
 
 # Examples
@@ -151,26 +146,24 @@ This is the close function used to close the lightbox. It receives the event obj
 		targetAttr: 'href'
 	});
 
-## Open image with Featherlight
+## Open images with Featherlight
 Us a link and point the data-featherlight attribute to the desired attribute which contains the link...
 
-	<a href="myimage.jpg" data-featherlight="href">Open Image</a>
+	<a href="myimage.jpg" data-featherlight="image">Open Image</a>
 
 ...or directly provide the link as the data-featherlight attribute:
 
 	<span data-featherlight="myimage.jpg">Open Image</span>
 
-## Open lightbox after loading data from ajax
-Use Featherlight with ajax.
+## Open lightbox with ajax content
+Use Featherlight with ajax using 'ajax' keyword or providing a url. It even suports selecting elements inside the response document.
 
-	$('a.ajax').click(function(){
-		$.ajax(this.href, {
-			success: function(data){
-				$.featherlight(data);
-			}
-		});
-		return false;
-	});
+	<a href="url.html .jQuery-Selector" data-featherlight="ajax">Open Ajax Content</a>
+
+or you can provide the link directly as the featherlight-attribute:
+
+	<a href="url.html .jQuery-Selector" data-featherlight="ajax">Open Ajax Content</a>
+
 
 ## Featherlight your own style
 Add class to override styling. For a full example check out the index.html

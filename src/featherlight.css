@@ -52,8 +52,12 @@
 		padding: 2%;
 		width: 60%;
 		max-height: 95%;
-		overflow: hidden;
+		overflow: scroll;
 		background: #fff;
+	}
+
+	.featherlight .featherlight-inner {
+		display: block;
 	}
 
 	.featherlight-iframe .featherlight-content {
