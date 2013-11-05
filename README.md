@@ -102,6 +102,11 @@ All functions bound to elements are namespaced. This is also used to prefix all 
 
 ================================================
 
+	resetCss – Boolean: false
+Set this to true to remove all default css and start from designing scratch.
+
+================================================
+
 	variant – String:  null
 Pass your own CSS class to adjust the styling of the lightbox according to your need. You can also use the  `data-featherlight-variant` attribute on the element triggering the lightbox.
 
