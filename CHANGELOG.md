@@ -3,8 +3,14 @@ Featherlight – Changelog
 
 0.1.5 - 2013-11-??
 -----------------------------------
+### Features
+* Added support for image link
+* Added support for image links
+* Added option to reset css – { resetCss: true }
+
 ### Maintenance/Fixes
-*
+* Improved CSS to use flexible height and vertical alignment
+* Improved JS code
 
 0.1.3 & 0.1.4 - 2013-11-05
 -----------------------------------

@@ -8,7 +8,8 @@ Featherlight is a very lightweight jQuery lightbox plugin.
 * no inline css
 * name-spaced
 * completely customizable via config object
-* iframe support out of the box
+* image support
+* iframe support
 * call with custom content
 
 http://noelboss.github.io/featherlight/
@@ -31,10 +32,15 @@ Featherlight requires jQuery version 1.7.0 or higher. It's recommended to includ
 
 # Usage
 
-By default, featherlight acts on all elements using the data-featherlight attribute. An Element with this attribute triggers the lightbox. The value of the attribute acts as selector for an element thats opened as lightbox.
+By default, featherlight acts on all elements using the 'data-featherlight' attribute. An Element with this attribute triggers the lightbox. The value of the attribute acts as selector for an element thats opened as lightbox.
 
-	<a herf="#" data-featherlight="#mylightbox">Open Lightbox</a>
+	<a herf="#" data-featherlight="#mylightbox">Open elemnt in lightbox</a>
 	<div id="mylightbox">This div will be opened in a lightbox</div>
+
+'data-featherlight' can also contain a link to an image or the name of an attribute thats used as selector or even DOM code:
+
+	<a name="myimage.png" data-featherlight="href">Open image in lightbox</a>
+	<span data-featherlight="<p>Fanxy DOM Lightbox!</p>">Open some DOM in lightbox</span>
 
 By default, Featherbox initializes all elements found with the configured selector on document ready. If you want to prevent this, set $.fn.featherlight.defaults.autostart to false before the DOM is ready.
 
@@ -75,7 +81,7 @@ Context used for selecting elements matching "selector". Usefull of you only wan
 ================================================
 
 	targetAttr – String:  'data-featherlight'
-Attribute on the triggering element pointing to the target element that will be opened in the lightbox
+Attribute on the triggering element pointing to the target element that will be opened in the lightbox.
 
 ================================================
 
@@ -145,12 +151,14 @@ This is the close function used to close the lightbox. It receives the event obj
 		targetAttr: 'href'
 	});
 
-## Open Image with Featherlight
-	<a href="myimage.jpg" class="fl" title="Feather">Open Image</a>
+## Open image with Featherlight
+Us a link and point the data-featherlight attribute to the desired attribute which contains the link...
 
-	$('a.fl').each(function(){
-		$.featherlight('<img src="'+this.href+'" alt="'+this.title+'" />');
-	});
+	<a href="myimage.jpg" data-featherlight="href">Open Image</a>
+
+...or directly provide the link as the data-featherlight attribute:
+
+	<span data-featherlight="myimage.jpg">Open Image</span>
 
 ## Open lightbox after loading data from ajax
 Use Featherlight with ajax.
