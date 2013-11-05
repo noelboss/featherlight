@@ -38,9 +38,10 @@ By default, featherlight acts on all elements using the 'data-featherlight' attr
 	<a herf="#" data-featherlight="#mylightbox">Open elemnt in lightbox</a>
 	<div id="mylightbox">This div will be opened in a lightbox</div>
 
-'data-featherlight' can also contain a link to an image or the name of an attribute thats used as selector or even DOM code:
+'data-featherlight' can also contain a link to an image, an ajax-url or even DOM code:
 
-	<a name="myimage.png" data-featherlight="href">Open image in lightbox</a>
+	<a href="myimage.png" data-featherlight="image">Open image in lightbox</a>
+	<a href="myhtml.html .selector" data-featherlight="ajax">Open ajax content in lightbox</a>
 	<span data-featherlight="<p>Fanxy DOM Lightbox!</p>">Open some DOM in lightbox</span>
 
 By default, Featherbox initializes all elements found with the configured selector on document ready. If you want to prevent this, set $.featherlight.defaults.autostart to false before the DOM is ready.
