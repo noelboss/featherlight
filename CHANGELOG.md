@@ -1,6 +1,12 @@
 Featherlight – Changelog
 ===================================
 
+0.1.7 - 2013-11-06
+-----------------------------------
+### Maintenance/Fixes
+* Fixed IE8 Issue
+
+
 0.1.6 - 2013-11-05
 -----------------------------------
 ### Features
@@ -13,6 +19,7 @@ Featherlight – Changelog
 * Improved JS code
 * Moved defaults to $.featherlight.defaults
 
+
 0.1.5 - 2013-11-05
 -----------------------------------
 ### Features
@@ -23,10 +30,12 @@ Featherlight – Changelog
 * Improved CSS to use flexible height and vertical alignment
 * Improved JS code
 
+
 0.1.3 & 0.1.4 - 2013-11-05
 -----------------------------------
 ### Maintenance/Fixes
 * Added support for jQuery plugin site: http://plugins.jquery.com/featherlight/
+
 
 0.1.2 - 2013-11-04
 -----------------------------------

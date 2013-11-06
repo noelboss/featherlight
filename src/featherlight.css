@@ -17,7 +17,8 @@
 		height: 100%;
 		text-align: center;
 		cursor: pointer;
-		background-color: rgba(0, 0, 0, 0.8);
+		background: #333;
+		background: rgba(0, 0, 0, 0.8);
 	}
 
 	.featherlight .featherlight-close {
@@ -48,12 +49,12 @@
 		display: inline-block;
 		vertical-align: middle;
 		position: relative;
-		cursor: auto;
 		padding: 2%;
 		width: 60%;
 		max-height: 95%;
-		overflow: scroll;
+		overflow: auto;
 		background: #fff;
+		cursor: auto;
 	}
 
 	.featherlight .featherlight-inner {
