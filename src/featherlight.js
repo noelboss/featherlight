@@ -49,7 +49,7 @@
 				t.$fl.on(c.closeTrigger+'.'+c.namespace, $.proxy(c.close, t));
 
 				/* bind or call open function */
-				if($elm.length > 0 && this.hasOwnProperty('nodeName')){
+				if($elm.length > 0 && this.tagName){
 					$elm.on(c.openTrigger+'.'+c.namespace, $.proxy(c.open, t));
 				} else {
 					$.proxy(c.open, t)();
