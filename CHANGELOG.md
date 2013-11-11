@@ -1,9 +1,17 @@
 Featherlight – Changelog
 ===================================
 
+
+0.1.8 - 2013-11-11
+-----------------------------------
+### Maintenance & Fixes
+* Improved code readability
+* Fixed typos
+
+
 0.1.7 - 2013-11-06
 -----------------------------------
-### Maintenance/Fixes
+### Maintenance & Fixes
 * Fixed IE8 Issue
 
 
@@ -15,7 +23,7 @@ Featherlight – Changelog
 * Modified the way how images are handeled to match ajax method using data-featherlight="image"
 * Added $.featherlight.methods so all methods are accessible
 
-### Maintenance/Fixes
+### Maintenance & Fixes
 * Improved JS code
 * Moved defaults to $.featherlight.defaults
 
@@ -26,20 +34,20 @@ Featherlight – Changelog
 * Added support for images
 * Added option to reset css – { resetCss: true }
 
-### Maintenance/Fixes
+### Maintenance & Fixes
 * Improved CSS to use flexible height and vertical alignment
 * Improved JS code
 
 
 0.1.3 & 0.1.4 - 2013-11-05
 -----------------------------------
-### Maintenance/Fixes
+### Maintenance & Fixes
 * Added support for jQuery plugin site: http://plugins.jquery.com/featherlight/
 
 
 0.1.2 - 2013-11-04
 -----------------------------------
-### Maintenance/Fixes
+### Maintenance & Fixes
 * Fixed close behavior
 * Added changelog
 * Fixed version numbers and dates

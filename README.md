@@ -117,7 +117,7 @@ If true, the close event is also bound to the background
 
 ================================================
 
-	bg – DOM String: null
+	background – DOM String: null
 You can provide the wrapping DOM. This is a bit tricky and just for the advanced users. It's recommended to study the plugin code. But you need to provide an element with a "{namespace}-close" class: the content of the lightbox will be added *after* this element.
 
 ================================================
