@@ -1,6 +1,6 @@
 /**
 * Featherlight – ultra slim jQuery lightbox
-* Version 0.1.8 – https://github.com/noelboss/featherlight
+* Version 0.1.9 – https://github.com/noelboss/featherlight
 *
 * Copyright 2013, Noel Bossart
 * MIT Licensed.
@@ -10,6 +10,7 @@
 
 	/* featherlight object */
 	var fl = {
+		id: 0, /* used to manage ids */
 		defaults: { /* you can access and override all defaults using $.fl.defaults */
 			selector:     '[data-featherlight]',  /* elements that trigger the lightbox */
 			context:      'body',                 /* context used to search for the lightbox content and triggers */
@@ -19,7 +20,8 @@
 			namespace:    'featherlight',         /* name of the events and css class prefix */
 			resetCss:     false,                  /* reset all css */
 			variant:      null,                   /* class that will be added to change look of the lightbox */
-			clickBgClose: true,                   /* close lightbox on click on the background */
+			closeOnBg:    true,                   /* close lightbox on click on the background */
+			closeOnEsc:   true,                   /* close lightbox when pressing esc */
 			background:   null,                   /* custom DOM for the background, wrapper and the closebutton */
 			autostart:    true,                   /* initialize all links with that match "selector" on document ready */
 			open: function(event){                /* opens the lightbox "this" contains $instance with the lightbox, and with the config */
@@ -39,6 +41,7 @@
 
 					/* everything that we need later is stored in self (target) */
 					self = {
+						id: fl.id++,
 						config: config,
 						content: content,
 						$elm: $elm,
@@ -102,6 +105,15 @@
 
 				/* If we have content, add it and show lightbox */
 				if($.proxy(fl.methods.getContent, self)() !== false){
+
+					if(self.config.closeOnEsc){
+						$(document).bind('keyup.'+self.config.namespace+self.id, function(e) {
+							if (e.keyCode == 27) { // esc keycode
+								self.$instance.find('.'+self.config.namespace+'-close').click();
+							}
+						});
+					}
+
 					self.$instance
 						.prependTo('body').fadeIn()
 						.find('.'+self.config.namespace+'-close')
@@ -116,7 +128,11 @@
 					config = self.config,
 					$instance = $(event.target);
 
-				if((config.clickBgClose && $instance.is('.'+config.namespace)) || $instance.is('.'+config.namespace+'-close') ){
+				if((config.closeOnBg && $instance.is('.'+config.namespace)) || $instance.is('.'+config.namespace+'-close') ){
+					if(self.config.closeOnEsc){
+						$(document).unbind('keyup.'+self.config.namespace+self.id);
+					}
+
 					self.$instance.fadeOut(function(){
 						self.$instance.detach();
 					});

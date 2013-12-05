@@ -1,6 +1,14 @@
 Featherlight – Changelog
 ===================================
 
+0.1.9 - 2013-12-05
+-----------------------------------
+### Features
+* Added support for ESC key to close lightbox
+
+### Maintenance & Fixes
+* Renamed option clickBgClose to closeOnBg for consistency
+
 
 0.1.8 - 2013-11-11
 -----------------------------------

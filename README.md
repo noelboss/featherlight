@@ -1,7 +1,7 @@
 Featherlight – ultra slim jQuery lightbox
 ================================================
 
-Featherlight is a very lightweight jQuery lightbox plugin.
+Featherlight is a very lightweight jQuery lightbox plugin. For more information and demos, visit the [Official website](http://noelboss.github.io/featherlight/).
 
 * simple yet flexible
 * image support
@@ -13,7 +13,7 @@ Featherlight is a very lightweight jQuery lightbox plugin.
 * completely customizable via config object
 * call with custom content
 
-http://noelboss.github.io/featherlight/
+[Changelog](https://github.com/noelboss/featherlight/blob/master/CHANGELOG.md)
 
 ================================================
 
@@ -112,8 +112,13 @@ Pass your own CSS class to adjust the styling of the lightbox according to your 
 
 ================================================
 
-	clickBgClose – Boolean: true
+	closeOnBg – Boolean: true
 If true, the close event is also bound to the background
+
+================================================
+
+	closeOnEsc – Boolean: true
+If true, the lightbox is closed when pressing the ESC key
 
 ================================================
 
