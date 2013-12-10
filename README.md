@@ -1,7 +1,7 @@
 Featherlight – ultra slim jQuery lightbox
 ================================================
 
-Featherlight is a very lightweight jQuery lightbox plugin. For more information and demos, visit the [Official website](http://noelboss.github.io/featherlight/).
+Featherlight is a very lightweight jQuery lightbox plugin. For more information and demos, visit the [official website](http://noelboss.github.io/featherlight/).
 
 * simple yet flexible
 * image support
@@ -87,7 +87,7 @@ Context used for selecting elements matching "selector". Usefull of you only wan
 
 ================================================
 
-	type – object: image: valse, ajax: false
+	type – Object: image: valse, ajax: false
 The type object allows you to manually set what type the lightbox is. Set the value of type.image or type.ajax to true. Otherwise, the value from targetAttr will be to determine the type of the lightbox. Example:
 
 	$('.image-lightbox', $('.gallery')).featherlight({
