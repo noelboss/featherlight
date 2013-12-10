@@ -14,6 +14,10 @@
 		defaults: { /* you can access and override all defaults using $.fl.defaults */
 			selector:     '[data-featherlight]',  /* elements that trigger the lightbox */
 			context:      'body',                 /* context used to search for the lightbox content and triggers */
+			type: {                               /* manually set type of lightbox. Otherwise, it will check for the targetAttrs value. */
+				image: false,
+				ajax: false
+			},
 			targetAttr:   'data-featherlight',    /* attribute of the triggered element that contains the selector to the lightbox content */
 			openTrigger:  'click',                /* event that triggers the lightbox */
 			closeTrigger: 'click',                /* event that triggers the closing of the lightbox */
@@ -63,19 +67,19 @@
 			getContent: function(){
 				var self = this,
 					content = self.content,
-					attr = self.$elm.attr(self.config.targetAttr);
+					attr = self.$elm.attr(self.config.targetAttr) || '';
 
 				/* if we have DOM, convert to jQuery Object */
 				if(typeof content === 'string'){
 					self.content = $(content);
 				} else if(content instanceof $ === false){ /* if we have no jQuery Object */
 					/* check if we have an image and create element */
-					if(attr === 'image' || attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i)){
+					if(self.config.type.image == true || attr === 'image' || attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i)){
 						var url = attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i) ? attr : self.$elm.attr('href');
 						self.content = $('<img src="'+url+'" alt="" class="'+self.config.namespace+'-image" />');
 					}
 					/* check if we have an ajax link */
-					else if(attr === 'ajax' || attr.match(/(http|htm|php)/i)){
+					else if(self.config.type.ajax == true || attr === 'ajax' || attr.match(/(http|htm|php)/i)){
 						var url = attr.match(/(http|htm|php)/i) ? attr : self.$elm.attr('href'),
 						/* we are using load so one can specify a target with: url.html #targetelement */
 						content = url ? $('<div></div>').load(url, function(response, status){
@@ -86,13 +90,17 @@
 						return false;
 					}
 					/* otherwise create jquery element by using the attribute as selector */
-					else {
+					else if(attr) {
 						self.content = $($(attr), self.config.context);
+					}
+					/* could not find any content */
+					else {
+						return false;
 					}
 				}
 
 				/* we need a special class for the iframe */
-				if(self.content.is('iframe') || $('iframe', self.content).length > 0){
+				if($('iframe', self.content).length > 0){
 					self.$instance.addClass(self.config.namespace+'-iframe');
 				}
 				self.content.addClass(self.config.namespace+'-inner');

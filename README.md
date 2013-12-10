@@ -87,6 +87,17 @@ Context used for selecting elements matching "selector". Usefull of you only wan
 
 ================================================
 
+	type – object: image: valse, ajax: false
+The type object allows you to manually set what type the lightbox is. Set the value of type.image or type.ajax to true. Otherwise, the value from targetAttr will be to determine the type of the lightbox. Example:
+
+	$('.image-lightbox', $('.gallery')).featherlight({
+		type: {
+			image: true
+		}
+	});
+
+================================================
+
 	targetAttr – String:  'data-featherlight'
 Attribute on the triggering element pointing to the target element that will be opened in the lightbox.
 
