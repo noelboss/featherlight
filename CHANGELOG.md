@@ -1,6 +1,15 @@
 Featherlight – Changelog
 ===================================
 
+0.1.10 - 2013-12-10
+-----------------------------------
+### Features
+* Added type configuration object with two keys. type.image: false, type.ajax: false to manually set type of lightbox
+
+### Maintenance & Fixes
+* Fixed behavior with missing data in targetAttr and handling of non found content
+
+
 0.1.9 - 2013-12-05
 -----------------------------------
 ### Features
