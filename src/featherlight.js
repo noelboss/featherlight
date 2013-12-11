@@ -100,7 +100,7 @@
 				}
 
 				/* we need a special class for the iframe */
-				if($('iframe', self.content).length > 0){
+				if(self.content.is('iframe') || $('iframe', self.content).length > 0){
 					self.$instance.addClass(self.config.namespace+'-iframe');
 				}
 				self.content.addClass(self.config.namespace+'-inner');
@@ -131,7 +131,9 @@
 
 			/* closes the lightbox "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
-				if(event){event.preventDefault();}
+				if(event){
+					event.preventDefault();
+				}
 				var self = this,
 					config = self.config,
 					$instance = $(event.target);
