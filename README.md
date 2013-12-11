@@ -13,7 +13,7 @@ Featherlight is a very lightweight jQuery lightbox plugin. For more information 
 * completely customizable via configuration object
 * call with custom content
 
-[Changelog](https://github.com/noelboss/featherlight/blob/master/CHANGELOG.md)
+Download current version: [Featherlight 0.1.11](https://github.com/noelboss/featherlight/archive/master.zip) – [Changelog](https://github.com/noelboss/featherlight/blob/master/CHANGELOG.md)
 
 ================================================
 
@@ -33,7 +33,7 @@ Featherlight requires jQuery version 1.7.0 or higher. It's recommended to includ
 
 # Usage
 
-By default, featherlight acts on all elements using the 'data-featherlight' attribute. An Element with this attribute triggers the lightbox. The value of the attribute acts as selector for an element thats opened as lightbox.
+By default, featherlight acts on all elements using the 'data-featherlight' attribute. An element with this attribute triggers the lightbox. The value of the attribute acts as selector for an element that's opened as lightbox.
 
 	<a herf="#" data-featherlight="#mylightbox">Open elemnt in lightbox</a>
 	<div id="mylightbox">This div will be opened in a lightbox</div>
@@ -44,19 +44,19 @@ Featherlight is smart. 'data-featherlight' can also contain a link to an image, 
 	<span data-featherlight="myhtml.html .selector">Open ajax content in lightbox</a>
 	<span data-featherlight="<p>Fancy DOM Lightbox!</p>">Open some DOM in lightbox</span>
 
-it also works with links using href and the 'image' and 'ajax' keywords:
+it also works with links using href and the "image" and "ajax" keywords (this can also be manually set with the configuration options `type.image` and `type.ajax`):
 
 	<a href="myimage.png" data-featherlight="image">Open image in lightbox</a>
 	<a href="myhtml.html .selector" data-featherlight="ajax">Open ajax content in lightbox</a>
 
-By default, Featherlight initializes all elements matching defaults.selector on document ready. If you want to prevent this, set $.featherlight.defaults.autostart to false before the DOM is ready.
+By default, Featherlight initializes all elements matching `defaults.selector` on document ready. If you want to prevent this, set `$.featherlight.defaults.autostart` to false before the DOM is ready.
 
 ## Bind Featherlight
 You can bind the Featherlight events on any element using the following code:
 
 	$('.myElement').featherlight(configuration, $content);
 
-It will then look for the "targetAttr" (by default "data-featherlight") on this element and use its value to find the content that will be opened as lightbox when you click on the element.
+It will then look for the `targetAttr` (by default "data-featherlight") on this element and use its value to find the content that will be opened as lightbox when you click on the element.
 
 ***configuration*** – Object: Object to configure certain aspects of the plugin. See [Configuration](#configuration).
 
