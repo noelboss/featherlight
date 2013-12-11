@@ -23,7 +23,7 @@ All styling is done using CSS so you'll want to include the Featherlight CSS in 
 
 	<link fref="//rawgithub.com/noelboss/featherlight/master/src/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" />
 
-Be aware that Featherlight uses very unspecific CSS selectors to help you override every aspact. This means in turn, that if you're not following a modularized approach to write CSS (which you should! It's terrific!) and have many global and specific definitions (read ID's and such – which you shouldn't), these definitions can break the Featherbox styling.
+Be aware that Featherlight uses very unspecific CSS selectors to help you overwrite every aspact. This means in turn, that if you're not following a modularized approach to write CSS (which you should! It's terrific!) and have many global and specific definitions (read ID's and such – which you shouldn't), these definitions can break the Featherlight styling.
 
 Featherlight requires jQuery version 1.7.0 or higher. It's recommended to include the javascript at the bottom of the page before the closing `</body>` tag.
 
@@ -49,7 +49,7 @@ it also works with links using href and the 'image' and 'ajax' keywords:
 	<a href="myimage.png" data-featherlight="image">Open image in lightbox</a>
 	<a href="myhtml.html .selector" data-featherlight="ajax">Open ajax content in lightbox</a>
 
-By default, Featherbox initializes all elements matching defaults.selector on document ready. If you want to prevent this, set $.featherlight.defaults.autostart to false before the DOM is ready.
+By default, Featherlight initializes all elements matching defaults.selector on document ready. If you want to prevent this, set $.featherlight.defaults.autostart to false before the DOM is ready.
 
 ## Bind Featherlight
 You can bind the Featherlight events on any element using the following code:
@@ -73,7 +73,33 @@ In cases where you don't want an Element to act as Trigger you can call Featherl
 
 # Configuration
 
-Featherbox comes with a bunch of configuration-options which make it very flexible. Pass this options in an object to the function call or override $.featherlight.defaults.
+Featherlight comes with a bunch of configuration-options which make it very flexible. Pass your options in an object to the function call or overwrite $.featherlight.defaults. This is the whole default object:
+
+	/* you can access and overwrite all defaults using $.fl.defaults */
+	defaults: {
+		selector:     '[data-featherlight]',  /* elements that trigger the lightbox */
+		context:      'body',                 /* context used to search for the lightbox content and triggers */
+		type: {                               /* manually set type of lightbox. Otherwise, it will check for the targetAttrs value. */
+			image: false,
+			ajax: false
+		},
+		targetAttr:   'data-featherlight',    /* attribute of the triggered element that contains the selector to the lightbox content */
+		openTrigger:  'click',                /* event that triggers the lightbox */
+		closeTrigger: 'click',                /* event that triggers the closing of the lightbox */
+		namespace:    'featherlight',         /* name of the events and css class prefix */
+		resetCss:     false,                  /* reset all css */
+		variant:      null,                   /* class that will be added to change look of the lightbox */
+		closeOnBg:    true,                   /* close lightbox on click on the background */
+		closeOnEsc:   true,                   /* close lightbox when pressing esc */
+		background:   null,                   /* custom DOM for the background, wrapper and the closebutton */
+		autostart:    true,                   /* initialize all links with that match "selector" on document ready */
+		open: function(event){                /* opens the lightbox "this" contains $instance with the lightbox, and with the config */
+			$.proxy($.featherlight.methods.open, this, event)();
+		},
+		close: function(event){                   /* closes the lightbox "this" contains $instance with the lightbox, and with the config */
+			$.proxy($.featherlight.methods.close, this, event)();
+		}
+	}
 
 ================================================
 
@@ -139,12 +165,12 @@ You can provide the wrapping DOM. This is a bit tricky and just for the advanced
 ================================================
 
 	autostart – Boolean: true
-By default, Featherbox finds all elements that match "selector" and binds the open and close functions. To disable, set $.featherlight.defaults.autostart = false; before the document ready event is fired.
+By default, Featherlight finds all elements that match "selector" and binds the open and close functions. To disable, set $.featherlight.defaults.autostart = false; before the document ready event is fired.
 
 ================================================
 
 	 open – Function
-This is the open function used to open the lightbox. It receives the event object. "this" is an object and contains the triggering DOM element (if existing) and the related Featherbox objects:
+This is the open function used to open the lightbox. It receives the event object. "this" is an object and contains the triggering DOM element (if existing) and the related Featherlight objects:
 *$fl* – Containing the whole lightbox: background, content wrapper, close button and content.
 *$content* – The content thats wrapped with the background and prepended with the close button.
 
@@ -155,13 +181,44 @@ This is the open function used to open the lightbox. It receives the event objec
 ================================================
 
 	close – Function
-This is the close function used to close the lightbox. It receives the event object. "this" is an object and contains the triggering DOM element (if existing) and the related Featherbox objects:
+This is the close function used to close the lightbox. It receives the event object. "this" is an object and contains the triggering DOM element (if existing) and the related Featherlight objects:
 *$fl* – Containing the whole lightbox: background, content wrapper, close button and content.
 *$content* – The content thats wrapped with the background and prepended with the close button.
 
 	close: function(e){
 		$.proxy($.featherlight.methods.close, this, e)();
 	}
+
+
+# Methods
+
+All of Featherlights methods are stored in $.featherlight.methods and can therefore be overwritten like the configuration defaults.
+
+	methods: { /* you can access and overwrite all methods using */
+		/* setup iterrates over a single instance of featherlight and prepares the background and binds the events */
+		setup: function(config, content){
+			// ...
+		},
+
+		/* this method prepares the content and converts it into a jQuery object */
+		getContent: function(){
+			// ...
+		},
+
+		/* opens the lightbox "this" contains $instance with the lightbox, and with the config */
+		open: function(event){
+			// ...
+		},
+
+		/* closes the lightbox "this" contains $instance with the lightbox, and with the config */
+		close: function(event){
+			// ...
+		}
+	}
+
+You can overwrite a function like this:
+
+	$.featherlight.methods.open = function() { alert('open!'); }
 
 # Examples
 
@@ -193,7 +250,7 @@ or you can provide the link directly as the featherlight-attribute:
 
 
 ## Featherlight your own style
-Add class to override styling. For a full example check out the index.html
+Add class to overwrite styling. For a full example check out the index.html
 
 	$('a.fl').featherlight({
 		variant: 'myCssClass'

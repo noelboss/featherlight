@@ -35,7 +35,8 @@
 				$.proxy($.featherlight.methods.close, this, event)();
 			}
 		},
-		methods: { /* you can access and override all methods using $.fl.methods */
+		methods: { /* you can access and override all methods using $.featherlight.methods */
+			/* setup iterrates over a single instance of featherlight and prepares the background and binds the events */
 			setup: function(config, content){
 				var $elm = $(this) || $(),
 					config = $.extend({}, fl.defaults, config),
