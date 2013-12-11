@@ -10,7 +10,7 @@ Featherlight is a very lightweight jQuery lightbox plugin. For more information 
 * minimal css
 * name-spaced
 * responsive
-* completely customizable via config object
+* completely customizable via configuration object
 * call with custom content
 
 [Changelog](https://github.com/noelboss/featherlight/blob/master/CHANGELOG.md)
