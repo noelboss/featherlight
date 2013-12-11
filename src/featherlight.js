@@ -7,6 +7,7 @@
 */
 (function($) {
 	"use strict";
+	if(typeof $ === 'undefined') return;
 
 	/* featherlight object */
 	var fl = {
@@ -174,4 +175,4 @@
 			$(config.selector, config.context).featherlight();
 		}
 	});
-}(jQuery));
+}(typeof jQuery === 'function' ? jQuery : alert('To much lightness, Featherlight needs jQuery.')));
