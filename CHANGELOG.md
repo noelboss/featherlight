@@ -1,6 +1,11 @@
 Featherlight – Changelog
 ===================================
 
+0.1.12 - 20??-??-??
+-----------------------------------
+### Maintenance & Fixes
+- Featherlight checks for jQuery and throws an error if not loaded
+
 
 0.1.11 - 2013-12-11
 -----------------------------------
