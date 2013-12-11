@@ -1,7 +1,7 @@
 Featherlight – ultra slim jQuery lightbox
 ================================================
 
-*Featherlight is a very lightweight jQuery lightbox plugin. For more information and demos, visit the [official website](http://noelboss.github.io/featherlight/).*
+**Featherlight is a very lightweight jQuery lightbox plugin. For more information and demos, visit the [official website](http://noelboss.github.io/featherlight/).**
 
 * simple yet flexible
 * image support
@@ -14,7 +14,9 @@ Featherlight – ultra slim jQuery lightbox
 * call with custom content
 
 ## Download
-Current version: [Featherlight 0.1.11](https://github.com/noelboss/featherlight/archive/master.zip) [[Changelog](https://github.com/noelboss/featherlight/blob/master/CHANGELOG.md)]
+* **[Current Release 0.1.11](https://github.com/noelboss/featherlight/archive/master.zip)**
+* [Old releases](https://github.com/noelboss/featherlight/releases)
+* [Changelog](https://github.com/noelboss/featherlight/blob/master/CHANGELOG.md)
 
 
 # Installation
