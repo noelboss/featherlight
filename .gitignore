@@ -1,0 +1,9 @@
+node_modules
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*~

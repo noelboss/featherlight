@@ -1,10 +1,13 @@
 Featherlight – Changelog
 ===================================
 
-0.1.12 - 20??-??-??
+0.1.12 - 2014-01-06
 -----------------------------------
 ### Maintenance & Fixes
 - Featherlight checks for jQuery and throws an error if not loaded
+- Some jslint improvements
+– Moved minified files to release/folder
+- using grunt
 
 
 0.1.11 - 2013-12-11

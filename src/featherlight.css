@@ -1,10 +1,10 @@
 /**
-* Featherlight – ultra slim jQuery lightbox
-* Version 0.1.11 – https://github.com/noelboss/featherlight
-*
-* Copyright 2013, Noel Bossart
-* MIT Licensed.
-*/
+ * Featherlight – ultra slim jQuery lightbox
+ * https://github.com/noelboss/featherlight
+ *
+ * Copyright 2014, Noel Bossart
+ * MIT Licensed.
+**/
 @media all {
 	.featherlight {
 		display: none;

@@ -1,13 +1,13 @@
 /**
-* Featherlight – ultra slim jQuery lightbox
-* Version 0.1.11 – https://github.com/noelboss/featherlight
-*
-* Copyright 2013, Noel Bossart
-* MIT Licensed.
-*/
+ * Featherlight - ultra slim jQuery lightbox
+ * https://github.com/noelboss/featherlight
+ *
+ * Copyright 2014, Noel Bossart
+ * MIT Licensed.
+**/
 (function($) {
 	"use strict";
-	if(typeof $ === 'undefined') return;
+	if($ === 'undefined') {return; }
 
 	/* featherlight object */
 	var fl = {
@@ -76,12 +76,12 @@
 					self.content = $(content);
 				} else if(content instanceof $ === false){ /* if we have no jQuery Object */
 					/* check if we have an image and create element */
-					if(self.config.type.image == true || attr === 'image' || attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i)){
+					if(self.config.type.image === true || attr === 'image' || attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i)){
 						var url = attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i) ? attr : self.$elm.attr('href');
 						self.content = $('<img src="'+url+'" alt="" class="'+self.config.namespace+'-image" />');
 					}
 					/* check if we have an ajax link */
-					else if(self.config.type.ajax == true || attr === 'ajax' || attr.match(/(http|htm|php)/i)){
+					else if(self.config.type.ajax === true || attr === 'ajax' || attr.match(/(http|htm|php)/i)){
 						var url = attr.match(/(http|htm|php)/i) ? attr : self.$elm.attr('href'),
 						/* we are using load so one can specify a target with: url.html #targetelement */
 						content = url ? $('<div></div>').load(url, function(response, status){
@@ -92,7 +92,7 @@
 						return false;
 					}
 					/* otherwise create jquery element by using the attribute as selector */
-					else if(attr) {
+					if(attr) {
 						self.content = $($(attr), self.config.context);
 					}
 					/* could not find any content */
@@ -118,7 +118,7 @@
 
 					if(self.config.closeOnEsc){
 						$(document).bind('keyup.'+self.config.namespace+self.id, function(e) {
-							if (e.keyCode == 27) { // esc keycode
+							if (e.keyCode === 27) { // esc keycode
 								self.$instance.find('.'+self.config.namespace+'-close').click();
 							}
 						});
