@@ -45,19 +45,45 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		prebump: {
+			options: {
+				patterns: [
+					{
+						match: '/<%= pkg.version %>/g',
+						replacement: '@@version', // replaces "2013" to "2014"
+						expression: true     // must be forced for templated regexp
+					}
+				],
+				files: [
+					{ src: ['index.html'], dest: 'release/index.html' },
+					{ src: ['README.md'], dest: 'README.md'
+				]
+			}
+		},
 		bump: {
 			options: {
-				files: ['package.json', 'featherlight.jquery.json', 'index.html'],
-				updateConfigs: [],
-				commit: false,
+				files: ['package.json', 'featherlight.jquery.json'],
+				updateConfigs: ['pkg'],
+				commit: true,
 				commitMessage: 'Release v%VERSION%',
 				commitFiles: ['-a'], // '-a' for all files
-				createTag: false,
+				createTag: true,
 				tagName: '%VERSION%',
 				tagMessage: 'Version %VERSION%',
 				push: false,
 				pushTo: 'upstream',
 				gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
+			}
+		},
+		postbump: {
+			options: {
+				patterns: [
+					{
+						match: 'version',
+						replacement: '<%= pkg.version %>', // replaces "2013" to "2014"
+						expression: false     // must be forced for templated regexp
+					}
+				]
 			}
 		}
 	});
@@ -68,8 +94,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-jquerymanifest');
 	grunt.loadNpmTasks('grunt-bump');
-	/*grunt.loadNpmTasks('grunt-replace');*/
+	grunt.loadNpmTasks('grunt-replace');
 
 	// Default task(s).
 	grunt.registerTask('default', ['uglify','cssmin','jquerymanifest']);
+	grunt.registerTask('release', ['prebump', 'bump-only', 'postbump', 'uglify','cssmin','jquerymanifest']);
 };
