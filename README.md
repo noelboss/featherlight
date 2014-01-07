@@ -23,7 +23,7 @@ Featherlight – ultra slim jQuery lightbox
 
 All styling is done using CSS so you'll want to include the Featherlight CSS in your head.
 
-	<link fref="//rawgithub.com/noelboss/featherlight/master/src/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" />
+	<link href="//rawgithub.com/noelboss/featherlight/master/src/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" />
 
 Be aware that Featherlight uses very unspecific CSS selectors to help you overwrite every aspact. This means in turn, that if you're not following a modularized approach to write CSS (which you should! It's terrific!) and have many global and specific definitions (read ID's and such – which you shouldn't), these definitions can break the Featherlight styling.
 
