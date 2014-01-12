@@ -37,7 +37,7 @@
 			}
 		},
 		methods: { /* you can access and override all methods using $.featherlight.methods */
-			/* setup iterrates over a single instance of featherlight and prepares the background and binds the events */
+			/* setup iterates over a single instance of featherlight and prepares the background and binds the events */
 			setup: function(config, content){
 				var $elm = $(this) || $(),
 					config = $.extend({}, fl.defaults, config),
@@ -51,7 +51,7 @@
 						config: config,
 						content: content,
 						$elm: $elm,
-						$instance: $background.clone().addClass(variant) /* clone DOM for the background, wrapper and the closebutton */
+						$instance: $background.clone().addClass(variant) /* clone DOM for the background, wrapper and the close button */
 					};
 
 				/* close when click on background */
@@ -175,4 +175,4 @@
 			$(config.selector, config.context).featherlight();
 		}
 	});
-}(typeof jQuery === 'function' ? jQuery : alert('To much lightness, Featherlight needs jQuery.')));
+}(typeof jQuery === 'function' ? jQuery : alert('Too much lightness, Featherlight needs jQuery.')));
