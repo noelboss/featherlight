@@ -49,17 +49,27 @@ module.exports = function(grunt) {
 			}
 		},
 		replace: {
-			index: {
+			src: {
+				src: ['./README.md','./src/*.*'],
+				overwrite: true,
+				replacements: [
+					{
+						from: /Copyright\s[0-9]{4}/g,
+						to: 'Copyright <%= grunt.template.today("yyyy") %>'
+					},
+					{
+						from: /Current\sRelease\s[0-9]+[.]{1}[0-9]+[.]{1}[0-9]+/g,
+						to: 'Current Release <%= pkg.version %>'
+					}
+				]
+			},
+			min: {
 				src: ['src/index.html'],
 				dest: './',
 				replacements: [
 					{
-						from: 'MASTER',                   // string replacement
-						to: '<%= pkg.version %>'
-					},
-					{
 						from: '="featherlight.',
-						to: '="release/featherlight.min.',
+						to: '="release/featherlight.min.'
 					}
 				]
 			}
@@ -92,9 +102,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-bump');
 
 	// Default task(s).
-	grunt.registerTask('default', ['jshint', 'replace:index', 'uglify', 'cssmin', 'jquerymanifest']);
+	grunt.registerTask('default', ['jshint',  'replace:src', 'replace', 'uglify', 'cssmin', 'jquerymanifest']);
 	grunt.registerTask('test',    ['jshint']);
-	grunt.registerTask('patch',   ['bump-only:patch', 'jshint', 'replace:index', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit']);
-	grunt.registerTask('minor',   ['bump-only:minor', 'jshint', 'replace:index', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit']);
-	grunt.registerTask('major',   ['bump-only:major', 'jshint', 'replace:index', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit']);
+	grunt.registerTask('patch',   ['bump-only:patch', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit']);
+	grunt.registerTask('minor',   ['bump-only:minor', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit']);
+	grunt.registerTask('major',   ['bump-only:major', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit']);
 };
