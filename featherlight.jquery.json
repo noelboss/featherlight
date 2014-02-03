@@ -1,44 +1,44 @@
 {
-	"name": "featherlight",
-	"title": "Featherlight – ultra slim jQuery lightbox",
-	"description": "Featherlight is a very lightweight jQuery lightbox plugin. It's simple yet flexible and easy to use. Featherlight has minimal css and uses no inline css, everything is name-spaced, it's completely customizable via config object and offers image, ajax and iframe support out of the box. In total, Featherlight weights less than 4kB",
-	"keywords": [
-		"ajax",
-		"customizable",
-		"dialog",
-		"easy",
-		"fancy",
-		"fast",
-		"html5",
-		"image",
-		"jquery",
-		"lightbox",
-		"lightweight",
-		"minimal",
-		"modal",
-		"popup",
-		"simple",
-		"slim",
-		"small",
-		"ui",
-		"window"
-	],
-	"version": "0.1.11",
-	"author": {
-		"name": "Noël Raoul Bossart",
-		"url": "http://www.noelboss.com"
-	},
-	"licenses": [
-		{
-			"type": "MIT",
-			"url": "https://raw.github.com/noelboss/featherlight/master/LICENSE"
-		}
-	],
-	"bugs": "https://github.com/noelboss/featherlight/issues",
-	"homepage": "http://noelboss.github.io/featherlight/",
-	"docs": "https://github.com/noelboss/featherlight/blob/master/README.md",
-	"download": "https://github.com/noelboss/featherlight/archive/master.zip",
-	"dependencies": {
-		"jquery": ">=1.7"
-	}
+  "name": "featherlight",
+  "version": "0.1.12",
+  "title": "Featherlight – ultra slim jQuery lightbox",
+  "author": {
+    "name": "Noël Raoul Bossart",
+    "url": "http://www.noelboss.com"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/noelboss/featherlight/master/LICENSE"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
+  "description": "Featherlight is a very lightweight jQuery lightbox plugin. It's simple yet flexible and easy to use. Featherlight has minimal css and uses no inline css, everything is name-spaced, it's completely customizable via configuration object and offers image, ajax and iframe support out of the box. Featherlights small footprint weights less than 4kB – in total.",
+  "keywords": [
+    "ajax",
+    "customizable",
+    "dialog",
+    "easy",
+    "fancy",
+    "fast",
+    "html5",
+    "image",
+    "jquery",
+    "lightbox",
+    "lightweight",
+    "minimal",
+    "modal",
+    "popup",
+    "simple",
+    "slim",
+    "small",
+    "ui",
+    "window"
+  ],
+  "docs": "https://github.com/noelboss/featherlight/blob/master/README.md",
+  "download": "https://github.com/noelboss/featherlight/archive/master.zip",
+  "bugs": "https://github.com/noelboss/featherlight/issues",
+  "homepage": "http://noelboss.github.io/featherlight/"
 }

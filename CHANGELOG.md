@@ -1,6 +1,17 @@
 Featherlight – Changelog
 ===================================
 
+0.1.12 - 2014-02-03
+-----------------------------------
+### Features
+- Added configuration option 'openSpeed' and 'closeSpeed' to set animation duration
+
+### Maintenance & Fixes
+- Featherlight checks for jQuery and throws an error if not loaded
+- Some jslint improvements
+– Moved minified files to release/ folder
+- Using grunt
+
 
 0.1.11 - 2013-12-11
 -----------------------------------
@@ -12,7 +23,7 @@ Featherlight – Changelog
 0.1.10 - 2013-12-10
 -----------------------------------
 ### Features
-- Added type configuration object with two keys. type.image: false, type.ajax: false to manually set type of lightbox
+- Added configuration object 'type' with two keys: type.image: false, type.ajax: false, to manually set type of lightbox
 
 ### Maintenance & Fixes
 - Fixed behavior with missing data in targetAttr and handling of non found content
