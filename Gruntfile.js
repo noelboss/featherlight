@@ -13,16 +13,16 @@ module.exports = function(grunt) {
 			}
 		},
 		jshint: {
-			options: {
-				curly: true,
-				eqeqeq: true,
-				eqnull: true,
-				browser: true,
-				globals: {
-					jQuery: true
+				options: {
+					curly: true,
+					eqeqeq: true,
+					eqnull: true,
+					browser: true,
+					globals: {
+						jQuery: true
+					},
 				},
-			},
-			uses_defaults: ['src/**/*.js'],
+				uses_defaults: ['src/**/*.js']
 		},
 		cssmin: {
 			options: {
@@ -41,28 +41,34 @@ module.exports = function(grunt) {
 					"title": "<%= pkg.title %>",
 					"dependencies": {
 						"jquery": ">=1.7"
-					}
+					},
+					"devDependencies": null,
+					"main": null
 				}
 			}
 		},
-		prebump: {
-			options: {
-				patterns: [
+		replace: {
+			index: {
+				src: ['src/index.html'],
+				dest: './',
+				replacements: [
 					{
-						match: '/<%= pkg.version %>/g',
-						replacement: '@@version', // replaces "2013" to "2014"
-						expression: true     // must be forced for templated regexp
+						from: 'MASTER',                   // string replacement
+						to: '<%= pkg.version %>'
+					},
+					{
+						from: '="featherlight.',
+						to: '="release/featherlight.min.',
 					}
-				],
-				files: [
-					{ src: ['index.html'], dest: 'release/index.html' },
-					{ src: ['README.md'], dest: 'README.md'
 				]
 			}
 		},
 		bump: {
 			options: {
-				files: ['package.json', 'featherlight.jquery.json'],
+				files: [
+					'package.json',
+					'featherlight.jquery.json'
+				],
 				updateConfigs: ['pkg'],
 				commit: true,
 				commitMessage: 'Release v%VERSION%',
@@ -74,29 +80,19 @@ module.exports = function(grunt) {
 				pushTo: 'upstream',
 				gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
 			}
-		},
-		postbump: {
-			options: {
-				patterns: [
-					{
-						match: 'version',
-						replacement: '<%= pkg.version %>', // replaces "2013" to "2014"
-						expression: false     // must be forced for templated regexp
-					}
-				]
-			}
 		}
 	});
 
 	// Load the plugin that provides the "uglify" task.
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-text-replace');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-jquerymanifest');
-	grunt.loadNpmTasks('grunt-bump');
-	grunt.loadNpmTasks('grunt-replace');
+	//grunt.loadNpmTasks('grunt-bump');
 
 	// Default task(s).
-	grunt.registerTask('default', ['uglify','cssmin','jquerymanifest']);
-	grunt.registerTask('release', ['prebump', 'bump-only', 'postbump', 'uglify','cssmin','jquerymanifest']);
+	grunt.registerTask('default', ['jshint', 'replace:index', 'uglify', 'cssmin', 'jquerymanifest']);
+	grunt.registerTask('test', ['jshint']);
+	//grunt.registerTask('prerelease', ['jshint', 'replace', 'uglify', 'cssmin', 'jquerymanifest']);
 };
