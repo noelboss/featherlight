@@ -63,7 +63,7 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-		bump: {
+		/*bump: {
 			options: {
 				files: [
 					'package.json',
@@ -80,7 +80,7 @@ module.exports = function(grunt) {
 				pushTo: 'upstream',
 				gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
 			}
-		}
+		}*/
 	});
 
 	// Load the plugin that provides the "uglify" task.
