@@ -11,8 +11,8 @@
 
 	/* featherlight object */
 	var fl = {
-		id: 0, /* used to manage ids */
-		defaults: { /* you can access and override all defaults using $.fl.defaults */
+		id: 0,                                    /* used to id single featherlight instances */
+		defaults: {                               /* you can access and override all defaults using $.fl.defaults */
 			selector:     '[data-featherlight]',  /* elements that trigger the lightbox */
 			context:      'body',                 /* context used to search for the lightbox content and triggers */
 			type: {                               /* manually set type of lightbox. Otherwise, it will check for the targetAttrs value. */
@@ -22,6 +22,8 @@
 			targetAttr:   'data-featherlight',    /* attribute of the triggered element that contains the selector to the lightbox content */
 			openTrigger:  'click',                /* event that triggers the lightbox */
 			closeTrigger: 'click',                /* event that triggers the closing of the lightbox */
+			openSpeed:    250,                    /* duration of opening animation */
+			closeSpeed:   250,                    /* duration of closing animation */
 			namespace:    'featherlight',         /* name of the events and css class prefix */
 			resetCss:     false,                  /* reset all css */
 			variant:      null,                   /* class that will be added to change look of the lightbox */
@@ -39,8 +41,9 @@
 		methods: { /* you can access and override all methods using $.featherlight.methods */
 			/* setup iterrates over a single instance of featherlight and prepares the background and binds the events */
 			setup: function(config, content){
+				config = $.extend({}, fl.defaults, config);
+
 				var $elm = $(this) || $(),
-					config = $.extend({}, fl.defaults, config),
 					variant = $elm.attr('data-'+config.namespace+'-variant') || config.variant,
 					css = !config.resetCss ? config.namespace : config.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
 					$background = $(config.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close">X</span></div></div>'),
@@ -69,7 +72,8 @@
 			getContent: function(){
 				var self = this,
 					content = self.content,
-					attr = self.$elm.attr(self.config.targetAttr) || '';
+					attr = self.$elm.attr(self.config.targetAttr) || '',
+					url = '';
 
 				/* if we have DOM, convert to jQuery Object */
 				if(typeof content === 'string'){
@@ -77,12 +81,12 @@
 				} else if(content instanceof $ === false){ /* if we have no jQuery Object */
 					/* check if we have an image and create element */
 					if(self.config.type.image === true || attr === 'image' || attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i)){
-						var url = attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i) ? attr : self.$elm.attr('href');
+						url = attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i) ? attr : self.$elm.attr('href');
 						self.content = $('<img src="'+url+'" alt="" class="'+self.config.namespace+'-image" />');
 					}
 					/* check if we have an ajax link */
 					else if(self.config.type.ajax === true || attr === 'ajax' || attr.match(/(http|htm|php)/i)){
-						var url = attr.match(/(http|htm|php)/i) ? attr : self.$elm.attr('href'),
+						url = attr.match(/(http|htm|php)/i) ? attr : self.$elm.attr('href');
 						/* we are using load so one can specify a target with: url.html #targetelement */
 						content = url ? $('<div></div>').load(url, function(response, status){
 							if ( status !== "error" ) {
@@ -92,7 +96,7 @@
 						return false;
 					}
 					/* otherwise create jquery element by using the attribute as selector */
-					if(attr) {
+					else if(attr) {
 						self.content = $($(attr), self.config.context);
 					}
 					/* could not find any content */
@@ -125,7 +129,7 @@
 					}
 
 					self.$instance
-						.prependTo('body').fadeIn()
+						.prependTo('body').fadeIn(self.config.openSpeed)
 						.find('.'+self.config.namespace+'-close')
 						.after(self.content);
 				}
@@ -145,7 +149,7 @@
 						$(document).unbind('keyup.'+self.config.namespace+self.id);
 					}
 
-					self.$instance.fadeOut(function(){
+					self.$instance.fadeOut(self.config.closeSpeed,function(){
 						self.$instance.detach();
 					});
 				}
