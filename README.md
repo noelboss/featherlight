@@ -88,6 +88,8 @@ Featherlight comes with a bunch of configuration-options which make it very flex
 		targetAttr:   'data-featherlight',    /* attribute of the triggered element that contains the selector to the lightbox content */
 		openTrigger:  'click',                /* event that triggers the lightbox */
 		closeTrigger: 'click',                /* event that triggers the closing of the lightbox */
+		openSpeed:    250,                    /* duration of opening animation */
+		closeSpeed:   250,                    /* duration of closing animation */
 		namespace:    'featherlight',         /* name of the events and css class prefix */
 		resetCss:     false,                  /* reset all css */
 		variant:      null,                   /* class that will be added to change look of the lightbox */
@@ -133,6 +135,11 @@ Attribute on the triggering element pointing to the target element that will be 
 
 	openTrigger & closeTrigger – String:  'click'
 Events that are used to open or close the lightbox. The close event is bound to the close button and to the lightbox background (if enabled)
+
+================================================
+
+	openSpeed & closeSpeed – Integer or String:  250
+Defines the speed for the opening and close animations. Values allowed are [jQuery animation durations](http://api.jquery.com/animate/#duration). Avoid the usage of 0 since this would cause a reversal of time and the end of the world! (Okay, kidding, just the closing callback would not be fired and unused ghost-DOM would linger around, but still.)
 
 ================================================
 
