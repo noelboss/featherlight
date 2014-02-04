@@ -40,6 +40,7 @@ module.exports = function(grunt) {
 					"name": "<%= pkg.name %>",
 					"version": "<%= pkg.version %>",
 					"title": "<%= pkg.title %>",
+					"description": "<%= pkg.description %>",
 					"dependencies": {
 						"jquery": ">=1.7"
 					},
