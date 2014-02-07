@@ -59,6 +59,10 @@ module.exports = function(grunt) {
 						to: 'Copyright <%= grunt.template.today("yyyy") %>'
 					},
 					{
+						from: /\*\sVersion\s[0-9]+[.]{1}[0-9]+[.]{1}[0-9]+/g,
+						to: '* Version <%= pkg.version %>'
+					},
+					{
 						from: /Current\sRelease\s[0-9]+[.]{1}[0-9]+[.]{1}[0-9]+/g,
 						to: 'Current Release <%= pkg.version %>'
 					},
@@ -109,6 +113,8 @@ module.exports = function(grunt) {
 	// Default task(s).
 	grunt.registerTask('default', ['jshint',  'replace:src', 'replace', 'uglify', 'cssmin', 'jquerymanifest']);
 	grunt.registerTask('test',    ['jshint']);
+	grunt.registerTask('test-release', ['bump-only:patch', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest']);
+
 	grunt.registerTask('patch',   ['bump-only:patch', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit']);
 	grunt.registerTask('minor',   ['bump-only:minor', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit']);
 	grunt.registerTask('major',   ['bump-only:major', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit']);
