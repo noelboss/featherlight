@@ -1,6 +1,12 @@
 Featherlight – Changelog
 ===================================
 
+0.1.13 - 2014-02-09
+-----------------------------------
+### Maintenance & Fixes
+- Fixed issue #7 where links inside lightboxes don't work
+
+
 0.1.12 - 2014-02-03
 -----------------------------------
 ### Features

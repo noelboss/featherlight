@@ -1,15 +1,15 @@
 {
 	"title": "Featherlight \u2013 ultra slim jQuery lightbox",
-	"version": "0.1.12",
+	"version": "0.1.13",
 	"author": {
 		"name": "No\u00ebl Raoul Bossart",
 		"url": "http://www.noelboss.com"
 	},
 	"bugs": "https://github.com/noelboss/featherlight/issues",
-	"description": "Featherlight is a very lightweight jQuery lightbox plugin. It's simple yet flexible and easy to use. Featherlight has minimal css and uses no inline css, everything is name-spaced, it's completely customizable via configuration object and offers image, ajax and iframe support out of the box. Featherlights small footprint weights less than 4kB \u2013 in total.",
+	"description": "Featherlight is a very lightweight jQuery lightbox plugin. It's simple yet flexible and easy to use. Featherlight has minimal css and uses no inline styles, everything is name-spaced, it's completely customizable via configuration object and offers image, ajax and iframe support out of the box. Featherlights small footprint weights less than 4kB \u2013 in total.",
 	"devDependencies": {
 		"grunt": "~0.4.2",
-		"grunt-bump": "0.0.13",
+		"grunt-bump": "0.0.12",
 		"grunt-coffeelint": "0.0.7",
 		"grunt-contrib-clean": "~0.5.0",
 		"grunt-contrib-coffee": "~0.7.0",
