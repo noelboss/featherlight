@@ -127,24 +127,25 @@
 							}
 						});
 					}
-
+					// Build the lightbox
 					self.$instance
 						.prependTo('body').fadeIn(self.config.openSpeed)
-						.find('.'+self.config.namespace+'-close')
+						.find('.'+self.config.namespace+'-close') //add the content after the close button
 						.after(self.content);
 				}
 			},
 
 			/* closes the lightbox "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
-				if(event){
-					event.preventDefault();
-				}
 				var self = this,
 					config = self.config,
 					$instance = $(event.target);
 
 				if((config.closeOnBg && $instance.is('.'+config.namespace)) || $instance.is('.'+config.namespace+'-close') ){
+					if(event){
+						event.preventDefault();
+					}
+
 					if(self.config.closeOnEsc){
 						$(document).unbind('keyup.'+self.config.namespace+self.id);
 					}
