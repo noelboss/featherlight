@@ -12,7 +12,7 @@ Featherlight – ultra slim jQuery lightbox
 * Customizable via configuration object
 
 ## Download
-**[Current Release 0.2.1](https://github.com/noelboss/featherlight/archive/master.zip)**
+**[Current Release 0.2.2](https://github.com/noelboss/featherlight/archive/master.zip)**
 * [Old releases](https://github.com/noelboss/featherlight/releases)
 * [Changelog](https://github.com/noelboss/featherlight/blob/master/CHANGELOG.md)
 
@@ -93,6 +93,7 @@ Featherlight comes with a bunch of configuration-options which make it very flex
 		variant:      null,                   /* class that will be added to change look of the lightbox */
 		closeOnBg:    true,                   /* close lightbox on click on the background */
 		closeOnEsc:   true,                   /* close lightbox when pressing esc */
+		closeIcon:    '&#10005;',             /* close icon */
 		background:   null,                   /* custom DOM for the background, wrapper and the closebutton */
 		autostart:    true,                   /* initialize all links with that match "selector" on document ready */
 		open: function(event){                /* opens the lightbox "this" contains $instance with the lightbox, and with the config */
@@ -163,6 +164,11 @@ If true, the close event is also bound to the background
 
 	closeOnEsc – Boolean: true
 If true, the lightbox is closed when pressing the ESC key
+
+================================================
+
+	closeIcon – String: &#10005`;
+Oh the naming...
 
 ================================================
 
@@ -257,11 +263,32 @@ or you can provide the link directly as the featherlight-attribute:
 
 
 ## Featherlight Gallery
-Featherlight was created to be as small and simple as possible. Therefore it does not provide all functionality imaginable. But, since its small and simple, it can be extended easily. featherlight.gallery.js is a small extension that turns your set of links into a [gallery](http://noelboss.github.io/featherlight/gallery.html):
+Featherlight was created to be as small and simple as possible. Therefore it does not provide all functionality imaginable. But, since its small and simple, it can be extended easily. featherlight.gallery.js is a small extension that turns your set of links into a [gallery](http://noelboss.github.io/featherlight/gallery.html).
 
 	$('a.gallery').featherlightGallery({
 		openSpeed: 300
 	});
+
+The gallery also has a range of configuration options and the following defaults:
+
+	gallery: {
+		previous: '&#9664;',   /* Code that is used as previews icon */
+		next: '&#9654;',       /* Code that is used as next icon */
+		fadeIn: 100,           /* fadeIn speed when image is loaded */
+		fadeOut: 300           /* fadeOut speed before image is loaded */
+	}
+
+Example:
+	$('a.gallery').featherlightGallery({
+		gallery: {
+			previous: '«',
+			next: '»',
+			fadeIn: 300
+		},
+		openSpeed: 300
+	});
+
+### Installation
 
 Simply include the extension CSS and JavaScript Files after the regular featherlight files like this:
 

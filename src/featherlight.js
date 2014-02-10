@@ -1,6 +1,6 @@
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 0.2.1 - http://noelboss.github.io/featherlight/
+ * Version 0.2.2 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2014, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -29,6 +29,7 @@
 			variant:      null,                   /* class that will be added to change look of the lightbox */
 			closeOnBg:    true,                   /* close lightbox on click on the background */
 			closeOnEsc:   true,                   /* close lightbox when pressing esc */
+			closeIcon:    '&#10005;',             /* close icon */
 			background:   null,                   /* custom DOM for the background, wrapper and the closebutton */
 			autostart:    true,                   /* initialize all links with that match "selector" on document ready */
 			open: function(event){                /* opens the lightbox "this" contains $instance with the lightbox, and with the config */
@@ -46,7 +47,7 @@
 				var $elm = $(this) || $(),
 					variant = $elm.attr('data-'+config.namespace+'-variant') || config.variant,
 					css = !config.resetCss ? config.namespace : config.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
-					$background = $(config.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close">X</span></div></div>'),
+					$background = $(config.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close">'+config.closeIcon+'</span></div></div>'),
 
 					/* everything that we need later is stored in self (target) */
 					self = {

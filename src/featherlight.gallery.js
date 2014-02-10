@@ -1,6 +1,6 @@
 /**
  * Featherlight Gallery – an extension for the ultra slim jQuery lightbox
- * Version 0.2.1 - http://noelboss.github.io/featherlight/
+ * Version 0.2.2 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2014, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -13,19 +13,16 @@
 		return;
 	}
 
-	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
-	$.featherlightGallery = function($targets, config) {
-		if(typeof $targets !== 'object'){
-			$targets = $($targets);
-		}
-		$targets.featherlightGallery(config);
-	};
-
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlightGallery = function(config) {
-
 		var $gallery = $(this),
-			galleryConfig = {
+			flg = {
+				gallery: {
+					previous: '&#9664;',   /* Code that is used as previous icon */
+					next: '&#9654;',       /* Code that is used as next icon */
+					fadeIn: 100,           /* fadeIn speed when image is loaded */
+					fadeOut: 300           /* fadeOut speed before image is loaded */
+				},
 				type: {
 					image: true
 				},
@@ -38,23 +35,23 @@
 
 					$img.load(function(){
 
-						$img.stop().fadeTo(300,1)
+						$img.stop().fadeTo(fl.config.gallery.fadeIn,1)
 							.nextAll().remove();
 
 						var img = this,
 							loadNext = function($nx){
-								$img.fadeTo(100,0.2);
+								$img.fadeTo(fl.config.gallery.fadeOut,0.2);
 								fl.$elm = $nx;
 								img.src = $nx.attr('href');
 							},
-							$next = $('<em title="next" class="'+fl.config.namespace+'-next"><span>&#9658;<span></em>').click(function(){
+							$next = $('<em title="next" class="'+fl.config.namespace+'-next"><span>'+fl.config.gallery.next+'</span></em>').click(function(){
 								var $nx = $gallery.eq($gallery.index(fl.$elm)+1);
 								if($nx.length < 1){
 									$nx = $gallery.first();
 								}
 								loadNext($nx);
 							}),
-							$prev = $('<em title="preview" class="'+fl.config.namespace+'-prev"><span>&#9668;<span></em>').click(function(){
+							$prev = $('<em title="preview" class="'+fl.config.namespace+'-prev"><span>'+fl.config.gallery.previous+'</span></em>').click(function(){
 								var $nx = $gallery.eq($gallery.index(fl.$elm)-1);
 								if($nx.length < 1){
 									$nx = $gallery.last();
@@ -67,11 +64,15 @@
 					});
 				}
 			};
+		$gallery.featherlight($.extend(true, {}, flg, config));
+	};
 
-		/* extend featherlight with defaults and methods */
-		$.extend(galleryConfig, config);
 
-		/* call featherlight */
-		$gallery.featherlight(galleryConfig);
+	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
+	$.featherlightGallery = function($targets, config) {
+		if(typeof $targets !== 'object'){
+			$targets = $($targets);
+		}
+		$targets.featherlightGallery(config);
 	};
 }(typeof jQuery === 'function' ? jQuery : console.error('Too much lightness, Featherlight needs jQuery.')));
