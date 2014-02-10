@@ -1,6 +1,14 @@
 Featherlight – Changelog
 ===================================
 
+
+0.2.1 - 2014-02-10
+-----------------------------------
+### Maintenance & Fixes
+- Added image scale based on viewport height vh
+
+
+
 0.2.0 - 2014-02-10
 -----------------------------------
 ### Features
