@@ -3,15 +3,13 @@ Featherlight – ultra slim jQuery lightbox
 
 **Featherlight is a very lightweight jQuery lightbox plugin. For more information and demos, visit the [official website](http://noelboss.github.io/featherlight/).**
 
-* simple yet flexible
-* image support
-* ajax support
-* iframe support
-* minimal css
-* name-spaced
-* responsive
-* completely customizable via configuration object
-* call with custom content
+* Simple yet flexible
+* Image, Ajax, iFrame and custom content support
+* [Gallery Extension](https://github.com/noelboss/featherlight/#featherlight-gallery)
+* Minimal CSS
+* Name-spaced CSS and JavaScript
+* Responsive
+* Customizable via configuration object
 
 ## Download
 **[Current Release 0.2.0](https://github.com/noelboss/featherlight/archive/master.zip)**
@@ -259,7 +257,7 @@ or you can provide the link directly as the featherlight-attribute:
 
 
 ## Featherlight Gallery
-Featherlight was created to be as small and simple as possible. Therefore it does not provide all functionality imaginable. But, since its small and simple, it can be extended easily. featherlight.gallery.js is a small extension that turns your set of links into a gallery:
+Featherlight was created to be as small and simple as possible. Therefore it does not provide all functionality imaginable. But, since its small and simple, it can be extended easily. featherlight.gallery.js is a small extension that turns your set of links into a [gallery](http://noelboss.github.io/featherlight/gallery.html):
 
 	$('a.gallery').featherlightGallery({
 		openSpeed: 300
@@ -277,7 +275,7 @@ Add the JavaScript at the bottom of the body:
 	<script src="//rawgithub.com/noelboss/featherlight/master/src/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
 
 
-You can see an example here: [Gallery with Featherlight](http://noelboss.github.io/featherlight/gallery.html)
+Check out the example here: [Gallery with Featherlight](http://noelboss.github.io/featherlight/gallery.html)
 
 
 # IE8 background transparency
