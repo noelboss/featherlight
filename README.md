@@ -14,7 +14,7 @@ Featherlight – ultra slim jQuery lightbox
 * call with custom content
 
 ## Download
-**[Current Release 0.1.13](https://github.com/noelboss/featherlight/archive/master.zip)**
+**[Current Release 0.2.0](https://github.com/noelboss/featherlight/archive/master.zip)**
 * [Old releases](https://github.com/noelboss/featherlight/releases)
 * [Changelog](https://github.com/noelboss/featherlight/blob/master/CHANGELOG.md)
 
@@ -258,16 +258,26 @@ or you can provide the link directly as the featherlight-attribute:
 	<a href="url.html .jQuery-Selector" data-featherlight="ajax">Open Ajax Content</a>
 
 
-## Featherlight your own style
-Add class to overwrite styling. For a full example check out the index.html
+## Featherlight Gallery
+Featherlight was created to be as small and simple as possible. Therefore it does not provide all functionality imaginable. But, since its small and simple, it can be extended easily. featherlight.gallery.js is a small extension that turns your set of links into a gallery:
 
-	$('a.fl').featherlight({
-		variant: 'myCssClass'
+	$('a.gallery').featherlightGallery({
+		openSpeed: 300
 	});
 
-You can also use a data attribute:
+Simply include the extension CSS and JavaScript Files after the regular featherlight files like this:
 
-	<a href="#" data-featherlight="#myLightbox" data-featherlight-variant="blingbling">Special Lightbox</a>
+	<link href="//rawgithub.com/noelboss/featherlight/master/src/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" />
+	<link href="//rawgithub.com/noelboss/featherlight/master/src/featherlight.gallery.min.css" type="text/css" rel="stylesheet" title="Featherlight Gallery Styles" />
+
+Add the JavaScript at the bottom of the body:
+
+	<script src="//code.jquery.com/jquery-latest.js"></script>
+	<script src="//rawgithub.com/noelboss/featherlight/master/src/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//rawgithub.com/noelboss/featherlight/master/src/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
+
+
+You can see an example here: [Gallery with Featherlight](http://noelboss.github.io/featherlight/gallery.html)
 
 
 # IE8 background transparency

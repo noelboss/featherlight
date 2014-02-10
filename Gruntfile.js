@@ -1,15 +1,23 @@
 module.exports = function(grunt) {
 	// Project configuration
 	var banner = '/**\n * Featherlight - ultra slim jQuery lightbox\n * Version <%= pkg.version %> - <%= pkg.homepage %>\n *\n * Copyright <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %> (<%= pkg.author.url %>)\n * MIT Licensed.\n**/';
+	var gallery = '/**\n * Featherlight Gallery – an extension for the ultra slim jQuery lightbox\n * Version <%= pkg.version %> - <%= pkg.homepage %>\n *\n * Copyright <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %> (<%= pkg.author.url %>)\n * MIT Licensed.\n**/';
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		uglify: {
-			options: {
-				banner: banner+'\n'
-			},
-			build: {
+			featherlight: {
+				options: {
+					banner: banner+'\n'
+				},
 				src: 'src/<%= pkg.name %>.js',
 				dest: 'release/<%= pkg.name %>.min.js'
+			},
+			gallery: {
+				options: {
+					banner: gallery
+				},
+				src: 'src/<%= pkg.name %>.gallery.js',
+				dest: 'release/<%= pkg.name %>.gallery.min.js'
 			}
 		},
 		jshint: {
@@ -26,11 +34,21 @@ module.exports = function(grunt) {
 		},
 		cssmin: {
 			options: {
-				banner: banner
+				keepSpecialComments: 1
 			},
-			minify: {
+			featherlight: {
+				options: {
+					banner: banner
+				},
 				src: 'src/<%= pkg.name %>.css',
 				dest: 'release/<%= pkg.name %>.min.css'
+			},
+			gallery: {
+				options: {
+					banner: gallery
+				},
+				src: 'src/<%= pkg.name %>.gallery.css',
+				dest: 'release/<%= pkg.name %>.gallery.min.css'
 			}
 		},
 		jquerymanifest: {
@@ -73,12 +91,20 @@ module.exports = function(grunt) {
 				]
 			},
 			min: {
-				src: ['src/index.html'],
+				src: ['src/index.html', 'src/gallery.html'],
 				dest: './',
 				replacements: [
 					{
-						from: '="featherlight.',
-						to: '="release/featherlight.min.'
+						from: '="featherlight.gallery.',
+						to: '="release/featherlight.gallery.min.'
+					},
+					{
+						from: '="featherlight.js',
+						to: '="release/featherlight.min.js'
+					},
+					{
+						from: '="featherlight.css',
+						to: '="release/featherlight.min.css'
 					}
 				]
 			}

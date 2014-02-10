@@ -1,6 +1,12 @@
 Featherlight – Changelog
 ===================================
 
+0.2.0 - 2014-02-10
+-----------------------------------
+### Features
+- Added Gallery Extension. Check out the [example page](http://noelboss.github.io/featherlight/gallery.html).
+
+
 0.1.13 - 2014-02-09
 -----------------------------------
 ### Maintenance & Fixes
