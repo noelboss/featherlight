@@ -105,9 +105,23 @@ module.exports = function(grunt) {
 					{
 						from: '="featherlight.css',
 						to: '="release/featherlight.min.css'
+					},
+					{
+						from: 'master.zip',
+						to: '<%= pkg.version %>.zip'
 					}
 				]
-			}
+			},
+			changelog: {
+				src: ['./CHANGELOG.md'],
+				overwrite: true,
+				replacements: [
+					{
+						from: 'Master\n-----------------------------------',
+						to: 'Master\n-----------------------------------\n\n\n<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>'
+					}
+				]
+			},
 		},
 		bump: {
 			options: {
@@ -137,11 +151,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-bump');
 
 	// Default task(s).
-	grunt.registerTask('default', ['jshint',  'replace:src', 'replace', 'uglify', 'cssmin', 'jquerymanifest']);
-	grunt.registerTask('test',    ['jshint']);
-	grunt.registerTask('test-release', ['bump-only:patch', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest']);
+	grunt.registerTask('default', ['jshint',  'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest']);
+	grunt.registerTask('test-release', ['bump-only:patch', 'jshint', 'replace', 'uglify', 'cssmin', 'jquerymanifest']);
 
-	grunt.registerTask('patch',   ['bump-only:patch', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit']);
-	grunt.registerTask('minor',   ['bump-only:minor', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit']);
-	grunt.registerTask('major',   ['bump-only:major', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit']);
+	grunt.registerTask('patch',   ['bump-only:patch', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit', 'replace:changelog',]);
+	grunt.registerTask('minor',   ['bump-only:minor', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit', 'replace:changelog',]);
+	grunt.registerTask('major',   ['bump-only:major', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit', 'replace:changelog',]);
 };
