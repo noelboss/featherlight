@@ -18,7 +18,9 @@
 
 	.featherlight-next span,
 	.featherlight-prev span {
-			display: none;
+		font-style: normal;
+		font-weight: normal;
+		display: none;
 	}
 
 	.featherlight-next:hover,
