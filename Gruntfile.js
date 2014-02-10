@@ -105,6 +105,10 @@ module.exports = function(grunt) {
 					{
 						from: '="featherlight.css',
 						to: '="release/featherlight.min.css'
+					},
+					{
+						from: 'master.zip',
+						to: '<%= pkg.version %>.zip'
 					}
 				]
 			},
