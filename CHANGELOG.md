@@ -1,6 +1,12 @@
 Featherlight – Changelog
 ===================================
 
+Master
+-----------------------------------
+### Maintenance & Fixes
+- Preventing text selection
+
+
 0.2.2 - 2014-02-10
 -----------------------------------
 ### Features
