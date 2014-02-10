@@ -16,11 +16,9 @@
 		cursor: pointer;
 	}
 
-	.featherlight-next span,
-	.featherlight-prev span {
-		font-style: normal;
-		font-weight: normal;
-		display: none;
+	.featherlight-prev {
+		left: 0;
+		right: 80%;
 	}
 
 	.featherlight-next:hover,
@@ -28,25 +26,35 @@
 		background: rgba(255,255,255,0.25);
 	}
 
-	.featherlight-next:hover span,
-	.featherlight-prev:hover span {
+
+	.featherlight-next span,
+	.featherlight-prev span {
+		display: none;
 		position: absolute;
+
 		top: 50%;
-		right: 30%;
-		left: auto;
-		display: inline-block;
+		right: 0;
+		left: 18%;
+		width: 82%;
+		text-align: center; /* center horizontally */
+
 		font-size: 80px;
-		margin-top: -60px;
+		line-height: 80px;
+		margin-top: -40px; /* center vertically */
+
 		text-shadow: 0px 0px 5px #fff;
 		color: #fff;
+		font-style: normal;
+		font-weight: normal;
+	}
+	.featherlight-next span {
+		right: 18%;
+		left: 0;
 	}
 
-	.featherlight-prev {
-		left: 0;
-		right: 80%;
-	}
+
+	.featherlight-next:hover span,
 	.featherlight-prev:hover span {
-		left: 30%;
-		right: auto;
+		display: inline-block;
 	}
 }

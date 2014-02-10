@@ -34,19 +34,29 @@
 				.fl-page .github { margin: 2em 0; }
 				.fl-page .github a { vertical-align: top; }
 
-				/* override default feather style... */
-				.fixwidth {
-					background: rgba(256,256,256, 0.8);
+				/* customized gallery */
+
+				.featherlight-gallery2 {
+					background: rgba(100,100,100,0.5);
 				}
-				.fixwidth .featherlight-content {
-					width: 500px;
-					padding: 25px;
-					color: #fff;
-					background: #111;
+				.featherlight-gallery2 .featherlight-content {
+					background: #000;
 				}
-				.fixwidth .featherlight-close {
+				.featherlight-gallery2 .featherlight-next:hover,
+				.featherlight-gallery2 .featherlight-prev:hover {
+					background: rgba(0,0,0,0.5);
+				}
+				.featherlight-gallery2 .featherlight-next:hover span,
+				.featherlight-gallery2 .featherlight-prev:hover span {
+					font-size: 25px;
+					line-height: 25px;
+					margin-top: -12.5px;
 					color: #fff;
-					background: #333;
+				}
+				.featherlight-gallery2  .featherlight-close {
+					background: transparent;
+					color: #fff;
+					font-size: 1.2em;
 				}
 
 			}
@@ -100,6 +110,30 @@
 
 			<div class="row">
 				<div class="col-lg-12">
+					<h2>Customized</h2>
+				</div>
+				<div class="col-lg-2">
+					<a class="thumbnail gallery2" href="http://farm8.staticflickr.com/7070/6874560581_dc2b407cc0_b.jpg"><img src="http://farm8.staticflickr.com/7070/6874560581_dc2b407cc0_q.jpg" /></a>
+				</div>
+				<div class="col-lg-2">
+					<a class="thumbnail gallery2" href="http://farm5.staticflickr.com/4005/4400559493_3403152632_o.jpg"><img src="http://farm5.staticflickr.com/4005/4400559493_f652202d1b_q.jpg" /></a>
+				</div>
+				<div class="col-lg-2">
+					<a class="thumbnail gallery2" href="http://farm1.staticflickr.com/174/396673914_be9d1312b1_o.jpg"><img src="http://farm1.staticflickr.com/174/396673914_be9d1312b1_q.jpg" /></a>
+				</div>
+				<div class="col-lg-2">
+					<a class="thumbnail gallery2" href="http://farm9.staticflickr.com/8372/8546484756_cf9c892d91_b.jpg"><img src="http://farm9.staticflickr.com/8372/8546484756_cf9c892d91_q.jpg" /></a>
+				</div>
+				<div class="col-lg-2">
+					<a class="thumbnail gallery2" href="http://farm1.staticflickr.com/37/98092870_8c140b8609_b.jpg"><img src="http://farm1.staticflickr.com/37/98092870_8c140b8609_q.jpg" /></a>
+				</div>
+				<div class="col-lg-2">
+					<a class="thumbnail gallery2" href="http://farm8.staticflickr.com/7450/9509465847_dd05decdd7_b.jpg"><img src="http://farm8.staticflickr.com/7450/9509465847_dd05decdd7_q.jpg" /></a>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-12">
 					<h2>Featherlight Gallery made simple</h2>
 					<p>To create a gallery, simply include <kbd>featherlight.gallery.min.js</kbd> and <kbd>featherlight.gallery.min.css</kbd> after the regular featherlight files and
 						call it like this:
@@ -109,6 +143,10 @@
 	$('.gallery').featherlightGallery();
 });</pre>
 					</p>
+
+					<a class="doc btn btn-lg btn-default" href="https://github.com/noelboss/featherlight/#installation">
+						View Documentation
+					</a>
 				</div>
 			</div>
 
@@ -137,6 +175,13 @@
 					},
 					openSpeed:    300,
 					closeSpeed:   300
+				});
+				$('.gallery2').featherlightGallery({
+					gallery: {
+						next: 'next »',
+						previous: '« previous'
+					},
+					variant: 'featherlight-gallery2'
 				});
 			});
 
