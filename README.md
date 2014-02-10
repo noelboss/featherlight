@@ -279,6 +279,7 @@ The gallery also has a range of configuration options and the following defaults
 	}
 
 Example:
+
 	$('a.gallery').featherlightGallery({
 		gallery: {
 			previous: '«',
@@ -301,8 +302,9 @@ Add the JavaScript at the bottom of the body:
 	<script src="//rawgithub.com/noelboss/featherlight/master/src/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="//rawgithub.com/noelboss/featherlight/master/src/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
 
-
 Check out the example here: [Gallery with Featherlight](http://noelboss.github.io/featherlight/gallery.html)
+
+### Configuration
 
 
 # IE8 background transparency
