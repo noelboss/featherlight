@@ -14,8 +14,7 @@ Featherlight – ultra slim jQuery lightbox
 
 ## [» Download Current Release 0.2.2](https://github.com/noelboss/featherlight/archive/0.2.2.zip)
 
-* [Old releases](https://github.com/noelboss/featherlight/releases)
-* [Changelog](https://github.com/noelboss/featherlight/blob/master/CHANGELOG.md)
+Here you'll find a [list of all the changes](https://github.com/noelboss/featherlight/blob/master/CHANGELOG.md) and you can also download [old releases](https://github.com/noelboss/featherlight/releases).
 
 
 # Installation
