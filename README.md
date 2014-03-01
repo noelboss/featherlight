@@ -110,6 +110,17 @@ Featherlight comes with a bunch of configuration-options which make it very flex
 
 ================================================
 
+	autostart – Boolean: true
+By default, Featherlight finds all elements that match "selector" and binds the open and close functions. To disable, set $.featherlight.defaults.autostart = false; before the document ready event is fired.
+
+================================================
+
+	namespace – String:  'featherlight'
+All functions bound to elements are namespaced. This is also used to prefix all CSS classes for the background, the content-wrapper and the close button.
+
+
+================================================
+
 	selector – String: '[data-featherlight]'
 Selector used to collect triggering elements when document is ready.
 
@@ -136,18 +147,9 @@ Attribute on the triggering element pointing to the target element that will be 
 
 ================================================
 
-	openTrigger & closeTrigger – String:  'click'
-Events that are used to open or close the lightbox. The close event is bound to the close button and to the lightbox background (if enabled)
+	variant – String:  null
+Pass your own CSS class to adjust the styling of the lightbox according to your need. You can also use the  `data-featherlight-variant` attribute on the element triggering the lightbox.
 
-================================================
-
-	openSpeed & closeSpeed – Integer or String:  250
-Defines the speed for the opening and close animations. Values allowed are [jQuery animation durations](http://api.jquery.com/animate/#duration). Avoid the usage of 0 since this would cause a reversal of time and the end of the world! (Okay, kidding, just the closing callback would not be fired and unused ghost-DOM would linger around, but still.)
-
-================================================
-
-	namespace – String:  'featherlight'
-All functions bound to elements are namespaced. This is also used to prefix all CSS classes for the background, the content-wrapper and the close button.
 
 ================================================
 
@@ -156,8 +158,15 @@ Set this to true to remove all default css and start from designing scratch.
 
 ================================================
 
-	variant – String:  null
-Pass your own CSS class to adjust the styling of the lightbox according to your need. You can also use the  `data-featherlight-variant` attribute on the element triggering the lightbox.
+
+	openTrigger & closeTrigger – String:  'click'
+Events that are used to open or close the lightbox. The close event is bound to the close button and to the lightbox background (if enabled)
+
+================================================
+
+	openSpeed & closeSpeed – Integer or String:  250
+Defines the speed for the opening and close animations. Values allowed are [jQuery animation durations](http://api.jquery.com/animate/#duration). Avoid the usage of 0 since this would cause a reversal of time and the end of the world! (Okay, kidding, just the closing callback would not be fired and unused ghost-DOM would linger around, but still.)
+
 
 ================================================
 
@@ -179,30 +188,47 @@ Oh the naming...
 	background – DOM String: null
 You can provide the wrapping DOM. This is a bit tricky and just for the advanced users. It's recommended to study the plugin code. But you need to provide an element with a "{namespace}-close" class: the content of the lightbox will be added *after* this element.
 
+
 ================================================
 
-	autostart – Boolean: true
-By default, Featherlight finds all elements that match "selector" and binds the open and close functions. To disable, set $.featherlight.defaults.autostart = false; before the document ready event is fired.
+	beforeOpen, beforeClose – Function: null
+Called before the open or close method is executed. This function can return false to prevent open or
+close method from execution. ´this´ is an object and contains the triggering DOM element (if existing) and the related Featherlight objects.
+
+	// example
+	beforeOpen: function(event){
+		console.log(this); // this contains all related elements
+		returm false; // prevent lightbox from opening
+	}
+
+
+================================================
+
+	afterOpen, afterClose – Function: null
+Called after the open or close method is executed. ´this´ is an object and contains the triggering DOM element (if existing) and the related Featherlight objects.
+
+	// example
+	afterOpen: function(event){
+		console.log(this); // this contains all related elements
+		alert(this.$content.hasClass('true')); // alert class of content
+	}
+
 
 ================================================
 
 	 open – Function
-This is the open function used to open the lightbox. It receives the event object. "this" is an object and contains the triggering DOM element (if existing) and the related Featherlight objects:
-*$fl* – Containing the whole lightbox: background, content wrapper, close button and content.
-*$content* – The content thats wrapped with the background and prepended with the close button.
-
-	open: function(e){
+This is the open function used to open the lightbox. It receives the event object. ´this´ is an object and contains the triggering DOM element (if existing) and the related Featherlight objects.
+	open: function(event){
 		$.proxy($.featherlight.methods.open, this, e)();
 	}
+
 
 ================================================
 
 	close – Function
-This is the close function used to close the lightbox. It receives the event object. "this" is an object and contains the triggering DOM element (if existing) and the related Featherlight objects:
-*$fl* – Containing the whole lightbox: background, content wrapper, close button and content.
-*$content* – The content thats wrapped with the background and prepended with the close button.
+This is the close function used to close the lightbox. It receives the event object. ´this´ is an object and contains the triggering DOM element (if existing) and the related Featherlight objects.
 
-	close: function(e){
+	close: function(event){
 		$.proxy($.featherlight.methods.close, this, e)();
 	}
 
@@ -236,6 +262,8 @@ All of Featherlight's methods are stored in $.featherlight.methods and can there
 You can overwrite a function like this:
 
 	$.featherlight.methods.open = function() { alert('open!'); }
+
+Check the source code for more details.
 
 # Examples
 
