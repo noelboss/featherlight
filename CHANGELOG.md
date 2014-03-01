@@ -34,6 +34,7 @@ Master
 ### Features
 - Added closeIcon option
 - Added Gallery Configuration Options:
+
 	gallery: {
 		previous: '&#9664;',   /* Code that is used as previous icon */
 		next: '&#9654;',       /* Code that is used as next icon */
