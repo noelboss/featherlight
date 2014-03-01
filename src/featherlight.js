@@ -1,6 +1,6 @@
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 0.3.0 - http://noelboss.github.io/featherlight/
+ * Version 0.3.1 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2014, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -46,11 +46,11 @@
 				/* if no before function or before function did not stop propagation */
 				if(open !== false){
 					/* call open method */
-					$.proxy($.featherlight.methods.open, this, event)();
+					open = $.proxy($.featherlight.methods.open, this, event)();
 				}
 
 				/* check if after function exists */
-				if(typeof $.featherlight.defaults.afterOpen === 'function'){
+				if(open !== false && typeof $.featherlight.defaults.afterOpen === 'function'){
 					$.proxy($.featherlight.defaults.afterOpen, this, event)();
 				}
 			},
@@ -65,11 +65,11 @@
 				/* if no before function or before function did not stop propagation */
 				if(close !== false){
 					/* call open method */
-					$.proxy($.featherlight.methods.close, this, event)();
+					close = $.proxy($.featherlight.methods.close, this, event)();
 				}
 
 				/* check if after Function exists */
-				if(typeof $.featherlight.defaults.afterClose === 'function'){
+				if(close !== false && typeof $.featherlight.defaults.afterClose === 'function'){
 					$.proxy($.featherlight.defaults.afterClose, this, event)();
 				}
 			}
@@ -122,17 +122,18 @@
 				var self = this,
 					ok = true,
 					content = self.content,
+					$content = null,
 					attr = self.$elm.attr(self.config.targetAttr) || '',
 					url = '';
 
 				/* if we have DOM, convert to jQuery Object */
 				if(self.$content instanceof $ === false && typeof content === 'string'){
-					self.$content = $(content);
+					$content = $(content);
 				} else if(content instanceof $ === false){ /* if we have no jQuery Object */
 					/* check if we have an image and create element */
 					if(self.config.type.image === true || attr === 'image' || attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i)){
 						url = attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i) ? attr : self.$elm.attr('href');
-						self.$content = $('<img src="'+url+'" alt="" class="'+self.config.namespace+'-image" />');
+						$content = $('<img src="'+url+'" alt="" class="'+self.config.namespace+'-image" />');
 					}
 					/* check if we have an ajax link */
 					else if(self.config.type.ajax === true || attr === 'ajax' || attr.match(/(http|htm|php)/i)){
@@ -147,23 +148,24 @@
 					}
 					/* otherwise create jquery element by using the attribute as selector */
 					else if(attr) {
-						self.$content = $($(attr), self.config.context);
+						$content = $($(attr), self.config.context);
 					}
 					/* could not find any content */
 					else {
 						ok = false;
 					}
 				}
-				if(ok && self.$content instanceof $){
+				if(ok && $content instanceof $){
 					/* we need a special class for the iframe */
-					if(self.$content.is('iframe') || $('iframe', self.$content).length > 0){
+					if($content.is('iframe') || $('iframe', $content).length > 0){
 						self.$instance.addClass(self.config.namespace+'-iframe');
 					}
-					self.$content.addClass(self.config.namespace+'-inner');
+					$content.addClass(self.config.namespace+'-inner');
+					self.$content = $content.clone();
 
 					/* remove existing content */
 					self.$instance.find('.'+self.config.namespace+'-inner').remove();
-					self.$instance.find('.'+self.config.namespace+'-content').append(self.$content.clone());
+					self.$instance.find('.'+self.config.namespace+'-content').append(self.$content);
 				}
 				return ok;
 			},
@@ -176,6 +178,8 @@
 				/* If we have content, add it and show lightbox */
 				if($.proxy(fl.methods.getContent, self)() !== false){
 					self.$instance.prependTo('body').fadeIn(self.config.openSpeed);
+				} else {
+					return false;
 				}
 			},
 

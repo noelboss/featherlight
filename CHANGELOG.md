@@ -5,7 +5,15 @@ Master
 -----------------------------------
 
 
+0.3.1 - 2014-03-01
+-----------------------------------
+### Maintenance & Fixes
+– This.$content in after functions as well as open and close method now references actual elements inside the lightbox
+– If open function has no content to open, afterOpen is prevented
+
+
 0.3.0 - 2014-03-01
+-----------------------------------
 ### Features
 - Hooks! Added  before and after functions:
 	´beforeClose´ ´beforeOpen´ ´afterOpen´ ´afterClose´

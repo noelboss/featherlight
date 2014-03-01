@@ -118,7 +118,7 @@ module.exports = function(grunt) {
 				replacements: [
 					{
 						from: 'Master\n-----------------------------------',
-						to: 'Master\n-----------------------------------\n\n\n<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>'
+						to: 'Master\n-----------------------------------\n\n\n<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n-----------------------------------'
 					}
 				]
 			},
