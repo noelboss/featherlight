@@ -8,8 +8,8 @@ Master
 0.3.1 - 2014-03-01
 -----------------------------------
 ### Maintenance & Fixes
-– This.$content in after functions as well as open and close method now references actual elements inside the lightbox
-– If open function has no content to open, afterOpen is prevented
+- This.$content in after functions as well as open and close method now references actual elements inside the lightbox
+- If open function has no content to open, afterOpen is prevented
 
 
 0.3.0 - 2014-03-01
@@ -23,10 +23,10 @@ Master
 
 
 ### Maintenance & Fixes
-– Take care, open and clouse defaults have been rewritten for Hooks!
+- Take care, open and clouse defaults have been rewritten for Hooks!
 - Preventing text selection
-– Fixed issue #8
-– Fixed issue #9
+- Fixed issue #8
+- Fixed issue #9
 
 
 0.2.2 - 2014-02-10
