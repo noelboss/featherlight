@@ -13,6 +13,8 @@
 	var fl = {
 		id: 0,                                    /* used to id single featherlight instances */
 		defaults: {                               /* you can access and override all defaults using $.fl.defaults */
+			autostart:    true,                   /* initialize all links with that match "selector" on document ready */
+			namespace:    'featherlight',         /* name of the events and css class prefix */
 			selector:     '[data-featherlight]',  /* elements that trigger the lightbox */
 			context:      'body',                 /* context used to search for the lightbox content and triggers */
 			type: {                               /* manually set type of lightbox. Otherwise, it will check for the targetAttrs value. */
@@ -20,41 +22,51 @@
 				ajax: false
 			},
 			targetAttr:   'data-featherlight',    /* attribute of the triggered element that contains the selector to the lightbox content */
+			variant:      null,                   /* class that will be added to change look of the lightbox */
+			resetCss:     false,                  /* reset all css */
+			background:   null,                   /* custom DOM for the background, wrapper and the closebutton */
 			openTrigger:  'click',                /* event that triggers the lightbox */
 			closeTrigger: 'click',                /* event that triggers the closing of the lightbox */
 			openSpeed:    250,                    /* duration of opening animation */
 			closeSpeed:   250,                    /* duration of closing animation */
-			namespace:    'featherlight',         /* name of the events and css class prefix */
-			resetCss:     false,                  /* reset all css */
-			variant:      null,                   /* class that will be added to change look of the lightbox */
 			closeOnBg:    true,                   /* close lightbox on click on the background */
 			closeOnEsc:   true,                   /* close lightbox when pressing esc */
 			closeIcon:    '&#10005;',             /* close icon */
-			background:   null,                   /* custom DOM for the background, wrapper and the closebutton */
-			autostart:    true,                   /* initialize all links with that match "selector" on document ready */
-			open: function(event){                /* opens the lightbox "this" contains $instance with the lightbox, and with the config */
-				/* check if before Function exists */
+			beforeOpen:   null,                   /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+			beforeClose:  null,                   /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+			afterOpen:    null,                   /* Called after open. Gets event as parameter, this contains all data */
+			afterClose:   null,                   /* Called after close. Gets event as parameter, this contains all data */
+			/* opens the lightbox "this" contains $instance with the lightbox, and with the config */
+			open: function(event){
+				var open = true;
+				/* check if before function exists */
 				if(typeof $.featherlight.defaults.beforeOpen === 'function'){
-					$.proxy($.featherlight.defaults.beforeOpen, this, event)();
+					open = $.proxy($.featherlight.defaults.beforeOpen, this, event)();
+				}
+				/* if no before function or before function did not stop propagation */
+				if(open !== false){
+					/* call open method */
+					$.proxy($.featherlight.methods.open, this, event)();
 				}
 
-				/* call open method */
-				$.proxy($.featherlight.methods.open, this, event)();
-
-				/* check if after Function exists */
+				/* check if after function exists */
 				if(typeof $.featherlight.defaults.afterOpen === 'function'){
 					$.proxy($.featherlight.defaults.afterOpen, this, event)();
 				}
 			},
 			/* closes the lightbox "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
+				var close = true;
 				/* check if before Function exists */
 				if(typeof $.featherlight.defaults.beforeClose === 'function'){
-					$.proxy($.featherlight.defaults.beforeClose, this, event)();
+					close = $.proxy($.featherlight.defaults.beforeClose, this, event)();
 				}
 
-				/* call close method */
-				$.proxy($.featherlight.methods.close, this, event)();
+				/* if no before function or before function did not stop propagation */
+				if(close !== false){
+					/* call open method */
+					$.proxy($.featherlight.methods.close, this, event)();
+				}
 
 				/* check if after Function exists */
 				if(typeof $.featherlight.defaults.afterClose === 'function'){
