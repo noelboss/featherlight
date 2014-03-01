@@ -33,13 +33,37 @@
 			background:   null,                   /* custom DOM for the background, wrapper and the closebutton */
 			autostart:    true,                   /* initialize all links with that match "selector" on document ready */
 			open: function(event){                /* opens the lightbox "this" contains $instance with the lightbox, and with the config */
+				/* check if before Function exists */
+				if(typeof $.featherlight.defaults.beforeOpen === 'function'){
+					$.proxy($.featherlight.defaults.beforeOpen, this, event)();
+				}
+
+				/* call open method */
 				$.proxy($.featherlight.methods.open, this, event)();
+
+				/* check if after Function exists */
+				if(typeof $.featherlight.defaults.afterOpen === 'function'){
+					$.proxy($.featherlight.defaults.afterOpen, this, event)();
+				}
 			},
-			close: function(event){                   /* closes the lightbox "this" contains $instance with the lightbox, and with the config */
+			/* closes the lightbox "this" contains $instance with the lightbox, and with the config */
+			close: function(event){
+				/* check if before Function exists */
+				if(typeof $.featherlight.defaults.beforeClose === 'function'){
+					$.proxy($.featherlight.defaults.beforeClose, this, event)();
+				}
+
+				/* call close method */
 				$.proxy($.featherlight.methods.close, this, event)();
+
+				/* check if after Function exists */
+				if(typeof $.featherlight.defaults.afterClose === 'function'){
+					$.proxy($.featherlight.defaults.afterClose, this, event)();
+				}
 			}
 		},
-		methods: { /* you can access and override all methods using $.featherlight.methods */
+		/* you can access and override all methods using $.featherlight.methods */
+		methods: {
 			/* setup iterates over a single instance of featherlight and prepares the background and binds the events */
 			setup: function(config, content){
 				config = $.extend({}, fl.defaults, config);
