@@ -3,6 +3,9 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+
+
+0.3.0 - 2014-03-01
 ### Features
 - Hooks! Added  before and after functions:
 	´beforeClose´ ´beforeOpen´ ´afterOpen´ ´afterClose´
