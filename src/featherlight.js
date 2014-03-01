@@ -1,6 +1,6 @@
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 0.2.2 - http://noelboss.github.io/featherlight/
+ * Version 0.3.0 - http://noelboss.github.io/featherlight/
  *
  * Copyright 2014, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
@@ -11,35 +11,71 @@
 
 	/* featherlight object */
 	var fl = {
-		id: 0,                                    /* used to id single featherlight instances */
-		defaults: {                               /* you can access and override all defaults using $.fl.defaults */
-			selector:     '[data-featherlight]',  /* elements that trigger the lightbox */
-			context:      'body',                 /* context used to search for the lightbox content and triggers */
-			type: {                               /* manually set type of lightbox. Otherwise, it will check for the targetAttrs value. */
+		id: 0,                                    /* Used to id single featherlight instances */
+		defaults: {                               /* You can access and override all defaults using $.fl.defaults */
+			autostart:    true,                   /* Initialize all links with that match "selector" on document ready */
+			namespace:    'featherlight',         /* Name of the events and css class prefix */
+			selector:     '[data-featherlight]',  /* Elements that trigger the lightbox */
+			context:      'body',                 /* Context used to search for the lightbox content and triggers */
+			type: {                               /* Manually set type of lightbox. Otherwise, it will check for the targetAttrs value. */
 				image: false,
 				ajax: false
 			},
-			targetAttr:   'data-featherlight',    /* attribute of the triggered element that contains the selector to the lightbox content */
-			openTrigger:  'click',                /* event that triggers the lightbox */
-			closeTrigger: 'click',                /* event that triggers the closing of the lightbox */
-			openSpeed:    250,                    /* duration of opening animation */
-			closeSpeed:   250,                    /* duration of closing animation */
-			namespace:    'featherlight',         /* name of the events and css class prefix */
-			resetCss:     false,                  /* reset all css */
-			variant:      null,                   /* class that will be added to change look of the lightbox */
-			closeOnBg:    true,                   /* close lightbox on click on the background */
-			closeOnEsc:   true,                   /* close lightbox when pressing esc */
-			closeIcon:    '&#10005;',             /* close icon */
-			background:   null,                   /* custom DOM for the background, wrapper and the closebutton */
-			autostart:    true,                   /* initialize all links with that match "selector" on document ready */
-			open: function(event){                /* opens the lightbox "this" contains $instance with the lightbox, and with the config */
-				$.proxy($.featherlight.methods.open, this, event)();
+			targetAttr:   'data-featherlight',    /* Attribute of the triggered element that contains the selector to the lightbox content */
+			variant:      null,                   /* Class that will be added to change look of the lightbox */
+			resetCss:     false,                  /* Reset all css */
+			background:   null,                   /* Custom DOM for the background, wrapper and the closebutton */
+			openTrigger:  'click',                /* Event that triggers the lightbox */
+			closeTrigger: 'click',                /* Event that triggers the closing of the lightbox */
+			openSpeed:    250,                    /* Duration of opening animation */
+			closeSpeed:   250,                    /* Duration of closing animation */
+			closeOnBg:    true,                   /* Close lightbox on click on the background */
+			closeOnEsc:   true,                   /* Close lightbox when pressing esc */
+			closeIcon:    '&#10005;',             /* Close icon */
+			beforeOpen:   null,                   /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+			beforeClose:  null,                   /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+			afterOpen:    null,                   /* Called after open. Gets event as parameter, this contains all data */
+			afterClose:   null,                   /* Called after close. Gets event as parameter, this contains all data */
+			/* opens the lightbox "this" contains $instance with the lightbox, and with the config */
+			open: function(event){
+				var open = true;
+				/* check if before function exists */
+				if(typeof $.featherlight.defaults.beforeOpen === 'function'){
+					open = $.proxy($.featherlight.defaults.beforeOpen, this, event)();
+				}
+				/* if no before function or before function did not stop propagation */
+				if(open !== false){
+					/* call open method */
+					$.proxy($.featherlight.methods.open, this, event)();
+				}
+
+				/* check if after function exists */
+				if(typeof $.featherlight.defaults.afterOpen === 'function'){
+					$.proxy($.featherlight.defaults.afterOpen, this, event)();
+				}
 			},
-			close: function(event){                   /* closes the lightbox "this" contains $instance with the lightbox, and with the config */
-				$.proxy($.featherlight.methods.close, this, event)();
+			/* closes the lightbox "this" contains $instance with the lightbox, and with the config */
+			close: function(event){
+				var close = true;
+				/* check if before Function exists */
+				if(typeof $.featherlight.defaults.beforeClose === 'function'){
+					close = $.proxy($.featherlight.defaults.beforeClose, this, event)();
+				}
+
+				/* if no before function or before function did not stop propagation */
+				if(close !== false){
+					/* call open method */
+					$.proxy($.featherlight.methods.close, this, event)();
+				}
+
+				/* check if after Function exists */
+				if(typeof $.featherlight.defaults.afterClose === 'function'){
+					$.proxy($.featherlight.defaults.afterClose, this, event)();
+				}
 			}
 		},
-		methods: { /* you can access and override all methods using $.featherlight.methods */
+		/* you can access and override all methods using $.featherlight.methods */
+		methods: {
 			/* setup iterates over a single instance of featherlight and prepares the background and binds the events */
 			setup: function(config, content){
 				config = $.extend({}, fl.defaults, config);
@@ -48,6 +84,7 @@
 					variant = $elm.attr('data-'+config.namespace+'-variant') || config.variant,
 					css = !config.resetCss ? config.namespace : config.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
 					$background = $(config.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close">'+config.closeIcon+'</span></div></div>'),
+
 
 					/* everything that we need later is stored in self (target) */
 					self = {
@@ -58,8 +95,18 @@
 						$instance: $background.clone().addClass(variant) /* clone DOM for the background, wrapper and the close button */
 					};
 
+
 				/* close when click on background */
 				self.$instance.on(config.closeTrigger+'.'+config.namespace, $.proxy(config.close, self));
+
+				/* bind close on esc */
+				if(self.config.closeOnEsc){
+					$(document).bind('keyup.'+self.config.namespace+self.id, function(e) {
+						if (e.keyCode === 27) { // esc keycode
+							self.$instance.find('.'+self.config.namespace+'-close').click();
+						}
+					});
+				}
 
 				/* bind or call open function */
 				if($elm.length > 0 && this.tagName){
@@ -67,23 +114,25 @@
 				} else {
 					$.proxy(config.open, self)();
 				}
+
 			},
 
 			/* this method prepares the content and converts it into a jQuery object */
 			getContent: function(){
 				var self = this,
+					ok = true,
 					content = self.content,
 					attr = self.$elm.attr(self.config.targetAttr) || '',
 					url = '';
 
 				/* if we have DOM, convert to jQuery Object */
-				if(typeof content === 'string'){
-					self.content = $(content);
+				if(self.$content instanceof $ === false && typeof content === 'string'){
+					self.$content = $(content);
 				} else if(content instanceof $ === false){ /* if we have no jQuery Object */
 					/* check if we have an image and create element */
 					if(self.config.type.image === true || attr === 'image' || attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i)){
 						url = attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i) ? attr : self.$elm.attr('href');
-						self.content = $('<img src="'+url+'" alt="" class="'+self.config.namespace+'-image" />');
+						self.$content = $('<img src="'+url+'" alt="" class="'+self.config.namespace+'-image" />');
 					}
 					/* check if we have an ajax link */
 					else if(self.config.type.ajax === true || attr === 'ajax' || attr.match(/(http|htm|php)/i)){
@@ -91,26 +140,32 @@
 						/* we are using load so one can specify a target with: url.html #targetelement */
 						content = url ? $('<div></div>').load(url, function(response, status){
 							if ( status !== "error" ) {
-								$.featherlight(content.html());
+								$.featherlight(content.html(), self.config);
 							}
 						}) : null;
-						return false;
+						ok = false;
 					}
 					/* otherwise create jquery element by using the attribute as selector */
 					else if(attr) {
-						self.content = $($(attr), self.config.context);
+						self.$content = $($(attr), self.config.context);
 					}
 					/* could not find any content */
 					else {
-						return false;
+						ok = false;
 					}
 				}
+				if(ok && self.$content instanceof $){
+					/* we need a special class for the iframe */
+					if(self.$content.is('iframe') || $('iframe', self.$content).length > 0){
+						self.$instance.addClass(self.config.namespace+'-iframe');
+					}
+					self.$content.addClass(self.config.namespace+'-inner');
 
-				/* we need a special class for the iframe */
-				if(self.content.is('iframe') || $('iframe', self.content).length > 0){
-					self.$instance.addClass(self.config.namespace+'-iframe');
+					/* remove existing content */
+					self.$instance.find('.'+self.config.namespace+'-inner').remove();
+					self.$instance.find('.'+self.config.namespace+'-content').append(self.$content.clone());
 				}
-				self.content.addClass(self.config.namespace+'-inner');
+				return ok;
 			},
 
 			/* opens the lightbox "this" contains $instance with the lightbox, and with the config */
@@ -120,19 +175,7 @@
 
 				/* If we have content, add it and show lightbox */
 				if($.proxy(fl.methods.getContent, self)() !== false){
-
-					if(self.config.closeOnEsc){
-						$(document).bind('keyup.'+self.config.namespace+self.id, function(e) {
-							if (e.keyCode === 27) { // esc keycode
-								self.$instance.find('.'+self.config.namespace+'-close').click();
-							}
-						});
-					}
-					// Build the lightbox
-					self.$instance
-						.prependTo('body').fadeIn(self.config.openSpeed)
-						.find('.'+self.config.namespace+'-close') //add the content after the close button
-						.after(self.content);
+					self.$instance.prependTo('body').fadeIn(self.config.openSpeed);
 				}
 			},
 
@@ -146,11 +189,9 @@
 					if(event){
 						event.preventDefault();
 					}
-
 					if(self.config.closeOnEsc){
 						$(document).unbind('keyup.'+self.config.namespace+self.id);
 					}
-
 					self.$instance.fadeOut(self.config.closeSpeed,function(){
 						self.$instance.detach();
 					});
@@ -161,7 +202,14 @@
 
 	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
 	$.featherlight = function($content, config) {
-		$.proxy(fl.methods.setup, null, config, $content)();
+		/* if $.featherlight() was called only with config or without anything, initialize manually */
+		if(typeof $content !== 'string' && $content instanceof $ === false){
+			config = typeof $content === 'Object' ? $.extend({}, fl.defaults, $content) : fl.defaults;
+
+			$(config.selector, config.context).featherlight();
+		} else {
+			$.proxy(fl.methods.setup, null, config, $content)();
+		}
 	};
 
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
