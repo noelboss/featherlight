@@ -34,14 +34,14 @@ Master
 ### Features
 - Added closeIcon option
 - Added Gallery Configuration Options:
-
+´´´
 	gallery: {
 		previous: '&#9664;',   /* Code that is used as previous icon */
 		next: '&#9654;',       /* Code that is used as next icon */
 		fadeIn: 100,           /* fadeIn speed when image is loaded */
 		fadeOut: 300           /* fadeOut speed before image is loaded */
 	}
-
+´´´
 
 0.2.1 - 2014-02-10
 -----------------------------------
