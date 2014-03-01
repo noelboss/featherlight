@@ -3,8 +3,15 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+### Features
+- Hooks! Added  before and after functions:
+	´beforeClose´ ´beforeOpen´ ´afterOpen´ ´afterClose´
+- Manually initialize all config.selector elements with $.featherlight(); after config.autostart = false;
+
+
 ### Maintenance & Fixes
 - Preventing text selection
+– Fixed issue
 
 
 0.2.2 - 2014-02-10

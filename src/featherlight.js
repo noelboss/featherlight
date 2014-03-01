@@ -85,6 +85,7 @@
 					css = !config.resetCss ? config.namespace : config.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
 					$background = $(config.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close">'+config.closeIcon+'</span></div></div>'),
 
+
 					/* everything that we need later is stored in self (target) */
 					self = {
 						id: fl.id++,
@@ -93,6 +94,7 @@
 						$elm: $elm,
 						$instance: $background.clone().addClass(variant) /* clone DOM for the background, wrapper and the close button */
 					};
+
 
 				/* close when click on background */
 				self.$instance.on(config.closeTrigger+'.'+config.namespace, $.proxy(config.close, self));
@@ -197,7 +199,14 @@
 
 	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
 	$.featherlight = function($content, config) {
-		$.proxy(fl.methods.setup, null, config, $content)();
+		/* if $.featherlight() was called only with config or without anything, initialize manually */
+		if(typeof $conten !== 'string' && $content instanceof $ === false){
+			config = typeof $content === 'Object' ? $.extend({}, fl.defaults, $content) : fl.defaults;
+
+			$(config.selector, config.context).featherlight();
+		} else {
+			$.proxy(fl.methods.setup, null, config, $content)();
+		}
 	};
 
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
