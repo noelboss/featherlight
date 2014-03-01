@@ -19,6 +19,7 @@ Master
 	´beforeClose´ ´beforeOpen´ ´afterOpen´ ´afterClose´
 - Manually initialize all config.selector elements after config.autostart = false;
 
+
     $.featherlight();
 
 
@@ -34,6 +35,7 @@ Master
 ### Features
 - Added closeIcon option
 - Added Gallery Configuration Options:
+
 
 	gallery: {
 		previous: '&#9664;',   /* Code that is used as previous icon */
