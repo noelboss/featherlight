@@ -3,8 +3,12 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+
+
+0.3.1 - 2014-03-01
+-----------------------------------
 ### Maintenance & Fixes
-– This.$content in before and after functions as well as open and close method now references actual elements inside the lightbox
+– This.$content in after functions as well as open and close method now references actual elements inside the lightbox
 – If open function has no content to open, afterOpen is prevented
 
 
