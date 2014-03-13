@@ -28,7 +28,7 @@
 				},
 				/* extending the open function */
 				open: function(event){
-					$.proxy($.featherlight.methods.open, this, event)();
+					$.featherlight.methods.open.call(this, event);
 
 					var fl = this,
 						$img = fl.$instance.find('img');
