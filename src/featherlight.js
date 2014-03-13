@@ -187,9 +187,9 @@
 			close: function(event){
 				var self = this,
 					config = self.config,
-					$instance = $(event.target);
+					$target = $(event.target);
 
-				if((config.closeOnBg && $instance.is('.'+config.namespace)) || $instance.is('.'+config.namespace+'-close') ){
+				if((config.closeOnBg && $target.is('.'+config.namespace)) || $target.is('.'+config.namespace+'-close') ){
 					if(event){
 						event.preventDefault();
 					}
