@@ -36,7 +36,7 @@
 			beforeClose:  null,                   /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 			afterOpen:    null,                   /* Called after open. Gets event as parameter, this contains all data */
 			afterClose:   null,                   /* Called after close. Gets event as parameter, this contains all data */
-			/* opens the lightbox "this" contains $instance with the lightbox, and with the config */
+			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 			open: function(event){
 				var open = true;
 				/* check if before function exists */
@@ -54,7 +54,7 @@
 					$.proxy($.featherlight.defaults.afterOpen, this, event)();
 				}
 			},
-			/* closes the lightbox "this" contains $instance with the lightbox, and with the config */
+			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
 				var close = true;
 				/* check if before Function exists */
@@ -170,7 +170,7 @@
 				return ok;
 			},
 
-			/* opens the lightbox "this" contains $instance with the lightbox, and with the config */
+			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 			open: function(event){
 				if(event){event.preventDefault();}
 				var self = this;
@@ -183,7 +183,7 @@
 				}
 			},
 
-			/* closes the lightbox "this" contains $instance with the lightbox, and with the config */
+			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
 				var self = this,
 					config = self.config,
