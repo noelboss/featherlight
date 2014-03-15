@@ -34,34 +34,24 @@
 						$img = fl.$instance.find('img');
 
 					$img.load(function(){
-
-						$img.stop().fadeTo(fl.config.gallery.fadeIn,1)
-							.nextAll().remove();
-
-						var img = this,
-							loadNext = function($nx){
-								$img.fadeTo(fl.config.gallery.fadeOut,0.2);
-								fl.$elm = $nx;
-								img.src = $nx.attr('href');
-							},
-							$next = $('<em title="next" class="'+fl.config.namespace+'-next"><span>'+fl.config.gallery.next+'</span></em>').click(function(){
-								var $nx = $gallery.eq($gallery.index(fl.$elm)+1);
-								if($nx.length < 1){
-									$nx = $gallery.first();
-								}
-								loadNext($nx);
-							}),
-							$prev = $('<em title="preview" class="'+fl.config.namespace+'-prev"><span>'+fl.config.gallery.previous+'</span></em>').click(function(){
-								var $nx = $gallery.eq($gallery.index(fl.$elm)-1);
-								if($nx.length < 1){
-									$nx = $gallery.last();
-								}
-								loadNext($nx);
-							});
-
-						$img.after($prev)
-							.after($next);
+						$img.stop().fadeTo(fl.config.gallery.fadeIn,1);
 					});
+
+					var changeTo = function(which){
+							var offset = which === 'next' ? +1 : -1;
+							var $nx = $gallery.eq(($gallery.index(fl.$elm)+offset) % $gallery.length);
+							$img.fadeTo(fl.config.gallery.fadeOut,0.2);
+							fl.$elm = $nx;
+							$img[0].src = $nx.attr('href');
+						},
+						createNav = function(which){
+							return $('<em title="'+which+'" class="'+fl.config.namespace+'-'+which+'"><span>'+fl.config.gallery[which]+'</span></em>').click(function(){
+								changeTo(which);
+							})
+						};
+
+					$img.after(createNav('previous'))
+						.after(createNav('next'));
 				}
 			};
 		$gallery.featherlight($.extend(true, {}, flg, config));
