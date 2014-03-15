@@ -40,8 +40,8 @@
 			open: function(event){
 				var open = true;
 				/* check if before function exists */
-				if(typeof $.featherlight.defaults.beforeOpen === 'function'){
-					open = $.featherlight.defaults.beforeOpen.call(this, event);
+				if(typeof this.config.beforeOpen === 'function'){
+					open = this.config.beforeOpen.call(this, event);
 				}
 				/* if no before function or before function did not stop propagation */
 				if(open !== false){
@@ -50,16 +50,16 @@
 				}
 
 				/* check if after function exists */
-				if(open !== false && typeof $.featherlight.defaults.afterOpen === 'function'){
-					$.featherlight.defaults.afterOpen.call(this, event);
+				if(open !== false && typeof this.config.afterOpen === 'function'){
+					this.config.afterOpen.call(this, event);
 				}
 			},
 			/* closes the lightbox "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
 				var close = true;
 				/* check if before Function exists */
-				if(typeof $.featherlight.defaults.beforeClose === 'function'){
-					close = $.featherlight.defaults.beforeClose.call(this, event);
+				if(typeof this.config.beforeClose === 'function'){
+					close = this.config.beforeClose.call(this, event);
 				}
 
 				/* if no before function or before function did not stop propagation */
@@ -69,8 +69,8 @@
 				}
 
 				/* check if after Function exists */
-				if(close !== false && typeof $.featherlight.defaults.afterClose === 'function'){
-					$.featherlight.defaults.afterClose.call(this, event);
+				if(close !== false && typeof this.config.afterClose === 'function'){
+					this.config.afterClose.call(this, event);
 				}
 			}
 		},
