@@ -25,11 +25,11 @@
 				},
 				type: {
 					image: true
-				},
-				/* extending the open function */
-				open: function(event){
-					$.featherlight.methods.open.call(this, event);
-
+				}
+			},
+			customAfterOpen = config.afterOpen,
+			cb = {				/* provide an afterOpen function */
+				afterOpen: function(event){
 					var fl = this,
 						$img = fl.$instance.find('img');
 
@@ -62,9 +62,12 @@
 						$img.after($prev)
 							.after($next);
 					});
+					if(typeof customAfterOpen === 'function') {
+						customAfterOpen.call(this, event);
+					}
 				}
 			};
-		$gallery.featherlight($.extend(true, {}, flg, config));
+		$gallery.featherlight($.extend(true, {}, flg, config, cb));
 	};
 
 
