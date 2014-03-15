@@ -327,6 +327,8 @@ Example:
 		openSpeed: 300
 	});
 
+The gallery responds to custom events `previous` and `next` to navigate to the previous and next images.
+
 ### Installation
 
 Simply include the extension CSS and JavaScript Files after the regular featherlight files like this:
