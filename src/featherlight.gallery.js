@@ -37,16 +37,16 @@
 						$img.stop().fadeTo(fl.config.gallery.fadeIn,1);
 					});
 
-					var changeTo = function(which){
-							var offset = which === 'next' ? +1 : -1;
+					fl.$instance.on('next.'+fl.config.namespace+' previous.'+fl.config.namespace, function(evt){
+							var offset = evt.type === 'next' ? +1 : -1;
 							var $nx = $gallery.eq(($gallery.index(fl.$elm)+offset) % $gallery.length);
 							$img.fadeTo(fl.config.gallery.fadeOut,0.2);
 							fl.$elm = $nx;
 							$img[0].src = $nx.attr('href');
-						},
-						createNav = function(which){
+						});
+					var createNav = function(which){
 							return $('<em title="'+which+'" class="'+fl.config.namespace+'-'+which+'"><span>'+fl.config.gallery[which]+'</span></em>').click(function(){
-								changeTo(which);
+								$(this).trigger(which+'.'+fl.config.namespace);
 							})
 						};
 
