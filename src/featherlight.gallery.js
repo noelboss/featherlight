@@ -45,7 +45,7 @@
 							$img[0].src = $nx.attr('href');
 						});
 					var createNav = function(which){
-							return $('<em title="'+which+'" class="'+fl.config.namespace+'-'+which+'"><span>'+fl.config.gallery[which]+'</span></em>').click(function(){
+							return $('<span title="'+which+'" class="'+fl.config.namespace+'-'+which+'"><span>'+fl.config.gallery[which]+'</span></span>').click(function(){
 								$(this).trigger(which+'.'+fl.config.namespace);
 							})
 						};
