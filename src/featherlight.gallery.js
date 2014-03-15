@@ -34,30 +34,24 @@
 						$img = fl.$instance.find('img');
 
 					$img.load(function(){
-
-						$img.stop().fadeTo(fl.config.gallery.fadeIn,1)
-							.nextAll().remove();
-
-						var img = this,
-							load = function(target){
-								var offset = target === 'next' ? +1 : -1;
-								var $nx = $gallery.eq(($gallery.index(fl.$elm)+offset) % $gallery.length);
-								$img.fadeTo(fl.config.gallery.fadeOut,0.2);
-								fl.$elm = $nx;
-								img.src = $nx.attr('href');
-							},
-							createNav = function(target){
-								return $('<em title="'+target+'" class="'+fl.config.namespace+'-'+target+'"><span>'+fl.config.gallery[target]+'</span></em>').click(function(){
-									load(target);
-								})
-							};
-
-						$img.after(createNav('previous'))
-							.after(createNav('next'));
+						$img.stop().fadeTo(fl.config.gallery.fadeIn,1);
 					});
-					if(typeof customAfterOpen === 'function') {
-						customAfterOpen.call(this, event);
-					}
+
+					var load = function(target){
+							var offset = target === 'next' ? +1 : -1;
+							var $nx = $gallery.eq(($gallery.index(fl.$elm)+offset) % $gallery.length);
+							$img.fadeTo(fl.config.gallery.fadeOut,0.2);
+							fl.$elm = $nx;
+							$img[0].src = $nx.attr('href');
+						},
+						createNav = function(target){
+							return $('<em title="'+target+'" class="'+fl.config.namespace+'-'+target+'"><span>'+fl.config.gallery[target]+'</span></em>').click(function(){
+								load(target);
+							})
+						};
+
+					$img.after(createNav('previous'))
+						.after(createNav('next'));
 				}
 			};
 		$gallery.featherlight($.extend(true, {}, flg, config, cb));
