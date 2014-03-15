@@ -46,15 +46,14 @@
 								fl.$elm = $nx;
 								img.src = $nx.attr('href');
 							},
-							$next = $('<em title="next" class="'+fl.config.namespace+'-next"><span>'+fl.config.gallery.next+'</span></em>').click(function(){
-								load('next');
-							}),
-							$prev = $('<em title="previous" class="'+fl.config.namespace+'-previous"><span>'+fl.config.gallery.previous+'</span></em>').click(function(){
-								load('previous');
-							});
+							createNav = function(target){
+								return $('<em title="'+target+'" class="'+fl.config.namespace+'-'+target+'"><span>'+fl.config.gallery[target]+'</span></em>').click(function(){
+									load(target);
+								})
+							};
 
-						$img.after($prev)
-							.after($next);
+						$img.after(createNav('previous'))
+							.after(createNav('next'));
 					});
 					if(typeof customAfterOpen === 'function') {
 						customAfterOpen.call(this, event);
