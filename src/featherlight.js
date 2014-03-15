@@ -36,41 +36,41 @@
 			beforeClose:  null,                   /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 			afterOpen:    null,                   /* Called after open. Gets event as parameter, this contains all data */
 			afterClose:   null,                   /* Called after close. Gets event as parameter, this contains all data */
-			/* opens the lightbox "this" contains $instance with the lightbox, and with the config */
+			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 			open: function(event){
 				var open = true;
 				/* check if before function exists */
-				if(typeof $.featherlight.defaults.beforeOpen === 'function'){
-					open = $.proxy($.featherlight.defaults.beforeOpen, this, event)();
+				if(typeof this.config.beforeOpen === 'function'){
+					open = this.config.beforeOpen.call(this, event);
 				}
 				/* if no before function or before function did not stop propagation */
 				if(open !== false){
 					/* call open method */
-					open = $.proxy($.featherlight.methods.open, this, event)();
+					open = $.featherlight.methods.open.call(this, event);
 				}
 
 				/* check if after function exists */
-				if(open !== false && typeof $.featherlight.defaults.afterOpen === 'function'){
-					$.proxy($.featherlight.defaults.afterOpen, this, event)();
+				if(open !== false && typeof this.config.afterOpen === 'function'){
+					this.config.afterOpen.call(this, event);
 				}
 			},
-			/* closes the lightbox "this" contains $instance with the lightbox, and with the config */
+			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
 				var close = true;
 				/* check if before Function exists */
-				if(typeof $.featherlight.defaults.beforeClose === 'function'){
-					close = $.proxy($.featherlight.defaults.beforeClose, this, event)();
+				if(typeof this.config.beforeClose === 'function'){
+					close = this.config.beforeClose.call(this, event);
 				}
 
 				/* if no before function or before function did not stop propagation */
 				if(close !== false){
 					/* call open method */
-					close = $.proxy($.featherlight.methods.close, this, event)();
+					close = $.featherlight.methods.close.call(this, event);
 				}
 
 				/* check if after Function exists */
-				if(close !== false && typeof $.featherlight.defaults.afterClose === 'function'){
-					$.proxy($.featherlight.defaults.afterClose, this, event)();
+				if(close !== false && typeof this.config.afterClose === 'function'){
+					this.config.afterClose.call(this, event);
 				}
 			}
 		},
@@ -112,7 +112,7 @@
 				if($elm.length > 0 && this.tagName){
 					$elm.on(config.openTrigger+'.'+config.namespace, $.proxy(config.open, self));
 				} else {
-					$.proxy(config.open, self)();
+					config.open.call(self);
 				}
 
 			},
@@ -170,26 +170,26 @@
 				return ok;
 			},
 
-			/* opens the lightbox "this" contains $instance with the lightbox, and with the config */
+			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 			open: function(event){
 				if(event){event.preventDefault();}
 				var self = this;
 
 				/* If we have content, add it and show lightbox */
-				if($.proxy(fl.methods.getContent, self)() !== false){
+				if(fl.methods.getContent.call(self) !== false){
 					self.$instance.prependTo('body').fadeIn(self.config.openSpeed);
 				} else {
 					return false;
 				}
 			},
 
-			/* closes the lightbox "this" contains $instance with the lightbox, and with the config */
+			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
 				var self = this,
 					config = self.config,
-					$instance = $(event.target);
+					$target = $(event.target);
 
-				if((config.closeOnBg && $instance.is('.'+config.namespace)) || $instance.is('.'+config.namespace+'-close') ){
+				if((config.closeOnBg && $target.is('.'+config.namespace)) || $target.is('.'+config.namespace+'-close') ){
 					if(event){
 						event.preventDefault();
 					}
@@ -212,14 +212,14 @@
 
 			$(config.selector, config.context).featherlight();
 		} else {
-			$.proxy(fl.methods.setup, null, config, $content)();
+			fl.methods.setup.call(null, config, $content);
 		}
 	};
 
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlight = function(config, $content) {
 		$(this).each(function(){
-			$.proxy(fl.methods.setup, this, config, $content)();
+			fl.methods.setup.call(this, config, $content);
 		});
 	};
 
