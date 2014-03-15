@@ -39,24 +39,18 @@
 							.nextAll().remove();
 
 						var img = this,
-							loadNext = function($nx){
+							load = function(target){
+								var offset = target === 'next' ? +1 : -1;
+								var $nx = $gallery.eq(($gallery.index(fl.$elm)+offset) % $gallery.length);
 								$img.fadeTo(fl.config.gallery.fadeOut,0.2);
 								fl.$elm = $nx;
 								img.src = $nx.attr('href');
 							},
 							$next = $('<em title="next" class="'+fl.config.namespace+'-next"><span>'+fl.config.gallery.next+'</span></em>').click(function(){
-								var $nx = $gallery.eq($gallery.index(fl.$elm)+1);
-								if($nx.length < 1){
-									$nx = $gallery.first();
-								}
-								loadNext($nx);
+								load('next');
 							}),
 							$prev = $('<em title="previous" class="'+fl.config.namespace+'-previous"><span>'+fl.config.gallery.previous+'</span></em>').click(function(){
-								var $nx = $gallery.eq($gallery.index(fl.$elm)-1);
-								if($nx.length < 1){
-									$nx = $gallery.last();
-								}
-								loadNext($nx);
+								load('previous');
 							});
 
 						$img.after($prev)
