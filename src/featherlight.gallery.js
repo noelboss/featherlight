@@ -49,7 +49,7 @@
 							$next = $('<em title="next" class="'+fl.config.namespace+'-next"><span>'+fl.config.gallery.next+'</span></em>').click(function(){
 								changeTo('next');
 							}),
-							$prev = $('<em title="previous" class="'+fl.config.namespace+'-prev"><span>'+fl.config.gallery.previous+'</span></em>').click(function(){
+							$prev = $('<em title="previous" class="'+fl.config.namespace+'-previous"><span>'+fl.config.gallery.previous+'</span></em>').click(function(){
 								changeTo('previous');
 							});
 
