@@ -95,6 +95,7 @@ Featherlight comes with a bunch of configuration-options which make it very flex
 		closeSpeed:   250,                    /* Duration of closing animation */
 		closeOnBg:    true,                   /* Close lightbox on click on the background */
 		closeOnEsc:   true,                   /* Close lightbox when pressing esc */
+		closeOnAny:   false,                  /* Close lightbox when clicking anywhere */
 		closeIcon:    '&#10005;',             /* Close icon */
 		beforeOpen:   null,                   /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		beforeClose:  null,                   /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
@@ -177,6 +178,11 @@ If true, the close event is also bound to the background
 
 	closeOnEsc – Boolean: true
 If true, the lightbox is closed when pressing the ESC key
+
+================================================
+
+	closeOnAny – Boolean: false
+If true, the close event will succeed when clicking anywhere
 
 ================================================
 
