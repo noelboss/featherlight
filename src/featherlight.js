@@ -16,15 +16,9 @@
 	/* featherlight object */
 	var fl = {
 		id: 0,                                    /* Used to id single featherlight instances */
+		autostart:    '[data-featherlight]',  	  /* Selector for autobinding the lightbox */
 		defaults: {                               /* You can access and override all defaults using $.fl.defaults */
-			autostart:    true,                   /* Initialize all links with that match "selector" on document ready */
 			namespace:    'featherlight',         /* Name of the events and css class prefix */
-			selector:     '[data-featherlight]',  /* Elements that trigger the lightbox */
-			context:      'body',                 /* Context used to search for the lightbox content and triggers */
-			type: {                               /* Manually set type of lightbox. Otherwise, it will check for the targetAttrs value. */
-				image: false,
-				ajax: false
-			},
 			targetAttr:   'data-featherlight',    /* Attribute of the triggered element that contains the selector to the lightbox content */
 			variant:      null,                   /* Class that will be added to change look of the lightbox */
 			resetCss:     false,                  /* Reset all css */
@@ -40,6 +34,7 @@
 			beforeClose:  null,                   /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 			afterOpen:    null,                   /* Called after open. Gets event as parameter, this contains all data */
 			afterClose:   null,                   /* Called after close. Gets event as parameter, this contains all data */
+			contentFilters: ['jquery', 'image', 'html', 'ajax'], /* List of content filters to use to determine the content */
 			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 			open: function(event){
 				var open = true;
@@ -81,11 +76,11 @@
 		/* you can access and override all methods using $.featherlight.methods */
 		methods: {
 			/* setup iterates over a single instance of featherlight and prepares the background and binds the events */
-			setup: function(content, config){
+			setup: function(target, config){
 				/* all arguments are optional */
-				if (typeof content === 'object' && content instanceof $ === false && !config) {
-					config = content;
-					content = undefined;
+				if (typeof target === 'object' && target instanceof $ === false && !config) {
+					config = target;
+					target = undefined;
 				}
 				config = $.extend({}, fl.defaults, config);
 
@@ -98,7 +93,7 @@
 					self = {
 						id: fl.id++,
 						config: config,
-						content: content,
+						target: target,
 						$elm: $elm,
 						$instance: $background.clone().addClass(variant) /* clone DOM for the background, wrapper and the close button */
 					};
@@ -128,53 +123,42 @@
 			/* this method prepares the content and converts it into a jQuery object */
 			getContent: function(){
 				var self = this,
-					ok = true,
-					content = self.content,
-					$content = null,
-					attr = self.$elm.attr(self.config.targetAttr) || '',
-					url = '';
+					target = self.target || self.$elm.attr(self.config.targetAttr) || '';
 
-				/* if we have DOM, convert to jQuery Object */
-				if(false === self.$content instanceof $ && 'string' === typeof content ){
-					$content = $(content);
-				} else if(false === content instanceof $){ /* if we have no jQuery Object */
-					/* check if we have an image and create element */
-					if(self.config.type.image === true || 'image' === attr  || attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i)){
-						url = attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i) ? attr : self.$elm.attr('href');
-						$content = $('<img src="'+url+'" alt="" class="'+self.config.namespace+'-image" />');
+				/* Find which filter applies */
+				var data, filter;
+				$.each(self.config.contentFilters, function() {
+					var filterName = this;
+					filter = $.featherlight.contentFilters[filterName];
+					if(target === filterName || self.config[filterName] === true) {
+						data = self.$elm.attr('href');
+					} else {
+						data = self.config[filterName];
+						if(!data && filter.test)  { data = filter.test(target); }
+						if(!data && filter.regex && target.match && target.match(filter.regex)) { data = target; }
 					}
-					/* check if we have an ajax link */
-					else if(true === self.config.type.ajax || 'ajax' === attr  || attr.match(/(http|htm|php)/i)){
-						url = attr.match(/(http|htm|php)/i) ? attr : self.$elm.attr('href');
-						/* we are using load so one can specify a target with: url.html #targetelement */
-						content = url ? $('<div></div>').load(url, function(response, status){
-							if ( 'error' !== status ) {
-								$.featherlight(content.html(), self.config);
-							}
-						}) : null;
-						ok = false;
-					}
-					/* otherwise create jquery element by using the attribute as selector */
-					else if(attr) {
-						$content = $($(attr), self.config.context);
-					}
-					/* could not find any content */
-					else {
-						ok = false;
-					}
+					return !data;
+				});
+				if(!data) {
+					console.error('Featherlight: no content filter found ' + (target ? ' for "' + target + '"' : ' (no target specified)'));
+					return false;
+				} else {
+					/* Process it */
+					return filter.process.call(self, data);
 				}
-				if(ok && $content instanceof $){
-					/* we need a special class for the iframe */
-					if($content.is('iframe') || $('iframe', $content).length > 0){
-						self.$instance.addClass(self.config.namespace+'-iframe');
-					}
-					self.$content = $content.clone().addClass(self.config.namespace+'-inner');
+			},
 
-					/* remove existing content */
-					self.$instance.find('.'+self.config.namespace+'-inner').remove();
-					self.$instance.find('.'+self.config.namespace+'-content').append(self.$content);
+			setContent: function($content) {
+				var self = this;
+				/* we need a special class for the iframe */
+				if($content.is('iframe') || $('iframe', $content).length > 0){
+					self.$instance.addClass(self.config.namespace+'-iframe');
 				}
-				return ok;
+				self.$content = $content.clone().addClass(self.config.namespace+'-inner');
+
+				/* remove existing content */
+				self.$instance.find('.'+self.config.namespace+'-inner').remove();
+				self.$instance.find('.'+self.config.namespace+'-content').append(self.$content);
 			},
 
 			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
@@ -182,10 +166,11 @@
 				if(event){
 					event.preventDefault();
 				}
-				var self = this;
+				var $content, self = this;
 
 				/* If we have content, add it and show lightbox */
-				if(false !== fl.methods.getContent.call(self)){
+				if($content = fl.methods.getContent.call(self)){
+					fl.methods.setContent.call(self, $content);
 					self.$instance.appendTo('body').fadeIn(self.config.openSpeed);
 				} else {
 					return false;
@@ -213,18 +198,39 @@
 					});
 				}
 			}
+		},
+		/* Contains the logic to determine content */
+		contentFilters: {
+			jquery: {
+				regex: /^[#.]\w/,         /* Anything that starts with a class name or identifiers */
+				test: function(elem)    { return elem instanceof $ && elem; },
+				process: function(elem) { return $(elem); }
+			},
+			image: {
+				regex: /\.(png|jpg|jpeg|gif|tiff|bmp)(\?\S*)?$/i,
+				process: function(url)  { return $('<img src="'+url+'" alt="" class="'+this.config.namespace+'-image" />'); }
+			},
+			html: {
+				regex: /^\s*<[\w!][^<]*>/, /* Anything that starts with some kind of valid tag */
+				process: function(html) { return $(html); }
+			},
+			ajax: {
+				regex: /./,            /* At this point, any content is assumed to be an URL */
+				process: function(url)  {
+					/* we are using load so one can specify a target with: url.html #targetelement */
+					var content = $('<div></div>').load(url, function(response, status){
+						if ( status !== "error" ) {
+							$.featherlight($.extend(self.config, {html: content.html()}));
+						}
+					});
+				}
+			}
 		}
 	};
 
 	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
 	$.featherlight = function(content, config) {
-		/* if $.featherlight() was called only with config or without anything, initialize manually */
-		if('string' !== typeof content  && false === content instanceof $){
-			config = 'Object' === typeof content ? $.extend({}, fl.defaults, content) : fl.defaults;
-			$(config.selector, config.context).featherlight();
-		} else {
-			fl.methods.setup.call(null, content, config);
-		}
+		fl.methods.setup.call(null, content, config);
 	};
 
 	/* extend jQuery with selector featherlight method $(elm).featherlight(elm, config); */
@@ -239,9 +245,8 @@
 
 	/* bind featherlight on ready if config autostart is true */
 	$(document).ready(function(){
-		var config = $.featherlight.defaults;
-		if(config.autostart){
-			$(config.selector, config.context).featherlight();
+		if($.featherlight.autostart){
+			$($.featherlight.autostart).featherlight();
 		}
 	});
 }(jQuery));
