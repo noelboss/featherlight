@@ -31,6 +31,7 @@
 			closeSpeed:   250,                    /* Duration of closing animation */
 			closeOnBg:    true,                   /* Close lightbox on click on the background */
 			closeOnEsc:   true,                   /* Close lightbox when pressing esc */
+			closeOnAny:   false,                  /* Close lightbox when clicking anywhere */
 			closeIcon:    '&#10005;',             /* Close icon */
 			beforeOpen:   null,                   /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 			beforeClose:  null,                   /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
@@ -189,7 +190,7 @@
 					config = self.config,
 					$instance = $(event.target);
 
-				if((config.closeOnBg && $instance.is('.'+config.namespace)) || $instance.is('.'+config.namespace+'-close') ){
+				if(config.closeOnAny || (config.closeOnBg && $instance.is('.'+config.namespace)) || $instance.is('.'+config.namespace+'-close')){
 					if(event){
 						event.preventDefault();
 					}
