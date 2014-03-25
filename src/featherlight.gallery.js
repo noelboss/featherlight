@@ -51,7 +51,7 @@
 								}
 								loadNext($nx);
 							}),
-							$prev = $('<em title="preview" class="'+fl.config.namespace+'-prev"><span>'+fl.config.gallery.previous+'</span></em>').click(function(){
+							$prev = $('<em title="previous" class="'+fl.config.namespace+'-previous"><span>'+fl.config.gallery.previous+'</span></em>').click(function(){
 								var $nx = $gallery.eq($gallery.index(fl.$elm)-1);
 								if($nx.length < 1){
 									$nx = $gallery.last();
