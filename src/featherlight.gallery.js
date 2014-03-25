@@ -13,6 +13,11 @@
 		return;
 	}
 
+	var isTouchAware = 'ontouchstart' in document.documentElement,
+			jQueryConstructor = $.events.special.swipeleft && $,
+			hammerConstructor = Hammer && function($el){ Hammer(el[0])},
+			swipeAwareConstructor = isTouchAware && (jQueryConstructor || hammerConstructor);
+
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlightGallery = function(config) {
 		var $gallery = $(this),
@@ -44,14 +49,21 @@
 							fl.$elm = $nx;
 							$img[0].src = $nx.attr('href');
 						});
-					var createNav = function(target){
-							return $('<span title="'+target+'" class="'+fl.config.namespace+'-'+target+'"><span>'+fl.config.gallery[target]+'</span></span>').click(function(){
-								$(this).trigger(target+'.'+fl.config.namespace);
-							})
-						};
 
-					$img.after(createNav('previous'))
-						.after(createNav('next'));
+					if (swipeAwareConstructor) {
+						swipeAwareConstructor(fl.$instance)
+							.on('swipeleft', function()  { fl.$instance.trigger('next'); })
+							.on('swiperight', function() { fl.$instance.trigger('previous'); });
+					} else {
+						var createNav = function(target){
+								return $('<span title="'+target+'" class="'+fl.config.namespace+'-'+target+'"><span>'+fl.config.gallery[target]+'</span></span>').click(function(){
+									$(this).trigger(target+'.'+fl.config.namespace);
+								})
+							};
+
+						$img.after(createNav('previous'))
+							.after(createNav('next'));
+					}
 
 					if(typeof customAfterOpen === 'function') {
 						customAfterOpen.call(this, event);

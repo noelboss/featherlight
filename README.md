@@ -336,6 +336,8 @@ Example:
 
 The gallery responds to custom events `previous` and `next` to navigate to the previous and next images.
 
+Instead of navigation buttons it will use swipe events on touch devices, assuming that one of the [supported swipe libraries](https://github.com/noelboss/featherlight/wiki/Gallery:-swipe-on-touch-devices) is also installed.
+
 ### Installation
 
 Simply include the extension CSS and JavaScript Files after the regular featherlight files like this:
