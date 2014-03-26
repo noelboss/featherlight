@@ -7,7 +7,7 @@
 **/
 (function($) {
 	"use strict";
-	if($ === 'undefined') {return; }
+	if('undefined' === typeof $) { return; }
 
 	/* featherlight object */
 	var fl = {
@@ -40,17 +40,17 @@
 			open: function(event){
 				var open = true;
 				/* check if before function exists */
-				if(typeof this.config.beforeOpen === 'function'){
+				if('function' === typeof this.config.beforeOpen){
 					open = this.config.beforeOpen.call(this, event);
 				}
 				/* if no before function or before function did not stop propagation */
-				if(open !== false){
+				if(false !== open){
 					/* call open method */
 					open = $.featherlight.methods.open.call(this, event);
 				}
 
 				/* check if after function exists */
-				if(open !== false && typeof this.config.afterOpen === 'function'){
+				if(false !== open  && 'function' === typeof this.config.afterOpen){
 					this.config.afterOpen.call(this, event);
 				}
 			},
@@ -58,18 +58,18 @@
 			close: function(event){
 				var close = true;
 				/* check if before Function exists */
-				if(typeof this.config.beforeClose === 'function'){
+				if('function' === typeof this.config.beforeClose){
 					close = this.config.beforeClose.call(this, event);
 				}
 
 				/* if no before function or before function did not stop propagation */
-				if(close !== false){
+				if(false !== close){
 					/* call open method */
 					close = $.featherlight.methods.close.call(this, event);
 				}
 
 				/* check if after Function exists */
-				if(close !== false && typeof this.config.afterClose === 'function'){
+				if(false !== close  && typeof 'function' === this.config.afterClose){
 					this.config.afterClose.call(this, event);
 				}
 			}
@@ -101,14 +101,14 @@
 				/* bind close on esc */
 				if(self.config.closeOnEsc){
 					$(document).bind('keyup.'+self.config.namespace+self.id, function(e) {
-						if (e.keyCode === 27) { // esc keycode
+						if (27 === e.keyCode) { // esc keycode
 							self.$instance.find('.'+self.config.namespace+'-close:first').click();
 						}
 					});
 				}
 
 				/* bind or call open function */
-				if($elm.length > 0 && this.tagName){
+				if(0 < $elm.length && this.tagName){
 					$elm.on(config.openTrigger+'.'+config.namespace, $.proxy(config.open, self));
 				} else {
 					config.open.call(self);
@@ -126,20 +126,20 @@
 					url = '';
 
 				/* if we have DOM, convert to jQuery Object */
-				if(self.$content instanceof $ === false && typeof content === 'string'){
+				if(false === self.$content instanceof $ && 'string' === typeof content ){
 					$content = $(content);
-				} else if(content instanceof $ === false){ /* if we have no jQuery Object */
+				} else if(false === content instanceof $){ /* if we have no jQuery Object */
 					/* check if we have an image and create element */
-					if(self.config.type.image === true || attr === 'image' || attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i)){
+					if(self.config.type.image === true || 'image' === attr  || attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i)){
 						url = attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i) ? attr : self.$elm.attr('href');
 						$content = $('<img src="'+url+'" alt="" class="'+self.config.namespace+'-image" />');
 					}
 					/* check if we have an ajax link */
-					else if(self.config.type.ajax === true || attr === 'ajax' || attr.match(/(http|htm|php)/i)){
+					else if(true === self.config.type.ajax || 'ajax' === attr  || attr.match(/(http|htm|php)/i)){
 						url = attr.match(/(http|htm|php)/i) ? attr : self.$elm.attr('href');
 						/* we are using load so one can specify a target with: url.html #targetelement */
 						content = url ? $('<div></div>').load(url, function(response, status){
-							if ( status !== "error" ) {
+							if ( 'error' !== status ) {
 								$.featherlight(content.html(), self.config);
 							}
 						}) : null;
@@ -177,7 +177,7 @@
 				var self = this;
 
 				/* If we have content, add it and show lightbox */
-				if(fl.methods.getContent.call(self) !== false){
+				if(false !== fl.methods.getContent.call(self)){
 					self.$instance.appendTo('body').fadeIn(self.config.openSpeed);
 				} else {
 					return false;
@@ -190,8 +190,8 @@
 					config = self.config,
 					$target = $(event.target);
 
-				if( (config.closeOnClick === 'background' && $target.is('.'+config.namespace))
-					|| config.closeOnClick === 'anywhere'
+				if( ('background' === config.closeOnClick  && $target.is('.'+config.namespace))
+					|| 'anywhere' === config.closeOnClick
 					|| $target.is('.'+config.namespace+'-close') ){
 
 					if(event){
@@ -211,8 +211,8 @@
 	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
 	$.featherlight = function($content, config) {
 		/* if $.featherlight() was called only with config or without anything, initialize manually */
-		if(typeof $content !== 'string' && $content instanceof $ === false){
-			config = typeof $content === 'Object' ? $.extend({}, fl.defaults, $content) : fl.defaults;
+		if('string' !== typeof $content  && false === $content instanceof $){
+			config = 'Object' === typeof $content ? $.extend({}, fl.defaults, $content) : fl.defaults;
 
 			$(config.selector, config.context).featherlight();
 		} else {
@@ -237,4 +237,4 @@
 			$(config.selector, config.context).featherlight();
 		}
 	});
-}(typeof jQuery === 'function' ? jQuery : alert('Too much lightness, Featherlight needs jQuery.')));
+}('function' === typeof jQuery  ? jQuery : alert('Too much lightness, Featherlight needs jQuery.')));
