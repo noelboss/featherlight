@@ -22,7 +22,6 @@
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlightGallery = function(config) {
 		var $gallery = $(this),
-			customAfterOpen = config.afterOpen,
 			flg = {
 				gallery: {
 					previous: '&#9664;',   /* Code that is used as previous icon */
@@ -32,7 +31,10 @@
 				},
 				type: {
 					image: true
-				},
+				}
+			},
+			customAfterOpen = config.afterOpen,
+			cb = {				/* provide an afterOpen function */
 				afterOpen: function(event){
 					var fl = this,
 						$img = fl.$instance.find('img');
@@ -42,27 +44,26 @@
 					});
 
 					fl.$instance.on('next.'+fl.config.namespace+' previous.'+fl.config.namespace, function(event){
-						var offset = event.type === 'next' ? +1 : -1,
-							$nx = $gallery.eq(($gallery.index(fl.$elm)+offset) % $gallery.length);
-
-						$img.fadeTo(fl.config.gallery.fadeOut,0.2);
-						fl.$elm = $nx;
-						$img[0].src = $nx.attr('href');
-					});
+							var offset = event.type === 'next' ? +1 : -1;
+							var $nx = $gallery.eq(($gallery.index(fl.$elm)+offset) % $gallery.length);
+							$img.fadeTo(fl.config.gallery.fadeOut,0.2);
+							fl.$elm = $nx;
+							$img[0].src = $nx.attr('href');
+						});
 
 					if (swipeAwareConstructor) {
 						swipeAwareConstructor(fl.$instance)
 							.on('swipeleft', function()  { fl.$instance.trigger('next'); })
 							.on('swiperight', function() { fl.$instance.trigger('previous'); });
 					} else {
-						var createNavigation = function(target){
+						var createNav = function(target){
 								return $('<span title="'+target+'" class="'+fl.config.namespace+'-'+target+'"><span>'+fl.config.gallery[target]+'</span></span>').click(function(){
 									$(this).trigger(target+'.'+fl.config.namespace);
 								});
 							};
 
-						$img.after(createNavigation('previous'))
-							.after(createNavigation('next'));
+						$img.after(createNav('previous'))
+							.after(createNav('next'));
 					}
 
 					if(typeof customAfterOpen === 'function') {
@@ -70,8 +71,7 @@
 					}
 				}
 			};
-
-		$gallery.featherlight($.extend(true, {}, flg, config));
+		$gallery.featherlight($.extend(true, {}, flg, config, cb));
 	};
 
 
