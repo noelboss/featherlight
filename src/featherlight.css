@@ -11,7 +11,6 @@
 
 		/* dimensions: spanning the background from edge to edge */
 		position:fixed;
-		z-index: 9999;
 		top: 0; right: 0; bottom: 0; left: 0;
 
 		/* position: centering content */

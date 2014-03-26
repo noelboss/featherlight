@@ -178,7 +178,7 @@
 
 				/* If we have content, add it and show lightbox */
 				if(fl.methods.getContent.call(self) !== false){
-					self.$instance.prependTo('body').fadeIn(self.config.openSpeed);
+					self.$instance.appendTo('body').fadeIn(self.config.openSpeed);
 				} else {
 					return false;
 				}
