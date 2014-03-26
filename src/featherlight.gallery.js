@@ -8,12 +8,13 @@
 (function($) {
 	"use strict";
 
-	if('undefined' === typeof $) { return; }
-
-	if(!('featherlight' in $) && 'console' in window){
-		window.console.log('Load the featherlight plugin before the gallery plugin');
+	if('undefined' === typeof $) {
+		if('console' in window){ window.console.info('Too much lightness, Featherlight needs jQuery.');
+			if(!('featherlight' in $)){	window.console.info('Load the featherlight plugin before the gallery plugin'); }
+		}
 		return;
 	}
+
 
 	var isTouchAware = 'ontouchstart' in document.documentElement,
 		jQueryConstructor = $.events && $.events.special.swipeleft && $,
@@ -67,7 +68,7 @@
 							.after(createNav('next'));
 					}
 
-					if(typeof customAfterOpen === 'function') {
+					if('function' === typeof customAfterOpen) {
 						customAfterOpen.call(this, event);
 					}
 				}
@@ -78,9 +79,9 @@
 
 	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
 	$.featherlightGallery = function($targets, config) {
-		if(typeof $targets !== 'object'){
+		if('object' !== typeof $targets){
 			$targets = $($targets);
 		}
 		$targets.featherlightGallery(config);
 	};
-}(typeof jQuery === 'function' ? jQuery : console.error('Too much lightness, Featherlight needs jQuery.')));
+}(jQuery));

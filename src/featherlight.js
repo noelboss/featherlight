@@ -8,7 +8,10 @@
 (function($) {
 	"use strict";
 
-	if('undefined' === typeof $) { return; }
+	if('undefined' === typeof $) {
+		if('console' in window){ window.console.info('Too much lightness, Featherlight needs jQuery.'); }
+		return;
+	}
 
 	/* featherlight object */
 	var fl = {
@@ -238,4 +241,4 @@
 			$(config.selector, config.context).featherlight();
 		}
 	});
-}('function' === typeof jQuery  ? jQuery : alert('Too much lightness, Featherlight needs jQuery.')));
+}(jQuery));
