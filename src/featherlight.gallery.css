@@ -10,9 +10,10 @@
 	.featherlight-previous {
 		display: block;
 		position: absolute;
-		top: 0; bottom: 0;
+		top: 25px;
+		right: 25px;
+		bottom: 0;
 		left: 80%;
-		right: 0;
 		cursor: pointer;
 		/* preventing text selection */
 		-webkit-touch-callout: none;
@@ -24,7 +25,7 @@
 	}
 
 	.featherlight-previous {
-		left: 0;
+		left: 25px;
 		right: 80%;
 	}
 
@@ -40,14 +41,17 @@
 		position: absolute;
 
 		top: 50%;
-		right: 0;
-		left: 18%;
+		left: 5%;
 		width: 82%;
-		text-align: center; /* center horizontally */
+
+		/* center horizontally */
+		text-align: center;
 
 		font-size: 80px;
 		line-height: 80px;
-		margin-top: -40px; /* center vertically */
+
+		/* center vertically */
+		margin-top: -40px;
 
 		text-shadow: 0px 0px 5px #fff;
 		color: #fff;
@@ -55,8 +59,8 @@
 		font-weight: normal;
 	}
 	.featherlight-next span {
-		right: 18%;
-		left: 0;
+		right: 5%;
+		left: auto;
 	}
 
 
@@ -71,10 +75,6 @@
 	.featherlight-next:hover,
 	.featherlight-previous:hover {
 		background: none;
-		left: 10%;
-	}
-	.featherlight-next span {
-		right: 10%;
 	}
 	.featherlight-next span,
 	.featherlight-previous span {
@@ -84,10 +84,20 @@
 
 /* handling phones and small screens */
 @media only screen and (max-width: 1024px) {
+	.featherlight-next,
+	.featherlight-previous {
+		top: 10px;
+		right: 10px;
+		left: 85%;
+	}
+
+	.featherlight-previous {
+		left: 10px;
+		right: 85%;
+	}
+
 	.featherlight-next span,
 	.featherlight-previous span {
-		display: block;
-
 		margin-top: -30px;
 		font-size: 40px;
 	}
