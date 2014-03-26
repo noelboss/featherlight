@@ -109,6 +109,15 @@
 	}
 }
 
+/* iPads */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px)  {
+	.featherlight .featherlight-content {
+		/* dimensions: handling large content */
+		margin-left: 10%;
+		margin-right: 10%;
+	}
+}
+
 /* handling phones and small screens */
 @media only screen and (max-width: 767px) {
 	.featherlight .featherlight-content {

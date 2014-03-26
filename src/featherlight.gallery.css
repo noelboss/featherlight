@@ -7,7 +7,7 @@
 **/
 @media all {
 	.featherlight-next,
-	.featherlight-previous {
+	.featherlight-prev {
 		display: block;
 		position: absolute;
 		top: 0; bottom: 0;
@@ -23,19 +23,19 @@
 		user-select: none;
 	}
 
-	.featherlight-previous {
+	.featherlight-prev {
 		left: 0;
 		right: 80%;
 	}
 
 	.featherlight-next:hover,
-	.featherlight-previous:hover {
+	.featherlight-prev:hover {
 		background: rgba(255,255,255,0.25);
 	}
 
 
 	.featherlight-next span,
-	.featherlight-previous span {
+	.featherlight-prev span {
 		display: none;
 		position: absolute;
 
@@ -61,8 +61,19 @@
 
 
 	.featherlight-next:hover span,
-	.featherlight-previous:hover span {
+	.featherlight-prev:hover span {
 		display: inline-block;
+	}
+}
+
+/* iPads */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px)  {
+	.featherlight-next span,
+	.featherlight-previous span {
+		display: block;
+
+		margin-top: -30px;
+		font-size: 40px;
 	}
 }
 
