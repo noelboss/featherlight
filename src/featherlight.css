@@ -64,7 +64,7 @@
 		display: block;
 	}
 
-	.featherlight .featherlight-close {
+	.featherlight .featherlight-close-icon {
 		/* position: centering vertical and horizontal */
 		position: absolute;
 		z-index: 9999;

@@ -83,7 +83,7 @@
 				var $elm = $(this) || $(),
 					variant = $elm.attr('data-'+config.namespace+'-variant') || config.variant,
 					css = !config.resetCss ? config.namespace : config.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
-					$background = $(config.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close">'+config.closeIcon+'</span></div></div>'),
+					$background = $(config.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close-icon">'+config.closeIcon+'</span></div></div>'),
 
 					/* everything that we need later is stored in self (target) */
 					self = {
@@ -102,7 +102,7 @@
 				if(self.config.closeOnEsc){
 					$(document).bind('keyup.'+self.config.namespace+self.id, function(e) {
 						if (e.keyCode === 27) { // esc keycode
-							self.$instance.find('.'+self.config.namespace+'-close').click();
+							self.$instance.find('.'+self.config.namespace+'-close-icon').click();
 						}
 					});
 				}
@@ -192,7 +192,7 @@
 
 				if( (config.closeOnClick === 'background' && $target.is('.'+config.namespace))
 					|| config.closeOnClick === 'anywhere'
-					|| $target.is('.'+config.namespace+'-close') ){
+					|| $target.filter('[class*="'+config.namespace+'-close"]').length > 0 ){
 
 					if(event){
 						event.preventDefault();
