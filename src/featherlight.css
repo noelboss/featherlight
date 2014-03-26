@@ -108,3 +108,16 @@
 		border: none;
 	}
 }
+
+/* handling phones and small screens */
+@media only screen and (max-width: 767px) {
+	.featherlight .featherlight-content {
+		/* dimensions: handling large content */
+		margin-left: 10px;
+		margin-right: 10px;
+		max-height: 98%;
+
+		padding: 10px 10px 0;
+		border-bottom: 10px solid transparent;
+	}
+}
