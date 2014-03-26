@@ -3,7 +3,13 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+### Maintenance & Fixes
+- Improvements for mobile devices including gallery navigation
 
+The following changes could require changes to your custom CSS:
+– Improves the way tall images are handled using a bottom border to maintain space (cut of instead of shrunken unproportionally)
+– Improves the way the with of the lightbox is handeled
+– Changed paddings from % to pixels
 
 0.3.1 - 2014-03-01
 -----------------------------------
@@ -20,7 +26,7 @@ Master
 - Manually initialize all config.selector elements after config.autostart = false;
 
 
-    $.featherlight();
+	$.featherlight();
 
 
 ### Maintenance & Fixes
