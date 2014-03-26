@@ -73,7 +73,7 @@ The following changes could require changes to your custom CSS:
 0.1.13 - 2014-02-09
 -----------------------------------
 ### Maintenance & Fixes
-- Fixed issue #7 where links inside lightboxes don't work
+- Fixed issue #7 where links inside featherlight don't work
 
 
 0.1.12 - 2014-02-03
