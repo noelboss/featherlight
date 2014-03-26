@@ -85,7 +85,6 @@
 					css = !config.resetCss ? config.namespace : config.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
 					$background = $(config.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close">'+config.closeIcon+'</span></div></div>'),
 
-
 					/* everything that we need later is stored in self (target) */
 					self = {
 						id: fl.id++,
@@ -172,7 +171,9 @@
 
 			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 			open: function(event){
-				if(event){event.preventDefault();}
+				if(event){
+					event.preventDefault();
+				}
 				var self = this;
 
 				/* If we have content, add it and show lightbox */
@@ -190,8 +191,9 @@
 					$target = $(event.target);
 
 				if( (config.closeOnClick === 'background' && $target.is('.'+config.namespace))
-					  || config.closeOnClick === 'anywhere'
-					  || $target.is('.'+config.namespace+'-close') ){
+					|| config.closeOnClick === 'anywhere'
+					|| $target.is('.'+config.namespace+'-close') ){
+
 					if(event){
 						event.preventDefault();
 					}
