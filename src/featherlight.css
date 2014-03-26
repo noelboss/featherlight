@@ -107,4 +107,17 @@
 		/* styling */
 		border: none;
 	}
+
+	.featherlight + .featherlight {
+		background: transparent;
+		z-index: 9998;
+	}
+
+	.featherlight + .featherlight + .featherlight {
+		z-index: 9997;
+	}
+
+	.featherlight + .featherlight + .featherlight + .featherlight {
+		z-index: 9996; /* Support up to four nested featherlight */
+	}
 }
