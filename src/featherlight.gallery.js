@@ -7,9 +7,10 @@
 **/
 (function($) {
 	"use strict";
+
 	if('undefined' === typeof $) { return; }
 
-	if('featherlight' in $ && 'console' in window){
+	if(!('featherlight' in $) && 'console' in window){
 		window.console.log('Load the featherlight plugin before the gallery plugin');
 		return;
 	}

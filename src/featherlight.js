@@ -7,6 +7,7 @@
 **/
 (function($) {
 	"use strict";
+
 	if('undefined' === typeof $) { return; }
 
 	/* featherlight object */
