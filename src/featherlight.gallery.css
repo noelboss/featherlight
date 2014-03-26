@@ -68,6 +68,10 @@
 
 /* Allways display arrows on touch devices */
 @media only screen and (max-device-width: 1024px){
+	.featherlight-next:hover,
+	.featherlight-previous:hover {
+		background: none;
+	}
 	.featherlight-next span,
 	.featherlight-previous span {
 		display: block;
