@@ -36,7 +36,7 @@
 				}
 			},
 			customAfterOpen = config.afterOpen,
-			cb = {				/* provide an afterOpen function */
+			overrideCallbacks = {				/* provide an afterOpen function */
 				afterOpen: function(event){
 					var fl = this,
 						$img = fl.$instance.find('img');
@@ -73,7 +73,7 @@
 					}
 				}
 			};
-		$gallery.featherlight($.extend(true, {}, flg, config, cb));
+		$gallery.featherlight($.extend(true, {}, flg, config, overrideCallbacks));
 	};
 
 
