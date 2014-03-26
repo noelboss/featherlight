@@ -7,16 +7,17 @@
 **/
 (function($) {
 	"use strict";
-	if($ === 'undefined') {return; }
-	if(typeof $.featherlight !== 'function' && typeof window.console === 'object'){
+	if('undefined' === typeof $) { return; }
+
+	if('featherlight' in $ && 'console' in window){
 		window.console.log('Load the featherlight plugin before the gallery plugin');
 		return;
 	}
 
 	var isTouchAware = 'ontouchstart' in document.documentElement,
-			jQueryConstructor = $.events && $.events.special.swipeleft && $,
-			hammerConstructor = ('Hammer' in window) && function($el){ Hammer(el[0])},
-			swipeAwareConstructor = isTouchAware && (jQueryConstructor || hammerConstructor);
+		jQueryConstructor = $.events && $.events.special.swipeleft && $,
+		hammerConstructor = ('Hammer' in window) && function($el){ new window.Hammer(el[0]); },
+		swipeAwareConstructor = isTouchAware && (jQueryConstructor || hammerConstructor);
 
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlightGallery = function(config) {
@@ -57,7 +58,7 @@
 						var createNavigation = function(target){
 								return $('<span title="'+target+'" class="'+fl.config.namespace+'-'+target+'"><span>'+fl.config.gallery[target]+'</span></span>').click(function(){
 									$(this).trigger(target+'.'+fl.config.namespace);
-								})
+								});
 							};
 
 						$img.after(createNavigation('previous'))

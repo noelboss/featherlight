@@ -22,12 +22,15 @@ module.exports = function(grunt) {
 		},
 		jshint: {
 				options: {
+					laxbreak: true,
 					curly: true,
 					eqeqeq: true,
 					eqnull: true,
 					browser: true,
 					globals: {
-						jQuery: true
+						jQuery: true,
+						Hammer: true,
+						el: true
 					},
 				},
 				uses_defaults: ['src/**/*.js']
