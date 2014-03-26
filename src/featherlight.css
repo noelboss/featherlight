@@ -109,10 +109,10 @@
 	}
 }
 
-/* Sall devices and screens */
+/* handling phones and small screens */
 @media only screen and (max-width: 1024px) {
 	.featherlight .featherlight-content {
-		/* dimensions: handling large content */
+		/* dimensions: maximize lightbox with for small screens */
 		margin-left: 10px;
 		margin-right: 10px;
 		max-height: 98%;
