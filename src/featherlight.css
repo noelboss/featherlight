@@ -84,6 +84,12 @@
 	}
 
 
+	.featherlight .featherlight-image {
+		/* styling */
+		width: 100%;
+	}
+
+
 	.featherlight-iframe .featherlight-content {
 		/* since the iframe probably has no height, give it a minimum height */
 		min-height: 60%;
@@ -100,10 +106,5 @@
 
 		/* styling */
 		border: none;
-	}
-
-	.featherlight .featherlight-image {
-		/* styling */
-		width: 100%;
 	}
 }
