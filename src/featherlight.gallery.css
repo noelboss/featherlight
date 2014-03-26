@@ -71,6 +71,10 @@
 	.featherlight-next:hover,
 	.featherlight-previous:hover {
 		background: none;
+		left: 10%;
+	}
+	.featherlight-next span {
+		right: 10%;
 	}
 	.featherlight-next span,
 	.featherlight-previous span {
