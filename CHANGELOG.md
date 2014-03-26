@@ -6,6 +6,7 @@ Master
 ### Features
 - New option closeOnClick to support closing by clicking anywhere
 – Any element inside the lightbox with the class "featherlight-close" will now trigger the closing event
+- Support for nested lightboxes
 - Gallery uses swipes on touch devices (if a supported library present)
 - Gallery support and uses events to navigate through the images
 
