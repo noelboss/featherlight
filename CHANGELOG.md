@@ -3,6 +3,26 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+### Features
+- New option closeOnClick to support closing by clicking anywhere
+– Any element inside the lightbox with the class "featherlight-close" will now trigger the closing event
+- Support for nested lightboxes
+- Gallery uses swipes on touch devices (if a supported library present)
+- Gallery support and uses events to navigate through the images
+
+### Breaking changes
+- closeOnBg no longer supported, use closeOnClick
+- Gallery: class .featherlight-prev renamed to .featherlight-previous
+
+### Maintenance & Fixes
+- Improvements for mobile devices
+
+The following changes could require changes to your custom CSS:
+
+– Improves the way tall images are handled using a bottom border to maintain space (cut of instead of shrunken unproportionally)
+– Improves the way the with of the lightbox is handled
+– Changed paddings from % to pixels
+– Changed closing icon class to featherlight-close-icon
 
 
 0.3.1 - 2014-03-01
@@ -20,7 +40,7 @@ Master
 - Manually initialize all config.selector elements after config.autostart = false;
 
 
-    $.featherlight();
+	$.featherlight();
 
 
 ### Maintenance & Fixes
@@ -61,7 +81,7 @@ Master
 0.1.13 - 2014-02-09
 -----------------------------------
 ### Maintenance & Fixes
-- Fixed issue #7 where links inside lightboxes don't work
+- Fixed issue #7 where links inside featherlight don't work
 
 
 0.1.12 - 2014-02-03
