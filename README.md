@@ -242,7 +242,7 @@ This is the close function used to close the lightbox. It receives the event obj
 		// ...
 		$.featherlight.methods.close.call(this, event);
 		// ...
-		..this.config.afterClose.call(this, event);
+		this.config.afterClose.call(this, event);
 	}
 
 
