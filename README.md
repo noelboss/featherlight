@@ -193,7 +193,7 @@ You can provide the wrapping DOM. This is a bit tricky and just for the advanced
 
 	beforeOpen, beforeClose – Function: null
 Called before the open or close method is executed. This function can return false to prevent open or
-close method from execution. ´this´ is an object and contains the triggering DOM element (if existing) and the related Featherlight objects.
+close method from execution. `this` is an object and contains the triggering DOM element (if existing) and the related Featherlight objects.
 
 	// example
 	beforeOpen: function(event){
@@ -205,7 +205,7 @@ close method from execution. ´this´ is an object and contains the triggering D
 ================================================
 
 	afterOpen, afterClose – Function: null
-Called after the open or close method is executed. ´this´ is an object and contains the triggering DOM element (if existing) and the related Featherlight objects.
+Called after the open or close method is executed – it is not called, if the `before-` or `open` function returns `false`! It receives the event object. `this` is an object and contains the triggering DOM element (if existing) and the related Featherlight objects.
 
 	// example
 	afterOpen: function(event){
@@ -217,7 +217,7 @@ Called after the open or close method is executed. ´this´ is an object and con
 ================================================
 
 	 open – Function
-This is the open function used to open the lightbox. It receives the event object. ´this´ is an object and contains the triggering DOM element (if existing) and the related Featherlight objects. It calls the before/after and open method of the plugin.
+This is the open function used to open the lightbox. `this` is an object and contains the triggering DOM element (if existing) and the related Featherlight objects. It calls the `before/after` functions and the `open` methods of the plugin.
 
 	// this code has been simplified:
 	open: function(event){
@@ -233,7 +233,7 @@ This is the open function used to open the lightbox. It receives the event objec
 ================================================
 
 	close – Function
-This is the close function used to close the lightbox. It receives the event object. ´this´ is an object and contains the triggering DOM element (if existing) and the related Featherlight objects. It calls the before/after and open method of the plugin.
+This is the close function used to close the lightbox. `this` is an object and contains the triggering DOM element (if existing) and the related Featherlight objects. It calls the `before/after` functions and the `close` methods of the plugin.
 
 	// this code has been simplified:
 	close: function(event){
@@ -263,12 +263,12 @@ All of Featherlight's methods are stored in $.featherlight.methods and can there
 
 		/* opens the lightbox "this" contains $instance with the lightbox, and with the config */
 		open: function(event){
-			// ...
+			// return false prevents the `afterOpen` function
 		},
 
 		/* closes the lightbox "this" contains $instance with the lightbox, and with the config */
 		close: function(event){
-			// ...
+			// return false prevents the `afterClose` function
 		}
 	}
 
