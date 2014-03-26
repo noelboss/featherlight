@@ -15,7 +15,7 @@
 
 	var isTouchAware = 'ontouchstart' in document.documentElement,
 			jQueryConstructor = $.events && $.events.special.swipeleft && $,
-			hammerConstructor = Hammer && function($el){ Hammer(el[0])},
+			hammerConstructor = ('Hammer' in window) && function($el){ Hammer(el[0])},
 			swipeAwareConstructor = isTouchAware && (jQueryConstructor || hammerConstructor);
 
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
