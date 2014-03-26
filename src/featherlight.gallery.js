@@ -52,6 +52,10 @@
 
 					$img.after(createNav('previous'))
 						.after(createNav('next'));
+
+					if(typeof customAfterOpen === 'function') {
+						customAfterOpen.call(this, event);
+					}
 				}
 			};
 		$gallery.featherlight($.extend(true, {}, flg, config, cb));
