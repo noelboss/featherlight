@@ -66,19 +66,8 @@
 	}
 }
 
-/* iPads */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px)  {
-	.featherlight-next span,
-	.featherlight-previous span {
-		display: block;
-
-		margin-top: -30px;
-		font-size: 40px;
-	}
-}
-
-/* handling phones and small screens */
-@media only screen and (max-width: 767px) {
+/* Small devices */
+@media only screen and (max-width: 1024px) {
 	.featherlight-next span,
 	.featherlight-previous span {
 		display: block;
