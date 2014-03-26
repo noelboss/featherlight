@@ -19,6 +19,12 @@
 		/* styling */
 		cursor: pointer;
 		background: #333;
+		/* IE8 "hack" for nested lightboxes */
+		background: rgba(0, 0, 0, 0);
+	}
+
+	/* support for nested lightboxes. Does not work in IE8 (use JS to fix) */
+	.featherlight:last-child {
 		background: rgba(0, 0, 0, 0.8);
 	}
 
