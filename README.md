@@ -12,7 +12,7 @@ Featherlight – ultra slim jQuery lightbox
 * Customizable via configuration object
 
 
-## [» Download Current Release 0.3.1](https://github.com/noelboss/featherlight/archive/0.2.2.zip)
+## [» Download Current Release 0.3.1](https://github.com/noelboss/featherlight/archive/0.3.1.zip)
 
 Here you'll find a [list of all the changes](https://github.com/noelboss/featherlight/blob/master/CHANGELOG.md) and you can also download [old releases](https://github.com/noelboss/featherlight/releases) or [the master including all the latest  bling](https://github.com/noelboss/featherlight/archive/master.zip).
 
@@ -93,7 +93,7 @@ Featherlight comes with a bunch of configuration-options which make it very flex
 		closeTrigger: 'click',                /* Event that triggers the closing of the lightbox */
 		openSpeed:    250,                    /* Duration of opening animation */
 		closeSpeed:   250,                    /* Duration of closing animation */
-		closeOnBg:    true,                   /* Close lightbox on click on the background */
+		closeOnClick: 'background',           /* Close lightbox on click ('background', 'anywhere', or false) */
 		closeOnEsc:   true,                   /* Close lightbox when pressing esc */
 		closeIcon:    '&#10005;',             /* Close icon */
 		beforeOpen:   null,                   /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
@@ -170,8 +170,8 @@ Defines the speed for the opening and close animations. Values allowed are [jQue
 
 ================================================
 
-	closeOnBg – Boolean: true
-If true, the close event is also bound to the background
+	closeOnClick – 'background', 'anywhere' or false
+If set, the close event is also bound to the either the background only or anywhere
 
 ================================================
 
@@ -320,6 +320,8 @@ Example:
 		},
 		openSpeed: 300
 	});
+
+The gallery responds to custom events `previous` and `next` to navigate to the previous and next images.
 
 ### Installation
 

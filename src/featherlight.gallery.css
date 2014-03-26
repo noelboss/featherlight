@@ -7,7 +7,7 @@
 **/
 @media all {
 	.featherlight-next,
-	.featherlight-prev {
+	.featherlight-previous {
 		display: block;
 		position: absolute;
 		top: 0; bottom: 0;
@@ -23,19 +23,19 @@
 		user-select: none;
 	}
 
-	.featherlight-prev {
+	.featherlight-previous {
 		left: 0;
 		right: 80%;
 	}
 
 	.featherlight-next:hover,
-	.featherlight-prev:hover {
+	.featherlight-previous:hover {
 		background: rgba(255,255,255,0.25);
 	}
 
 
 	.featherlight-next span,
-	.featherlight-prev span {
+	.featherlight-previous span {
 		display: none;
 		position: absolute;
 
@@ -61,7 +61,18 @@
 
 
 	.featherlight-next:hover span,
-	.featherlight-prev:hover span {
+	.featherlight-previous:hover span {
 		display: inline-block;
+	}
+}
+
+/* handling phones and small screens */
+@media only screen and (max-width: 767px) {
+	.featherlight-next span,
+	.featherlight-previous span {
+		display: block;
+
+		margin-top: -30px;
+		font-size: 40px;
 	}
 }
