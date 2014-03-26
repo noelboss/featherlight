@@ -8,35 +8,23 @@
 @media all {
 	.featherlight {
 		display: none;
+
+		/* dimensions: spanning the background from edge to edge */
 		position:fixed;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
 		z-index: 9999;
-		height: 100%;
+		top: 0; right: 0; bottom: 0; left: 0;
+
+		/* position: centering content */
 		text-align: center;
+
+		/* styling */
 		cursor: pointer;
 		background: #333;
 		background: rgba(0, 0, 0, 0.8);
 	}
 
-	.featherlight .featherlight-close {
-		position: absolute;
-		z-index: 9999;
-		right: 0px;
-		top: 0px;
-		line-height: 25px;
-		width: 25px;
-		cursor: pointer;
-		text-decoration: none;
-		text-align: center;
-		font: Arial, sans-serif;
-		background: #fff;
-		color: #000;
-	}
-
 	.featherlight:before {
+		/* position: trick to center content vertically */
 		content: '';
 		display: inline-block;
 		height: 100%;
@@ -45,37 +33,77 @@
 	}
 
 	.featherlight .featherlight-content {
-		text-align: left;
-		display: inline-block;
-		vertical-align: middle;
+		/* make content container for positioned elements (close button) */
 		position: relative;
-		padding: 2%;
-		width: 60%;
-		max-height: 95%;
+
+		/* position: centering vertical and horizontal */
+		text-align: left;
+		vertical-align: middle;
+		display: inline-block;
+
+		/* dimensions: cut off images */
 		overflow: auto;
+		padding: 25px 25px 0;
+		border-bottom: 25px solid transparent;
+
+		/* dimensions: handling small or non existing (loading images) content */
+		min-width:  30%;
+
+		/* dimensions: handling large content */
+		margin-left: 5%;
+		margin-right: 5%;
+		max-height: 95%;
+
+		/* styling */
 		background: #fff;
 		cursor: auto;
 	}
 
+	/* contains the content */
 	.featherlight .featherlight-inner {
+		/* make sure its visible */
 		display: block;
 	}
 
+	.featherlight .featherlight-close {
+		/* position: centering vertical and horizontal */
+		position: absolute;
+		z-index: 9999;
+		top: 0;
+		right: 0;
+
+		/* dimensions: 25px x 25px */
+		line-height: 25px;
+		width: 25px;
+
+		/* styling */
+		cursor: pointer;
+		text-align: center;
+		font: Arial, sans-serif;
+		background: #fff;
+		color: #000;
+	}
+
+
 	.featherlight-iframe .featherlight-content {
+		/* since the iframe probably has no height, give it a minimum height */
 		min-height: 60%;
+		/* removed the border for image croping since iframe is edge to edge */
+		border-bottom: 0;
 	}
 
 	.featherlight iframe {
-		border: none;
+		/* dimensions: iframe edge to edge */
 		position: absolute;
-		top: 0; bottom: 0;
-		left: 0; right: 0;
+		top: 0; right: 0; bottom: 0; left: 0;
 		height: 100%;
 		width: 100%;
+
+		/* styling */
+		border: none;
 	}
 
 	.featherlight .featherlight-image {
 		width: 100%;
-		max-height: 85vh;
 	}
 }
