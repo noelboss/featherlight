@@ -9,7 +9,7 @@ Master
 The following changes could require changes to your custom CSS:
 
 – Improves the way tall images are handled using a bottom border to maintain space (cut of instead of shrunken unproportionally)
-– Improves the way the with of the lightbox is handeled
+– Improves the way the with of the lightbox is handled
 – Changed paddings from % to pixels
 – Changed closing icon class to featherlight-close-icon
 
