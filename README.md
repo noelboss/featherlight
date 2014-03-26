@@ -216,34 +216,9 @@ Called after the open or close method is executed – it is not called, if the `
 
 ================================================
 
-	 open – Function
-This is the open function used to open the lightbox. `this` is an object and contains the triggering DOM element (if existing) and the related Featherlight objects. It calls the `before/after` functions and the `open` methods of the plugin.
+	 open, close – Function
 
-	// this code has been simplified:
-	open: function(event){
-		// ...
-		this.config.beforeOpen.call(this, event);
-		// ...
-		$.featherlight.methods.open.call(this, event);
-		// ...
-		this.config.afterOpen.call(this, event);
-	}
-
-
-================================================
-
-	close – Function
-This is the close function used to close the lightbox. `this` is an object and contains the triggering DOM element (if existing) and the related Featherlight objects. It calls the `before/after` functions and the `close` methods of the plugin.
-
-	// this code has been simplified:
-	close: function(event){
-		// ...
-		this.config.beforeClose.call(this, event);
-		// ...
-		$.featherlight.methods.close.call(this, event);
-		// ...
-		this.config.afterClose.call(this, event);
-	}
+**Deprecated!** This functions will be removed in Release 0.4.0!
 
 
 # Methods
