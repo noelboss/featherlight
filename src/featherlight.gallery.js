@@ -35,7 +35,7 @@
 					image: true
 				}
 			},
-			customAfterOpen = config.afterOpen,
+			customAfterOpen = config && config.afterOpen,
 			overrideCallbacks = {				/* provide an afterOpen function */
 				afterOpen: function(event){
 					var fl = this,
