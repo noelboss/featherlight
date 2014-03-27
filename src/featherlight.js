@@ -130,20 +130,18 @@
 			/* this method prepares the content and converts it into a jQuery object */
 			getContent: function(){
 				var self = this,
-					ok = true,
 					content = self.content,
-					$content = null,
 					attr = self.$elm.attr(self.config.targetAttr) || '',
 					url = '';
 
 				/* if we have DOM, convert to jQuery Object */
 				if(false === self.$content instanceof $ && 'string' === typeof content ){
-					$content = $(content);
+					return $(content);
 				} else if(false === content instanceof $){ /* if we have no jQuery Object */
 					/* check if we have an image and create element */
 					if(self.config.type.image === true || 'image' === attr  || attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i)){
 						url = attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i) ? attr : self.$elm.attr('href');
-						$content = $('<img src="'+url+'" alt="" class="'+self.config.namespace+'-image" />');
+						return $('<img src="'+url+'" alt="" class="'+self.config.namespace+'-image" />');
 					}
 					/* check if we have an ajax link */
 					else if(true === self.config.type.ajax || 'ajax' === attr  || attr.match(/(http|htm|php)/i)){
@@ -154,29 +152,30 @@
 								$.featherlight(content.html(), self.config);
 							}
 						}) : null;
-						ok = false;
+						return null;
 					}
 					/* otherwise create jquery element by using the attribute as selector */
 					else if(attr) {
-						$content = $($(attr), self.config.context);
+						return $($(attr), self.config.context);
 					}
-					/* could not find any content */
 					else {
-						ok = false;
+						console.error('Could not find any content');
 					}
 				}
-				if(ok && $content instanceof $){
-					/* we need a special class for the iframe */
-					if($content.is('iframe') || $('iframe', $content).length > 0){
-						self.$instance.addClass(self.config.namespace+'-iframe');
-					}
-					self.$content = $content.clone().addClass(self.config.namespace+'-inner');
+			},
 
-					/* remove existing content */
-					self.$instance.find('.'+self.config.namespace+'-inner').remove();
-					self.$instance.find('.'+self.config.namespace+'-content').append(self.$content);
+			/* sets the content of $instance to $content */
+			setContent: function($content){
+				var self = this;
+				/* we need a special class for the iframe */
+				if($content.is('iframe') || $('iframe', $content).length > 0){
+					self.$instance.addClass(self.config.namespace+'-iframe');
 				}
-				return ok;
+				self.$content = $content.clone().addClass(self.config.namespace+'-inner');
+
+				/* remove existing content */
+				self.$instance.find('.'+self.config.namespace+'-inner').remove();
+				self.$instance.find('.'+self.config.namespace+'-content').append(self.$content);
 			},
 
 			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
@@ -184,10 +183,12 @@
 				if(event){
 					event.preventDefault();
 				}
-				var self = this;
+				var self = this,
+					$content = fl.methods.getContent.call(self);
 
 				/* If we have content, add it and show lightbox */
-				if(false !== fl.methods.getContent.call(self)){
+				if($content){
+					fl.methods.setContent.call(self, $content);
 					self.$instance.appendTo('body').fadeIn(self.config.openSpeed);
 				} else {
 					return false;
