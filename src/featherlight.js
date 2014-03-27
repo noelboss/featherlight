@@ -163,8 +163,7 @@
 					if($content.is('iframe') || $('iframe', $content).length > 0){
 						self.$instance.addClass(self.config.namespace+'-iframe');
 					}
-					$content.addClass(self.config.namespace+'-inner');
-					self.$content = $content.clone();
+					self.$content = $content.clone().addClass(self.config.namespace+'-inner');
 
 					/* remove existing content */
 					self.$instance.find('.'+self.config.namespace+'-inner').remove();
