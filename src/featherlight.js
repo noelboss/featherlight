@@ -66,10 +66,10 @@
 					close = this.config.beforeClose.call(this, event);
 				}
 
-				/* if no before function or before function did not stop propagation */
+				/* if before function did not stop propagation */
 				if(false !== close){
 					/* call open method */
-					close = $.featherlight.methods.close.call(this, event);
+					$.featherlight.methods.close.call(this, event);
 				}
 
 				/* check if after Function exists */
@@ -98,9 +98,16 @@
 						$instance: $background.clone().addClass(variant) /* clone DOM for the background, wrapper and the close button */
 					};
 
-
-				/* close when click on background */
-				self.$instance.on(config.closeTrigger+'.'+config.namespace, $.proxy(config.close, self));
+				/* close when click on background/anywhere/null or closebox */
+				self.$instance.on(config.closeTrigger+'.'+config.namespace, function(event) {
+					var $target = $(event.target);
+					if( ('background' === config.closeOnClick  && $target.is('.'+config.namespace))
+						|| 'anywhere' === config.closeOnClick
+						|| $target.is('.'+config.namespace+'-close') ){
+						event.preventDefault();
+						config.close.call(self);
+					}
+				});
 
 				/* bind close on esc */
 				if(self.config.closeOnEsc){
@@ -189,24 +196,13 @@
 
 			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
-				var self = this,
-					config = self.config,
-					$target = $(event.target);
-
-				if( ('background' === config.closeOnClick  && $target.is('.'+config.namespace))
-					|| 'anywhere' === config.closeOnClick
-					|| $target.is('.'+config.namespace+'-close') ){
-
-					if(event){
-						event.preventDefault();
-					}
-					if(self.config.closeOnEsc){
-						$(document).unbind('keyup.'+self.config.namespace+self.id);
-					}
-					self.$instance.fadeOut(self.config.closeSpeed,function(){
-						self.$instance.detach();
-					});
+				var self = this;
+				if(self.config.closeOnEsc){
+					$(document).unbind('keyup.'+self.config.namespace+self.id);
 				}
+				self.$instance.fadeOut(self.config.closeSpeed,function(){
+					self.$instance.detach();
+				});
 			}
 		}
 	};
