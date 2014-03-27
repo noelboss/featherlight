@@ -40,6 +40,7 @@
 			beforeClose:  null,                   /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 			afterOpen:    null,                   /* Called after open. Gets event as parameter, this contains all data */
 			afterClose:   null,                   /* Called after close. Gets event as parameter, this contains all data */
+			contentFilters: ['jquery', 'image', 'html', 'ajax'], /* List of content filters to use to determine the content */
 			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 			open: function(event){
 				var open = true;
@@ -81,7 +82,12 @@
 		/* you can access and override all methods using $.featherlight.methods */
 		methods: {
 			/* setup iterates over a single instance of featherlight and prepares the background and binds the events */
-			setup: function(config, content){
+			setup: function(target, config){
+				/* all arguments are optional */
+				if (typeof target === 'object' && target instanceof $ === false && !config) {
+					config = target;
+					target = undefined;
+				}
 				config = $.extend({}, fl.defaults, config);
 
 				var $elm = $(this) || $(),
@@ -93,7 +99,7 @@
 					self = {
 						id: fl.id++,
 						config: config,
-						content: content,
+						target: target,
 						$elm: $elm,
 						$instance: $background.clone().addClass(variant) /* clone DOM for the background, wrapper and the close button */
 					};
@@ -130,38 +136,39 @@
 			/* this method prepares the content and converts it into a jQuery object */
 			getContent: function(){
 				var self = this,
-					content = self.content,
-					attr = self.$elm.attr(self.config.targetAttr) || '',
-					url = '';
+					data = self.target || self.$elm.attr(self.config.targetAttr) || '';
 
-				/* if we have DOM, convert to jQuery Object */
-				if(false === self.$content instanceof $ && 'string' === typeof content ){
-					return $(content);
-				} else if(false === content instanceof $){ /* if we have no jQuery Object */
-					/* check if we have an image and create element */
-					if(self.config.type.image === true || 'image' === attr  || attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i)){
-						url = attr.match(/\.(png|jpg|jpeg|gif|tiff|bmp)$/i) ? attr : self.$elm.attr('href');
-						return $('<img src="'+url+'" alt="" class="'+self.config.namespace+'-image" />');
-					}
-					/* check if we have an ajax link */
-					else if(true === self.config.type.ajax || 'ajax' === attr  || attr.match(/(http|htm|php)/i)){
-						url = attr.match(/(http|htm|php)/i) ? attr : self.$elm.attr('href');
-						/* we are using load so one can specify a target with: url.html #targetelement */
-						content = url ? $('<div></div>').load(url, function(response, status){
-							if ( 'error' !== status ) {
-								$.featherlight(content.html(), self.config);
-							}
-						}) : null;
-						return null;
-					}
-					/* otherwise create jquery element by using the attribute as selector */
-					else if(attr) {
-						return $($(attr), self.config.context);
-					}
-					else {
-						console.error('Could not find any content');
+				/* Find which filter applies */
+				var filter;
+				/* check explicit type like {type:{image: true}} */
+				for(var filterName in self.config.type) {
+					if(self.config.type[filterName] === true) {
+						filter = $.featherlight.contentFilters[filterName];
 					}
 				}
+				/* check explicit type like data-featherlight="image" */
+				if(!filter && data in $.featherlight.contentFilters) {
+					filter = $.featherlight.contentFilters[data];
+					data = self.target && self.$elm.attr(self.config.targetAttr);
+				}
+				data = data || self.$elm.attr('href') || '';
+				/* otherwise it's implicit, run chekcs */
+				if(!filter) {
+					var target = data;
+					data = null;
+					$.each(self.config.contentFilters, function() {
+						filter = $.featherlight.contentFilters[this];
+						if(filter.test)  { data = filter.test(target); }
+						if(!data && filter.regex && target.match && target.match(filter.regex)) { data = target; }
+						return !data;
+					});
+					if(!data) {
+						console.error('Featherlight: no content filter found ' + (target ? ' for "' + target + '"' : ' (no target specified)'));
+						return false;
+					}
+				}
+				/* Process it */
+				return filter.process.call(self, data);
 			},
 
 			/* sets the content of $instance to $content */
@@ -205,6 +212,33 @@
 					self.$instance.detach();
 				});
 			}
+		},
+		/* Contains the logic to determine content */
+		contentFilters: {
+			jquery: {
+				regex: /^[#.]\w/,         /* Anything that starts with a class name or identifiers */
+				test: function(elem)    { return elem instanceof $ && elem; },
+				process: function(elem) { return $(elem); }
+			},
+			image: {
+				regex: /\.(png|jpg|jpeg|gif|tiff|bmp)(\?\S*)?$/i,
+				process: function(url)  { return $('<img src="'+url+'" alt="" class="'+this.config.namespace+'-image" />'); }
+			},
+			html: {
+				regex: /^\s*<[\w!][^<]*>/, /* Anything that starts with some kind of valid tag */
+				process: function(html) { return $(html); }
+			},
+			ajax: {
+				regex: /./,            /* At this point, any content is assumed to be an URL */
+				process: function(url)  {
+					/* we are using load so one can specify a target with: url.html #targetelement */
+					var content = $('<div></div>').load(url, function(response, status){
+						if ( status !== "error" ) {
+							$.featherlight(content.html(), $.extend(self.config, {type: {html: true}}));
+						}
+					});
+				}
+			}
 		}
 	};
 
@@ -216,14 +250,14 @@
 
 			$(config.selector, config.context).featherlight();
 		} else {
-			fl.methods.setup.call(null, config, $content);
+			fl.methods.setup.call(null, $content, config);
 		}
 	};
 
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlight = function(config, $content) {
 		$(this).each(function(){
-			fl.methods.setup.call(this, config, $content);
+			fl.methods.setup.call(this, $content, config);
 		});
 	};
 

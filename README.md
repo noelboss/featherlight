@@ -60,14 +60,14 @@ It will then look for the `targetAttr` (by default "data-featherlight") on this 
 
 ***configuration*** – Object: Object to configure certain aspects of the plugin. See [Configuration](#configuration).
 
-***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string containing HTML Code to be opened in the ligthbox.
+***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string (see [content filters](content_filters])) to be opened in the ligthbox.
 
 ## Manual calling of Featherlight
 In cases where you don't want an Element to act as Trigger you can call Featherlight manually. You can use this for example in an ajax callback to display the response data.
 
 	$.featherlight($content, configuration);
 
-***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string containing HTML Code to be opened in the ligthbox.
+***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string (see [content filters](content_filters])) to be opened in the ligthbox.
 
 ***configuration*** – Object: Object to configure certain aspects of the plugin. See [Configuration](#configuration).
 
@@ -100,6 +100,7 @@ Featherlight comes with a bunch of configuration-options which make it very flex
 		beforeClose:  null,                   /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		afterOpen:    null,                   /* Called after open. Gets event as parameter, this contains all data */
 		afterClose:   null,                   /* Called after close. Gets event as parameter, this contains all data */
+		contentFilters: ['jquery', 'image', 'html', 'ajax'], /* List of content filters to use to determine the content */
 		open: function(event){                /* opens the lightbox "this" contains $instance with the lightbox, and with the config */
 			$.proxy($.featherlight.methods.open, this, event)();
 		},
@@ -132,6 +133,9 @@ Context used for selecting elements matching "selector". Useful of you only want
 ================================================
 
 	type – Object: image: false, ajax: false
+
+**Deprecated!** This will be changed in Release 0.4.0!
+
 The type object allows you to manually set what type the lightbox is. Set the value of type.image or type.ajax to true. Otherwise, the value from targetAttr will be to determine the type of the lightbox. Example:
 
 	$('.image-lightbox', $('.gallery')).featherlight({
@@ -252,6 +256,45 @@ You can overwrite a function like this:
 	$.featherlight.methods.open = function() { alert('open!'); }
 
 Check the source code for more details.
+
+# Content Filters
+
+There are many ways to specify content to featherlight. Featherlight uses a set of heuristics to determine the type, for example data ending with `.gif` will be assumed to be an image. The following are equivalent:
+
+  <a href="#" data-featherlight="photo.gif">See in a lightbox</a>
+
+  <a href="photo.gif" data-featherlight>See in a lightbox</a>
+
+  <a id="#example" href="#">See in a lightbox</a>
+  <script>$('#example').featherlight('photo.gif')</script>
+
+In case the heuristic wouldn't work, you can specify which contentFiter to use:
+
+  <a href="photo_without_extension" data-featherlight="image">See in a lightbox</a>
+
+  <a id="force_as_image" href="photo_without_extension">See in a lightbox</a>
+  <script>
+    $('#force_as_image').featherlight('image');
+    // Equivalent:
+    $('#force_as_image').featherlight({type: {image: true}});
+  </script>
+
+  <a id="force_as_image2" href="#">See in a lightbox</a>
+  <script>$('#force_as_image2').featherlight('photo_without_extension', {type:{image: true}});</script>
+
+You can add your own heuristics, for example:
+
+	$.featherlight.contentFilters.feed = {
+		regex: /^feed:/
+		process: function(url) { /* deal with url */ return $('Loading...'); }
+	}
+	$.featherlight.defaults.contentFilters.unshift('feed');
+
+This way the following would be possible:
+
+  <a href="feed://some_url" data-featherlight>See the feed in a lightbox</a>
+
+**Deprecated!** `type` will be changed in Release 0.4.0!
 
 # Examples
 
