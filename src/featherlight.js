@@ -163,7 +163,7 @@
 						return !data;
 					});
 					if(!data) {
-						console.error('Featherlight: no content filter found ' + (target ? ' for "' + target + '"' : ' (no target specified)'));
+						if('console' in window){ window.console.error('Featherlight: no content filter found ' + (target ? ' for "' + target + '"' : ' (no target specified)')); }
 						return false;
 					}
 				}
@@ -231,6 +231,7 @@
 			ajax: {
 				regex: /./,            /* At this point, any content is assumed to be an URL */
 				process: function(url)  {
+					var self = this;
 					/* we are using load so one can specify a target with: url.html #targetelement */
 					var content = $('<div></div>').load(url, function(response, status){
 						if ( status !== "error" ) {
