@@ -15,6 +15,7 @@
     "jquery": "~1.7.0",
     "requirejs": "~2.1.10",
     "chai": "~1.9.1",
+    "chai-jquery": "*",
     "mocha": "~1.18.2"
   },
   "keywords": [

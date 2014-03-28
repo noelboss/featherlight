@@ -10,11 +10,12 @@ var expect = chai.expect;
 			expect($('img').length).to.equal(0);
 			$bound.click();
 			setTimeout(function() {
-				expect($('.featherlight img').attr('src')).to.equal('fixtures/photo.jpeg');
+				expect($('.featherlight img')).to.be.visible;
+				expect($('.featherlight img')).to.have.attr('src').equal('fixtures/photo.jpeg');
 				$('.featherlight').click();
 			}, 500 );
 			setTimeout(function() {
-				expect($('img:visible')).to.have.length(0);
+				expect($('img')).to.not.be.visible;
 				done();
 			}, 1000 );
 		});
@@ -33,7 +34,7 @@ var expect = chai.expect;
 
 			it('opens a dialog box', function() {
 				$.featherlight('<p class="testing">This is a test<p>');
-				expect($('.featherlight p.testing').is(':visible')).to.be.ok;
+				expect($('.featherlight p.testing')).to.be.visible;
 			});
 
 		});
