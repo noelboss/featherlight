@@ -256,9 +256,10 @@
 
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlight = function(config, $content) {
-		$(this).each(function(){
+		this.each(function(){
 			fl.methods.setup.call(this, $content, config);
 		});
+		return this;
 	};
 
 	/* extend featherlight with defaults and methods */
