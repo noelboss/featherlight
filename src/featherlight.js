@@ -211,7 +211,7 @@
 	$.featherlight = function($content, config) {
 		/* if $.featherlight() was called only with config or without anything, initialize manually */
 		if('string' !== typeof $content  && false === $content instanceof $){
-			config = 'Object' === typeof $content ? $.extend({}, fl.defaults, $content) : fl.defaults;
+			config = 'object' === typeof $content ? $.extend({}, fl.defaults, $content) : fl.defaults;
 
 			$(config.selector, config.context).featherlight();
 		} else {
