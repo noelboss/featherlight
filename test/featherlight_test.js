@@ -2,8 +2,12 @@ if(!this.chai) { chai = require("chai"); }
 var expect = chai.expect;
 
 (function($) {
+	var cleanupDom = function(){
+		$('body >:not(#mocha)').remove()
+	};
 
 	describe('Featherlight', function() {
+		afterEach(cleanupDom);
 
 		it ('works on items with data-featherlight by default', function(done) {
 			var $bound = $('#auto-bound')
