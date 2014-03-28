@@ -49,27 +49,27 @@ it also works with links using href and the "image" and "ajax" keywords (this ca
 	<a href="myimage.png" data-featherlight="image">Open image in lightbox</a>
 	<a href="myhtml.html .selector" data-featherlight="ajax">Open ajax content in lightbox</a>
 
-By default, Featherlight initializes all elements matching `defaults.selector` on document ready. If you want to prevent this, set `$.featherlight.defaults.autostart` to false before the DOM is ready.
+By default, Featherlight initializes all elements matching `$.featherlight.autostart` on document ready. If you want to prevent this, set `$.featherlight.autostart` to false before the DOM is ready.
 
 ## Bind Featherlight
 You can bind the Featherlight events on any element using the following code:
 
-	$('.myElement').featherlight(configuration, $content);
+	$('.myElement').featherlight(target, configuration);
 
 It will then look for the `targetAttr` (by default "data-featherlight") on this element and use its value to find the content that will be opened as lightbox when you click on the element.
 
-***configuration*** – Object: Object to configure certain aspects of the plugin. See [Configuration](#configuration).
+***target*** – (optional) jQuery Object or String: You can manually pass a jQuery object or a string containing the target (see [content filters](content_filters])) to be opened in the ligthbox.
 
-***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string containing HTML Code to be opened in the ligthbox.
+***configuration*** – (optional) Object: Object to configure certain aspects of the plugin. See [Configuration](#configuration).
 
 ## Manual calling of Featherlight
 In cases where you don't want an Element to act as Trigger you can call Featherlight manually. You can use this for example in an ajax callback to display the response data.
 
-	$.featherlight($content, configuration);
+	$.featherlight(target, configuration);
 
-***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string containing HTML Code to be opened in the ligthbox.
+***target*** – (optional) jQuery Object or String: You can manually pass a jQuery object or a string containing the target (see [content filters](content_filters])) to be opened in the ligthbox.
 
-***configuration*** – Object: Object to configure certain aspects of the plugin. See [Configuration](#configuration).
+***configuration*** – (optional) Object: Object to configure certain aspects of the plugin. See [Configuration](#configuration).
 
 # Configuration
 
@@ -77,14 +77,7 @@ Featherlight comes with a bunch of configuration-options which make it very flex
 
 	/* you can access and overwrite all defaults using $.fl.defaults */
 	defaults: {
-		autostart:    true,                   /* Initialize all links with that match "selector" on document ready */
 		namespace:    'featherlight',         /* Name of the events and css class prefix */
-		selector:     '[data-featherlight]',  /* Elements that trigger the lightbox */
-		context:      'body',                 /* Context used to search for the lightbox content and triggers */
-		type: {                               /* Manually set type of lightbox. Otherwise, it will check for the targetAttrs value. */
-			image: false,
-			ajax: false
-		},
 		targetAttr:   'data-featherlight',    /* Attribute of the triggered element that contains the selector to the lightbox content */
 		variant:      null,                   /* Class that will be added to change look of the lightbox */
 		resetCss:     false,                  /* Reset all css */
@@ -100,6 +93,7 @@ Featherlight comes with a bunch of configuration-options which make it very flex
 		beforeClose:  null,                   /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		afterOpen:    null,                   /* Called after open. Gets event as parameter, this contains all data */
 		afterClose:   null,                   /* Called after close. Gets event as parameter, this contains all data */
+		contentFilters: ['jquery', 'image', 'html', 'ajax'], /* List of content filters to use to determine the content */
 		open: function(event){                /* opens the lightbox "this" contains $instance with the lightbox, and with the config */
 			$.proxy($.featherlight.methods.open, this, event)();
 		},
@@ -110,24 +104,9 @@ Featherlight comes with a bunch of configuration-options which make it very flex
 
 ================================================
 
-	autostart – Boolean: true
-By default, Featherlight finds all elements that match "selector" and binds the open and close functions. To disable, set $.featherlight.defaults.autostart = false; before the document ready event is fired.
-
-================================================
-
 	namespace – String:  'featherlight'
 All functions bound to elements are namespaced. This is also used to prefix all CSS classes for the background, the content-wrapper and the close button.
 
-
-================================================
-
-	selector – String: '[data-featherlight]'
-Selector used to collect triggering elements when document is ready.
-
-================================================
-
-	context – String: 'body'
-Context used for selecting elements matching "selector". Useful of you only want to bind featherbox to parts of the DOM, for example in content loaded via ajax.
 
 ================================================
 
@@ -252,6 +231,43 @@ You can overwrite a function like this:
 	$.featherlight.methods.open = function() { alert('open!'); }
 
 Check the source code for more details.
+
+# Content Filters
+
+There are many ways to specify content to featherlight. Featherlight uses a set of heuristics to determine the type, for example data ending with `.gif` will be assumed to be an image. The following
+
+  <a href="#" data-featherlight="photo.gif">See in a lightbox</a>
+
+  <a href="photo.gif" data-featherlight>See in a lightbox</a>
+
+  <a id="#example" href="#">See in a lightbox</a>
+  <script>$('#example').featherlight({image: 'photo.gif'})</script>
+
+In case the heuristic wouldn't work, you can specify which contentFiter to use:
+
+  <a href="photo_without_extension" data-featherlight="image">See in a lightbox</a>
+
+  <a id="force_as_image" href="photo_without_extension">See in a lightbox</a>
+  <script>
+    $('#force_as_image').featherlight('image');
+    // Equivalent:
+    $('#force_as_image').featherlight({image: true});
+  </script>
+
+  <a id="force_as_image2" href="#">See in a lightbox</a>
+  <script>$('#force_as_image2').featherlight({image: 'photo_without_extension'});</script>
+
+You can add your own heuristics, for example:
+
+	$.featherlight.contentFilters.feed = {
+		regex: /^feed:/
+		process: function(url) { /* deal with url */ return $('Loading...'); }
+	}
+	$.featherlight.defaults.contentFilters.push('feed');
+
+This way the following would be possible:
+
+  <a href="feed://some_url" data-featherlight>See the feed in a lightbox</a>
 
 # Examples
 
