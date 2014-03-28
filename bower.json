@@ -1,0 +1,25 @@
+{
+  "name": "featherlight",
+  "version": "3.1.0",
+  "main": "dist/jquery.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "release",
+    "test",
+    "*.md",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "devDependencies": {
+    "jquery": "~1.7.0",
+    "requirejs": "~2.1.10",
+    "chai": "~1.9.1",
+    "mocha": "~1.18.2"
+  },
+  "keywords": [
+    "featherlight",
+    "javascript",
+    "library"
+  ]
+}

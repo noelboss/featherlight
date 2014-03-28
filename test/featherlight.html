@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Featherlight Test Suite</title>
+  <link rel="stylesheet" href="../bower_components/mocha/mocha.css" />
+  <link rel="stylesheet" href="../src/featherlight.css" />
+</head>
+<body>
+  <div id="mocha"></div>
+  <script src="../bower_components/jquery/jquery.js"></script>
+  <script src="../bower_components/chai/chai.js"></script>
+  <script src="../bower_components/mocha/mocha.js"></script>
+  <script>mocha.setup('bdd')</script>
+  <script src="../src/featherlight.js"></script>
+  <script src="featherlight_test.js"></script>
+  <script>
+    if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+      mocha.checkLeaks();
+      mocha.globals(['jQuery']);
+      mocha.run();
+    }
+  </script>
+  <a id="auto-bound" href="fixtures/photo.jpeg" data-featherlight>A photo</a>
+  <a id="plain-photo-link" href="fixtures/photo.jpeg?2">Same photo</a>
+</body>
+</html>
+

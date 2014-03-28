@@ -141,8 +141,16 @@ module.exports = function(grunt) {
 				push: false
 				/*pushTo: 'upstream',*/
 				/*gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'*/
-			}
-		}
+			},
+		},
+		mocha: {
+			test: {
+				src: ['test/featherlight*.html'],
+			},
+			options: {
+				run: true,
+			},
+		},
 	});
 
 	// Load the plugin that provides the "uglify" task.
@@ -151,6 +159,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-jquerymanifest');
+	grunt.loadNpmTasks('grunt-mocha');
 	grunt.loadNpmTasks('grunt-bump');
 
 	// Default task(s).
@@ -160,4 +169,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('patch',   ['bump-only:patch', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit', 'replace:changelog',]);
 	grunt.registerTask('minor',   ['bump-only:minor', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit', 'replace:changelog',]);
 	grunt.registerTask('major',   ['bump-only:major', 'jshint', 'replace:src', 'replace:min', 'uglify', 'cssmin', 'jquerymanifest', 'bump-commit', 'replace:changelog',]);
+
+	grunt.registerTask('test',    ['jshint', 'mocha']);
 };
