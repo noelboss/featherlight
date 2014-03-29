@@ -72,19 +72,15 @@
 				}
 				config = $.extend({}, fl.defaults, config);
 
-				var $elm = $(this) || $(),
-					variant = $elm.attr('data-'+config.namespace+'-variant') || config.variant,
-					css = !config.resetCss ? config.namespace : config.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
+				var css = !config.resetCss ? config.namespace : config.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
 					$background = $(config.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close-icon '+ config.namespace + '-close">'+config.closeIcon+'</span></div></div>'),
-
+					self = this;
 					/* everything that we need later is stored in self (target) */
-					self = {
-						id: fl.id++,
+					$.extend(self, {
 						config: config,
 						target: target,
-						$elm: $elm,
-						$instance: $background.clone().addClass(variant) /* clone DOM for the background, wrapper and the close button */
-					};
+						$instance: $background.clone().addClass(config.variant) /* clone DOM for the background, wrapper and the close button */
+					});
 
 				/* close when click on background/anywhere/null or closebox */
 				self.$instance.on(config.closeTrigger+'.'+config.namespace, function(event) {
@@ -105,14 +101,16 @@
 						}
 					});
 				}
+				return this;
+			},
 
-				/* bind or call open function */
-				if(0 < $elm.length && this.tagName){
-					$elm.on(config.openTrigger+'.'+config.namespace, $.proxy(config.open, self));
-				} else {
-					config.open.call(self);
-				}
-
+			attach: function($elm, $content, config){
+				this.$elm = $elm;
+				config = $.extend({variant: $elm.attr('data-featherlight-variant')}, config);
+				this.setup(config, $content);
+				var config = this.config;
+				$elm.on(config.openTrigger+'.'+config.namespace, $.proxy(config.open, this));
+				return this;
 			},
 
 			/* this method prepares the content and converts it into a jQuery object */
@@ -227,26 +225,29 @@
 
 	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
 	$.featherlight = function($content, config) {
-		/* if $.featherlight() was called only with config or without anything, initialize manually */
-		if('string' !== typeof $content  && false === $content instanceof $){
-			config = 'object' === typeof $content ? $.extend({}, fl.defaults, $content) : fl.defaults;
-
+		if(this.constructor === $.featherlight) {  /* called with new */
+			this.id = $.featherlight.id++;
+		} /* if $.featherlight() was called only with config or without anything, initialize manually */
+		else if('string' !== typeof $content  && false === $content instanceof $){
+			config = $.extend({}, $.featherlight.defaults, $content || {});
 			$(config.selector, config.context).featherlight();
 		} else {
-			fl.methods.setup.call(null, $content, config);
+			var fl = new $.featherlight().setup($content, config);
+			fl.config.open.call(fl);
+			return fl;
 		}
 	};
+	/* extend featherlight with defaults and methods */
+	$.extend($.featherlight, fl);
+	$.featherlight.prototype = $.extend($.featherlight.methods, {constructor: $.featherlight});
 
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlight = function(config, $content) {
 		this.each(function(){
-			fl.methods.setup.call(this, $content, config);
+			new $.featherlight().attach($(this), $content, config);
 		});
 		return this;
 	};
-
-	/* extend featherlight with defaults and methods */
-	$.extend($.featherlight, fl);
 
 	/* bind featherlight on ready if config autostart is true */
 	$(document).ready(function(){
