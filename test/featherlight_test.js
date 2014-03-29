@@ -5,23 +5,18 @@ var expect = chai.expect;
 	var cleanupDom = function(){
 		$('body >:not(#mocha)').remove()
 	};
-
+	$.fx.off = true;
 	describe('Featherlight', function() {
 		afterEach(cleanupDom);
 
-		it ('works on items with data-featherlight by default', function(done) {
+		it ('works on items with data-featherlight by default', function() {
 			var $bound = $('#auto-bound')
 			expect($('img').length).to.equal(0);
 			$bound.click();
-			setTimeout(function() {
-				expect($('.featherlight img')).to.be.visible;
-				expect($('.featherlight img')).to.have.attr('src').equal('fixtures/photo.jpeg');
-				$('.featherlight').click();
-			}, 500 );
-			setTimeout(function() {
-				expect($('img')).to.not.be.visible;
-				done();
-			}, 1000 );
+			expect($('.featherlight img')).to.be.visible;
+			expect($('.featherlight img')).to.have.attr('src').equal('fixtures/photo.jpeg');
+			$('.featherlight').click();
+			expect($('img')).to.not.be.visible;
 		});
 
 		describe('jQuery#featherlight', function() {
