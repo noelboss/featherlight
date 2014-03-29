@@ -96,10 +96,10 @@ Featherlight comes with a bunch of configuration-options which make it very flex
 		closeOnClick: 'background',           /* Close lightbox on click ('background', 'anywhere', or false) */
 		closeOnEsc:   true,                   /* Close lightbox when pressing esc */
 		closeIcon:    '&#10005;',             /* Close icon */
-		beforeOpen:   null,                   /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
-		beforeClose:  null,                   /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
-		afterOpen:    null,                   /* Called after open. Gets event as parameter, this contains all data */
-		afterClose:   null,                   /* Called after close. Gets event as parameter, this contains all data */
+		beforeOpen:   $.noop,                 /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+		beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+		afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
+		afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
 		contentFilters: ['jquery', 'image', 'html', 'ajax'], /* List of content filters to use to determine the content */
 		open: function(event){                /* opens the lightbox "this" contains $instance with the lightbox, and with the config */
 			$.proxy($.featherlight.methods.open, this, event)();

@@ -36,45 +36,27 @@
 			closeOnClick: 'background',           /* Close lightbox on click ('background', 'anywhere' or false) */
 			closeOnEsc:   true,                   /* Close lightbox when pressing esc */
 			closeIcon:    '&#10005;',             /* Close icon */
-			beforeOpen:   null,                   /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
-			beforeClose:  null,                   /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
-			afterOpen:    null,                   /* Called after open. Gets event as parameter, this contains all data */
-			afterClose:   null,                   /* Called after close. Gets event as parameter, this contains all data */
+			beforeOpen:   $.noop,                 /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+			beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+			afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
+			afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
 			contentFilters: ['jquery', 'image', 'html', 'ajax'], /* List of content filters to use to determine the content */
 			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 			open: function(event){
-				var open = true;
-				/* check if before function exists */
-				if('function' === typeof this.config.beforeOpen){
-					open = this.config.beforeOpen.call(this, event);
+				var goOn = this.config.beforeOpen.call(this, event);
+				if(false !== goOn){ /* if before function did not stop propagation */
+					goOn = $.featherlight.methods.open.call(this, event);
 				}
-				/* if no before function or before function did not stop propagation */
-				if(false !== open){
-					/* call open method */
-					open = $.featherlight.methods.open.call(this, event);
-				}
-
-				/* check if after function exists */
-				if(false !== open  && 'function' === typeof this.config.afterOpen){
+				if(false !== goOn){
 					this.config.afterOpen.call(this, event);
 				}
+				return goOn;
 			},
 			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
-				var close = true;
-				/* check if before Function exists */
-				if('function' === typeof this.config.beforeClose){
-					close = this.config.beforeClose.call(this, event);
-				}
-
-				/* if before function did not stop propagation */
-				if(false !== close){
-					/* call open method */
+				var goOn = this.config.beforeClose.call(this, event);
+				if(false !== goOn){ /* if before function did not stop propagation */
 					$.featherlight.methods.close.call(this, event);
-				}
-
-				/* check if after Function exists */
-				if(false !== close  && typeof 'function' === this.config.afterClose){
 					this.config.afterClose.call(this, event);
 				}
 			}
