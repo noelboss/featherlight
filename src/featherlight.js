@@ -45,7 +45,7 @@
 			open: function(event){
 				var goOn = this.config.beforeOpen.call(this, event);
 				if(false !== goOn){ /* if before function did not stop propagation */
-					goOn = $.featherlight.methods.open.call(this, event);
+					goOn = this.open(event);
 				}
 				if(false !== goOn){
 					this.config.afterOpen.call(this, event);
@@ -56,7 +56,7 @@
 			close: function(event){
 				var goOn = this.config.beforeClose.call(this, event);
 				if(false !== goOn){ /* if before function did not stop propagation */
-					$.featherlight.methods.close.call(this, event);
+					this.close(event);
 					this.config.afterClose.call(this, event);
 				}
 			}
@@ -170,13 +170,12 @@
 				if(event){
 					event.preventDefault();
 				}
-				var self = this,
-					$content = fl.methods.getContent.call(self);
+				var $content = this.getContent(self);
 
 				/* If we have content, add it and show lightbox */
 				if($content){
-					fl.methods.setContent.call(self, $content);
-					self.$instance.appendTo('body').fadeIn(self.config.openSpeed);
+					this.setContent($content);
+					this.$instance.appendTo('body').fadeIn(this.config.openSpeed);
 				} else {
 					return false;
 				}
