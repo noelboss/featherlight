@@ -109,11 +109,19 @@
 			},
 
 			attach: function($elm, $content, config){
+				/* read attributes starting with data-featherlight- */
+				var elementConfig = {};
+				$.each($elm[0].attributes, function(){
+					var match = this.name.match(/^data-featherlight-(.*)/);
+					if (match) {
+						var val = this.value;
+						try { val = $.parseJSON(val); } catch(e) {}
+						elementConfig[$.camelCase(match[1])] = val; }
+				});
+
 				this.$elm = $elm;
-				config = $.extend({variant: $elm.attr('data-featherlight-variant')}, config);
-				this.setup(config, $content);
-				var config = this.config;
-				$elm.on(config.openTrigger+'.'+config.namespace, $.proxy(config.open, this));
+				this.setup($content, $.extend(elementConfig, config));
+				$elm.on(this.config.openTrigger+'.'+this.config.namespace, $.proxy(this.config.open, this));
 				return this;
 			},
 

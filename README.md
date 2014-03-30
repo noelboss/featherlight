@@ -73,7 +73,12 @@ In cases where you don't want an Element to act as Trigger you can call Featherl
 
 # Configuration
 
-Featherlight comes with a bunch of configuration-options which make it very flexible. Pass your options in an object to the function call or overwrite $.featherlight.defaults. This is the whole default object:
+Featherlight comes with a bunch of configuration-options which make it very flexible.
+These options can be passed when calling `featherlight`.
+Alternatively, they can specified as attribute on the elements triggering the lightbox;
+for example, `<a data-featherlight-close-on-esc="false" ...>` has the same effect as
+passing `{closeOnEsc: false}`.
+You can also modify the `$.featherlight.defaults` directly which holds all the defaults:
 
 	/* you can access and overwrite all defaults using $.fl.defaults */
 	defaults: {
@@ -152,7 +157,7 @@ Attribute on the triggering element pointing to the target element that will be 
 ================================================
 
 	variant – String:  null
-Pass your own CSS class to adjust the styling of the lightbox according to your need. You can also use the  `data-featherlight-variant` attribute on the element triggering the lightbox.
+Pass your own CSS class to adjust the styling of the lightbox according to your need.
 
 
 ================================================

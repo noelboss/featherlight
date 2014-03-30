@@ -62,5 +62,19 @@ var expect = chai.expect;
 
 		});
 
+		describe('configuration', function() {
+			it('can be set using data-feather-*', function() {
+				$('<a href="fixtures/photo.jpeg" \
+							data-featherlight-variant="test" \
+							data-featherlight-close-speed="42" \
+							data-featherlight-close-on-esc="false">').featherlight().click();
+				expect($.featherlight.current().config).to.have.properties({
+					variant: 'test',
+					closeOnEsc: false,
+					closeSpeed: 42,
+				});
+			});
+		});
+
 	});
 }(jQuery));
