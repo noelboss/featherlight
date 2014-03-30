@@ -16,6 +16,8 @@
     "requirejs": "~2.1.10",
     "chai": "~1.9.1",
     "chai-jquery": "*",
+    "chai-properties": "git://github.com/vbardales/chai-properties.git",
+    "lodash": "*",
     "mocha": "~1.18.2"
   },
   "keywords": [
