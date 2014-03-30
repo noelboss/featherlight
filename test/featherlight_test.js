@@ -38,5 +38,29 @@ var expect = chai.expect;
 
 		});
 
+		describe('jQuery.featherlight.current', function() {
+			it('returns null if no dialogbox is currently opened', function() {
+				expect($.featherlight.current()).to.be.undefined;
+				/* even if opened and then closed */
+				$.featherlight('<p class="testing">This is a test<p>');
+				$('.featherlight').click();
+				expect($.featherlight.current()).to.be.undefined;
+				/* even if savagely removed */
+				$.featherlight('<p class="testing">This is a test<p>');
+				$('.featherlight').remove();
+				expect($.featherlight.current()).to.be.undefined;
+			});
+
+			it('returns the featherlight object of the last currently opened dialog', function() {
+				var first = $.featherlight('<p>First<p>');
+				expect($.featherlight.current()).to.equal(first);
+				var second = $.featherlight('<p>Inner<p>', {namespace: 'different_namespace'});
+				expect($.featherlight.current()).to.equal(second);
+				$('.different_namespace').click();
+				expect($.featherlight.current()).to.equal(first);
+			});
+
+		});
+
 	});
 }(jQuery));

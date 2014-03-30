@@ -257,6 +257,12 @@ You can overwrite a function like this:
 
 Check the source code for more details.
 
+# Globals
+
+`$.featherlight` has the following globals:
+
+	current: function() /* returns the currently opened featherlight, or undefined */
+
 # Content Filters
 
 There are many ways to specify content to featherlight. Featherlight uses a set of heuristics to determine the type, for example data ending with `.gif` will be assumed to be an image. The following are equivalent:

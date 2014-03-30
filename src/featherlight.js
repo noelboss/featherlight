@@ -93,6 +93,10 @@
 					}
 				});
 
+				self.$instance.on('featherlightGetCurrent', function(event){
+					if(self.$instance.closest('body').length > 0) event.currentFeatherlight = self;
+				});
+
 				/* bind close on esc */
 				if(self.config.closeOnEsc){
 					$(document).bind('keyup.'+self.config.namespace+self.id, function(e) {
@@ -219,6 +223,12 @@
 					});
 				}
 			}
+		},
+
+		current: function() {
+			var event = new $.Event('featherlightGetCurrent');
+			$.event.trigger(event);
+			return event.currentFeatherlight;
 		}
 	};
 
