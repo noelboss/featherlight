@@ -70,16 +70,6 @@ var expect = chai.expect;
 				expect($.featherlight.current()).to.be.undefined;
 				$.featherlight.close(); /* should not create error */
 			});
-
-			it('returns the featherlight object of the last currently opened dialog', function() {
-				var first = $.featherlight('<p>First<p>');
-				expect($.featherlight.current()).to.equal(first);
-				var second = $.featherlight('<p>Inner<p>', {namespace: 'different_namespace'});
-				expect($.featherlight.current()).to.equal(second);
-				$('.different_namespace').click();
-				expect($.featherlight.current()).to.equal(first);
-			});
-
 		});
 
 
