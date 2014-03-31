@@ -24,9 +24,9 @@
 	};
 
 	/* featherlight object */
-	var fl = {
+	var Fl = {
 		id: 0,                                    /* Used to id single featherlight instances */
-		defaults: {                               /* You can access and override all defaults using $.fl.defaults */
+		defaults: {                               /* You can access and override all defaults using $.Fl.defaults */
 			autostart:    true,                   /* Initialize all links with that match "selector" on document ready */
 			namespace:    'featherlight',         /* Name of the events and css class prefix */
 			selector:     '[data-featherlight]',  /* Elements that trigger the lightbox */
@@ -80,7 +80,7 @@
 					config = target;
 					target = undefined;
 				}
-				config = $.extend({}, fl.defaults, config);
+				config = $.extend({}, Fl.defaults, config);
 
 				var css = !config.resetCss ? config.namespace : config.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
 					$background = $(config.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close-icon '+ config.namespace + '-close">'+config.closeIcon+'</span></div></div>'),
@@ -258,13 +258,13 @@
 			config = $.extend({}, $.featherlight.defaults, $content || {});
 			$(config.selector, config.context).featherlight();
 		} else {
-			var fl = new $.featherlight().setup($content, config);
-			fl.config.open.call(fl);
-			return fl;
+			var Fl = new $.featherlight().setup($content, config);
+			Fl.config.open.call(Fl);
+			return Fl;
 		}
 	};
 	/* extend featherlight with defaults and methods */
-	$.extend($.featherlight, fl);
+	$.extend($.featherlight, Fl);
 	$.featherlight.prototype = $.extend($.featherlight.methods, {constructor: $.featherlight});
 
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
