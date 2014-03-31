@@ -239,6 +239,11 @@
 			var event = new $.Event('featherlightGetCurrent');
 			$.event.trigger(event);
 			return event.currentFeatherlight;
+		},
+
+		close: function() {
+			var cur = $.featherlight.current()
+			if(cur) { cur.config.close.call(cur); }
 		}
 	};
 

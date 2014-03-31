@@ -267,6 +267,7 @@ Check the source code for more details.
 `$.featherlight` has the following globals:
 
 	current: function() /* returns the currently opened featherlight, or undefined */
+	close:   function() /* closes the currently opened featherlight (if any) */
 
 # Content Filters
 

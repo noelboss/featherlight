@@ -63,6 +63,26 @@ var expect = chai.expect;
 
 		});
 
+		describe('jQuery.featherlight.close', function() {
+			it('closes the currently opened window, if any', function() {
+				$.featherlight('<p class="testing">This is a test<p>');
+				$.featherlight.close();
+				expect($.featherlight.current()).to.be.undefined;
+				$.featherlight.close(); /* should not create error */
+			});
+
+			it('returns the featherlight object of the last currently opened dialog', function() {
+				var first = $.featherlight('<p>First<p>');
+				expect($.featherlight.current()).to.equal(first);
+				var second = $.featherlight('<p>Inner<p>', {namespace: 'different_namespace'});
+				expect($.featherlight.current()).to.equal(second);
+				$('.different_namespace').click();
+				expect($.featherlight.current()).to.equal(first);
+			});
+
+		});
+
+
 		describe('configuration', function() {
 			it('can be set using data-feather-*', function() {
 				$('<a href="fixtures/photo.jpeg" \
