@@ -17,7 +17,7 @@
 		if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
 			var cur = $.featherlight.current();
 			if(cur && cur.config.closeOnEsc) {
-				cur.$instance.find('.'+cur.config.namespace+'-close:first').click()
+				cur.$instance.find('.'+cur.config.namespace+'-close:first').click();
 				event.preventDefault();
 			}
 		}
@@ -104,7 +104,9 @@
 				});
 
 				self.$instance.on('featherlightGetCurrent', function(event){
-					if(self.$instance.closest('body').length > 0) event.currentFeatherlight = self;
+					if(self.$instance.closest('body').length > 0) {
+						event.currentFeatherlight = self;
+					}
 				});
 				return this;
 			},
@@ -183,7 +185,7 @@
 				if(event){
 					event.preventDefault();
 				}
-				var $content = this.getContent(self);
+				var $content = this.getContent();
 
 				/* If we have content, add it and show lightbox */
 				if($content){
@@ -242,7 +244,7 @@
 		},
 
 		close: function() {
-			var cur = $.featherlight.current()
+			var cur = $.featherlight.current();
 			if(cur) { cur.config.close.call(cur); }
 		}
 	};
