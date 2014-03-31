@@ -6,6 +6,7 @@ var expect = chai.expect;
 		$('body >:not(#mocha)').remove()
 	};
 	$.fx.off = true;
+
 	describe('Featherlight', function() {
 		afterEach(cleanupDom);
 
@@ -73,6 +74,24 @@ var expect = chai.expect;
 					closeOnEsc: false,
 					closeSpeed: 42,
 				});
+			});
+
+			it('can specify to close or not on escape key', function() {
+				var first = $.featherlight('<p/>'),
+					second = $.featherlight('<p/>'),
+					third = $.featherlight('<p/>', {closeOnEsc: false}),
+					last = $.featherlight('<p/>', {closeOnEsc: true}),
+					triggerEscape = function(){
+						$(document).trigger($.Event("keyup", { keyCode: 27 }));
+					};
+				triggerEscape();
+				expect($.featherlight.current()).to.equal(third);
+				triggerEscape();
+				expect($('.featherlight')).with.length(3);
+				$('.featherlight:last').click();
+				expect($.featherlight.current()).to.equal(second);
+				triggerEscape();
+				expect($.featherlight.current()).to.equal(first);
 			});
 		});
 

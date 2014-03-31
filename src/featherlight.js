@@ -13,6 +13,16 @@
 		return;
 	}
 
+	var escapeHandler = function(event) {
+		if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
+			var cur = $.featherlight.current();
+			if(cur && cur.config.closeOnEsc) {
+				cur.$instance.find('.'+cur.config.namespace+'-close:first').click()
+				event.preventDefault();
+			}
+		}
+	};
+
 	/* featherlight object */
 	var fl = {
 		id: 0,                                    /* Used to id single featherlight instances */
@@ -96,15 +106,6 @@
 				self.$instance.on('featherlightGetCurrent', function(event){
 					if(self.$instance.closest('body').length > 0) event.currentFeatherlight = self;
 				});
-
-				/* bind close on esc */
-				if(self.config.closeOnEsc){
-					$(document).bind('keyup.'+self.config.namespace+self.id, function(e) {
-						if (27 === e.keyCode) { // esc keycode
-							self.$instance.find('.'+self.config.namespace+'-close:first').click();
-						}
-					});
-				}
 				return this;
 			},
 
@@ -186,6 +187,10 @@
 
 				/* If we have content, add it and show lightbox */
 				if($content){
+					if(this.config.closeOnEsc && escapeHandler) {
+						$(document).bind('keyup.'+$.featherlight.defaults.namespace, escapeHandler);
+						escapeHandler = null;
+					}
 					this.setContent($content);
 					this.$instance.appendTo('body').fadeIn(this.config.openSpeed);
 				} else {
@@ -196,9 +201,6 @@
 			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
 				var self = this;
-				if(self.config.closeOnEsc){
-					$(document).unbind('keyup.'+self.config.namespace+self.id);
-				}
 				self.$instance.fadeOut(self.config.closeSpeed,function(){
 					self.$instance.detach();
 				});
