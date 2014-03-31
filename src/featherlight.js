@@ -13,9 +13,24 @@
 		return;
 	}
 
+	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
+	var Fl = $.featherlight = function($content, config) {
+		if(this.constructor === Fl) {  /* called with new */
+			this.id = Fl.id++;
+		} /* if $.featherlight() was called only with config or without anything, initialize manually */
+		else if('string' !== typeof $content  && false === $content instanceof $){
+			config = $.extend({}, Fl.defaults, $content || {});
+			$(config.selector, config.context).featherlight();
+		} else {
+			var fl = new Fl().setup($content, config);
+			fl.config.open.call(fl);
+			return fl;
+		}
+	};
+
 	var escapeHandler = function(event) {
 		if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
-			var cur = $.featherlight.current();
+			var cur = Fl.current();
 			if(cur && cur.config.closeOnEsc) {
 				cur.$instance.find('.'+cur.config.namespace+'-close:first').click();
 				event.preventDefault();
@@ -23,8 +38,8 @@
 		}
 	};
 
-	/* featherlight object */
-	var Fl = {
+	/* extend featherlight with defaults and methods */
+	$.extend(Fl, {
 		id: 0,                                    /* Used to id single featherlight instances */
 		defaults: {                               /* You can access and override all defaults using $.Fl.defaults */
 			autostart:    true,                   /* Initialize all links with that match "selector" on document ready */
@@ -138,12 +153,12 @@
 				/* check explicit type like {type:{image: true}} */
 				for(var filterName in self.config.type) {
 					if(self.config.type[filterName] === true) {
-						filter = $.featherlight.contentFilters[filterName];
+						filter = Fl.contentFilters[filterName];
 					}
 				}
 				/* check explicit type like data-featherlight="image" */
-				if(!filter && data in $.featherlight.contentFilters) {
-					filter = $.featherlight.contentFilters[data];
+				if(!filter && data in Fl.contentFilters) {
+					filter = Fl.contentFilters[data];
 					data = self.target && self.$elm.attr(self.config.targetAttr);
 				}
 				data = data || self.$elm.attr('href') || '';
@@ -152,7 +167,7 @@
 					var target = data;
 					data = null;
 					$.each(self.config.contentFilters, function() {
-						filter = $.featherlight.contentFilters[this];
+						filter = Fl.contentFilters[this];
 						if(filter.test)  { data = filter.test(target); }
 						if(!data && filter.regex && target.match && target.match(filter.regex)) { data = target; }
 						return !data;
@@ -190,7 +205,7 @@
 				/* If we have content, add it and show lightbox */
 				if($content){
 					if(this.config.closeOnEsc && escapeHandler) {
-						$(document).bind('keyup.'+$.featherlight.defaults.namespace, escapeHandler);
+						$(document).bind('keyup.'+Fl.defaults.namespace, escapeHandler);
 						escapeHandler = null;
 					}
 					this.setContent($content);
@@ -244,40 +259,24 @@
 		},
 
 		close: function() {
-			var cur = $.featherlight.current();
+			var cur = Fl.current();
 			if(cur) { cur.config.close.call(cur); }
 		}
-	};
+	});
 
-	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
-	$.featherlight = function($content, config) {
-		if(this.constructor === $.featherlight) {  /* called with new */
-			this.id = $.featherlight.id++;
-		} /* if $.featherlight() was called only with config or without anything, initialize manually */
-		else if('string' !== typeof $content  && false === $content instanceof $){
-			config = $.extend({}, $.featherlight.defaults, $content || {});
-			$(config.selector, config.context).featherlight();
-		} else {
-			var Fl = new $.featherlight().setup($content, config);
-			Fl.config.open.call(Fl);
-			return Fl;
-		}
-	};
-	/* extend featherlight with defaults and methods */
-	$.extend($.featherlight, Fl);
-	$.featherlight.prototype = $.extend($.featherlight.methods, {constructor: $.featherlight});
+	Fl.prototype = $.extend(Fl.methods, {constructor: Fl});
 
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlight = function(config, $content) {
 		this.each(function(){
-			new $.featherlight().attach($(this), $content, config);
+			new Fl().attach($(this), $content, config);
 		});
 		return this;
 	};
 
 	/* bind featherlight on ready if config autostart is true */
 	$(document).ready(function(){
-		var config = $.featherlight.defaults;
+		var config = Fl.defaults;
 		if(config.autostart){
 			$(config.selector, config.context).featherlight();
 		}
