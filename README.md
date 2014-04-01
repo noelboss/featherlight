@@ -105,13 +105,7 @@ You can also modify the `$.featherlight.defaults` directly which holds all the d
 		beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
 		afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
-		contentFilters: ['jquery', 'image', 'html', 'ajax'], /* List of content filters to use to determine the content */
-		open: function(event){                /* opens the lightbox "this" contains $instance with the lightbox, and with the config */
-			$.proxy($.featherlight.methods.open, this, event)();
-		},
-		close: function(event){                   /* closes the lightbox "this" contains $instance with the lightbox, and with the config */
-			$.proxy($.featherlight.methods.close, this, event)();
-		}
+		contentFilters: ['jquery', 'image', 'html', 'ajax'] /* List of content filters to use to determine the content */
 	}
 
 ================================================
@@ -223,13 +217,6 @@ Called after the open or close method is executed – it is not called, if the `
 	}
 
 
-================================================
-
-	 open, close – Function
-
-**Deprecated!** This functions will be removed in Release 0.4.0!
-
-
 # Methods
 
 All of Featherlight's methods are stored in $.featherlight.methods and can therefore be overwritten like the configuration defaults.
@@ -247,12 +234,12 @@ All of Featherlight's methods are stored in $.featherlight.methods and can there
 
 		/* opens the lightbox "this" contains $instance with the lightbox, and with the config */
 		open: function(event){
-			// return false prevents the `afterOpen` function
+			// ...
 		},
 
 		/* closes the lightbox "this" contains $instance with the lightbox, and with the config */
 		close: function(event){
-			// return false prevents the `afterClose` function
+			// ...
 		}
 	}
 
