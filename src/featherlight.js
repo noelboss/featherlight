@@ -124,7 +124,7 @@
 				return this;
 			},
 
-			/* this method prepares the content and converts it into a jQuery object */
+			/* this method prepares the content and converts it into a jQuery object or a promise */
 			getContent: function(){
 				var self = this,
 					data = self.target || self.$elm.attr(self.config.targetAttr) || '';
@@ -178,6 +178,7 @@
 
 			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 			open: function(event){
+				var self = this;
 				if(this.config.beforeOpen.call(this, event) === false) {
 					return false;
 				}
@@ -187,17 +188,18 @@
 				var $content = this.getContent();
 
 				/* If we have content, add it and show lightbox */
-				if($content){
-					if(this.config.closeOnEsc && escapeHandler) {
+				if(!$content){
+					return false;
+				}
+				$content.promise().done(function($content){
+					if(self.config.closeOnEsc && escapeHandler) {
 						$(document).bind('keyup.'+Fl.defaults.namespace, escapeHandler);
 						escapeHandler = null;
 					}
-					this.setContent($content);
-					this.$instance.appendTo('body').fadeIn(this.config.openSpeed);
-				} else {
-					return false;
-				}
-				this.config.afterOpen.call(this, event);
+					self.setContent($content);
+					self.$instance.appendTo('body').fadeIn(self.config.openSpeed);
+					self.config.afterOpen.call(self, event);
+				});
 			},
 
 			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
@@ -230,13 +232,16 @@
 			ajax: {
 				regex: /./,            /* At this point, any content is assumed to be an URL */
 				process: function(url)  {
-					var self = this;
+					var self = this,
+						deferred = $.Deferred();
 					/* we are using load so one can specify a target with: url.html #targetelement */
-					var content = $('<div></div>').load(url, function(response, status){
+					var $container = $('<div></div>').load(url, function(response, status){
 						if ( status !== "error" ) {
-							$.featherlight(content.html(), $.extend(self.config, {type: {html: true}}));
+							deferred.resolve($container.contents());
 						}
+						deferred.fail();
 					});
+					return deferred.promise();
 				}
 			}
 		},
