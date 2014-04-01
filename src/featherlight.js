@@ -102,6 +102,10 @@
 			},
 
 			attach: function($elm, $content, config){
+				if (typeof $content === 'object' && $content instanceof $ === false && !config) {
+					config = $content;
+					$content = undefined;
+				}
 				/* read attributes starting with data-featherlight- */
 				var elementConfig = {};
 				$.each($elm[0].attributes, function(){
@@ -255,7 +259,7 @@
 	Fl.prototype = $.extend(Fl.methods, {constructor: Fl});
 
 	/* bind jQuery elements to trigger featherlight */
-	$.fn.featherlight = function(config, $content) {
+	$.fn.featherlight = function($content, config) {
 		this.each(function(){
 			new Fl().attach($(this), $content, config);
 		});
