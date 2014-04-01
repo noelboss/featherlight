@@ -17,10 +17,6 @@
 	var Fl = $.featherlight = function($content, config) {
 		if(this.constructor === Fl) {  /* called with new */
 			this.id = Fl.id++;
-		} /* if $.featherlight() was called only with config or without anything, initialize manually */
-		else if('string' !== typeof $content  && false === $content instanceof $){
-			config = $.extend({}, Fl.defaults, $content || {});
-			$(config.selector, config.context).featherlight();
 		} else {
 			var fl = new Fl().setup($content, config);
 			fl.open();
