@@ -37,11 +37,9 @@
 	/* extend featherlight with defaults and methods */
 	$.extend(Fl, {
 		id: 0,                                    /* Used to id single featherlight instances */
+		autoBind:       '[data-featherlight]',    /* Will automatically bind elements matching this selector. Clear or set before onReady */
 		defaults: {                               /* You can access and override all defaults using $.featherlight.defaults */
-			autostart:    true,                   /* Initialize all links with that match "selector" on document ready */
 			namespace:    'featherlight',         /* Name of the events and css class prefix */
-			selector:     '[data-featherlight]',  /* Elements that trigger the lightbox */
-			context:      'body',                 /* Context used to search for the lightbox content and triggers */
 			type: {                               /* Manually set type of lightbox. Otherwise, it will check for the targetAttrs value. */
 				image: false,
 				ajax: false
@@ -256,7 +254,7 @@
 
 	Fl.prototype = $.extend(Fl.methods, {constructor: Fl});
 
-	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
+	/* bind jQuery elements to trigger featherlight */
 	$.fn.featherlight = function(config, $content) {
 		this.each(function(){
 			new Fl().attach($(this), $content, config);
@@ -264,11 +262,10 @@
 		return this;
 	};
 
-	/* bind featherlight on ready if config autostart is true */
+	/* bind featherlight on ready if config autoBind is set */
 	$(document).ready(function(){
-		var config = Fl.defaults;
-		if(config.autostart){
-			$(config.selector, config.context).featherlight();
+		if(Fl.autoBind){
+			$(Fl.autoBind).featherlight();
 		}
 	});
 }(jQuery));

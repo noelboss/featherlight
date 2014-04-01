@@ -82,10 +82,7 @@ You can also modify the `$.featherlight.defaults` directly which holds all the d
 
 	/* you can access and overwrite all defaults using $.featherlight.defaults */
 	defaults: {
-		autostart:    true,                   /* Initialize all links with that match "selector" on document ready */
 		namespace:    'featherlight',         /* Name of the events and css class prefix */
-		selector:     '[data-featherlight]',  /* Elements that trigger the lightbox */
-		context:      'body',                 /* Context used to search for the lightbox content and triggers */
 		type: {                               /* Manually set type of lightbox. Otherwise, it will check for the targetAttrs value. */
 			image: false,
 			ajax: false
@@ -110,24 +107,9 @@ You can also modify the `$.featherlight.defaults` directly which holds all the d
 
 ================================================
 
-	autostart – Boolean: true
-By default, Featherlight finds all elements that match "selector" and binds the open and close functions. To disable, set $.featherlight.defaults.autostart = false; before the document ready event is fired.
-
-================================================
-
 	namespace – String:  'featherlight'
 All functions bound to elements are namespaced. This is also used to prefix all CSS classes for the background, the content-wrapper and the close button.
 
-
-================================================
-
-	selector – String: '[data-featherlight]'
-Selector used to collect triggering elements when document is ready.
-
-================================================
-
-	context – String: 'body'
-Context used for selecting elements matching "selector". Useful of you only want to bind featherbox to parts of the DOM, for example in content loaded via ajax.
 
 ================================================
 
@@ -253,6 +235,7 @@ Check the source code for more details.
 
 `$.featherlight` has the following globals:
 
+	autoBind: '[data-featherlight]' /* Will automatically bind elements matching this selector. Clear or set before onReady */
 	current: function() /* returns the currently opened featherlight, or undefined */
 	close:   function() /* closes the currently opened featherlight (if any) */
 
