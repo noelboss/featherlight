@@ -40,10 +40,6 @@
 		autoBind:       '[data-featherlight]',    /* Will automatically bind elements matching this selector. Clear or set before onReady */
 		defaults: {                               /* You can access and override all defaults using $.featherlight.defaults */
 			namespace:    'featherlight',         /* Name of the events and css class prefix */
-			type: {                               /* Manually set type of lightbox. Otherwise, it will check for the targetAttrs value. */
-				image: false,
-				ajax: false
-			},
 			targetAttr:   'data-featherlight',    /* Attribute of the triggered element that contains the selector to the lightbox content */
 			variant:      null,                   /* Class that will be added to change look of the lightbox */
 			resetCss:     false,                  /* Reset all css */
@@ -59,6 +55,7 @@
 			beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 			afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
 			afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
+			type:         null,                   /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
 			contentFilters: ['jquery', 'image', 'html', 'ajax'] /* List of content filters to use to determine the content */
 		},
 		/* you can access and override all methods using $.featherlight.methods */
@@ -128,13 +125,8 @@
 					data = self.target || self.$elm.attr(self.config.targetAttr) || '';
 
 				/* Find which filter applies */
-				var filter;
-				/* check explicit type like {type:{image: true}} */
-				for(var filterName in self.config.type) {
-					if(self.config.type[filterName] === true) {
-						filter = Fl.contentFilters[filterName];
-					}
-				}
+				var filter = Fl.contentFilters[self.config.type]; /* check explicit type like {type: 'image'} */
+
 				/* check explicit type like data-featherlight="image" */
 				if(!filter && data in Fl.contentFilters) {
 					filter = Fl.contentFilters[data];
