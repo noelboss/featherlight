@@ -80,7 +80,7 @@ for example, `<a data-featherlight-close-on-esc="false" ...>` has the same effec
 passing `{closeOnEsc: false}`.
 You can also modify the `$.featherlight.defaults` directly which holds all the defaults:
 
-	/* you can access and overwrite all defaults using $.fl.defaults */
+	/* you can access and overwrite all defaults using $.featherlight.defaults */
 	defaults: {
 		autostart:    true,                   /* Initialize all links with that match "selector" on document ready */
 		namespace:    'featherlight',         /* Name of the events and css class prefix */

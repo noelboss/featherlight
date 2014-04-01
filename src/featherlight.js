@@ -41,7 +41,7 @@
 	/* extend featherlight with defaults and methods */
 	$.extend(Fl, {
 		id: 0,                                    /* Used to id single featherlight instances */
-		defaults: {                               /* You can access and override all defaults using $.Fl.defaults */
+		defaults: {                               /* You can access and override all defaults using $.featherlight.defaults */
 			autostart:    true,                   /* Initialize all links with that match "selector" on document ready */
 			namespace:    'featherlight',         /* Name of the events and css class prefix */
 			selector:     '[data-featherlight]',  /* Elements that trigger the lightbox */
