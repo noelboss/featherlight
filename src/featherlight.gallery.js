@@ -49,9 +49,8 @@
 				},
 				afterOpen: function(event){
 					var fl = this,
+						current = $gallery.index($(event.currentTarget)),
 						$img = fl.$instance.find('img');
-
-					fl.$currentTarget = $(event.currentTarget);
 
 					$img.load(function(){
 						$img.stop().fadeTo(fl.config.gallery.fadeIn,1);
@@ -59,10 +58,9 @@
 
 					fl.$instance.on('next.'+fl.config.namespace+' previous.'+fl.config.namespace, function(event){
 							var offset = event.type === 'next' ? +1 : -1;
-							var $nx = $gallery.eq(($gallery.index(fl.$currentTarget)+offset) % $gallery.length);
+							current = ($gallery.length + current+offset) % $gallery.length;
 							$img.fadeTo(fl.config.gallery.fadeOut,0.2);
-							fl.$currentTarget = $nx;
-							$img[0].src = $nx.attr('href');
+							$img[0].src = $gallery.eq(current).attr('href');
 						});
 
 					if (swipeAwareConstructor) {

@@ -17,8 +17,9 @@
 	var Fl = $.featherlight = function($content, config) {
 		if(this.constructor === Fl) {  /* called with new */
 			this.id = Fl.id++;
+			this.setup($content, config);
 		} else {
-			var fl = new Fl().setup($content, config);
+			var fl = new Fl($content, config);
 			fl.open();
 			return fl;
 		}
@@ -106,21 +107,12 @@
 				return this;
 			},
 
-			attach: function($elm, $content, config){
-				if (typeof $content === 'object' && $content instanceof $ === false && !config) {
-					config = $content;
-					$content = undefined;
-				}
-				this.$elm = $elm;
-				this.setup($content, $.extend(elementConfig($elm[0]), config));
-				$elm.on(this.config.openTrigger+'.'+this.config.namespace, $.proxy(this.open, this));
-				return this;
-			},
-
 			/* this method prepares the content and converts it into a jQuery object or a promise */
 			getContent: function(){
 				var self = this,
-					data = self.target || self.$elm.attr(self.config.targetAttr) || '';
+					sourceAttr = function(name){ return self.config.source && self.config.source.getAttribute(name); },
+					targetAttr = sourceAttr(self.config.targetAttr),
+					data = self.target || targetAttr || '';
 
 				/* Find which filter applies */
 				var filter = Fl.contentFilters[self.config.type]; /* check explicit type like {type: 'image'} */
@@ -128,9 +120,9 @@
 				/* check explicit type like data-featherlight="image" */
 				if(!filter && data in Fl.contentFilters) {
 					filter = Fl.contentFilters[data];
-					data = self.target && self.$elm.attr(self.config.targetAttr);
+					data = self.target && targetAttr;
 				}
-				data = data || self.$elm.attr('href') || '';
+				data = data || sourceAttr('href') || '';
 				/* otherwise it's implicit, run checks */
 				if(!filter) {
 					var target = data;
@@ -241,6 +233,19 @@
 			}
 		},
 
+		attach: function($source, $content, config) {
+			if (typeof $content === 'object' && $content instanceof $ === false && !config) {
+				config = $content;
+				$content = undefined;
+			}
+			config = $.extend({}, config); // make a copy
+			var curConfig = $.extend({}, Fl.defaults, $source[0] && elementConfig($source[0]), config); // Only for openTrigger and namespace...
+			$source.on(curConfig.openTrigger+'.'+curConfig.namespace, function(event) {
+				var elemConfig = $.extend({source: this}, elementConfig(this), config);  // ... since we might as well compute the config on the actual target
+				new $.featherlight($content, elemConfig).open(event);
+			});
+		},
+
 		current: function() {
 			var response = {};
 			this._opened.fire(response);
@@ -259,9 +264,7 @@
 
 	/* bind jQuery elements to trigger featherlight */
 	$.fn.featherlight = function($content, config) {
-		this.each(function(){
-			new Fl().attach($(this), $content, config);
-		});
+		Fl.attach(this, $content, config);
 		return this;
 	};
 
