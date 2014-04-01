@@ -54,7 +54,7 @@ By default, Featherlight initializes all elements matching `defaults.selector` o
 ## Bind Featherlight
 You can bind the Featherlight events on any element using the following code:
 
-	$('.myElement').featherlight(configuration, $content);
+	$('.myElement').featherlight($content, configuration);
 
 It will then look for the `targetAttr` (by default "data-featherlight") on this element and use its value to find the content that will be opened as lightbox when you click on the element.
 
