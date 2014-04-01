@@ -31,6 +31,10 @@ var expect = chai.expect;
 				expect($all_links.featherlight()).to.equal($all_links);
 			});
 
+			it("won't open a dialog if the event is already prevented", function(){
+				$('#auto-bound').on('click', function(event) { event.preventDefault(); }).click()
+				expect($.featherlight.current()).to.be.undefined;
+			});
 		});
 
 		describe('jQuery.featherlight', function() {

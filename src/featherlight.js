@@ -180,6 +180,9 @@
 			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 			open: function(event){
 				var self = this;
+				if(event && event.isDefaultPrevented()) {
+					return false;
+				}
 				if(this.config.beforeOpen.call(this, event) === false) {
 					return false;
 				}
