@@ -115,6 +115,11 @@ var expect = chai.expect;
 				expect($('.featherlight:first img')).to.have.attr('src', 'fixtures/photo.jpeg?filterYes');
 				expect($('.featherlight:last  img')).to.have.attr('src', 'fixtures/photo.jpeg?filterAppended');
 			});
+
+			it('can specify explicit content', function() {
+				var fl = new $.featherlight({image: '#photo'});
+				expect(fl.getContent()).to.match('img[src="#photo"]');
+			})
 		});
 
 	});

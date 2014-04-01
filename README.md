@@ -44,10 +44,11 @@ Featherlight is smart. 'data-featherlight' can also contain a link to an image, 
 	<span data-featherlight="myhtml.html .selector">Open ajax content in lightbox</a>
 	<span data-featherlight="<p>Fancy DOM Lightbox!</p>">Open some DOM in lightbox</span>
 
-it also works with links using href and the "image" and "ajax" keywords (this can also be manually set with the configuration options like `{type: 'image'}`):
+it also works with links using href and the "image" and "ajax" keywords (this can also be manually set with the configuration options like `{image: 'photo.jpg}` or `{type: 'image'}`):
 
 	<a href="myimage.png" data-featherlight="image">Open image in lightbox</a>
 	<a href="myhtml.html .selector" data-featherlight="ajax">Open ajax content in lightbox</a>
+	<a href="#" data-featherlight-ajax="myhtml.html .selector">Open ajax content in lightbox</a>
 	<a href="#" data-featherlight="myhtml.html .selector" data-featherlight-type="ajax">Open ajax content in lightbox</a>
 
 By default, Featherlight initializes all elements matching `defaults.selector` on document ready. If you want to prevent this, set `$.featherlight.defaults.autostart` to false before the DOM is ready.
@@ -102,6 +103,7 @@ You can also modify the `$.featherlight.defaults` directly which holds all the d
 		afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
 		type:         null,                   /* Specify content type. If unset, it will check for the targetAttrs value. */
 		contentFilters: ['jquery', 'image', 'html', 'ajax'] /* List of content filters to use to determine the content */
+		jquery/image/html/ajax: undefined     /* Specify content type and data */
 	}
 
 ================================================

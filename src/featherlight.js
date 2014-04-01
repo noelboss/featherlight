@@ -131,6 +131,17 @@
 					data = self.target && targetAttr;
 				}
 				data = data || sourceAttr('href') || '';
+
+				/* check explicity type & content like {image: 'photo.jpg'} */
+				if(!filter) {
+					for(var filterName in Fl.contentFilters) {
+						if(self.config[filterName]) {
+							filter = Fl.contentFilters[filterName];
+							data = self.config[filterName];
+						}
+					}
+				}
+
 				/* otherwise it's implicit, run checks */
 				if(!filter) {
 					var target = data;
