@@ -34,6 +34,19 @@
 		}
 	};
 
+	/* read element's attributes starting with data-featherlight- */
+	var elementConfig = function(element) {
+		var config = {};
+		$.each(element.attributes, function(){
+			var match = this.name.match(/^data-featherlight-(.*)/);
+			if (match) {
+				var val = this.value;
+				try { val = $.parseJSON(val); } catch(e) {}
+				config[$.camelCase(match[1])] = val; }
+		});
+		return config;
+	};
+
 	/* extend featherlight with defaults and methods */
 	$.extend(Fl, {
 		id: 0,                                    /* Used to id single featherlight instances */
@@ -103,18 +116,8 @@
 					config = $content;
 					$content = undefined;
 				}
-				/* read attributes starting with data-featherlight- */
-				var elementConfig = {};
-				$.each($elm[0].attributes, function(){
-					var match = this.name.match(/^data-featherlight-(.*)/);
-					if (match) {
-						var val = this.value;
-						try { val = $.parseJSON(val); } catch(e) {}
-						elementConfig[$.camelCase(match[1])] = val; }
-				});
-
 				this.$elm = $elm;
-				this.setup($content, $.extend(elementConfig, config));
+				this.setup($content, $.extend(elementConfig($elm[0]), config));
 				$elm.on(this.config.openTrigger+'.'+this.config.namespace, $.proxy(this.open, this));
 				return this;
 			},
