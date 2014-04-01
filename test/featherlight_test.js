@@ -120,6 +120,14 @@ var expect = chai.expect;
 				var fl = new $.featherlight({image: '#photo'});
 				expect(fl.getContent()).to.match('img[src="#photo"]');
 			})
+
+			it('can specify an alternate close button selector', function() {
+				var fl = $.featherlight('<div>Test<div class="close-me">close</div></div>', {otherClose: '.close-me'});
+				expect($.featherlight.current()).to.equal(fl);
+				$('.close-me').click();
+				expect($.featherlight.current()).to.be.undefined;
+			});
+
 		});
 
 	});
