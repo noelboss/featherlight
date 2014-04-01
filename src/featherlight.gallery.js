@@ -31,9 +31,7 @@
 					fadeIn: 100,           /* fadeIn speed when image is loaded */
 					fadeOut: 300           /* fadeOut speed before image is loaded */
 				},
-				type: {
-					image: true
-				}
+				type: 'image'
 			},
 			customAfterOpen = config && config.afterOpen,
 			customAfterClose = config && config.afterClose,
