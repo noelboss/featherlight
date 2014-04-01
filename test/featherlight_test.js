@@ -106,6 +106,15 @@ var expect = chai.expect;
 				triggerEscape();
 				expect($.featherlight.current()).to.equal(first);
 			});
+
+			it('can specify a filter for events', function() {
+				$("#filter-test .group").featherlight({filter: '.yes'})
+					.append('<span class="yes" href="fixtures/photo.jpeg?filterAppended">Photo</span>');
+				$("#filter-test span").each(function(){ $(this).click(); });
+				expect($('.featherlight')).with.length(2);
+				expect($('.featherlight:first img')).to.have.attr('src', 'fixtures/photo.jpeg?filterYes');
+				expect($('.featherlight:last  img')).to.have.attr('src', 'fixtures/photo.jpeg?filterAppended');
+			});
 		});
 
 	});
