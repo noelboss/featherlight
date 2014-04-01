@@ -37,6 +37,7 @@
 			overrideCallbacks = {				/* provide an afterOpen function */
 				afterOpen: function(event){
 					var fl = this,
+						current = $gallery.index($(event.currentTarget)),
 						$img = fl.$instance.find('img');
 
 					$img.load(function(){
@@ -45,10 +46,9 @@
 
 					fl.$instance.on('next.'+fl.config.namespace+' previous.'+fl.config.namespace, function(event){
 							var offset = event.type === 'next' ? +1 : -1;
-							var $nx = $gallery.eq(($gallery.index(fl.$elm)+offset) % $gallery.length);
+							current = ($gallery.length + current+offset) % $gallery.length;
 							$img.fadeTo(fl.config.gallery.fadeOut,0.2);
-							fl.$elm = $nx;
-							$img[0].src = $nx.attr('href');
+							$img[0].src = $gallery.eq(current).attr('href');
 						});
 
 					if (swipeAwareConstructor) {
