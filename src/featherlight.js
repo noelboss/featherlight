@@ -68,6 +68,7 @@
 			closeOnClick: 'background',           /* Close lightbox on click ('background', 'anywhere' or false) */
 			closeOnEsc:   true,                   /* Close lightbox when pressing esc */
 			closeIcon:    '&#10005;',             /* Close icon */
+			otherClose:   null,                   /* Selector for alternate close buttons (e.g. "a.close") */
 			beforeOpen:   $.noop,                 /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 			beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 			afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
@@ -88,6 +89,7 @@
 
 				var css = !config.resetCss ? config.namespace : config.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
 					$background = $(config.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close-icon '+ config.namespace + '-close">'+config.closeIcon+'</span></div></div>'),
+					closeButtonSelector = '.'+config.namespace+'-close' + (config.otherClose ? ',' + config.otherClose : ''),
 					self = this;
 					/* everything that we need later is stored in self (target) */
 					$.extend(self, {
@@ -101,7 +103,7 @@
 					var $target = $(event.target);
 					if( ('background' === config.closeOnClick  && $target.is('.'+config.namespace))
 						|| 'anywhere' === config.closeOnClick
-						|| $target.is('.'+config.namespace+'-close') ){
+						|| $target.is(closeButtonSelector) ){
 						event.preventDefault();
 						self.close();
 					}
