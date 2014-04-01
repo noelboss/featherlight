@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Featherlight Gallery Test Suite</title>
+  <link rel="stylesheet" href="../bower_components/mocha/mocha.css" />
+  <link rel="stylesheet" href="../src/featherlight.css" />
+</head>
+<body>
+  <div id="mocha"></div>
+  <script src="../bower_components/jquery/jquery.js"></script>
+  <script src="../bower_components/lodash/dist/lodash.js"></script>
+  <script src="../bower_components/chai/chai.js"></script>
+  <script src="../bower_components/chai-jquery/chai-jquery.js"></script>
+  <script src="../bower_components/chai-properties/chai-properties.js"></script>
+  <script src="../bower_components/mocha/mocha.js"></script>
+  <script>mocha.setup('bdd')</script>
+  <script src="../src/featherlight.js"></script>
+  <script src="../src/featherlight.gallery.js"></script>
+  <script src="featherlight_gallery_test.js"></script>
+  <script>
+    if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+      mocha.checkLeaks();
+      mocha.globals(['jQuery']);
+      mocha.run();
+    }
+  </script>
+  <section id="fixtures">
+    <span id="basic-test">
+      <a href="fixtures/photo_large.jpeg?0"><img src="fixtures/photo.jpeg?0"></a>
+      <a href="fixtures/photo_large.jpeg?1"><img src="fixtures/photo.jpeg?1"></a>
+      <a href="fixtures/photo_large.jpeg?2"><img src="fixtures/photo.jpeg?2"></a>
+      <a href="fixtures/photo_large.jpeg?3"><img src="fixtures/photo.jpeg?3"></a>
+    </span>
+  </section>
+</body>
+</html>
+
