@@ -23,7 +23,7 @@
 			$(config.selector, config.context).featherlight();
 		} else {
 			var fl = new Fl().setup($content, config);
-			fl.config.open.call(fl);
+			fl.open();
 			return fl;
 		}
 	};
@@ -65,26 +65,7 @@
 			beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 			afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
 			afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
-			contentFilters: ['jquery', 'image', 'html', 'ajax'], /* List of content filters to use to determine the content */
-			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
-			open: function(event){
-				var goOn = this.config.beforeOpen.call(this, event);
-				if(false !== goOn){ /* if before function did not stop propagation */
-					goOn = this.open(event);
-				}
-				if(false !== goOn){
-					this.config.afterOpen.call(this, event);
-				}
-				return goOn;
-			},
-			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
-			close: function(event){
-				var goOn = this.config.beforeClose.call(this, event);
-				if(false !== goOn){ /* if before function did not stop propagation */
-					this.close(event);
-					this.config.afterClose.call(this, event);
-				}
-			}
+			contentFilters: ['jquery', 'image', 'html', 'ajax'] /* List of content filters to use to determine the content */
 		},
 		/* you can access and override all methods using $.featherlight.methods */
 		methods: {
@@ -114,7 +95,7 @@
 						|| 'anywhere' === config.closeOnClick
 						|| $target.is('.'+config.namespace+'-close') ){
 						event.preventDefault();
-						config.close.call(self);
+						self.close();
 					}
 				});
 
@@ -139,7 +120,7 @@
 
 				this.$elm = $elm;
 				this.setup($content, $.extend(elementConfig, config));
-				$elm.on(this.config.openTrigger+'.'+this.config.namespace, $.proxy(this.config.open, this));
+				$elm.on(this.config.openTrigger+'.'+this.config.namespace, $.proxy(this.open, this));
 				return this;
 			},
 
@@ -197,6 +178,9 @@
 
 			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 			open: function(event){
+				if(this.config.beforeOpen.call(this, event) === false) {
+					return false;
+				}
 				if(event){
 					event.preventDefault();
 				}
@@ -213,14 +197,19 @@
 				} else {
 					return false;
 				}
+				this.config.afterOpen.call(this, event);
 			},
 
 			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
 				var self = this;
+				if(this.config.beforeClose.call(this, event) === false) {
+					return false;
+				}
 				self.$instance.fadeOut(self.config.closeSpeed,function(){
 					self.$instance.detach();
 				});
+				this.config.afterClose.call(this, event);
 			}
 		},
 		/* Contains the logic to determine content */
@@ -260,7 +249,7 @@
 
 		close: function() {
 			var cur = Fl.current();
-			if(cur) { cur.config.close.call(cur); }
+			if(cur) { cur.close(); }
 		}
 	});
 
