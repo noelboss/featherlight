@@ -38,13 +38,15 @@
 	/* read element's attributes starting with data-featherlight- */
 	var elementConfig = function(element) {
 		var config = {};
-		$.each(element.attributes, function(){
-			var match = this.name.match(/^data-featherlight-(.*)/);
-			if (match) {
-				var val = this.value;
-				try { val = $.parseJSON(val); } catch(e) {}
-				config[$.camelCase(match[1])] = val; }
-		});
+		if (element && element.attributes) {
+				$.each(element.attributes, function(){
+				var match = this.name.match(/^data-featherlight-(.*)/);
+				if (match) {
+					var val = this.value;
+					try { val = $.parseJSON(val); } catch(e) {}
+					config[$.camelCase(match[1])] = val; }
+			});
+		}
 		return config;
 	};
 
@@ -60,6 +62,7 @@
 			background:   null,                   /* Custom DOM for the background, wrapper and the closebutton */
 			openTrigger:  'click',                /* Event that triggers the lightbox */
 			closeTrigger: 'click',                /* Event that triggers the closing of the lightbox */
+			filter:       null,                   /* Selector to filter events. Think $(...).on('click', filter, eventHandler) */
 			openSpeed:    250,                    /* Duration of opening animation */
 			closeSpeed:   250,                    /* Duration of closing animation */
 			closeOnClick: 'background',           /* Close lightbox on click ('background', 'anywhere' or false) */
@@ -237,8 +240,8 @@
 				$content = undefined;
 			}
 			config = $.extend({}, config); // make a copy
-			var curConfig = $.extend({}, Fl.defaults, $source[0] && elementConfig($source[0]), config); // Only for openTrigger and namespace...
-			$source.on(curConfig.openTrigger+'.'+curConfig.namespace, function(event) {
+			var curConfig = $.extend({}, Fl.defaults, elementConfig($source[0]), config); // Only for openTrigger and namespace...
+			$source.on(curConfig.openTrigger+'.'+curConfig.namespace, curConfig.filter, function(event) {
 				var elemConfig = $.extend({source: this}, elementConfig(this), config);  // ... since we might as well compute the config on the actual target
 				new $.featherlight($content, elemConfig).open(event);
 			});
@@ -267,7 +270,7 @@
 	/* bind featherlight on ready if config autoBind is set */
 	$(document).ready(function(){
 		if(Fl.autoBind){
-			$(Fl.autoBind).featherlight();
+			$(document).featherlight({filter: Fl.autoBind});
 		}
 	});
 }(jQuery));
