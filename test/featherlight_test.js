@@ -1,13 +1,17 @@
 var expect = chai.expect;
 
 (function($) {
-	var cleanupDom = function(){
+	var $htmlFixtures = null;
+	var resetFixtures = function(){
+		if (!$htmlFixtures) $htmlFixtures = $('#fixtures').detach();
 		$('body >:not(#mocha)').remove()
+		$('body').append($htmlFixtures.clone());
 	};
 	$.fx.off = true;
 
 	describe('Featherlight', function() {
-		afterEach(cleanupDom);
+		beforeEach(resetFixtures);
+		after(resetFixtures);
 
 		it ('works on items with data-featherlight by default', function() {
 			var $bound = $('#auto-bound')
