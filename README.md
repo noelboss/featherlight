@@ -44,10 +44,11 @@ Featherlight is smart. 'data-featherlight' can also contain a link to an image, 
 	<span data-featherlight="myhtml.html .selector">Open ajax content in lightbox</a>
 	<span data-featherlight="<p>Fancy DOM Lightbox!</p>">Open some DOM in lightbox</span>
 
-it also works with links using href and the "image" and "ajax" keywords (this can also be manually set with the configuration options `type.image` and `type.ajax`):
+it also works with links using href and the "image" and "ajax" keywords (this can also be manually set with the configuration options like `{type: 'image'}`):
 
 	<a href="myimage.png" data-featherlight="image">Open image in lightbox</a>
 	<a href="myhtml.html .selector" data-featherlight="ajax">Open ajax content in lightbox</a>
+	<a href="#" data-featherlight="myhtml.html .selector" data-featherlight-type="ajax">Open ajax content in lightbox</a>
 
 By default, Featherlight initializes all elements matching `defaults.selector` on document ready. If you want to prevent this, set `$.featherlight.defaults.autostart` to false before the DOM is ready.
 
@@ -83,10 +84,6 @@ You can also modify the `$.featherlight.defaults` directly which holds all the d
 	/* you can access and overwrite all defaults using $.featherlight.defaults */
 	defaults: {
 		namespace:    'featherlight',         /* Name of the events and css class prefix */
-		type: {                               /* Manually set type of lightbox. Otherwise, it will check for the targetAttrs value. */
-			image: false,
-			ajax: false
-		},
 		targetAttr:   'data-featherlight',    /* Attribute of the triggered element that contains the selector to the lightbox content */
 		variant:      null,                   /* Class that will be added to change look of the lightbox */
 		resetCss:     false,                  /* Reset all css */
@@ -102,6 +99,7 @@ You can also modify the `$.featherlight.defaults` directly which holds all the d
 		beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
 		afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
+		type:         null,                   /* Specify content type. If unset, it will check for the targetAttrs value. */
 		contentFilters: ['jquery', 'image', 'html', 'ajax'] /* List of content filters to use to determine the content */
 	}
 
@@ -113,22 +111,8 @@ All functions bound to elements are namespaced. This is also used to prefix all 
 
 ================================================
 
-	type – Object: image: false, ajax: false
-
-**Deprecated!** This will be changed in Release 0.4.0!
-
-The type object allows you to manually set what type the lightbox is. Set the value of type.image or type.ajax to true. Otherwise, the value from targetAttr will be to determine the type of the lightbox. Example:
-
-	$('.image-lightbox', $('.gallery')).featherlight({
-		type: {
-			image: true
-		}
-	});
-
-================================================
-
 	targetAttr – String:  'data-featherlight'
-Attribute on the triggering element pointing to the target element that will be opened in the lightbox.
+Attribute on the triggering element pointing to the target element or content that will be opened in the lightbox.
 
 ================================================
 
@@ -197,6 +181,14 @@ Called after the open or close method is executed – it is not called, if the `
 		console.log(this); // this contains all related elements
 		alert(this.$content.hasClass('true')); // alert class of content
 	}
+
+================================================
+
+	type – String: null
+
+The type object allows you to manually set what type the lightbox is. Set the value to 'image', 'ajax' or any of the content filters. Otherwise, the value from targetAttr will used be to determine the type of the lightbox. Example:
+
+	$('.image-lightbox').featherlight({type: 'image'});
 
 
 # Methods
