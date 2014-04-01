@@ -90,6 +90,7 @@ You can also modify the `$.featherlight.defaults` directly which holds all the d
 		background:   null,                   /* Custom DOM for the background, wrapper and the closebutton */
 		openTrigger:  'click',                /* Event that triggers the lightbox */
 		closeTrigger: 'click',                /* Event that triggers the closing of the lightbox */
+		filter:       null,                   /* Selector to filter events. Think $(...).on('click', filter, eventHandler) */
 		openSpeed:    250,                    /* Duration of opening animation */
 		closeSpeed:   250,                    /* Duration of closing animation */
 		closeOnClick: 'background',           /* Close lightbox on click ('background', 'anywhere', or false) */
@@ -129,7 +130,13 @@ Set this to true to remove all default css and start from designing scratch.
 
 
 	openTrigger & closeTrigger – String:  'click'
-Events that are used to open or close the lightbox. The close event is bound to the close button and to the lightbox background (if enabled)
+Events that are used to open or close the lightbox. The close event is bound to the close button and to the lightbox background (if enabled).
+Has no effect if $.featherlight is called directly.
+
+================================================
+
+	filter - String: null
+A selector to filter events, when calling `featherlight` on a jQuery set, in a similar fashion to `$(...).on('click', filter, eventHandler)`.
 
 ================================================
 
