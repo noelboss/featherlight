@@ -273,26 +273,26 @@ Check the source code for more details.
 
 There are many ways to specify content to featherlight. Featherlight uses a set of heuristics to determine the type, for example data ending with `.gif` will be assumed to be an image. The following are equivalent:
 
-  <a href="#" data-featherlight="photo.gif">See in a lightbox</a>
+	<a href="#" data-featherlight="photo.gif">See in a lightbox</a>
 
-  <a href="photo.gif" data-featherlight>See in a lightbox</a>
+	<a href="photo.gif" data-featherlight>See in a lightbox</a>
 
-  <a id="#example" href="#">See in a lightbox</a>
-  <script>$('#example').featherlight('photo.gif')</script>
+	<a id="#example" href="#">See in a lightbox</a>
+	<script>$('#example').featherlight('photo.gif')</script>
 
 In case the heuristic wouldn't work, you can specify which contentFiter to use:
 
-  <a href="photo_without_extension" data-featherlight="image">See in a lightbox</a>
+	<a href="photo_without_extension" data-featherlight="image">See in a lightbox</a>
 
-  <a id="force_as_image" href="photo_without_extension">See in a lightbox</a>
-  <script>
-    $('#force_as_image').featherlight('image');
-    // Equivalent:
-    $('#force_as_image').featherlight({type: {image: true}});
-  </script>
+	<a id="force_as_image" href="photo_without_extension">See in a lightbox</a>
+	<script>
+		$('#force_as_image').featherlight('image');
+		// Equivalent:
+		$('#force_as_image').featherlight({type: {image: true}});
+	</script>
 
-  <a id="force_as_image2" href="#">See in a lightbox</a>
-  <script>$('#force_as_image2').featherlight('photo_without_extension', {type:{image: true}});</script>
+	<a id="force_as_image2" href="#">See in a lightbox</a>
+	<script>$('#force_as_image2').featherlight('photo_without_extension', {type:{image: true}});</script>
 
 You can add your own heuristics, for example:
 
@@ -304,7 +304,7 @@ You can add your own heuristics, for example:
 
 This way the following would be possible:
 
-  <a href="feed://some_url" data-featherlight>See the feed in a lightbox</a>
+	<a href="feed://some_url" data-featherlight>See the feed in a lightbox</a>
 
 **Deprecated!** `type` will be changed in Release 0.4.0!
 
