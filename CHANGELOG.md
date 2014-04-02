@@ -7,6 +7,7 @@ Master
 - New option filter to attach lazily like `$(sel).on('click', filter, ...)`. Attaching is done for the whole set, not on each individual element.
 - New option otherClose to support extra closing buttons.
 - Gallery has new callbacks `beforeImage` and `afterImage`.
+- Gallery defaults are accessible with $.featherlightGallery.defaults
 
 ### Breaking changes
 - `$.featherlight` now always trigger a new lightbox. Use `$.fn.featherlight` for attaching events to elements.

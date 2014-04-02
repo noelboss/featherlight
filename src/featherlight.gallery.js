@@ -26,15 +26,8 @@
 		var flg = {
 				gallery: {
 					$gallery: this,
-					$current: null,        /* Current source */
-					beforeImage: $.noop,   /* Callback before an image is changed */
-					afterImage: $.noop,    /* Callback after an image is presented */
-					previous: '&#9664;',   /* Code that is used as previous icon */
-					next: '&#9654;',       /* Code that is used as next icon */
-					fadeIn: 100,           /* fadeIn speed when image is loaded */
-					fadeOut: 300           /* fadeOut speed before image is loaded */
-				},
-				type: 'image'
+					$current: null         /* Current source */
+				}
 			},
 			customAfterOpen = config && config.afterOpen,
 			overrideCallbacks = {				/* provide an afterOpen function */
@@ -79,7 +72,7 @@
 					config.afterImage.call(fl, event);
 				}
 			};
-		this.featherlight($.extend(true, {}, flg, config, overrideCallbacks));
+		this.featherlight($.extend(true, {}, $.featherlightGallery.defaults, flg, config, overrideCallbacks));
 	};
 
 
@@ -90,4 +83,17 @@
 		}
 		$targets.featherlightGallery(config);
 	};
+
+	$.featherlightGallery.defaults = {
+		gallery: {
+			beforeImage: $.noop,   /* Callback before an image is changed */
+			afterImage: $.noop,    /* Callback after an image is presented */
+			previous: '&#9664;',   /* Code that is used as previous icon */
+			next: '&#9654;',       /* Code that is used as next icon */
+			fadeIn: 100,           /* fadeIn speed when image is loaded */
+			fadeOut: 300           /* fadeOut speed before image is loaded */
+		},
+		type: 'image'
+	};
+
 }(jQuery));
