@@ -86,7 +86,7 @@ var expect = chai.expect;
 							data-featherlight-variant="test" \
 							data-featherlight-close-speed="42" \
 							data-featherlight-close-on-esc="false">').featherlight().click();
-				expect($.featherlight.current().config).to.have.properties({
+				expect($.featherlight.current()).to.have.properties({
 					variant: 'test',
 					closeOnEsc: false,
 					closeSpeed: 42,

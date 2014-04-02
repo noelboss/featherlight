@@ -208,33 +208,14 @@ The type object allows you to manually set what type the lightbox is. Set the va
 
 # Methods
 
-All of Featherlight's methods are stored in $.featherlight.methods and can therefore be overwritten like the configuration defaults.
+`$.featherlight` is actually a constructor with `$.featherlight.methods` as a prototype and all the configuration options as attributes.
 
-	methods: { /* you can access and overwrite all methods using */
-		/* setup iterates over a single instance of featherlight and prepares the background and binds the events */
-		setup: function(config, content){
-			// ...
-		},
+It's possible to use or change these methods, but the API isn't guaranteed to remain constant; enquire if you have particular needs.
 
-		/* this method prepares the content and converts it into a jQuery object */
-		getContent: function(){
-			// ...
-		},
-
-		/* opens the lightbox "this" contains $instance with the lightbox, and with the config */
-		open: function(event){
-			// ...
-		},
-
-		/* closes the lightbox "this" contains $instance with the lightbox, and with the config */
-		close: function(event){
-			// ...
-		}
-	}
-
-You can overwrite a function like this:
-
-	$.featherlight.methods.open = function() { alert('open!'); }
+	var current = $.featherlight.current()
+	current.close();
+	// do something else
+	current.open(); // reopen it
 
 Check the source code for more details.
 

@@ -28,8 +28,8 @@
 	var escapeHandler = function(event) {
 		if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
 			var cur = Fl.current();
-			if(cur && cur.config.closeOnEsc) {
-				cur.$instance.find('.'+cur.config.namespace+'-close:first').click();
+			if(cur && cur.closeOnEsc) {
+				cur.$instance.find('.'+cur.namespace+'-close:first').click();
 				event.preventDefault();
 			}
 		}
@@ -85,24 +85,19 @@
 					config = target;
 					target = undefined;
 				}
-				config = $.extend({}, Fl.defaults, config);
+				var self = $.extend(this, Fl.defaults, config, {target: target});
 
-				var css = !config.resetCss ? config.namespace : config.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
-					$background = $(config.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close-icon '+ config.namespace + '-close">'+config.closeIcon+'</span></div></div>'),
-					closeButtonSelector = '.'+config.namespace+'-close' + (config.otherClose ? ',' + config.otherClose : ''),
-					self = this;
-					/* everything that we need later is stored in self (target) */
-					$.extend(self, {
-						config: config,
-						target: target,
-						$instance: $background.clone().addClass(config.variant) /* clone DOM for the background, wrapper and the close button */
-					});
+				var css = !self.resetCss ? self.namespace : self.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
+					$background = $(self.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close-icon '+ self.namespace + '-close">'+self.closeIcon+'</span></div></div>'),
+					closeButtonSelector = '.'+self.namespace+'-close' + (self.otherClose ? ',' + self.otherClose : '');
+
+					self.$instance = $background.clone().addClass(self.variant); /* clone DOM for the background, wrapper and the close button */
 
 				/* close when click on background/anywhere/null or closebox */
-				self.$instance.on(config.closeTrigger+'.'+config.namespace, function(event) {
+				self.$instance.on(self.closeTrigger+'.'+self.namespace, function(event) {
 					var $target = $(event.target);
-					if( ('background' === config.closeOnClick  && $target.is('.'+config.namespace))
-						|| 'anywhere' === config.closeOnClick
+					if( ('background' === self.closeOnClick  && $target.is('.'+self.namespace))
+						|| 'anywhere' === self.closeOnClick
 						|| $target.is(closeButtonSelector) ){
 						event.preventDefault();
 						self.close();
@@ -120,12 +115,12 @@
 			/* this method prepares the content and converts it into a jQuery object or a promise */
 			getContent: function(){
 				var self = this,
-					sourceAttr = function(name){ return self.config.source && self.config.source.getAttribute(name); },
-					targetAttr = sourceAttr(self.config.targetAttr),
+					sourceAttr = function(name){ return self.source && self.source.getAttribute(name); },
+					targetAttr = sourceAttr(self.targetAttr),
 					data = self.target || targetAttr || '';
 
 				/* Find which filter applies */
-				var filter = Fl.contentFilters[self.config.type]; /* check explicit type like {type: 'image'} */
+				var filter = Fl.contentFilters[self.type]; /* check explicit type like {type: 'image'} */
 
 				/* check explicit type like data-featherlight="image" */
 				if(!filter && data in Fl.contentFilters) {
@@ -137,9 +132,9 @@
 				/* check explicity type & content like {image: 'photo.jpg'} */
 				if(!filter) {
 					for(var filterName in Fl.contentFilters) {
-						if(self.config[filterName]) {
+						if(self[filterName]) {
 							filter = Fl.contentFilters[filterName];
-							data = self.config[filterName];
+							data = self[filterName];
 						}
 					}
 				}
@@ -148,7 +143,7 @@
 				if(!filter) {
 					var target = data;
 					data = null;
-					$.each(self.config.contentFilters, function() {
+					$.each(self.contentFilters, function() {
 						filter = Fl.contentFilters[this];
 						if(filter.test)  { data = filter.test(target); }
 						if(!data && filter.regex && target.match && target.match(filter.regex)) { data = target; }
@@ -168,13 +163,13 @@
 				var self = this;
 				/* we need a special class for the iframe */
 				if($content.is('iframe') || $('iframe', $content).length > 0){
-					self.$instance.addClass(self.config.namespace+'-iframe');
+					self.$instance.addClass(self.namespace+'-iframe');
 				}
-				self.$content = $content.clone().addClass(self.config.namespace+'-inner');
+				self.$content = $content.clone().addClass(self.namespace+'-inner');
 
 				/* remove existing content */
-				self.$instance.find('.'+self.config.namespace+'-inner').remove();
-				self.$instance.find('.'+self.config.namespace+'-content').append(self.$content);
+				self.$instance.find('.'+self.namespace+'-inner').remove();
+				self.$instance.find('.'+self.namespace+'-content').append(self.$content);
 			},
 
 			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
@@ -183,7 +178,7 @@
 				if(event && event.isDefaultPrevented()) {
 					return false;
 				}
-				if(this.config.beforeOpen.call(this, event) === false) {
+				if(this.beforeOpen(event) === false) {
 					return false;
 				}
 				if(event){
@@ -196,26 +191,26 @@
 					return false;
 				}
 				$content.promise().done(function($content){
-					if(self.config.closeOnEsc && escapeHandler) {
+					if(self.closeOnEsc && escapeHandler) {
 						$(document).bind('keyup.'+Fl.defaults.namespace, escapeHandler);
 						escapeHandler = null;
 					}
 					self.setContent($content);
-					self.$instance.appendTo('body').fadeIn(self.config.openSpeed);
-					self.config.afterOpen.call(self, event);
+					self.$instance.appendTo('body').fadeIn(self.openSpeed);
+					self.afterOpen(event);
 				});
 			},
 
 			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
 				var self = this;
-				if(this.config.beforeClose.call(this, event) === false) {
+				if(this.beforeClose(event) === false) {
 					return false;
 				}
-				self.$instance.fadeOut(self.config.closeSpeed,function(){
+				self.$instance.fadeOut(self.closeSpeed,function(){
 					self.$instance.detach();
 				});
-				this.config.afterClose.call(this, event);
+				this.afterClose(event);
 			}
 		},
 		/* Contains the logic to determine content */
@@ -227,7 +222,7 @@
 			},
 			image: {
 				regex: /\.(png|jpg|jpeg|gif|tiff|bmp)(\?\S*)?$/i,
-				process: function(url)  { return $('<img src="'+url+'" alt="" class="'+this.config.namespace+'-image" />'); }
+				process: function(url)  { return $('<img src="'+url+'" alt="" class="'+this.namespace+'-image" />'); }
 			},
 			html: {
 				regex: /^\s*<[\w!][^<]*>/, /* Anything that starts with some kind of valid tag */
