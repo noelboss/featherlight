@@ -316,6 +316,8 @@ Featherlight was created to be as small and simple as possible. Therefore it doe
 The gallery also has a range of configuration options and the following defaults:
 
 	gallery: {
+		beforeImage: $.noop,   /* Callback before an image is changed */
+		afterImage: $.noop,    /* Callback after an image is presented */
 		previous: '&#9664;',   /* Code that is used as previews icon */
 		next: '&#9654;',       /* Code that is used as next icon */
 		fadeIn: 100,           /* fadeIn speed when image is loaded */
