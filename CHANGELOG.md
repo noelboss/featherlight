@@ -9,13 +9,13 @@ Master
 - Support for nested lightboxes
 - Gallery uses swipes on touch devices (if a supported library present)
 - Gallery support and uses events to navigate through the images
+- New functions: `$.featherlight.close()` and `current()`
+- All configuration options have their equivalent html attribute.
+- Improved and extensible content filters.
 
 ### Breaking changes
-- closeOnBg no longer supported, use closeOnClick
-- Gallery: class .featherlight-prev renamed to .featherlight-previous
-
-### Maintenance & Fixes
-- Improvements for mobile devices
+- `closeOnBg` no longer supported, use `closeOnClick`
+- Gallery: class `.featherlight-prev` renamed to `.featherlight-previous`
 
 The following changes could require changes to your custom CSS:
 
@@ -23,6 +23,13 @@ The following changes could require changes to your custom CSS:
 – Improves the way the with of the lightbox is handled
 – Changed paddings from % to pixels
 – Changed closing icon class to featherlight-close-icon
+
+### Maintenance & Fixes
+- Improvements for mobile devices
+- Many small bugs fixed
+- Tests added
+- $.fn.featherlight is now chainable
+
 
 
 0.3.1 - 2014-03-01
