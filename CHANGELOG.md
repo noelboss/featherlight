@@ -3,6 +3,20 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+### Features
+- New option filter to attach lazily like `$(sel).on('click', filter, ...)`. Attaching is done for the whole set, not on each individual element.
+- New option otherClose to support extra closing buttons.
+
+### Breaking changes
+- `$.featherlight` now always trigger a new lightbox. Use `$.fn.featherlight` for attaching events to elements.
+- The order of the arguments of `$.fn.featherlight` has been reversed, for consistency and ease of use, but remain optional.
+- The configuration options `open` and `close` have been removed.
+- The configuration options `autostart`, `context` and `selector` have been merged to the global `$.featherlight.autoBind`. It's also lazily attached, so items added via ajax, for example, will be automatically attached too.
+- The `$elm` attribute has been removed.
+- The `config` attribute has been removed and merged with the `this` object.
+
+### Maintenance & Fixes
+- Small bugs fixed
 
 
 0.4.9 - 2014-06-12
