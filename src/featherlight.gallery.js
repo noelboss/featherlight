@@ -53,13 +53,13 @@
 						$img = fl.$instance.find('img');
 
 					$img.load(function(){
-						$img.stop().fadeTo(fl.config.gallery.fadeIn,1);
+						$img.stop().fadeTo(fl.gallery.fadeIn,1);
 					});
 
-					fl.$instance.on('next.'+fl.config.namespace+' previous.'+fl.config.namespace, function(event){
+					fl.$instance.on('next.'+fl.namespace+' previous.'+fl.namespace, function(event){
 							var offset = event.type === 'next' ? +1 : -1;
 							current = ($gallery.length + current+offset) % $gallery.length;
-							$img.fadeTo(fl.config.gallery.fadeOut,0.2);
+							$img.fadeTo(fl.gallery.fadeOut,0.2);
 							$img[0].src = $gallery.eq(current).attr('href');
 						});
 
@@ -69,8 +69,8 @@
 							.on('swiperight', function() { fl.$instance.trigger('previous'); });
 					} else {
 						var createNav = function(target){
-								return $('<span title="'+target+'" class="'+fl.config.namespace+'-'+target+'"><span>'+fl.config.gallery[target]+'</span></span>').click(function(){
-									$(this).trigger(target+'.'+fl.config.namespace);
+								return $('<span title="'+target+'" class="'+fl.namespace+'-'+target+'"><span>'+fl.gallery[target]+'</span></span>').click(function(){
+									$(this).trigger(target+'.'+fl.namespace);
 								});
 							};
 
