@@ -23,9 +23,9 @@
 
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlightGallery = function(config) {
-		var $gallery = $(this),
-			flg = {
+		var flg = {
 				gallery: {
+					$gallery: this,
 					previous: '&#9664;',   /* Code that is used as previous icon */
 					next: '&#9654;',       /* Code that is used as next icon */
 					fadeIn: 100,           /* fadeIn speed when image is loaded */
@@ -49,18 +49,19 @@
 				},
 				afterOpen: function(event){
 					var fl = this,
-						current = $gallery.index($(event.currentTarget)),
+						config = this.gallery,
+						current = config.$gallery.index($(event.currentTarget)),
 						$img = fl.$instance.find('img');
 
 					$img.load(function(){
-						$img.stop().fadeTo(fl.gallery.fadeIn,1);
+						$img.stop().fadeTo(config.fadeIn,1);
 					});
 
 					fl.$instance.on('next.'+fl.namespace+' previous.'+fl.namespace, function(event){
 							var offset = event.type === 'next' ? +1 : -1;
-							current = ($gallery.length + current+offset) % $gallery.length;
-							$img.fadeTo(fl.gallery.fadeOut,0.2);
-							$img[0].src = $gallery.eq(current).attr('href');
+							current = (config.$gallery.length + current+offset) % config.$gallery.length;
+							$img.fadeTo(config.fadeOut,0.2);
+							$img[0].src = config.$gallery.eq(current).attr('href');
 						});
 
 					if (swipeAwareConstructor) {
@@ -69,7 +70,7 @@
 							.on('swiperight', function() { fl.$instance.trigger('previous'); });
 					} else {
 						var createNav = function(target){
-								return $('<span title="'+target+'" class="'+fl.namespace+'-'+target+'"><span>'+fl.gallery[target]+'</span></span>').click(function(){
+								return $('<span title="'+target+'" class="'+fl.namespace+'-'+target+'"><span>'+config[target]+'</span></span>').click(function(){
 									$(this).trigger(target+'.'+fl.namespace);
 								});
 							};
@@ -83,7 +84,7 @@
 					}
 				}
 			};
-		$gallery.featherlight($.extend(true, {}, flg, config, overrideCallbacks));
+		this.featherlight($.extend(true, {}, flg, config, overrideCallbacks));
 	};
 
 
