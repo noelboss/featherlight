@@ -26,6 +26,9 @@
 		var flg = {
 				gallery: {
 					$gallery: this,
+					$current: null,        /* Current source */
+					beforeImage: $.noop,   /* Callback before an image is changed */
+					afterImage: $.noop,    /* Callback after an image is presented */
 					previous: '&#9664;',   /* Code that is used as previous icon */
 					next: '&#9654;',       /* Code that is used as next icon */
 					fadeIn: 100,           /* fadeIn speed when image is loaded */
@@ -38,8 +41,9 @@
 				afterOpen: function(event){
 					var fl = this,
 						config = this.gallery,
-						current = config.$gallery.index($(event.currentTarget)),
 						$img = fl.$instance.find('img');
+
+					config.$current = $(event.currentTarget);
 
 					$img.load(function(){
 						$img.stop().fadeTo(config.fadeIn,1);
@@ -47,9 +51,11 @@
 
 					fl.$instance.on('next.'+fl.namespace+' previous.'+fl.namespace, function(event){
 							var offset = event.type === 'next' ? +1 : -1;
-							current = (config.$gallery.length + current+offset) % config.$gallery.length;
+							config.$current = config.$gallery.eq((config.$gallery.length + config.$gallery.index(config.$current) + offset) % config.$gallery.length);
+							config.beforeImage.call(fl, event);
 							$img.fadeTo(config.fadeOut,0.2);
-							$img[0].src = config.$gallery.eq(current).attr('href');
+							$img[0].src = config.$current.attr('href');
+							config.afterImage.call(fl, event);
 						});
 
 					if (swipeAwareConstructor) {
@@ -68,8 +74,9 @@
 					}
 
 					if('function' === typeof customAfterOpen) {
-						customAfterOpen.call(this, event);
+						customAfterOpen.call(fl, event);
 					}
+					config.afterImage.call(fl, event);
 				}
 			};
 		this.featherlight($.extend(true, {}, flg, config, overrideCallbacks));

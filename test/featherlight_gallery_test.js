@@ -25,5 +25,16 @@ var expect = chai.expect;
       expect($('.featherlight img')).to.have.attr('src').equal('fixtures/photo_large.jpg?3');
     });
 
+    it ('accepts an afterImage config', function() {
+      var lastCurrent = null;
+      $('#basic-test a').featherlightGallery({gallery:
+        {afterImage: function() { lastCurrent = this.gallery.$current; }}
+      });
+      expect(lastCurrent).to.be.null;
+      $('#basic-test a').eq(2).click();
+      expect(lastCurrent).to.have.attr('href').equal('fixtures/photo_large.jpeg?2');
+      $('.featherlight').trigger('next');
+      expect(lastCurrent).to.have.attr('href').equal('fixtures/photo_large.jpeg?3');
+    });
   });
 }(jQuery));
