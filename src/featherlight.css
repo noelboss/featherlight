@@ -24,7 +24,7 @@
 	}
 
 	/* support for nested featherlights. Does not work in IE8 (use JS to fix) */
-	.featherlight:last-child {
+	.featherlight:last-of-type {
 		background: rgba(0, 0, 0, 0.8);
 	}
 
