@@ -88,6 +88,10 @@ module.exports = function(grunt) {
 						to: 'Current Release <%= pkg.version %>'
 					},
 					{
+						from: /archive\/[0-9]+[.]{1}[0-9]+[.]{1}[0-9]+/g,
+						to: 'archive/<%= pkg.version %>'
+					},
+					{
 						from: /\([0-9]+[.]{1}[0-9]+[.]{1}[0-9]+\)/g,
 						to: '(<%= pkg.version %>)'
 					}
