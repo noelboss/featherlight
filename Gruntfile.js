@@ -72,7 +72,7 @@ module.exports = function(grunt) {
 		},
 		replace: {
 			src: {
-				src: ['./README.md','./src/*.*'],
+				src: ['./README.md','./src/*.*','bower.json'],
 				overwrite: true,
 				replacements: [
 					{
@@ -90,6 +90,10 @@ module.exports = function(grunt) {
 					{
 						from: /archive\/[0-9]+[.]{1}[0-9]+[.]{1}[0-9]+/g,
 						to: 'archive/<%= pkg.version %>'
+					},
+					{
+						from: /"version": "[0-9]+[.]{1}[0-9]+[.]{1}[0-9]+"/g,
+						to: '"version": "<%= pkg.version %>"'
 					},
 					{
 						from: /\([0-9]+[.]{1}[0-9]+[.]{1}[0-9]+\)/g,
