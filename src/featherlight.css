@@ -17,6 +17,9 @@
 		/* position: centering content */
 		text-align: center;
 
+		/* insures that the ::before pseudo element doesn't force wrap with fixed width content; */
+		white-space: nowrap;
+
 		/* styling */
 		cursor: pointer;
 		background: #333;
@@ -63,6 +66,9 @@
 		/* styling */
 		background: #fff;
 		cursor: auto;
+
+		/* reset white-space wrapping */
+		white-space: normal;
 	}
 
 	/* contains the content */
