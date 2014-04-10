@@ -162,7 +162,7 @@
 					data = self.target && self.$elm.attr(self.config.targetAttr);
 				}
 				data = data || self.$elm.attr('href') || '';
-				/* otherwise it's implicit, run chekcs */
+				/* otherwise it's implicit, run checks */
 				if(!filter) {
 					var target = data;
 					data = null;
