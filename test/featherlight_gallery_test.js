@@ -13,28 +13,36 @@ var expect = chai.expect;
     beforeEach(resetFixtures);
     after(resetFixtures);
 
-    it ('works as expected', function() {
+    it ('works as expected', function(done) {
       $('#basic-test a').featherlightGallery();
       $('#basic-test a').eq(2).click();
-      expect($('.featherlight img')).to.have.attr('src').equal('fixtures/photo_large.jpg?2');
-      $('.featherlight').trigger('next');
-      expect($('.featherlight img')).to.have.attr('src').equal('fixtures/photo_large.jpg?3');
-      $('.featherlight').trigger('next');
-      expect($('.featherlight img')).to.have.attr('src').equal('fixtures/photo_large.jpg?0');
-      $('.featherlight').trigger('previous');
-      expect($('.featherlight img')).to.have.attr('src').equal('fixtures/photo_large.jpg?3');
+      patiently(done, [function() {
+        expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?2/);
+        $('.featherlight').trigger('next');
+      }, function() {
+        expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?3/);
+        $('.featherlight').trigger('next');
+      }, function() {
+        expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?0/);
+        $('.featherlight').trigger('previous');
+      }, function() {
+        expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?3/);
+      }]);
     });
 
-    it ('accepts an afterImage config', function() {
+    it ('accepts an afterImage config', function(done) {
       var lastCurrent = null;
       $('#basic-test a').featherlightGallery({gallery:
         {afterImage: function() { lastCurrent = this.gallery.$current; }}
       });
-      expect(lastCurrent).to.be.null;
       $('#basic-test a').eq(2).click();
-      expect(lastCurrent).to.have.attr('href').equal('fixtures/photo_large.jpeg?2');
-      $('.featherlight').trigger('next');
-      expect(lastCurrent).to.have.attr('href').equal('fixtures/photo_large.jpeg?3');
+      patiently(done, [function(){
+        expect(lastCurrent).to.not.be.null
+        expect(lastCurrent).to.have.attr('href').match(/photo_large.jpg\?2/);
+        $('.featherlight').trigger('next');
+      }, function() {
+        expect(lastCurrent).to.have.attr('href').match(/photo_large.jpg\?3/);
+      }]);
     });
   });
 }(jQuery));
