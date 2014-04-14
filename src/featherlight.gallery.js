@@ -38,18 +38,19 @@
 
 					config.$current = $(event.currentTarget);
 
-					$img.load(function(){
-						$img.stop().fadeTo(config.fadeIn,1);
-					});
-
 					fl.$instance.on('next.'+fl.namespace+' previous.'+fl.namespace, function(event){
 							var offset = event.type === 'next' ? +1 : -1;
 							config.$current = config.$gallery.eq((config.$gallery.length + config.$gallery.index(config.$current) + offset) % config.$gallery.length);
 							config.beforeImage.call(fl, event);
-							$img.fadeTo(config.fadeOut,0.2);
-							$img[0].src = config.$current.attr('href');
-							config.afterImage.call(fl, event);
-						});
+							$.when(
+								$.featherlight.contentFilters.image.process(config.$current.attr('href')),
+								$img.fadeTo(config.fadeOut,0.2)
+							).done(function($i) {
+									$img[0].src = $i[0].src;
+									config.afterImage.call(fl, event);
+									$img.fadeTo(config.fadeIn,1);
+								});
+							});
 
 					if (swipeAwareConstructor) {
 						swipeAwareConstructor(fl.$instance)

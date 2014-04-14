@@ -13,14 +13,18 @@ var expect = chai.expect;
 		beforeEach(resetFixtures);
 		after(resetFixtures);
 
-		it ('works on items with data-featherlight by default', function() {
-			var $bound = $('#auto-bound')
-			expect($('img').length).to.equal(0);
-			$bound.click();
-			expect($('.featherlight img')).to.be.visible;
-			expect($('.featherlight img')).to.have.attr('src').equal('fixtures/photo.jpeg');
-			$('.featherlight').click();
+		it ('works on items with data-featherlight by default', function(done) {
 			expect($('img')).to.not.be.visible;
+			$('#auto-bound').click();
+			patiently(done, [
+				function() {
+					expect($('.featherlight img')).to.be.visible;
+					expect($('.featherlight img')).to.have.attr('src').equal('fixtures/photo.jpeg');
+					$('.featherlight').click();
+				}, function() {
+					expect($('img')).to.not.be.visible;
+				}
+			]);
 		});
 
 		describe('jQuery#featherlight', function() {
