@@ -225,7 +225,17 @@
 			},
 			image: {
 				regex: /\.(png|jpg|jpeg|gif|tiff|bmp)(\?\S*)?$/i,
-				process: function(url)  { return $('<img src="'+url+'" alt="" class="'+this.namespace+'-image" />'); }
+				process: function(url)  {
+					var self = this,
+						deferred = $.Deferred(),
+						img = new Image();
+					img.onload  = function() { deferred.resolve(
+						$('<img src="'+url+'" alt="" class="'+self.namespace+'-image" />')
+					); };
+					img.onerror = function() { deferred.reject(); };
+					img.src = url;
+					return deferred.promise();
+				}
 			},
 			html: {
 				regex: /^\s*<[\w!][^<]*>/, /* Anything that starts with some kind of valid tag */
