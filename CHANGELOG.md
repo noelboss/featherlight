@@ -3,6 +3,10 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+
+
+0.4.0 - 2014-04-07
+-----------------------------------
 ### Features
 - New option closeOnClick to support closing by clicking anywhere
 – Any element inside the lightbox with the class "featherlight-close" will now trigger the closing event
