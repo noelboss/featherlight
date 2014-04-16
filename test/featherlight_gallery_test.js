@@ -1,4 +1,3 @@
-if(!this.chai) { chai = require("chai"); }
 var expect = chai.expect;
 
 (function($) {
