@@ -74,7 +74,7 @@
 			afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
 			afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
 			type:         null,                   /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
-			contentFilters: ['jquery', 'image', 'html', 'ajax'] /* List of content filters to use to determine the content */
+			contentFilters: ['jquery', 'image', 'html', 'ajax', 'text'] /* List of content filters to use to determine the content */
 		},
 		/* you can access and override all methods using $.featherlight.methods */
 		methods: {
@@ -245,6 +245,9 @@
 					});
 					return deferred.promise();
 				}
+			},
+			text: {
+				process: function(text) { return $('<div>', {text: text}); }
 			}
 		},
 

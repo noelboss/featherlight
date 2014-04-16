@@ -103,8 +103,8 @@ You can also modify the `$.featherlight.defaults` directly which holds all the d
 		afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
 		afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
 		type:         null,                   /* Specify content type. If unset, it will check for the targetAttrs value. */
-		contentFilters: ['jquery', 'image', 'html', 'ajax'] /* List of content filters to use to determine the content */
-		jquery/image/html/ajax: undefined     /* Specify content type and data */
+		contentFilters: ['jquery', 'image', 'html', 'ajax', 'text'] /* List of content filters to use to determine the content */
+		jquery/image/html/ajax/text: undefined     /* Specify content type and data */
 	}
 
 ================================================
@@ -264,7 +264,9 @@ This way the following would be possible:
 
 	<a href="feed://some_url" data-featherlight>See the feed in a lightbox</a>
 
-**Deprecated!** `type` will be changed in Release 0.4.0!
+The content filter 'text' needs to be specified explicitly, it has no heuristic attached to it:
+
+	<a href="Hello, world" data-featherlight="text">Example</a>
 
 # Examples
 
