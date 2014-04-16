@@ -125,6 +125,13 @@ var expect = chai.expect;
 				expect($('.featherlight')).to.contain('A <div> & "quoted text"');
 			});
 
+			it('can specify ajax content', function(done) {
+				$.featherlight({ajax: 'featherlight.html .some-content'});
+				patiently(done, function() {
+					expect($('.featherlight')).to.contain('Hello');
+				});
+			})
+
 			it('can specify an alternate close button selector', function() {
 				var fl = $.featherlight('<div>Test<div class="close-me">close</div></div>', {otherClose: '.close-me'});
 				expect($.featherlight.current()).to.equal(fl);
