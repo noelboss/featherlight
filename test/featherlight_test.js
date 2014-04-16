@@ -82,7 +82,7 @@ var expect = chai.expect;
 
 		describe('configuration', function() {
 			it('can be set using data-feather-*', function() {
-				$('<a href="fixtures/photo.jpeg" \
+				$('<a href=".some-content" \
 							data-featherlight-variant="test" \
 							data-featherlight-close-speed="42" \
 							data-featherlight-close-on-esc="false">').featherlight().click();
@@ -112,12 +112,12 @@ var expect = chai.expect;
 			});
 
 			it('can specify a filter for events', function() {
-				$("#filter-test .group").featherlight({filter: '.yes'})
-					.append('<span class="yes" href="fixtures/photo.jpeg?filterAppended">Photo</span>');
+				$("#filter-test .group").featherlight({filter: '.yes', type: 'text'})
+					.append('<span class="yes"  href="filter Appended">Photo</span>');
 				$("#filter-test span").each(function(){ $(this).click(); });
 				expect($('.featherlight')).with.length(2);
-				expect($('.featherlight:first img')).to.have.attr('src', 'fixtures/photo.jpeg?filterYes');
-				expect($('.featherlight:last  img')).to.have.attr('src', 'fixtures/photo.jpeg?filterAppended');
+				expect($('.featherlight:first .featherlight-content')).to.contain('filter Yes');
+				expect($('.featherlight:last  .featherlight-content')).to.contain('filter Appended');
 			});
 
 			it('can specify explicit content', function() {
