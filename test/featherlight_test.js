@@ -121,9 +121,9 @@ var expect = chai.expect;
 			});
 
 			it('can specify explicit content', function() {
-				var fl = new $.featherlight({image: '#photo'});
-				expect(fl.getContent()).to.match('img[src="#photo"]');
-			})
+				$.featherlight({text: 'A <div> & "quoted text"'});
+				expect($('.featherlight')).to.contain('A <div> & "quoted text"');
+			});
 
 			it('can specify an alternate close button selector', function() {
 				var fl = $.featherlight('<div>Test<div class="close-me">close</div></div>', {otherClose: '.close-me'});
