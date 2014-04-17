@@ -22,6 +22,8 @@
 		-moz-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
+		/* IE9 hack, otherwise navigation doesn't appear */
+		background: rgba(0,0,0,0);
 	}
 
 	.featherlight-previous {
