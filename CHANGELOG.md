@@ -5,6 +5,12 @@ Master
 -----------------------------------
 
 
+0.4.1 - 2014-04-17
+-----------------------------------
+### Maintenance & Fixes
+- Fix dialog disappearing for large fixed width content
+- Fig gallery navigation on IE
+
 0.4.0 - 2014-04-07
 -----------------------------------
 ### Features
