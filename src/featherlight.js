@@ -182,13 +182,13 @@
 				if(event && event.isDefaultPrevented()) {
 					return false;
 				}
-				if(this.beforeOpen(event) === false) {
+				if(self.beforeOpen(event) === false) {
 					return false;
 				}
 				if(event){
 					event.preventDefault();
 				}
-				var $content = this.getContent();
+				var $content = self.getContent();
 
 				if(!$content){
 					return false;
@@ -211,7 +211,7 @@
 			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
 				var self = this;
-				if(this.beforeClose(event) === false) {
+				if(self.beforeClose(event) === false) {
 					return false;
 				}
 				self.constructor._opened.remove(self._openedCallback);
