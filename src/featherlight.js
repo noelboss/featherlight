@@ -151,8 +151,12 @@
 					data = null;
 					$.each(self.contentFilters, function() {
 						filter = Fl.contentFilters[this];
-						if(filter.test)  { data = filter.test(target); }
-						if(!data && filter.regex && target.match && target.match(filter.regex)) { data = target; }
+						if(filter.test)  {
+							data = filter.test(target);
+						}
+						if(!data && filter.regex && target.match && target.match(filter.regex)) {
+							data = target;
+						}
 						return !data;
 					});
 					if(!data) {
@@ -276,9 +280,11 @@
 			}
 			/* make a copy */
 			config = $.extend({}, config);
+
 			/* Only for openTrigger and namespace... */
-			var curConfig = $.extend({}, Fl.defaults, readElementConfigHelper($source[0]), config);
-			$source.on(curConfig.openTrigger+'.'+curConfig.namespace, curConfig.filter, function(event) {
+			var tempConfig = $.extend({}, Fl.defaults, readElementConfigHelper($source[0]), config);
+
+			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, function(event) {
 				/* ... since we might as well compute the config on the actual target */
 				var elemConfig = $.extend({source: this}, readElementConfigHelper(this), config);
 				new $.featherlight($content, elemConfig).open(event);
