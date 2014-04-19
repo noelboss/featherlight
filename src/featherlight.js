@@ -165,6 +165,8 @@
 				/* remove existing content */
 				self.$instance.find('.'+self.namespace+'-inner').remove();
 				self.$instance.find('.'+self.namespace+'-content').append(self.$content);
+
+				return self;
 			},
 
 			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
@@ -197,8 +199,8 @@
 						escapeHandler = null;
 					}
 					/* Set content and show */
-					self.setContent($content);
-					self.$instance.appendTo('body').fadeIn(self.openSpeed);
+					self.setContent($content)
+						.$instance.appendTo('body').fadeIn(self.openSpeed);
 					self.afterOpen(event);
 				});
 			},
