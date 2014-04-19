@@ -37,7 +37,7 @@
 	};
 
 	/* read element's attributes starting with data-featherlight- */
-	var elementConfig = function(element) {
+	var readElementConfigHelper = function(element) {
 		var config = {};
 		if (element && element.attributes) {
 				$.each(element.attributes, function(){
@@ -270,10 +270,10 @@
 			/* make a copy */
 			config = $.extend({}, config);
 			/* Only for openTrigger and namespace... */
-			var curConfig = $.extend({}, Fl.defaults, elementConfig($source[0]), config);
+			var curConfig = $.extend({}, Fl.defaults, readElementConfigHelper($source[0]), config);
 			$source.on(curConfig.openTrigger+'.'+curConfig.namespace, curConfig.filter, function(event) {
 				/* ... since we might as well compute the config on the actual target */
-				var elemConfig = $.extend({source: this}, elementConfig(this), config);
+				var elemConfig = $.extend({source: this}, readElementConfigHelper(this), config);
 				new $.featherlight($content, elemConfig).open(event);
 			});
 		},
