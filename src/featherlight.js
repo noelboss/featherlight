@@ -28,10 +28,10 @@
 	/* document wide esc handler, attached in setup method */
 	var escapeHelper = function(event) {
 		if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
-			var cur = Fl.current();
-			if(cur && cur.closeOnEsc) {
-				cur.$instance.find('.'+cur.namespace+'-close:first').click();
-				event.preventDefault();
+			var self = Fl.current();
+			if(self && self.closeOnEsc) {
+				self.$instance.find('.'+self.namespace+'-close:first').click();
+				self.preventDefault();
 			}
 		}
 	};
