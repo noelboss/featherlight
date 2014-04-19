@@ -85,13 +85,13 @@
 					config = target;
 					target = undefined;
 				}
-				var self = $.extend(this, Fl.defaults, config, {target: target});
 
-				var css = !self.resetCss ? self.namespace : self.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
+				var self = $.extend(this, Fl.defaults, config, {target: target}),
+					css = !self.resetCss ? self.namespace : self.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
 					$background = $(self.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close-icon '+ self.namespace + '-close">'+self.closeIcon+'</span></div></div>'),
 					closeButtonSelector = '.'+self.namespace+'-close' + (self.otherClose ? ',' + self.otherClose : '');
 
-					self.$instance = $background.clone().addClass(self.variant); /* clone DOM for the background, wrapper and the close button */
+				self.$instance = $background.clone().addClass(self.variant); /* clone DOM for the background, wrapper and the close button */
 
 				/* close when click on background/anywhere/null or closebox */
 				self.$instance.on(self.closeTrigger+'.'+self.namespace, function(event) {
@@ -266,10 +266,13 @@
 				config = $content;
 				$content = undefined;
 			}
-			config = $.extend({}, config); // make a copy
-			var curConfig = $.extend({}, Fl.defaults, elementConfig($source[0]), config); // Only for openTrigger and namespace...
+			/* make a copy */
+			config = $.extend({}, config);
+			/* Only for openTrigger and namespace... */
+			var curConfig = $.extend({}, Fl.defaults, elementConfig($source[0]), config);
 			$source.on(curConfig.openTrigger+'.'+curConfig.namespace, curConfig.filter, function(event) {
-				var elemConfig = $.extend({source: this}, elementConfig(this), config);  // ... since we might as well compute the config on the actual target
+				/* ... since we might as well compute the config on the actual target */
+				var elemConfig = $.extend({source: this}, elementConfig(this), config);
 				new $.featherlight($content, elemConfig).open(event);
 			});
 		},
