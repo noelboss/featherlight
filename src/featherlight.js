@@ -5,7 +5,7 @@
  * Copyright 2014, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
 **/
--(function($) {
+(function($) {
 	"use strict";
 
 	if('undefined' === typeof $) {
@@ -31,7 +31,7 @@
 				var self = Fl.current();
 				if(self && self.closeOnEsc) {
 					self.$instance.find('.'+self.namespace+'-close:first').click();
-					self.preventDefault();
+					event.preventDefault();
 				}
 			}
 		},
