@@ -25,6 +25,7 @@
 		}
 	};
 
+	/* document wide esc handler, attached in setup method */
 	var escapeHandler = function(event) {
 		if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
 			var cur = Fl.current();
@@ -92,6 +93,12 @@
 					closeButtonSelector = '.'+self.namespace+'-close' + (self.otherClose ? ',' + self.otherClose : '');
 
 				self.$instance = $background.clone().addClass(self.variant); /* clone DOM for the background, wrapper and the close button */
+
+				/* attach esc handler to document if configured */
+				if(self.closeOnEsc && escapeHandler) {
+					$(document).bind('keyup.'+Fl.defaults.namespace, escapeHandler);
+					escapeHandler = null;
+				}
 
 				/* close when click on background/anywhere/null or closebox */
 				self.$instance.on(self.closeTrigger+'.'+self.namespace, function(event) {
@@ -194,10 +201,6 @@
 						}
 					});
 
-					if(self.closeOnEsc && escapeHandler) {
-						$(document).bind('keyup.'+Fl.defaults.namespace, escapeHandler);
-						escapeHandler = null;
-					}
 					/* Set content and show */
 					self.setContent($content)
 						.$instance.appendTo('body').fadeIn(self.openSpeed);
