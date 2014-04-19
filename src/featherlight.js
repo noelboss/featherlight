@@ -15,41 +15,45 @@
 
 	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
 	var Fl = $.featherlight = function($content, config) {
-		if(this.constructor === Fl) {  /* called with new */
-			this.id = Fl.id++;
-			this.setup($content, config);
-		} else {
-			var fl = new Fl($content, config);
-			fl.open();
-			return fl;
-		}
-	};
-
-	/* document wide esc handler, attached in setup method */
-	var escapeHelper = function(event) {
-		if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
-			var self = Fl.current();
-			if(self && self.closeOnEsc) {
-				self.$instance.find('.'+self.namespace+'-close:first').click();
-				self.preventDefault();
+			if(this.constructor === Fl) {  /* called with new */
+				this.id = Fl.id++;
+				this.setup($content, config);
+			} else {
+				var fl = new Fl($content, config);
+				fl.open();
+				return fl;
 			}
-		}
-	};
+		},
 
-	/* read element's attributes starting with data-featherlight- */
-	var readElementConfigHelper = function(element) {
-		var config = {};
-		if (element && element.attributes) {
-				$.each(element.attributes, function(){
-				var match = this.name.match(/^data-featherlight-(.*)/);
-				if (match) {
-					var val = this.value;
-					try { val = $.parseJSON(val); } catch(e) {}
-					config[$.camelCase(match[1])] = val; }
-			});
-		}
-		return config;
-	};
+		/* document wide esc handler, attached in setup method */
+		escapeHelper = function(event) {
+			if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
+				var self = Fl.current();
+				if(self && self.closeOnEsc) {
+					self.$instance.find('.'+self.namespace+'-close:first').click();
+					self.preventDefault();
+				}
+			}
+		},
+
+		/* read element's attributes starting with data-featherlight- */
+		readElementConfigHelper = function(element) {
+			var config = {};
+			if (element && element.attributes) {
+					$.each(element.attributes, function(){
+					var match = this.name.match(/^data-featherlight-(.*)/);
+					if (match) {
+						var val = this.value;
+						try {
+							val = $.parseJSON(val);
+						}
+						catch(e) {}
+						config[$.camelCase(match[1])] = val;
+					}
+				});
+			}
+			return config;
+		};
 
 	/* extend featherlight with defaults and methods */
 	$.extend(Fl, {
