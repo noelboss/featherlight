@@ -26,7 +26,7 @@
 	};
 
 	/* document wide esc handler, attached in setup method */
-	var escapeHandler = function(event) {
+	var escapeHelper = function(event) {
 		if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
 			var cur = Fl.current();
 			if(cur && cur.closeOnEsc) {
@@ -95,9 +95,9 @@
 				self.$instance = $background.clone().addClass(self.variant); /* clone DOM for the background, wrapper and the close button */
 
 				/* attach esc handler to document if configured */
-				if(self.closeOnEsc && escapeHandler) {
-					$(document).bind('keyup.'+Fl.defaults.namespace, escapeHandler);
-					escapeHandler = null;
+				if(self.closeOnEsc && escapeHelper) {
+					$(document).bind('keyup.'+Fl.defaults.namespace, escapeHelper);
+					escapeHelper = null;
 				}
 
 				/* close when click on background/anywhere/null or closebox */
@@ -179,33 +179,32 @@
 			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 			open: function(event){
 				var self = this;
-				if(event && event.isDefaultPrevented()) {
-					return false;
-				}
-				if(self.beforeOpen(event) === false) {
-					return false;
-				}
-				if(event){
-					event.preventDefault();
-				}
-				var $content = self.getContent();
+				if(event && !event.isDefaultPrevented()
+					|| self.beforeOpen(event) !== false) {
 
-				if(!$content){
-					return false;
-				}
-				$content.promise().done(function($content){
-					/* Add to opened registry */
-					self.constructor._opened.add(self._openedCallback = function(response){
-						if(self.$instance.closest('body').length > 0) {
-							response.currentFeatherlight = self;
-						}
-					});
+					if(event){
+						event.preventDefault();
+					}
+					var $content = self.getContent();
 
-					/* Set content and show */
-					self.setContent($content)
-						.$instance.appendTo('body').fadeIn(self.openSpeed);
-					self.afterOpen(event);
-				});
+					if($content){
+						/* Add to opened registry */
+						self.constructor._opened.add(self._openedCallback = function(response){
+							if(self.$instance.closest('body').length > 0) {
+								response.currentFeatherlight = self;
+							}
+						});
+
+						/* Set content and show */
+						$content.promise().done(function($content){
+							self.setContent($content)
+								.$instance.appendTo('body').fadeIn(self.openSpeed);
+							self.afterOpen(event);
+						});
+						return self;
+					}
+				}
+				return false;
 			},
 
 			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
