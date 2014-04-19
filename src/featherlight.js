@@ -187,13 +187,13 @@
 				if(event && event.isDefaultPrevented()) {
 					return false;
 				}
-				if(this.beforeOpen(event) === false) {
+				if(self.beforeOpen(event) === false) {
 					return false;
 				}
 				if(event){
 					event.preventDefault();
 				}
-				var $content = this.getContent();
+				var $content = self.getContent();
 
 				/* If we have content, add it and show lightbox */
 				if(!$content){
@@ -209,13 +209,13 @@
 			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
 				var self = this;
-				if(this.beforeClose(event) === false) {
+				if(self.beforeClose(event) === false) {
 					return false;
 				}
 				self.$instance.fadeOut(self.closeSpeed,function(){
 					self.$instance.detach();
 				});
-				this.afterClose(event);
+				self.afterClose(event);
 			}
 		},
 		/* Contains the logic to determine content */
