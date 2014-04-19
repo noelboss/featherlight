@@ -106,20 +106,20 @@
 
 				/* close when click on background/anywhere/null or closebox */
 				self.$instance.on(self.closeTrigger+'.'+self.namespace, function(event) {
-					var $target = $(event.target);
-					if( ('background' === self.closeOnClick  && $target.is('.'+self.namespace))
-						|| 'anywhere' === self.closeOnClick
-						|| $target.is(closeButtonSelector) ){
-						event.preventDefault();
-						self.close();
-					}
-				});
+						var $target = $(event.target);
+						if( ('background' === self.closeOnClick  && $target.is('.'+self.namespace))
+							|| 'anywhere' === self.closeOnClick
+							|| $target.is(closeButtonSelector) ){
+							event.preventDefault();
+							self.close();
+						}
+					})
+					.on('featherlightGetCurrent', function(event){
+						if(self.$instance.closest('body').length > 0) {
+							event.currentFeatherlight = self;
+						}
+					});
 
-				self.$instance.on('featherlightGetCurrent', function(event){
-					if(self.$instance.closest('body').length > 0) {
-						event.currentFeatherlight = self;
-					}
-				});
 				return this;
 			},
 
