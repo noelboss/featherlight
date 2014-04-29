@@ -68,6 +68,7 @@
 			openTrigger:  'click',                /* Event that triggers the lightbox */
 			closeTrigger: 'click',                /* Event that triggers the closing of the lightbox */
 			filter:       null,                   /* Selector to filter events. Think $(...).on('click', filter, eventHandler) */
+			root:         'body',                 /* Where to append featherlights */
 			openSpeed:    250,                    /* Duration of opening animation */
 			closeSpeed:   250,                    /* Duration of closing animation */
 			closeOnClick: 'background',           /* Close lightbox on click ('background', 'anywhere' or false) */
@@ -206,7 +207,7 @@
 						/* Set content and show */
 						$.when($content).done(function($content){
 							self.setContent($content)
-								.$instance.appendTo('body').fadeIn(self.openSpeed);
+								.$instance.appendTo(self.root).fadeIn(self.openSpeed);
 							self.afterOpen(event);
 						});
 						return self;
