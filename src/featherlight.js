@@ -14,12 +14,12 @@
 	}
 
 	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
-	function Fl($content, config) {
-		if(this.constructor === Fl) {  /* called with new */
-			this.id = Fl.id++;
+	function Featherlight($content, config) {
+		if(this.constructor === Featherlight) {  /* called with new */
+			this.id = Featherlight.id++;
 			this.setup($content, config);
 		} else {
-			var fl = new Fl($content, config);
+			var fl = new Featherlight($content, config);
 			fl.open();
 			return fl;
 		}
@@ -28,7 +28,7 @@
 		/* document wide esc handler, attached in setup method */
 	var escapeHelper = function(event) {
 			if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
-				var self = Fl.current();
+				var self = Featherlight.current();
 				if(self && self.closeOnEsc) {
 					self.$instance.find('.'+self.namespace+'-close:first').click();
 					event.preventDefault();
@@ -56,7 +56,7 @@
 		};
 
 	/* extend featherlight with defaults and methods */
-	$.extend(Fl, {
+	$.extend(Featherlight, {
 		id: 0,                                    /* Used to id single featherlight instances */
 		autoBind:       '[data-featherlight]',    /* Will automatically bind elements matching this selector. Clear or set before onReady */
 		defaults: {                               /* You can access and override all defaults using $.featherlight.defaults */
@@ -92,7 +92,7 @@
 					target = undefined;
 				}
 
-				var self = $.extend(this, Fl.defaults, config, {target: target}),
+				var self = $.extend(this, Featherlight.defaults, config, {target: target}),
 					css = !self.resetCss ? self.namespace : self.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
 					$background = $(self.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close-icon '+ self.namespace + '-close">'+self.closeIcon+'</span></div></div>'),
 					closeButtonSelector = '.'+self.namespace+'-close' + (self.otherClose ? ',' + self.otherClose : '');
@@ -101,7 +101,7 @@
 
 				/* attach esc handler to document if configured */
 				if(self.closeOnEsc && escapeHelper) {
-					$(document).bind('keyup.'+Fl.defaults.namespace, escapeHelper);
+					$(document).bind('keyup.'+Featherlight.defaults.namespace, escapeHelper);
 					escapeHelper = null;
 				}
 
@@ -132,20 +132,20 @@
 					data = self.target || targetValue || '';
 
 				/* Find which filter applies */
-				var filter = Fl.contentFilters[self.type]; /* check explicit type like {type: 'image'} */
+				var filter = Featherlight.contentFilters[self.type]; /* check explicit type like {type: 'image'} */
 
 				/* check explicit type like data-featherlight="image" */
-				if(!filter && data in Fl.contentFilters) {
-					filter = Fl.contentFilters[data];
+				if(!filter && data in Featherlight.contentFilters) {
+					filter = Featherlight.contentFilters[data];
 					data = self.target && targetValue;
 				}
 				data = data || readTargetAttr('href') || '';
 
 				/* check explicity type & content like {image: 'photo.jpg'} */
 				if(!filter) {
-					for(var filterName in Fl.contentFilters) {
+					for(var filterName in Featherlight.contentFilters) {
 						if(self[filterName]) {
-							filter = Fl.contentFilters[filterName];
+							filter = Featherlight.contentFilters[filterName];
 							data = self[filterName];
 						}
 					}
@@ -156,7 +156,7 @@
 					var target = data;
 					data = null;
 					$.each(self.contentFilters, function() {
-						filter = Fl.contentFilters[this];
+						filter = Featherlight.contentFilters[this];
 						if(filter.test)  {
 							data = filter.test(target);
 						}
@@ -280,7 +280,7 @@
 			config = $.extend({}, config);
 
 			/* Only for openTrigger and namespace... */
-			var tempConfig = $.extend({}, Fl.defaults, readElementConfigHelper($source[0]), config);
+			var tempConfig = $.extend({}, Featherlight.defaults, readElementConfigHelper($source[0]), config);
 
 			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, function(event) {
 				/* ... since we might as well compute the config on the actual target */
@@ -296,25 +296,25 @@
 		},
 
 		close: function() {
-			var cur = Fl.current();
+			var cur = Featherlight.current();
 			if(cur) { cur.close(); }
 		}
 	});
 
-	Fl.prototype = $.extend(Fl.methods, {constructor: Fl});
+	Featherlight.prototype = $.extend(Featherlight.methods, {constructor: Featherlight});
 
-	$.featherlight = Fl;
+	$.featherlight = Featherlight;
 
 	/* bind jQuery elements to trigger featherlight */
 	$.fn.featherlight = function($content, config) {
-		Fl.attach(this, $content, config);
+		Featherlight.attach(this, $content, config);
 		return this;
 	};
 
 	/* bind featherlight on ready if config autoBind is set */
 	$(document).ready(function(){
-		if(Fl.autoBind){
-			$(document).featherlight({filter: Fl.autoBind});
+		if(Featherlight.autoBind){
+			$(document).featherlight({filter: Featherlight.autoBind});
 		}
 	});
 }(jQuery));
