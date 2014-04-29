@@ -202,7 +202,7 @@
 
 					/* If we have content, add it and show lightbox */
 					if($content){
-						$content.promise().done(function($content){
+						$.when($content).done(function($content){
 							self.setContent($content)
 								.$instance.appendTo('body').fadeIn(self.openSpeed);
 							self.afterOpen(event);
