@@ -30,6 +30,11 @@ var expect = chai.expect;
       }]);
     });
 
+    it ('is chainable', function() {
+      var $anchors = $('#basic-test a');
+      expect($anchors.featherlight()).to.equal($anchors);
+    });
+
     it ('accepts an afterImage config', function(done) {
       var lastCurrent = null;
       $('#basic-test a').featherlightGallery({gallery:
