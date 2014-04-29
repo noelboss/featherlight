@@ -55,7 +55,7 @@
 		padding: 25px 25px 0;
 		border-bottom: 25px solid transparent;
 
-		/* dimensions: handling small or non existing (loading images) content */
+		/* dimensions: handling small or empty content */
 		min-width:  30%;
 
 		/* dimensions: handling large content */
