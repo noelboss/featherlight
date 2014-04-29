@@ -74,6 +74,7 @@
 				}
 			};
 		this.featherlight($.extend(true, {}, $.featherlightGallery.defaults, flg, config, overrideCallbacks));
+		return this;
 	};
 
 
