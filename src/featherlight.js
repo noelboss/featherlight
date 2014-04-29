@@ -14,19 +14,19 @@
 	}
 
 	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
-	var Fl = $.featherlight = function($content, config) {
-			if(this.constructor === Fl) {  /* called with new */
-				this.id = Fl.id++;
-				this.setup($content, config);
-			} else {
-				var fl = new Fl($content, config);
-				fl.open();
-				return fl;
-			}
-		},
+	function Fl($content, config) {
+		if(this.constructor === Fl) {  /* called with new */
+			this.id = Fl.id++;
+			this.setup($content, config);
+		} else {
+			var fl = new Fl($content, config);
+			fl.open();
+			return fl;
+		}
+	}
 
 		/* document wide esc handler, attached in setup method */
-		escapeHelper = function(event) {
+	var escapeHelper = function(event) {
 			if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
 				var self = Fl.current();
 				if(self && self.closeOnEsc) {
@@ -302,6 +302,8 @@
 	});
 
 	Fl.prototype = $.extend(Fl.methods, {constructor: Fl});
+
+	$.featherlight = Fl;
 
 	/* bind jQuery elements to trigger featherlight */
 	$.fn.featherlight = function($content, config) {
