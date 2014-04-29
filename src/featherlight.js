@@ -204,7 +204,7 @@
 						});
 
 						/* Set content and show */
-						$content.promise().done(function($content){
+						$.when($content).done(function($content){
 							self.setContent($content)
 								.$instance.appendTo('body').fadeIn(self.openSpeed);
 							self.afterOpen(event);
