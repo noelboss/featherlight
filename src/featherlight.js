@@ -92,7 +92,7 @@
 					target = undefined;
 				}
 
-				var self = $.extend(this, Featherlight.defaults, config, {target: target}),
+				var self = $.extend(this, this.constructor.defaults, config, {target: target}),
 					css = !self.resetCss ? self.namespace : self.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
 					$background = $(self.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close-icon '+ self.namespace + '-close">'+self.closeIcon+'</span></div></div>'),
 					closeButtonSelector = '.'+self.namespace+'-close' + (self.otherClose ? ',' + self.otherClose : '');
@@ -101,7 +101,7 @@
 
 				/* attach esc handler to document if configured */
 				if(self.closeOnEsc && escapeHelper) {
-					$(document).bind('keyup.'+Featherlight.defaults.namespace, escapeHelper);
+					$(document).bind('keyup.'+this.constructor.defaults.namespace, escapeHelper);
 					escapeHelper = null;
 				}
 
@@ -122,25 +122,26 @@
 			/* this method prepares the content and converts it into a jQuery object or a promise */
 			getContent: function(){
 				var self = this,
+					filters = this.constructor.contentFilters,
 					readTargetAttr = function(name){ return self.$currentTarget && self.$currentTarget.attr(name); },
 					targetValue = readTargetAttr(self.targetAttr),
 					data = self.target || targetValue || '';
 
 				/* Find which filter applies */
-				var filter = Featherlight.contentFilters[self.type]; /* check explicit type like {type: 'image'} */
+				var filter = filters[self.type]; /* check explicit type like {type: 'image'} */
 
 				/* check explicit type like data-featherlight="image" */
-				if(!filter && data in Featherlight.contentFilters) {
-					filter = Featherlight.contentFilters[data];
+				if(!filter && data in filters) {
+					filter = filters[data];
 					data = self.target && targetValue;
 				}
 				data = data || readTargetAttr('href') || '';
 
 				/* check explicity type & content like {image: 'photo.jpg'} */
 				if(!filter) {
-					for(var filterName in Featherlight.contentFilters) {
+					for(var filterName in filters) {
 						if(self[filterName]) {
-							filter = Featherlight.contentFilters[filterName];
+							filter = filters[filterName];
 							data = self[filterName];
 						}
 					}
@@ -151,7 +152,7 @@
 					var target = data;
 					data = null;
 					$.each(self.contentFilters, function() {
-						filter = Featherlight.contentFilters[this];
+						filter = filters[this];
 						if(filter.test)  {
 							data = filter.test(target);
 						}
