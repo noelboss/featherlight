@@ -17,9 +17,11 @@ Master
 - The configuration options `autostart`, `context` and `selector` have been merged to the global `$.featherlight.autoBind`. It's also lazily attached, so items added via ajax, for example, will be automatically attached too.
 - The `$elm` attribute has been removed.
 - The `config` attribute has been removed and merged with the `this` object.
+- Content returned from filters isn't cloned anymore.
 
 ### Maintenance & Fixes
 - Small bugs fixed
+- Content filter 'jquery' now clones content *and* bound handlers.
 
 
 0.4.1 - 2014-04-17

@@ -180,7 +180,7 @@
 				if($content.is('iframe') || $('iframe', $content).length > 0){
 					self.$instance.addClass(self.namespace+'-iframe');
 				}
-				self.$content = $content.clone().addClass(self.namespace+'-inner');
+				self.$content = $content.addClass(self.namespace+'-inner');
 
 				/* remove existing content */
 				self.$instance.find('.'+self.namespace+'-inner').remove();
@@ -230,7 +230,7 @@
 			jquery: {
 				regex: /^[#.]\w/,         /* Anything that starts with a class name or identifiers */
 				test: function(elem)    { return elem instanceof $ && elem; },
-				process: function(elem) { return $(elem); }
+				process: function(elem) { return $(elem).clone(true); }
 			},
 			image: {
 				regex: /\.(png|jpg|jpeg|gif|tiff|bmp)(\?\S*)?$/i,
