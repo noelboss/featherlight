@@ -280,7 +280,7 @@
 			config = $.extend({}, config);
 
 			/* Only for openTrigger and namespace... */
-			var tempConfig = $.extend({}, Featherlight.defaults, readElementConfigHelper($source[0]), config);
+			var tempConfig = $.extend({}, this.defaults, readElementConfigHelper($source[0]), config);
 
 			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, function(event) {
 				/* ... since we might as well compute the config on the actual target */
@@ -296,7 +296,7 @@
 		},
 
 		close: function() {
-			var cur = Featherlight.current();
+			var cur = this.current();
 			if(cur) { cur.close(); }
 		}
 	});
