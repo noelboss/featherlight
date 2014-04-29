@@ -143,6 +143,11 @@ var expect = chai.expect;
 				expect($.featherlight.current()).to.be.undefined;
 			});
 
+			it('can specify an alternate root selector', function() {
+				$.featherlight('<div>Test<div class="close-me">close</div></div>', {root: '#fixtures'});
+				expect($('#fixtures').children().last()).to.have.class('featherlight');
+			});
+
 		});
 
 	});
