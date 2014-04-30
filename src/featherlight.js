@@ -55,11 +55,10 @@
 			return config;
 		};
 
-	/* extend featherlight with defaults and methods */
-	$.extend(Featherlight, {
-		id: 0,                                    /* Used to id single featherlight instances */
-		autoBind:       '[data-featherlight]',    /* Will automatically bind elements matching this selector. Clear or set before onReady */
-		defaults: {                               /* You can access and override all defaults using $.featherlight.defaults */
+	Featherlight.prototype = {
+			constructor: Featherlight,
+			/*** defaults ***/
+			/* extend featherlight with defaults and methods */
 			namespace:    'featherlight',         /* Name of the events and css class prefix */
 			targetAttr:   'data-featherlight',    /* Attribute of the triggered element that contains the selector to the lightbox content */
 			variant:      null,                   /* Class that will be added to change look of the lightbox */
@@ -80,10 +79,9 @@
 			afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
 			afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
 			type:         null,                   /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
-			contentFilters: ['jquery', 'image', 'html', 'ajax', 'text'] /* List of content filters to use to determine the content */
-		},
-		/* you can access and override all methods using $.featherlight.methods */
-		methods: {
+			contentFilters: ['jquery', 'image', 'html', 'ajax', 'text'], /* List of content filters to use to determine the content */
+
+			/*** methods ***/
 			/* setup iterates over a single instance of featherlight and prepares the background and binds the events */
 			setup: function(target, config){
 				/* all arguments are optional */
@@ -92,7 +90,7 @@
 					target = undefined;
 				}
 
-				var self = $.extend(this, this.constructor.defaults, config, {target: target}),
+				var self = $.extend(this, config, {target: target}),
 					css = !self.resetCss ? self.namespace : self.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
 					$background = $(self.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close-icon '+ self.namespace + '-close">'+self.closeIcon+'</span></div></div>'),
 					closeButtonSelector = '.'+self.namespace+'-close' + (self.otherClose ? ',' + self.otherClose : '');
@@ -101,7 +99,7 @@
 
 				/* attach esc handler to document if configured */
 				if(self.closeOnEsc && escapeHelper) {
-					$(document).bind('keyup.'+this.constructor.defaults.namespace, escapeHelper);
+					$(document).bind('keyup.'+this.constructor.prototype.namespace, escapeHelper);
 					escapeHelper = null;
 				}
 
@@ -229,7 +227,12 @@
 					self.afterClose(event);
 				});
 			}
-		},
+	};
+
+	$.extend(Featherlight, {
+		id: 0,                                    /* Used to id single featherlight instances */
+		autoBind:       '[data-featherlight]',    /* Will automatically bind elements matching this selector. Clear or set before onReady */
+		defaults:       Featherlight.prototype,   /* You can access and override all defaults using $.featherlight.defaults, which is just a synonym for $.featherlight.prototype */
 		/* Contains the logic to determine content */
 		contentFilters: {
 			jquery: {
@@ -275,6 +278,8 @@
 			}
 		},
 
+		/*** class methods ***/
+
 		attach: function($source, $content, config) {
 			if (typeof $content === 'object' && $content instanceof $ === false && !config) {
 				config = $content;
@@ -306,8 +311,6 @@
 
 		_opened: $.Callbacks()
 	});
-
-	Featherlight.prototype = $.extend({constructor: Featherlight}, Featherlight.methods);
 
 	$.featherlight = Featherlight;
 
