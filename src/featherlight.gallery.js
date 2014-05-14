@@ -15,38 +15,32 @@
 		return;
 	}
 
-
 	var isTouchAware = 'ontouchstart' in document.documentElement,
 		jQueryConstructor = $.event && $.event.special.swipeleft && $,
 		hammerConstructor = ('Hammer' in window) && function($el){ new window.Hammer(el[0]); },
-		swipeAwareConstructor = isTouchAware && (jQueryConstructor || hammerConstructor);
-
-	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
-	$.fn.featherlightGallery = function(config) {
-		var customAfterOpen = config && config.afterOpen,
-			customAfterClose = config && config.afterClose,
-			overrideCallbacks = {				/* provide an afterOpen function */
-				afterClose: function(event){
+		swipeAwareConstructor = isTouchAware && (jQueryConstructor || hammerConstructor),
+		afterCloseCallback = function(_super) {
+			return function(event){
 					var self = this;
 					self.$instance.off('next.'+self.namespace+' previous.'+self.namespace);
 					if (swipeAwareConstructor) {
 						swipeAwareConstructor(self.$instance).off('swipeleft', self._swipeleft); /* See http://stackoverflow.com/questions/17367198/hammer-js-cant-remove-event-listener */
 						swipeAwareConstructor(self.$instance).off('swiperight', self._swiperight);
 					}
-					if('function' === typeof customAfterClose) {
-						customAfterClose.call(this, event);
-					}
-				},
-				afterOpen: function(event){
+					return _super.call(fl, event);
+			};
+		},
+		afterOpenCallback = function(_super) {
+			return function(event){
 					var self = this,
 						$img = self.$instance.find('img');
 
 					self.$instance.on('next.'+self.namespace+' previous.'+self.namespace, function(event){
 							var offset = event.type === 'next' ? +1 : -1;
-							self.$currentTarget = self.$gallery.eq((self.$gallery.length + self.$gallery.index(self.$currentTarget) + offset) % self.$gallery.length);
+							self.$currentTarget = self.$source.eq((self.$source.length + self.$source.index(self.$currentTarget) + offset) % self.$source.length);
 							self.beforeImage(event);
 							$.when(
-								$.featherlight.contentFilters.image.process(self.$currentTarget.attr('href')),
+								self.getContent(),
 								$img.fadeTo(self.galleryFadeOut,0.2)
 							).done(function($i) {
 									$img[0].src = $i[0].src;
@@ -70,26 +64,27 @@
 							.after(createNav('next'));
 					}
 
-					if('function' === typeof customAfterOpen) {
-						customAfterOpen.call(self, event);
-					}
+					_super.call(self, event);
+
 					self.afterImage(event);
-				}
 			};
-		this.featherlight($.extend({$gallery: this}, $.featherlightGallery.defaults, config, overrideCallbacks));
-		return this;
-	};
+		};
 
-
-	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
-	$.featherlightGallery = function($targets, config) {
-		if('object' !== typeof $targets){
-			$targets = $($targets);
+	function FeatherlightGallery($source, config) {
+		if(this instanceof FeatherlightGallery) {  /* called with new */
+			$.featherlight.apply(this, arguments);
+			this.afterOpen = afterOpenCallback(this.afterOpen);
+			this.afterClose = afterCloseCallback(this.afterClose);
+		} else {
+			var flg = new FeatherlightGallery($.extend({$source: $source, $currentTarget: $source.first()}, config));
+			flg.open();
+			return flg;
 		}
-		$targets.featherlightGallery(config);
-	};
+	}
 
-	$.featherlightGallery.defaults = {
+	$.featherlight.extend(FeatherlightGallery);
+
+	$.extend(FeatherlightGallery.prototype, {
 		type: 'image',
 		/** Additional settings for Gallery **/
 		beforeImage: $.noop,         /* Callback before an image is changed */
@@ -98,6 +93,17 @@
 		nextIcon: '&#9654;',         /* Code that is used as next icon */
 		galleryFadeIn: 100,          /* fadeIn speed when image is loaded */
 		galleryFadeOut: 300          /* fadeOut speed before image is loaded */
+	});
+
+	FeatherlightGallery.functionAttributes = FeatherlightGallery.functionAttributes.concat([
+		'beforeImage', 'afterImage'
+	]);
+
+	$.featherlightGallery = FeatherlightGallery;
+
+	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
+	$.fn.featherlightGallery = function(config) {
+		return FeatherlightGallery.attach(this, config);
 	};
 
 }(jQuery));
