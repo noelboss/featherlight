@@ -44,34 +44,34 @@
 					}
 				},
 				afterOpen: function(event){
-					var fl = this,
+					var self = this,
 						config = this.gallery,
-						$img = fl.$instance.find('img');
+						$img = self.$instance.find('img');
 
 					config.$current = $(event.currentTarget);
 
-					fl.$instance.on('next.'+fl.namespace+' previous.'+fl.namespace, function(event){
+					self.$instance.on('next.'+self.namespace+' previous.'+self.namespace, function(event){
 							var offset = event.type === 'next' ? +1 : -1;
 							config.$current = config.$gallery.eq((config.$gallery.length + config.$gallery.index(config.$current) + offset) % config.$gallery.length);
-							config.beforeImage.call(fl, event);
+							config.beforeImage.call(self, event);
 							$.when(
 								$.featherlight.contentFilters.image.process(config.$current.attr('href')),
 								$img.fadeTo(config.fadeOut,0.2)
 							).done(function($i) {
 									$img[0].src = $i[0].src;
-									config.afterImage.call(fl, event);
+									config.afterImage.call(self, event);
 									$img.fadeTo(config.fadeIn,1);
 								});
 							});
 
 					if (swipeAwareConstructor) {
-						swipeAwareConstructor(fl.$instance)
-							.on('swipeleft', function()  { fl.$instance.trigger('next'); })
-							.on('swiperight', function() { fl.$instance.trigger('previous'); });
+						swipeAwareConstructor(self.$instance)
+							.on('swipeleft', function()  { self.$instance.trigger('next'); })
+							.on('swiperight', function() { self.$instance.trigger('previous'); });
 					} else {
 						var createNav = function(target){
-								return $('<span title="'+target+'" class="'+fl.namespace+'-'+target+'"><span>'+config[target]+'</span></span>').click(function(){
-									$(this).trigger(target+'.'+fl.namespace);
+								return $('<span title="'+target+'" class="'+self.namespace+'-'+target+'"><span>'+config[target]+'</span></span>').click(function(){
+									$(this).trigger(target+'.'+self.namespace);
 								});
 							};
 
@@ -80,9 +80,9 @@
 					}
 
 					if('function' === typeof customAfterOpen) {
-						customAfterOpen.call(fl, event);
+						customAfterOpen.call(self, event);
 					}
-					config.afterImage.call(fl, event);
+					config.afterImage.call(self, event);
 				}
 			};
 		this.featherlight($.extend(true, {}, $.featherlightGallery.defaults, flg, config, overrideCallbacks));
