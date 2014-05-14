@@ -122,7 +122,7 @@
 			/* this method prepares the content and converts it into a jQuery object or a promise */
 			getContent: function(){
 				var self = this,
-					readTargetAttr = function(name){ return self.source && self.source.getAttribute(name); },
+					readTargetAttr = function(name){ return self.$currentTarget && self.$currentTarget.attr(name); },
 					targetValue = readTargetAttr(self.targetAttr),
 					data = self.target || targetValue || '';
 
@@ -287,7 +287,7 @@
 
 			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, function(event) {
 				/* ... since we might as well compute the config on the actual target */
-				var elemConfig = $.extend({source: this}, readElementConfigHelper(this), config);
+				var elemConfig = $.extend({$currentTarget: $(this)}, readElementConfigHelper(this), config);
 				new $.featherlight($content, elemConfig).open(event);
 			});
 		},
