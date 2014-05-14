@@ -24,8 +24,7 @@
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlightGallery = function(config) {
 		var flg = {
-				$gallery: this,
-				$current: null         /* Current source */
+				$gallery: this
 			},
 			customAfterOpen = config && config.afterOpen,
 			customAfterClose = config && config.afterClose,
@@ -45,14 +44,12 @@
 					var self = this,
 						$img = self.$instance.find('img');
 
-					self.$current = $(event.currentTarget);
-
 					self.$instance.on('next.'+self.namespace+' previous.'+self.namespace, function(event){
 							var offset = event.type === 'next' ? +1 : -1;
-							self.$current = self.$gallery.eq((self.$gallery.length + self.$gallery.index(self.$current) + offset) % self.$gallery.length);
+							self.$currentTarget = self.$gallery.eq((self.$gallery.length + self.$gallery.index(self.$currentTarget) + offset) % self.$gallery.length);
 							self.beforeImage.call(self, event);
 							$.when(
-								$.featherlight.contentFilters.image.process(self.$current.attr('href')),
+								$.featherlight.contentFilters.image.process(self.$currentTarget.attr('href')),
 								$img.fadeTo(self.galleryFadeOut,0.2)
 							).done(function($i) {
 									$img[0].src = $i[0].src;
