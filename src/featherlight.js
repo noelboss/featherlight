@@ -127,8 +127,8 @@
 			/* this method prepares the content and converts it into a jQuery object or a promise */
 			getContent: function(){
 				var self = this,
-					sourceAttr = function(name){ return self.source && self.source.getAttribute(name); },
-					targetValue = sourceAttr(self.targetAttr),
+					readTargetAttr = function(name){ return self.source && self.source.getAttribute(name); },
+					targetValue = readTargetAttr(self.targetAttr),
 					data = self.target || targetValue || '';
 
 				/* Find which filter applies */
@@ -139,7 +139,7 @@
 					filter = Fl.contentFilters[data];
 					data = self.target && targetValue;
 				}
-				data = data || sourceAttr('href') || '';
+				data = data || readTargetAttr('href') || '';
 
 				/* check explicity type & content like {image: 'photo.jpg'} */
 				if(!filter) {
