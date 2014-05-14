@@ -123,8 +123,8 @@
 			getContent: function(){
 				var self = this,
 					sourceAttr = function(name){ return self.source && self.source.getAttribute(name); },
-					targetAttr = sourceAttr(self.targetAttr),
-					data = self.target || targetAttr || '';
+					targetValue = sourceAttr(self.targetAttr),
+					data = self.target || targetValue || '';
 
 				/* Find which filter applies */
 				var filter = Fl.contentFilters[self.type]; /* check explicit type like {type: 'image'} */
@@ -132,7 +132,7 @@
 				/* check explicit type like data-featherlight="image" */
 				if(!filter && data in Fl.contentFilters) {
 					filter = Fl.contentFilters[data];
-					data = self.target && targetAttr;
+					data = self.target && targetValue;
 				}
 				data = data || sourceAttr('href') || '';
 
