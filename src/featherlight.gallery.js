@@ -24,10 +24,8 @@
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlightGallery = function(config) {
 		var flg = {
-				gallery: {
-					$gallery: this,
-					$current: null         /* Current source */
-				}
+				$gallery: this,
+				$current: null         /* Current source */
 			},
 			customAfterOpen = config && config.afterOpen,
 			customAfterClose = config && config.afterClose,
@@ -45,22 +43,21 @@
 				},
 				afterOpen: function(event){
 					var self = this,
-						config = this.gallery,
 						$img = self.$instance.find('img');
 
-					config.$current = $(event.currentTarget);
+					self.$current = $(event.currentTarget);
 
 					self.$instance.on('next.'+self.namespace+' previous.'+self.namespace, function(event){
 							var offset = event.type === 'next' ? +1 : -1;
-							config.$current = config.$gallery.eq((config.$gallery.length + config.$gallery.index(config.$current) + offset) % config.$gallery.length);
-							config.beforeImage.call(self, event);
+							self.$current = self.$gallery.eq((self.$gallery.length + self.$gallery.index(self.$current) + offset) % self.$gallery.length);
+							self.beforeImage.call(self, event);
 							$.when(
-								$.featherlight.contentFilters.image.process(config.$current.attr('href')),
-								$img.fadeTo(config.fadeOut,0.2)
+								$.featherlight.contentFilters.image.process(self.$current.attr('href')),
+								$img.fadeTo(self.galleryFadeOut,0.2)
 							).done(function($i) {
 									$img[0].src = $i[0].src;
-									config.afterImage.call(self, event);
-									$img.fadeTo(config.fadeIn,1);
+									self.afterImage.call(self, event);
+									$img.fadeTo(self.galleryFadeIn,1);
 								});
 							});
 
@@ -70,7 +67,7 @@
 							.on('swiperight', self._swiperight = function() { self.$instance.trigger('previous'); });
 					} else {
 						var createNav = function(target){
-								return $('<span title="'+target+'" class="'+self.namespace+'-'+target+'"><span>'+config[target]+'</span></span>').click(function(){
+								return $('<span title="'+target+'" class="'+self.namespace+'-'+target+'"><span>'+self[target+'Icon']+'</span></span>').click(function(){
 									$(this).trigger(target+'.'+self.namespace);
 								});
 							};
@@ -82,10 +79,10 @@
 					if('function' === typeof customAfterOpen) {
 						customAfterOpen.call(self, event);
 					}
-					config.afterImage.call(self, event);
+					self.afterImage.call(self, event);
 				}
 			};
-		this.featherlight($.extend(true, {}, $.featherlightGallery.defaults, flg, config, overrideCallbacks));
+		this.featherlight($.extend({}, $.featherlightGallery.defaults, flg, config, overrideCallbacks));
 		return this;
 	};
 
@@ -99,15 +96,14 @@
 	};
 
 	$.featherlightGallery.defaults = {
-		gallery: {
-			beforeImage: $.noop,   /* Callback before an image is changed */
-			afterImage: $.noop,    /* Callback after an image is presented */
-			previous: '&#9664;',   /* Code that is used as previous icon */
-			next: '&#9654;',       /* Code that is used as next icon */
-			fadeIn: 100,           /* fadeIn speed when image is loaded */
-			fadeOut: 300           /* fadeOut speed before image is loaded */
-		},
-		type: 'image'
+		type: 'image',
+		/** Additional settings for Gallery **/
+		beforeImage: $.noop,         /* Callback before an image is changed */
+		afterImage: $.noop,          /* Callback after an image is presented */
+		previousIcon: '&#9664;',     /* Code that is used as previous icon */
+		nextIcon: '&#9654;',         /* Code that is used as next icon */
+		galleryFadeIn: 100,          /* fadeIn speed when image is loaded */
+		galleryFadeOut: 300          /* fadeOut speed before image is loaded */
 	};
 
 }(jQuery));
