@@ -44,13 +44,13 @@
 					self.$instance.on('next.'+self.namespace+' previous.'+self.namespace, function(event){
 							var offset = event.type === 'next' ? +1 : -1;
 							self.$currentTarget = self.$gallery.eq((self.$gallery.length + self.$gallery.index(self.$currentTarget) + offset) % self.$gallery.length);
-							self.beforeImage.call(self, event);
+							self.beforeImage(event);
 							$.when(
 								$.featherlight.contentFilters.image.process(self.$currentTarget.attr('href')),
 								$img.fadeTo(self.galleryFadeOut,0.2)
 							).done(function($i) {
 									$img[0].src = $i[0].src;
-									self.afterImage.call(self, event);
+									self.afterImage(event);
 									$img.fadeTo(self.galleryFadeIn,1);
 								});
 							});
@@ -73,7 +73,7 @@
 					if('function' === typeof customAfterOpen) {
 						customAfterOpen.call(self, event);
 					}
-					self.afterImage.call(self, event);
+					self.afterImage(event);
 				}
 			};
 		this.featherlight($.extend({$gallery: this}, $.featherlightGallery.defaults, config, overrideCallbacks));
