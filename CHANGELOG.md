@@ -22,6 +22,7 @@ element are combined.
 - The `config` attribute has been removed and merged with the `this` object.
 - The `methods` global attribute has been removed. Methods have changed quite a bit. Access the prototype instead if needed.
 - Content returned from filters isn't cloned anymore.
+- Gallery configuration has changed and is no longer nested under `gallery`.
 
 ### Maintenance & Fixes
 - Small bugs fixed
