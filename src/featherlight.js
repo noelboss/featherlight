@@ -15,7 +15,7 @@
 
 	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
 	function Featherlight($content, config) {
-		if(this.constructor === Featherlight) {  /* called with new */
+		if(this instanceof Featherlight) {  /* called with new */
 			this.id = Featherlight.id++;
 			this.setup($content, config);
 		} else {
@@ -285,6 +285,19 @@
 			return config;
 		},
 
+		/* create a plugin that inherits the prototype chain */
+		extend: function(child, defaults) {
+			/* Setup class hierarchy, adapted from CoffeeScript */
+			var Ctor = function(){ this.constructor = child; };
+			Ctor.prototype = this.prototype;
+			child.prototype = new Ctor();
+			child.__super__ = this.prototype;
+			/* Copy class methods & attributes */
+			$.extend(child, this);
+			child.defaults = child.prototype;
+			return child;
+		},
+
 		attach: function($source, $content, config) {
 			var Klass = this;
 			if (typeof $content === 'object' && $content instanceof $ === false && !config) {
@@ -299,9 +312,10 @@
 
 			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, function(event) {
 				/* ... since we might as well compute the config on the actual target */
-				var elemConfig = $.extend({$currentTarget: $(this)}, Klass.readElementConfig($source[0]), Klass.readElementConfig(this), config);
-				new $.featherlight($content, elemConfig).open(event);
+				var elemConfig = $.extend({$source: $source, $currentTarget: $(this)}, Klass.readElementConfig($source[0]), Klass.readElementConfig(this), config);
+				new Klass($content, elemConfig).open(event);
 			});
+			return $source;
 		},
 
 		current: function() {
@@ -322,8 +336,7 @@
 
 	/* bind jQuery elements to trigger featherlight */
 	$.fn.featherlight = function($content, config) {
-		Featherlight.attach(this, $content, config);
-		return this;
+		return Featherlight.attach(this, $content, config);
 	};
 
 	/* bind featherlight on ready if config autoBind is set */

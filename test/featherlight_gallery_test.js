@@ -49,5 +49,38 @@ var expect = chai.expect;
         expect(lastCurrent).to.have.attr('href').match(/photo_large.jpg\?3/);
       }]);
     });
+
+    describe('$.featherlightGallery', function() {
+      it ('can be called directly', function(done) {
+        var lastCurrent = null;
+        var imgs =  '<img src="fixtures/photo.jpeg?direct_1"/>' +
+                    '<img src="fixtures/photo.jpeg?direct_2"/>' +
+                    '<img src="fixtures/photo.jpeg?direct_3"/>';
+        $.featherlightGallery($(imgs), {
+          targetAttr: 'src',
+          afterImage: function(){ lastCurrent = this.$currentTarget }
+        });
+        patiently(done, [function(){
+          expect($('.featherlight img')).to.have.attr('src').match(/direct_1$/);
+          $('.featherlight').trigger('previous');
+        }, function() {
+          expect(lastCurrent).to.have.attr('src').match(/direct_3$/);
+        }]);
+      });
+    });
+
+    it ('accepts config as data-attributes', function(done) {
+      var $cur;
+      $('#extra-test').featherlightGallery();
+      $('#extra-test a:first').click();
+      patiently(done, [function(){
+        $cur = $.featherlightGallery.current()
+        expect($cur).to.be.an.instanceof($.featherlightGallery)
+        expect($cur).to.not.have.property('called');
+        $('.featherlight').trigger('next');
+      }, function(){
+        expect($cur).to.have.property('called', true);
+      }]);
+    });
   });
 }(jQuery));
