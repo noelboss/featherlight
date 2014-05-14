@@ -38,7 +38,7 @@ var expect = chai.expect;
     it ('accepts an afterImage config', function(done) {
       var lastCurrent = null;
       $('#basic-test a').featherlightGallery({
-        afterImage: function() { lastCurrent = this.$current; }
+        afterImage: function() { lastCurrent = this.$currentTarget; }
       });
       $('#basic-test a').eq(2).click();
       patiently(done, [function(){
