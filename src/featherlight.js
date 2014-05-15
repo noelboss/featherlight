@@ -253,7 +253,7 @@
 			},
 			html: {
 				regex: /^\s*<[\w!][^<]*>/, /* Anything that starts with some kind of valid tag */
-				process: function(html) { return $(html); }
+				process: function(html) { return $('<div></div>').html(html); }
 			},
 			ajax: {
 				regex: /./,            /* At this point, any content is assumed to be an URL */
