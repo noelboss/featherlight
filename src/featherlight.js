@@ -34,25 +34,6 @@
 					event.preventDefault();
 				}
 			}
-		},
-
-		/* read element's attributes starting with data-featherlight- */
-		readElementConfigHelper = function(element) {
-			var config = {};
-			if (element && element.attributes) {
-					$.each(element.attributes, function(){
-					var match = this.name.match(/^data-featherlight-(.*)/);
-					if (match) {
-						var val = this.value;
-						try {
-							val = $.parseJSON(val);
-						}
-						catch(e) {}
-						config[$.camelCase(match[1])] = val;
-					}
-				});
-			}
-			return config;
 		};
 
 	Featherlight.prototype = {
@@ -279,8 +260,27 @@
 		},
 
 		/*** class methods ***/
+		/* read element's attributes starting with data-featherlight- */
+		readElementConfig: function(element) {
+			var config = {};
+			if (element && element.attributes) {
+					$.each(element.attributes, function(){
+					var match = this.name.match(/^data-featherlight-(.*)/);
+					if (match) {
+						var val = this.value;
+						try {
+							val = $.parseJSON(val);
+						}
+						catch(e) {}
+						config[$.camelCase(match[1])] = val;
+					}
+				});
+			}
+			return config;
+		},
 
 		attach: function($source, $content, config) {
+			var Klass = this;
 			if (typeof $content === 'object' && $content instanceof $ === false && !config) {
 				config = $content;
 				$content = undefined;
@@ -289,11 +289,11 @@
 			config = $.extend({}, config);
 
 			/* Only for openTrigger and namespace... */
-			var tempConfig = $.extend({}, this.defaults, readElementConfigHelper($source[0]), config);
+			var tempConfig = $.extend({}, Klass.defaults, Klass.readElementConfig($source[0]), config);
 
 			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, function(event) {
 				/* ... since we might as well compute the config on the actual target */
-				var elemConfig = $.extend({$currentTarget: $(this)}, readElementConfigHelper(this), config);
+				var elemConfig = $.extend({$currentTarget: $(this)}, Klass.readElementConfig(this), config);
 				new $.featherlight($content, elemConfig).open(event);
 			});
 		},
