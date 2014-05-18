@@ -10,6 +10,7 @@ Master
 - New content filter 'text' for plain text messages.
 - Gallery has new callbacks `beforeImage` and `afterImage`.
 - Gallery defaults are accessible with $.featherlightGallery.defaults
+- Callbacks like afterOpen can be set using data-featherlight-after-open
 
 ### Breaking changes
 - `$.featherlight` now always trigger a new lightbox. Use `$.fn.featherlight` for attaching events to elements.

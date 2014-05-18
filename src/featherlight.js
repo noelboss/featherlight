@@ -259,20 +259,26 @@
 			}
 		},
 
+		functionAttributes: ['beforeOpen', 'afterOpen', 'beforeClose', 'afterClose'],
+
 		/*** class methods ***/
 		/* read element's attributes starting with data-featherlight- */
 		readElementConfig: function(element) {
-			var config = {};
+			var Klass = this,
+				config = {};
 			if (element && element.attributes) {
 					$.each(element.attributes, function(){
 					var match = this.name.match(/^data-featherlight-(.*)/);
 					if (match) {
-						var val = this.value;
-						try {
-							val = $.parseJSON(val);
+						var val = this.value,
+							name = $.camelCase(match[1]);
+						if ($.inArray(name, Klass.functionAttributes) >= 0) {  /* jshint -W054 */
+							val = new Function(val);                           /* jshint +W054 */
+						} else {
+							try { val = $.parseJSON(val); }
+							catch(e) {}
 						}
-						catch(e) {}
-						config[$.camelCase(match[1])] = val;
+						config[name] = val;
 					}
 				});
 			}

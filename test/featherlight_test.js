@@ -86,15 +86,18 @@ var expect = chai.expect;
 
 		describe('configuration', function() {
 			it('can be set using data-feather-*', function() {
+				fn = "this.$instance.append('<caption>Added in callback</caption>')"
 				$('<a href=".some-content" \
 							data-featherlight-variant="test" \
 							data-featherlight-close-speed="42" \
+							data-featherlight-after-open="'+ fn + '" \
 							data-featherlight-close-on-esc="false">').featherlight().click();
 				expect($.featherlight.current()).to.have.properties({
 					variant: 'test',
 					closeOnEsc: false,
 					closeSpeed: 42,
 				});
+				expect($.featherlight.current().$instance.find('caption')).to.have.text('Added in callback');
 			});
 
 			it('can specify to close or not on escape key', function() {
