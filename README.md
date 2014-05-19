@@ -142,6 +142,8 @@ Has no effect if $.featherlight is called directly.
 	filter - String: null
 A selector to filter events, when calling `featherlight` on a jQuery set, in a similar fashion to `$(...).on('click', filter, eventHandler)`.
 
+Limitation: While auto bound elements added dynamically after onReady (e.g. via Ajax) will work fine, those with a `filter` are only supported supported if present before onReady.
+
 ================================================
 
 	root - String: 'body'

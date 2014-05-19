@@ -5,7 +5,7 @@ var expect = chai.expect;
 	var resetFixtures = function(){
 		if (!$htmlFixtures) $htmlFixtures = $('#fixtures').detach();
 		$('body >:not(#mocha)').remove()
-		$('body').append($htmlFixtures.clone());
+		$('body').append($htmlFixtures.clone(true));
 	};
 	$.fx.off = true;
 
