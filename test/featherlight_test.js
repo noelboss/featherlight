@@ -95,6 +95,16 @@ var expect = chai.expect;
 				expect($.featherlight.current().$instance.find('b')).to.have.text('Added in callback');
 			});
 
+			it('can be set using data-feather-* on filtered element too', function() {
+				$('#data-attr-filter-test a:first').click();
+				expect($.featherlight.current()).to.have.property('variant').equal('wrapper');
+				$('#data-attr-filter-test a:last').click();
+				expect($.featherlight.current()).to.have.property('variant').equal('inner');
+				$('<a data-featherlight-variant="dynamic" href=".some-content">z</a>')
+					.appendTo($('#data-attr-filter-test')).click()
+				expect($.featherlight.current()).to.have.property('variant').equal('dynamic');
+			});
+
 			it('can specify to close or not on escape key', function() {
 				var first = $.featherlight('<p/>'),
 					second = $.featherlight('<p/>'),

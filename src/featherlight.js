@@ -299,7 +299,7 @@
 
 			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, function(event) {
 				/* ... since we might as well compute the config on the actual target */
-				var elemConfig = $.extend({$currentTarget: $(this)}, Klass.readElementConfig(this), config);
+				var elemConfig = $.extend({$currentTarget: $(this)}, Klass.readElementConfig($source[0]), Klass.readElementConfig(this), config);
 				new $.featherlight($content, elemConfig).open(event);
 			});
 		},

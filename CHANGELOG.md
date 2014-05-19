@@ -4,7 +4,8 @@ Featherlight – Changelog
 Master
 -----------------------------------
 ### Features
-- New option filter to attach lazily like `$(sel).on('click', filter, ...)`. Attaching is done for the whole set, not on each individual element.
+- New option filter to attach lazily like `$(sel).on('click', filter, ...)`. Attaching is done for the whole set, not on each individual element. Attributes of the whole set and the filtered
+element are combined.
 - New option otherClose to support extra closing buttons.
 - New option root to support appending featherlight elsewhere than on the body.
 - New content filter 'text' for plain text messages.

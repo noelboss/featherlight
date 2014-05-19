@@ -142,6 +142,16 @@ Has no effect if $.featherlight is called directly.
 	filter - String: null
 A selector to filter events, when calling `featherlight` on a jQuery set, in a similar fashion to `$(...).on('click', filter, eventHandler)`.
 
+Attributes both the selector and the filtered element are taken into account.
+
+In the following example, the first link will make an ajax request while the second will display the text "second".
+
+    <div data-featherlight data-featherlight-filter="a"
+         data-featherlight-type="ajax">
+      <a href="first">Hello</a>
+      <a href="second" data-featherlight-type="text">World</a>
+    </div>
+
 Limitation: While auto bound elements added dynamically after onReady (e.g. via Ajax) will work fine, those with a `filter` are only supported supported if present before onReady.
 
 ================================================
