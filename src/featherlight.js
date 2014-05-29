@@ -118,11 +118,6 @@
 					}
 				});
 
-				self.$instance.on('featherlightGetCurrent', function(event){
-					if(self.$instance.closest('body').length > 0) {
-						event.currentFeatherlight = self;
-					}
-				});
 				return this;
 			},
 
@@ -197,6 +192,7 @@
 
 			/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 			open: function(event){
+				var self = this;
 				if(event){
 					event.preventDefault();
 				}
@@ -204,6 +200,14 @@
 
 				/* If we have content, add it and show lightbox */
 				if($content){
+					/* Add to opened registry */
+					self.constructor._opened.add(self._openedCallback = function(response){
+						if(self.$instance.closest('body').length > 0) {
+							response.currentFeatherlight = self;
+						}
+					});
+					/* Set content and show */
+
 					if(this.config.closeOnEsc && escapeHandler) {
 						$(document).bind('keyup.'+Fl.defaults.namespace, escapeHandler);
 						escapeHandler = null;
@@ -218,6 +222,7 @@
 			/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
 			close: function(event){
 				var self = this;
+				self.constructor._opened.remove(self._openedCallback);
 				self.$instance.fadeOut(self.config.closeSpeed,function(){
 					self.$instance.detach();
 				});
@@ -253,15 +258,17 @@
 		},
 
 		current: function() {
-			var event = new $.Event('featherlightGetCurrent');
-			$.event.trigger(event);
-			return event.currentFeatherlight;
+			var response = {};
+			this._opened.fire(response);
+			return response.currentFeatherlight;
 		},
 
 		close: function() {
 			var cur = Fl.current();
 			if(cur) { cur.config.close.call(cur); }
-		}
+		},
+
+		_opened: $.Callbacks()
 	});
 
 	Fl.prototype = $.extend(Fl.methods, {constructor: Fl});
