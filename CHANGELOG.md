@@ -5,6 +5,11 @@ Master
 -----------------------------------
 
 
+0.4.2 - 2014-05-29
+-----------------------------------
+### Maintenance & Fixes
+- Avoid using global events since they are undocumented and apparently deprecated.
+
 0.4.1 - 2014-04-17
 -----------------------------------
 ### Maintenance & Fixes
