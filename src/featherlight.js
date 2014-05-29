@@ -27,14 +27,14 @@
 
 		/* document wide esc handler, attached in setup method */
 	var escapeHelper = function(event) {
-			if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
-				var self = Featherlight.current();
-				if(self && self.closeOnEsc) {
-					self.$instance.find('.'+self.namespace+'-close:first').click();
-					event.preventDefault();
-				}
+		if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
+			var self = Featherlight.current();
+			if(self && self.closeOnEsc) {
+				self.$instance.find('.'+self.namespace+'-close:first').click();
+				event.preventDefault();
 			}
-		};
+		}
+	};
 
 	Featherlight.prototype = {
 		constructor: Featherlight,
