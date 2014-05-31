@@ -82,7 +82,6 @@
 				var goOn = this.config.beforeClose.call(this, event);
 				if(false !== goOn){ /* if before function did not stop propagation */
 					this.close(event);
-					this.config.afterClose.call(this, event);
 				}
 			}
 		},
@@ -225,6 +224,7 @@
 				self.constructor._opened.remove(self._openedCallback);
 				self.$instance.fadeOut(self.config.closeSpeed,function(){
 					self.$instance.detach();
+					self.config.afterClose.call(this,event);
 				});
 			}
 		},
