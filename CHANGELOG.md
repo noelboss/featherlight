@@ -3,6 +3,10 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+
+
+0.4.3 - 2014-05-31
+-----------------------------------
 ### Maintenance & Fixes
 - Call `afterClose` callback after the end of the fadeout
 
