@@ -12,7 +12,7 @@ Featherlight - ultra slim jQuery lightbox [![Build Status](https://travis-ci.org
 * Customizable via configuration object
 
 
-## [» Download Current Release 0.4.2](https://github.com/noelboss/featherlight/archive/0.4.2.zip)
+## [» Download Current Release 0.4.3](https://github.com/noelboss/featherlight/archive/0.4.3.zip)
 
 Here you'll find a [list of all the changes](https://github.com/noelboss/featherlight/blob/master/CHANGELOG.md) and you can also download [old releases](https://github.com/noelboss/featherlight/releases) or [the master including all the latest  bling](https://github.com/noelboss/featherlight/archive/master.zip).
 
