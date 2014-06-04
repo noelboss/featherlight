@@ -82,5 +82,13 @@ var expect = chai.expect;
         expect($cur).to.have.property('called', true);
       }]);
     });
+
+    describe('.current', function() {
+      it ('only returns actual featherlight gallery instances', function() {
+        $.featherlight('<p>This is a test<p>');
+        expect($.featherlight.current()).to.not.be.undefined;
+        expect($.featherlightGallery.current()).to.be.undefined;
+      });
+    });
   });
 }(jQuery));
