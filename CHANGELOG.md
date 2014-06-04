@@ -5,11 +5,12 @@ Master
 -----------------------------------
 
 
-0.4.4 - 2014-05-31
+0.4.5 - 2014-06-04
 -----------------------------------
+### Maintenance & Fixes
+- Bugfix for IE 8.
 
-
-0.4.3 - 2014-05-31
+0.4.4 - 2014-05-31
 -----------------------------------
 ### Maintenance & Fixes
 - Call `afterClose` callback after the end of the fadeout
