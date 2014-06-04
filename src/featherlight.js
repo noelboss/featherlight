@@ -271,7 +271,7 @@
 		_opened: $.Callbacks()
 	});
 
-	Fl.prototype = $.extend(Fl.methods, {constructor: Fl});
+	Fl.prototype = $.extend({constructor: Fl}, Fl.methods);
 
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlight = function(config, $content) {
