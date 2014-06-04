@@ -178,8 +178,9 @@
 
 				if($content){
 					/* Add to opened registry */
-					self.constructor._opened.add(self._openedCallback = function(response){
-						if(self.$instance.closest('body').length > 0) {
+					self.constructor._opened.add(self._openedCallback = function(klass, response){
+						if ((self instanceof klass) &&
+								(self.$instance.closest('body').length > 0)) {
 							response.currentFeatherlight = self;
 						}
 					});
@@ -320,7 +321,7 @@
 
 		current: function() {
 			var response = {};
-			this._opened.fire(response);
+			this._opened.fire(this, response);
 			return response.currentFeatherlight;
 		},
 
