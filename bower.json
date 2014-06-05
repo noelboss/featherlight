@@ -1,11 +1,10 @@
 {
   "name": "featherlight",
   "version": "0.4.5",
-  "main": "dist/jquery.js",
+  "main": "release/featherlight.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "release",
     "test",
     "*.md",
     "Gruntfile.js",

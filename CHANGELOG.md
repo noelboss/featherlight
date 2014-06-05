@@ -3,7 +3,8 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
-
+### Maintenance & Fixes
+- Fix bower manifest
 
 0.4.5 - 2014-06-04
 -----------------------------------
