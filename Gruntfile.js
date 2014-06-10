@@ -118,6 +118,10 @@ module.exports = function(grunt) {
 						to: '="release/featherlight.min.css'
 					},
 					{
+						from: '="../assets',
+						to: '="assets'
+					},
+					{
 						from: 'master.zip',
 						to: '<%= pkg.version %>.zip'
 					}
