@@ -250,7 +250,7 @@
 					/* we are using load so one can specify a target with: url.html #targetelement */
 					var content = $('<div></div>').load(url, function(response, status){
 						if ( status !== "error" ) {
-							$.featherlight(content.html(), $.extend(self.config, {type: {html: true}}));
+							$.featherlight(content.html(), $.extend({}, self.config, {type: {html: true}}));
 						}
 					});
 				}

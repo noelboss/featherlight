@@ -3,7 +3,8 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
-
+### Maintenance & Fixes
+- Bug fix with loading ajax [#63]
 
 0.4.8 - 2014-06-11
 -----------------------------------
