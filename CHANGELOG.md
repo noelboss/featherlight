@@ -3,6 +3,10 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+
+
+0.4.8 - 2014-06-11
+-----------------------------------
 ### Maintenance & Fixes
 - Bug fix with gallery navigation (bis) [#62]
 
