@@ -36,7 +36,19 @@
 				}
 			},
 			customAfterOpen = config && config.afterOpen,
+			customAfterClose = config && config.afterClose,
 			overrideCallbacks = {				/* provide an afterOpen function */
+				afterClose: function(event){
+					var fl = this;
+					fl.$instance.off('next.'+fl.config.namespace+' previous.'+fl.config.namespace);
+					if (swipeAwareConstructor) {
+						fl.$instance.off('swipeleft');
+						fl.$instance.off('swiperight');
+					}
+					if('function' === typeof customAfterClose) {
+						customAfterClose.call(this, event);
+					}
+				},
 				afterOpen: function(event){
 					var fl = this,
 						$img = fl.$instance.find('img');
