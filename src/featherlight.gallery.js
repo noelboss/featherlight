@@ -34,18 +34,9 @@
 						$img = self.$instance.find('img');
 
 					self.$instance.on('next.'+self.namespace+' previous.'+self.namespace, function(event){
-							var offset = event.type === 'next' ? +1 : -1;
-							self.$currentTarget = self.$source.eq((self.$source.length + self.$source.index(self.$currentTarget) + offset) % self.$source.length);
-							self.beforeImage(event);
-							$.when(
-								self.getContent(),
-								$img.fadeTo(self.galleryFadeOut,0.2)
-							).done(function($i) {
-									$img[0].src = $i[0].src;
-									self.afterImage(event);
-									$img.fadeTo(self.galleryFadeIn,1);
-								});
-							});
+						var offset = event.type === 'next' ? +1 : -1;
+						self.navigateTo(self.currentNavigation() + offset);
+					});
 
 					if (swipeAwareConstructor) {
 						swipeAwareConstructor(self.$instance)
@@ -89,7 +80,29 @@
 		previousIcon: '&#9664;',     /* Code that is used as previous icon */
 		nextIcon: '&#9654;',         /* Code that is used as next icon */
 		galleryFadeIn: 100,          /* fadeIn speed when image is loaded */
-		galleryFadeOut: 300          /* fadeOut speed before image is loaded */
+		galleryFadeOut: 300,         /* fadeOut speed before image is loaded */
+
+		currentNavigation: function() {
+			return this.$source.index(this.$currentTarget);
+		},
+
+		navigateTo: function(index) {
+			var self = this,
+				len = self.$source.length,
+				$img = self.$instance.find('img');
+			index = ((index % len) + len) % len; /* pin index to [0, len[ */
+
+			self.$currentTarget = self.$source.eq(index);
+			self.beforeImage(event);
+			return $.when(
+				self.getContent(),
+				$img.fadeTo(self.galleryFadeOut,0.2)
+			).done(function($i) {
+					$img[0].src = $i[0].src;
+					self.afterImage(event);
+					$img.fadeTo(self.galleryFadeIn,1);
+			});
+		}
 	});
 
 	FeatherlightGallery.functionAttributes = FeatherlightGallery.functionAttributes.concat([
