@@ -43,14 +43,8 @@
 							.on('swipeleft', self._swipeleft = function()  { self.$instance.trigger('next'); })
 							.on('swiperight', self._swiperight = function() { self.$instance.trigger('previous'); });
 					} else {
-						var createNav = function(target){
-								return $('<span title="'+target+'" class="'+self.namespace+'-'+target+'"><span>'+self[target+'Icon']+'</span></span>').click(function(){
-									$(this).trigger(target+'.'+self.namespace);
-								});
-							};
-
-						$img.after(createNav('previous'))
-							.after(createNav('next'));
+						$img.after(self.createNavigation('previous'))
+							.after(self.createNavigation('next'));
 					}
 
 					_super(event);
@@ -101,6 +95,13 @@
 					$img[0].src = $i[0].src;
 					self.afterImage(event);
 					$img.fadeTo(self.galleryFadeIn,1);
+			});
+		},
+
+		createNavigation: function(target) {
+			var self = this;
+			return $('<span title="'+target+'" class="'+this.namespace+'-'+target+'"><span>'+this[target+'Icon']+'</span></span>').click(function(){
+				$(this).trigger(target+'.'+self.namespace);
 			});
 		}
 	});
