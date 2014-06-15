@@ -208,6 +208,13 @@
 				self.$instance.detach();
 				self.afterClose(event);
 			});
+		},
+
+		/* Argument 'chain' has callback names as keys and function(super, event) as values */
+		chainCallbacks: function(chain) {
+			for (var name in chain) {
+				this[name] = $.proxy(chain[name], this, $.proxy(this[name]));
+			}
 		}
 	};
 
