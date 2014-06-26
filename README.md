@@ -200,7 +200,7 @@ close method from execution. `this` is an object and contains the triggering DOM
 	// example
 	beforeOpen: function(event){
 		console.log(this); // this contains all related elements
-		returm false; // prevent lightbox from opening
+		return false; // prevent lightbox from opening
 	}
 
 
