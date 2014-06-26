@@ -169,7 +169,7 @@
 		open: function(event){
 			var self = this;
 			if(event && !event.isDefaultPrevented()
-				|| self.beforeOpen(event) !== false) {
+				&& self.beforeOpen(event) !== false) {
 
 				if(event){
 					event.preventDefault();
@@ -187,8 +187,9 @@
 					/* Set content and show */
 					$.when($content).done(function($content){
 						self.setContent($content)
-							.$instance.appendTo(self.root).fadeIn(self.openSpeed);
-						self.afterOpen(event);
+							.$instance.appendTo(self.root).fadeIn(self.openSpeed, function(){
+								self.afterOpen(event);
+							});
 					});
 					return self;
 				}
