@@ -186,9 +186,6 @@
 
 					/* Set content and show */
 					$.when($content).done(function($content){
-						/* Call the before open */
-						self.beforeOpen(event);
-
 						self.setContent($content)
 							.$instance.appendTo(self.root).fadeIn(self.openSpeed, function(){
 								self.afterOpen(event);
