@@ -187,8 +187,9 @@
 					/* Set content and show */
 					$.when($content).done(function($content){
 						self.setContent($content)
-							.$instance.appendTo(self.root).fadeIn(self.openSpeed);
-						self.afterOpen(event);
+							.$instance.appendTo(self.root).fadeIn(self.openSpeed, function(){
+								self.afterOpen(event);
+							});
 					});
 					return self;
 				}
