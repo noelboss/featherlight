@@ -168,8 +168,8 @@
 		/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 		open: function(event){
 			var self = this;
-			if(event && !event.isDefaultPrevented()
-				|| self.beforeOpen(event) !== false) {
+			if((!event || !event.isDefaultPrevented())
+				&& self.beforeOpen(event) !== false) {
 
 				if(event){
 					event.preventDefault();
