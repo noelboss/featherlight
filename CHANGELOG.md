@@ -9,6 +9,7 @@ element are combined.
 - New option otherClose to support extra closing buttons.
 - New option root to support appending featherlight elsewhere than on the body.
 - New content filter 'text' for plain text messages.
+- New callback onKeyDown
 - Gallery has new callbacks `beforeImage` and `afterImage`.
 - Gallery defaults are accessible with $.featherlightGallery.defaults
 - Callbacks like afterOpen can be set using data-featherlight-after-open

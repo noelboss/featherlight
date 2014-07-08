@@ -18,6 +18,7 @@
 		if(this instanceof Featherlight) {  /* called with new */
 			this.id = Featherlight.id++;
 			this.setup($content, config);
+			this.chainCallbacks(Featherlight._callbackChain);
 		} else {
 			var fl = new Featherlight($content, config);
 			fl.open();
@@ -27,11 +28,10 @@
 
 		/* document wide esc handler, attached in setup method */
 	var keyHelper = function(event) {
-		if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
+		if (!event.isDefaultPrevented()) { // esc keycode
 			var self = Featherlight.current();
-			if(self && self.closeOnEsc) {
-				self.$instance.find('.'+self.namespace+'-close:first').click();
-				event.preventDefault();
+			if (self) {
+				self.onKeyDown(event);
 			}
 		}
 	};
@@ -59,6 +59,7 @@
 		beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
 		afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
+		onKeyDown:    $.noop,									/* Called on key down for the frontmost featherlight */
 		type:         null,                   /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
 		contentFilters: ['jquery', 'image', 'html', 'ajax', 'text'], /* List of content filters to use to determine the content */
 
@@ -342,6 +343,18 @@
 		close: function() {
 			var cur = this.current();
 			if(cur) { cur.close(); }
+		},
+
+		_callbackChain: {
+			onKeyDown: function(_super, event){
+				if(27 === event.keyCode && this.closeOnEsc) {
+					this.$instance.find('.'+this.namespace+'-close:first').click();
+					event.preventDefault();
+				} else {
+					console.log('pass');
+					return _super(event);
+				}
+			}
 		},
 
 		_opened: $.Callbacks()

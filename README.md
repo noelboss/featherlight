@@ -103,6 +103,7 @@ You can also modify the `$.featherlight.defaults` directly which holds all the d
 		beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
 		afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
+		onKeyDown:    $.noop,									/* Called on key down for the frontmost featherlight */
 		type:         null,                   /* Specify content type. If unset, it will check for the targetAttrs value. */
 		contentFilters: ['jquery', 'image', 'html', 'ajax', 'text'] /* List of content filters to use to determine the content */
 		jquery/image/html/ajax/text: undefined     /* Specify content type and data */
