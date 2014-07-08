@@ -26,7 +26,7 @@
 	}
 
 		/* document wide esc handler, attached in setup method */
-	var escapeHelper = function(event) {
+	var keyHelper = function(event) {
 		if (27 === event.keyCode && !event.isDefaultPrevented()) { // esc keycode
 			var self = Featherlight.current();
 			if(self && self.closeOnEsc) {
@@ -77,12 +77,6 @@
 				closeButtonSelector = '.'+self.namespace+'-close' + (self.otherClose ? ',' + self.otherClose : '');
 
 			self.$instance = $background.clone().addClass(self.variant); /* clone DOM for the background, wrapper and the close button */
-
-			/* attach esc handler to document if configured */
-			if(self.closeOnEsc && escapeHelper) {
-				$(document).bind('keyup.'+this.constructor.prototype.namespace, escapeHelper);
-				escapeHelper = null;
-			}
 
 			/* close when click on background/anywhere/null or closebox */
 			self.$instance.on(self.closeTrigger+'.'+self.namespace, function(event) {
@@ -185,6 +179,12 @@
 						}
 					});
 
+					/* attach key handler to document if needed */
+					if(!Featherlight._keyHandlerInstalled) {
+						$(document).on('keyup.'+Featherlight.prototype.namespace, keyHelper);
+						Featherlight._keyHandlerInstalled = true;
+					}
+
 					/* Set content and show */
 					$.when($content).done(function($content){
 						self.setContent($content)
@@ -204,6 +204,13 @@
 				return false;
 			}
 			self.constructor._opened.remove(self._openedCallback);
+
+			/* attach key handler to document if no opened Featherlight */
+			if(!Featherlight.current()) {
+				$(document).off('keyup.'+Featherlight.namespace, keyHelper);
+				self.constructor._keyHandlerInstalled = false;
+			}
+
 			self.$instance.fadeOut(self.closeSpeed,function(){
 				self.$instance.detach();
 				self.afterClose(event);
