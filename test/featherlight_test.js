@@ -7,6 +7,13 @@ var expect = chai.expect;
 		$('body >:not(#mocha)').remove()
 		$('body').append($htmlFixtures.clone(true));
 	};
+	var triggerKeyCode = function(keyCode) {
+		$(document).trigger($.Event("keyup", { keyCode: keyCode }));
+	};
+	var triggerEscape = function(){
+		triggerKeyCode(27);
+	};
+
 	$.fx.off = true;
 
 	describe('Featherlight', function() {
@@ -109,10 +116,7 @@ var expect = chai.expect;
 				var first = $.featherlight('<p/>'),
 					second = $.featherlight('<p/>'),
 					third = $.featherlight('<p/>', {closeOnEsc: false}),
-					last = $.featherlight('<p/>', {closeOnEsc: true}),
-					triggerEscape = function(){
-						$(document).trigger($.Event("keyup", { keyCode: 27 }));
-					};
+					last = $.featherlight('<p/>', {closeOnEsc: true});
 				expect($.featherlight._keyHandlerInstalled).to.be.true;
 				triggerEscape();
 				expect($.featherlight.current()).to.equal(third);
