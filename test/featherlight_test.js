@@ -131,6 +131,20 @@ var expect = chai.expect;
 				expect($.featherlight._keyHandlerInstalled).to.be.false;
 			});
 
+			it('can specify a key handler', function() {
+				var lastKeyCode;
+				$.featherlight('<p/>', {
+					onKeyDown: function(event) {
+						lastKeyCode = event.keyCode;
+					}
+				});
+				triggerKeyCode(25);
+				expect(lastKeyCode).to.equal(25);
+				triggerKeyCode(27);
+				expect(lastKeyCode).to./* still be */equal(25); /* since event is handled by FL */
+				expect($.featherlight.current()).to.be.undefined;
+			});
+
 			it('can specify a filter for events', function() {
 				$("#filter-test .group").featherlight({filter: '.yes', type: 'text'})
 					.append('<span class="yes"  href="filter Appended">Photo</span>');
