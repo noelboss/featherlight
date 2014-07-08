@@ -113,6 +113,7 @@ var expect = chai.expect;
 					triggerEscape = function(){
 						$(document).trigger($.Event("keyup", { keyCode: 27 }));
 					};
+				expect($.featherlight._keyHandlerInstalled).to.be.true;
 				triggerEscape();
 				expect($.featherlight.current()).to.equal(third);
 				triggerEscape();
@@ -121,6 +122,9 @@ var expect = chai.expect;
 				expect($.featherlight.current()).to.equal(second);
 				triggerEscape();
 				expect($.featherlight.current()).to.equal(first);
+				expect($.featherlight._keyHandlerInstalled).to.be.true;
+				$.featherlight.current().close();
+				expect($.featherlight._keyHandlerInstalled).to.be.false;
 			});
 
 			it('can specify a filter for events', function() {
