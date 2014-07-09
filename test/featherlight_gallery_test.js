@@ -7,6 +7,9 @@ var expect = chai.expect;
     $('body >:not(#mocha)').remove()
     $('body').append($htmlFixtures.clone(true));
   };
+  var triggerKeyCode = function(keyCode) {
+    $(document).trigger($.Event("keyup", { keyCode: keyCode }));
+  };
   $.fx.off = true;
 
   describe('Featherlight Gallery', function() {
@@ -25,6 +28,23 @@ var expect = chai.expect;
       }, function() {
         expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?0/);
         $('.featherlight').trigger('previous');
+      }, function() {
+        expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?3/);
+      }]);
+    });
+
+    it ('can be navigated using arrow keys', function(done) {
+      $('#basic-test a').featherlightGallery();
+      $('#basic-test a').eq(2).click();
+      patiently(done, [function() {
+        expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?2/);
+        triggerKeyCode(39);
+      }, function() {
+        expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?3/);
+        triggerKeyCode(39);
+      }, function() {
+        expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?0/);
+        triggerKeyCode(37);
       }, function() {
         expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?3/);
       }]);

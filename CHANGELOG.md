@@ -14,7 +14,8 @@ element are combined.
 - Gallery defaults are accessible with $.featherlightGallery.defaults
 - Callbacks like afterOpen can be set using data-featherlight-after-open
 - Gallery inherits Featherlight's prototype and class methods.
-- Gallery can be called entirely from javascript
+- Gallery can be called entirely from javascript.
+- Gallery can be navigated using left and right arrow keys.
 
 ### Breaking changes
 - `$.featherlight` now always trigger a new lightbox. Use `$.fn.featherlight` for attaching events to elements.
