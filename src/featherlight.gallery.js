@@ -36,8 +36,8 @@
 					var self = this;
 					self.$instance.off('next.'+self.namespace+' previous.'+self.namespace);
 					if (swipeAwareConstructor) {
-						self.$instance.off('swipeleft');
-						self.$instance.off('swiperight');
+						swipeAwareConstructor(self.$instance).off('swipeleft', self._swipeleft); /* See http://stackoverflow.com/questions/17367198/hammer-js-cant-remove-event-listener */
+						swipeAwareConstructor(self.$instance).off('swiperight', self._swiperight);
 					}
 					if('function' === typeof customAfterClose) {
 						customAfterClose.call(this, event);
@@ -66,8 +66,8 @@
 
 					if (swipeAwareConstructor) {
 						swipeAwareConstructor(self.$instance)
-							.on('swipeleft', function()  { self.$instance.trigger('next'); })
-							.on('swiperight', function() { self.$instance.trigger('previous'); });
+							.on('swipeleft', self._swipeleft = function()  { self.$instance.trigger('next'); })
+							.on('swiperight', self._swiperight = function() { self.$instance.trigger('previous'); });
 					} else {
 						var createNav = function(target){
 								return $('<span title="'+target+'" class="'+self.namespace+'-'+target+'"><span>'+config[target]+'</span></span>').click(function(){
