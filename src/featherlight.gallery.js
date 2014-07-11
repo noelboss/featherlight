@@ -88,17 +88,25 @@
 		galleryFadeIn: 100,          /* fadeIn speed when image is loaded */
 		galleryFadeOut: 300,         /* fadeOut speed before image is loaded */
 
+		images: function() {
+			if (this.filter) {
+				return this.$source.find(this.filter);
+			}
+			return this.$source;
+		},
+
 		currentNavigation: function() {
-			return this.$source.index(this.$currentTarget);
+			return this.images().index(this.$currentTarget);
 		},
 
 		navigateTo: function(index) {
 			var self = this,
-				len = self.$source.length,
+				source = self.images(),
+				len = source.length,
 				$img = self.$instance.find('img');
 			index = ((index % len) + len) % len; /* pin index to [0, len[ */
 
-			self.$currentTarget = self.$source.eq(index);
+			self.$currentTarget = source.eq(index);
 			self.beforeImage(event);
 			return $.when(
 				self.getContent(),
