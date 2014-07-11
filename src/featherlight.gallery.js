@@ -33,11 +33,11 @@
 			customAfterClose = config && config.afterClose,
 			overrideCallbacks = {				/* provide an afterOpen function */
 				afterClose: function(event){
-					var fl = this;
-					fl.$instance.off('next.'+fl.config.namespace+' previous.'+fl.config.namespace);
+					var self = this;
+					self.$instance.off('next.'+self.namespace+' previous.'+self.namespace);
 					if (swipeAwareConstructor) {
-						fl.$instance.off('swipeleft');
-						fl.$instance.off('swiperight');
+						self.$instance.off('swipeleft');
+						self.$instance.off('swiperight');
 					}
 					if('function' === typeof customAfterClose) {
 						customAfterClose.call(this, event);
