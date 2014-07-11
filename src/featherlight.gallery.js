@@ -30,8 +30,7 @@
 					return _super(event);
 			},
 			afterOpen: function(_super, event){
-					var self = this,
-						$img = self.$instance.find('img');
+					var self = this;
 
 					self.$instance.on('next.'+self.namespace+' previous.'+self.namespace, function(event){
 						var offset = event.type === 'next' ? +1 : -1;
@@ -43,8 +42,9 @@
 							.on('swipeleft', self._swipeleft = function()  { self.$instance.trigger('next'); })
 							.on('swiperight', self._swiperight = function() { self.$instance.trigger('previous'); });
 					} else {
-						$img.after(self.createNavigation('previous'))
-							.after(self.createNavigation('next'));
+						self.$instance.find('.'+self.namespace+'-content')
+							.append(self.createNavigation('previous'))
+							.append(self.createNavigation('next'));
 					}
 
 					_super(event);
@@ -79,7 +79,6 @@
 	$.featherlight.extend(FeatherlightGallery);
 
 	$.extend(FeatherlightGallery.prototype, {
-		type: 'image',
 		/** Additional settings for Gallery **/
 		beforeImage: $.noop,         /* Callback before an image is changed */
 		afterImage: $.noop,          /* Callback after an image is presented */
@@ -103,18 +102,19 @@
 			var self = this,
 				source = self.images(),
 				len = source.length,
-				$img = self.$instance.find('img');
+				$inner = self.$instance.find('.' + self.namespace + '-inner');
 			index = ((index % len) + len) % len; /* pin index to [0, len[ */
 
 			self.$currentTarget = source.eq(index);
 			self.beforeImage(event);
+
 			return $.when(
 				self.getContent(),
-				$img.fadeTo(self.galleryFadeOut,0.2)
-			).done(function($i) {
-					$img[0].src = $i[0].src;
+				$inner.fadeTo(self.galleryFadeOut,0.2)
+			).done(function($newContent) {
+					self.setContent($newContent);
 					self.afterImage(event);
-					$img.fadeTo(self.galleryFadeIn,1);
+					$newContent.fadeTo(self.galleryFadeIn,1);
 			});
 		},
 

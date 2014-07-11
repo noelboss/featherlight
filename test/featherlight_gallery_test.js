@@ -100,7 +100,8 @@ var expect = chai.expect;
         $('.featherlight').trigger('next');
       }, function(){
         expect($cur).to.have.property('called', true);
-        expect($('.featherlight img')).to.have.attr('src').match(/extra_1$/);
+        expect($('.featherlight')).to.contain('Hello');
+        expect($('.featherlight img')).to.not.be.visible;
       }]);
     });
 

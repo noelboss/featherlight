@@ -59,6 +59,32 @@
 					font-size: 1.2em;
 				}
 
+				/* text slide */
+				.thumbnail a { text-decoration: none; }
+				.blurb {
+					display: inline-block;
+					width: 150px;
+					height: 150px;
+				}
+				.blurb h2 { text-align: center;}
+				.blurb .detail { display: none;}
+				.blurb .teaser {
+					font-style: italic;
+					text-align: center;
+				}
+				.featherlight .blurb {
+					display: inline-block;
+					width: 500px;
+					height: 300px;
+					color: #99f;
+				}
+				.featherlight .blurb .detail {
+					color: #ddf;
+					font-size: large;
+					display: inherit;
+				}
+				.featherlight .blurb .teaser { display: none;}
+
 			}
 			@media(max-width: 768px){
 				.fl-page h1 span { display: block; }
@@ -110,7 +136,16 @@
 
 			<div class="row">
 				<div class="col-lg-2">
-					<a class="thumbnail gallery2" href="../assets/two_birds.jpg"><img src="../assets/two_birds.thumb.jpg" /></a>
+					<a class="thumbnail gallery2" href=".blurb">
+						<div class="blurb">
+							<h2>A different example</h2>
+							<p class="teaser">click me!</p>
+							<span class="detail">
+								<p>Featherlight Gallery inherit all the goodies of Featherlight.</p>
+								<p>In particular, the different content filters are available and a gallery can have mixed content. For example, this slide that is not an image.</p>
+								<p>This gallery also demonstrates the use of a css variant.</p>
+						</div>
+					</a>
 				</div>
 				<div class="col-lg-2">
 					<a class="thumbnail gallery2" href="../assets/droplets.jpg"><img src="../assets/droplets.thumb.jpg" /></a>
