@@ -21,7 +21,7 @@ var expect = chai.expect;
         $('.featherlight').trigger('next');
       }, function() {
         expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?3/);
-        $('.featherlight').trigger('next');
+        $('.featherlight-next').click();
       }, function() {
         expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?0/);
         $('.featherlight').trigger('previous');
