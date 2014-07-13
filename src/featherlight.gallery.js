@@ -49,7 +49,7 @@
 
 					_super(event);
 
-					self.afterImage(event);
+					self.afterSlide(event);
 			},
 			onKeyDown: function(_super, event){
 				var dir = {
@@ -80,8 +80,8 @@
 
 	$.extend(FeatherlightGallery.prototype, {
 		/** Additional settings for Gallery **/
-		beforeImage: $.noop,         /* Callback before an image is changed */
-		afterImage: $.noop,          /* Callback after an image is presented */
+		beforeSlide: $.noop,         /* Callback before an image is changed */
+		afterSlide: $.noop,          /* Callback after an image is presented */
 		previousIcon: '&#9664;',     /* Code that is used as previous icon */
 		nextIcon: '&#9654;',         /* Code that is used as next icon */
 		galleryFadeIn: 100,          /* fadeIn speed when image is loaded */
@@ -106,14 +106,14 @@
 			index = ((index % len) + len) % len; /* pin index to [0, len[ */
 
 			self.$currentTarget = source.eq(index);
-			self.beforeImage(event);
+			self.beforeSlide(event);
 
 			return $.when(
 				self.getContent(),
 				$inner.fadeTo(self.galleryFadeOut,0.2)
 			).done(function($newContent) {
 					self.setContent($newContent);
-					self.afterImage(event);
+					self.afterSlide(event);
 					$newContent.fadeTo(self.galleryFadeIn,1);
 			});
 		},
@@ -127,7 +127,7 @@
 	});
 
 	FeatherlightGallery.functionAttributes = FeatherlightGallery.functionAttributes.concat([
-		'beforeImage', 'afterImage'
+		'beforeSlide', 'afterSlide'
 	]);
 
 	$.featherlightGallery = FeatherlightGallery;
