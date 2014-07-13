@@ -55,10 +55,10 @@ var expect = chai.expect;
       expect($anchors.featherlight()).to.equal($anchors);
     });
 
-    it ('accepts an afterImage config', function(done) {
+    it ('accepts an afterSlide config', function(done) {
       var lastCurrent = null;
       $('#basic-test a').featherlightGallery({
-        afterImage: function() { lastCurrent = this.$currentTarget; }
+        afterSlide: function() { lastCurrent = this.$currentTarget; }
       });
       $('#basic-test a').eq(2).click();
       patiently(done, [function(){
@@ -78,7 +78,7 @@ var expect = chai.expect;
                     '<img src="fixtures/photo.jpeg?direct_3"/>';
         $.featherlightGallery($(imgs), {
           targetAttr: 'src',
-          afterImage: function(){ lastCurrent = this.$currentTarget }
+          afterSlide: function(){ lastCurrent = this.$currentTarget }
         });
         patiently(done, [function(){
           expect($('.featherlight img')).to.have.attr('src').match(/direct_1$/);

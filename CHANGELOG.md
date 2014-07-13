@@ -11,7 +11,7 @@ element are combined.
 - New content filter 'text' for plain text messages.
 - New callback onKeyDown
 - Gallery can display mixed content, not just images.
-- Gallery has new callbacks `beforeImage` and `afterImage`.
+- Gallery has new callbacks `beforeSlide` and `afterSlide`.
 - Gallery defaults are accessible with $.featherlightGallery.defaults
 - Callbacks like afterOpen can be set using data-featherlight-after-open
 - Gallery inherits Featherlight's prototype and class methods.
