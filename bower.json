@@ -1,7 +1,7 @@
 {
   "name": "featherlight",
   "version": "0.4.9",
-  "main": "release/featherlight.js",
+  "main": "release/featherlight.min.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
