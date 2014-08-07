@@ -29,7 +29,7 @@
 					}
 					return _super(event);
 			},
-			afterOpen: function(_super, event){
+			beforeOpen: function(_super, event){
 					var self = this;
 
 					self.$instance.on('next.'+self.namespace+' previous.'+self.namespace, function(event){
@@ -46,10 +46,10 @@
 							.append(self.createNavigation('previous'))
 							.append(self.createNavigation('next'));
 					}
-
-					_super(event);
-
-					self.afterSlide(event);
+			},
+			afterOpen: function(_super, event){
+				_super(event);
+				this.afterSlide(event);
 			},
 			onKeyDown: function(_super, event){
 				var dir = {
