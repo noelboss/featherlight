@@ -100,8 +100,10 @@ You can also modify the `$.featherlight.defaults` directly which holds all the d
 		closeIcon:    '&#10005;',             /* Close icon */
 		otherClose:   null,                   /* Selector for alternate close buttons (e.g. "a.close") */
 		beforeOpen:   $.noop,                 /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+		beforeContent: $.noop,                /* Called when content is loaded. Gets event as parameter, this contains all data */
 		beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
+		afterContent: $.noop,                 /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
 		afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
 		onKeyDown:    $.noop,									/* Called on key down for the frontmost featherlight */
 		type:         null,                   /* Specify content type. If unset, it will check for the targetAttrs value. */
@@ -204,6 +206,11 @@ close method from execution. `this` is an object and contains the triggering DOM
 		return false; // prevent lightbox from opening
 	}
 
+
+================================================
+
+	beforeContent, afterContent – Function: null
+Called before and after the loading of the content. For ajax calls or images, there can be a significant delay, for inline content the two calls will occur one right after the other. It receives the event object. `this` is an object and contains the triggering DOM element (if existing) and the related Featherlight objects.
 
 ================================================
 

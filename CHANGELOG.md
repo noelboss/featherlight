@@ -9,7 +9,7 @@ element are combined.
 - New option otherClose to support extra closing buttons.
 - New option root to support appending featherlight elsewhere than on the body.
 - New content filter 'text' for plain text messages.
-- New callback onKeyDown
+- New callback onKeyDown, beforeContent, afterContent
 - Gallery can display mixed content, not just images.
 - Gallery has new callbacks `beforeSlide` and `afterSlide`.
 - Gallery defaults are accessible with $.featherlightGallery.defaults
