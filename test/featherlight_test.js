@@ -178,6 +178,22 @@ var expect = chai.expect;
 				expect($('#fixtures').children().last()).to.have.class('featherlight');
 			});
 
+			it('can specify callbacks to track the progress of the dialog', function() {
+				var callbacks = ['beforeOpen', 'beforeContent', 'afterContent', 'afterOpen', 'beforeClose', 'afterClose'],
+					lastCallback = undefined;
+					options = {};
+				$.each(callbacks, function(i, cb){
+					options[cb] = function() {
+						expect(lastCallback).to.equal(callbacks[i-1]);
+						lastCallback = cb;
+					}
+				});
+				$.featherlight($('<p>Hello</p>'), options);
+				expect(lastCallback).to.equal('afterOpen');
+				$.featherlight.current().close();
+				expect(lastCallback).to.equal('afterClose');
+			});
+
 		});
 
 	});

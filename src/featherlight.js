@@ -56,8 +56,10 @@
 		closeIcon:    '&#10005;',             /* Close icon */
 		otherClose:   null,                   /* Selector for alternate close buttons (e.g. "a.close") */
 		beforeOpen:   $.noop,                 /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+		beforeContent: $.noop,                /* Called when content is loaded. Gets event as parameter, this contains all data */
 		beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
+		afterContent: $.noop,                 /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
 		afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
 		onKeyDown:    $.noop,									/* Called on key down for the frontmost featherlight */
 		type:         null,                   /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
@@ -186,11 +188,17 @@
 						Featherlight._keyHandlerInstalled = true;
 					}
 
+					self.$instance.appendTo(self.root).fadeIn(self.openSpeed);
+					self.beforeContent(event);
+
 					/* Set content and show */
 					$.when($content).done(function($content){
-						self.setContent($content)
-							.$instance.appendTo(self.root).fadeIn(self.openSpeed);
-						self.afterOpen(event);
+						self.setContent($content);
+						self.afterContent(event);
+						/* Call afterOpen after fadeIn is done */
+						$.when(self.$instance.promise()).done(function(){
+							self.afterOpen(event);
+						});
 					});
 					return self;
 				}
@@ -275,7 +283,7 @@
 			}
 		},
 
-		functionAttributes: ['beforeOpen', 'afterOpen', 'beforeClose', 'afterClose'],
+		functionAttributes: ['beforeOpen', 'afterOpen', 'beforeContent', 'afterContent', 'beforeClose', 'afterClose'],
 
 		/*** class methods ***/
 		/* read element's attributes starting with data-featherlight- */
