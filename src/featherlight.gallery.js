@@ -107,12 +107,13 @@
 
 			self.$currentTarget = source.eq(index);
 			self.beforeSlide(event);
-
+			self.beforeContent();
 			return $.when(
 				self.getContent(),
 				$inner.fadeTo(self.galleryFadeOut,0.2)
 			).done(function($newContent) {
 					self.setContent($newContent);
+					self.afterContent();
 					self.afterSlide(event);
 					$newContent.fadeTo(self.galleryFadeIn,1);
 			});
