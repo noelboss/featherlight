@@ -16,7 +16,7 @@
 	}
 
 
-	var isTouchAware = 'ontouchstart' in document.documentElement,
+	var isTouchAware = 'ontouchstart' in window,
 		jQueryConstructor = $.event && $.event.special.swipeleft && $,
 		hammerConstructor = ('Hammer' in window) && function($el){ new window.Hammer(el[0]); },
 		swipeAwareConstructor = isTouchAware && (jQueryConstructor || hammerConstructor);
