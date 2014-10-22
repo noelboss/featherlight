@@ -20,7 +20,7 @@
 		return warn('Load the featherlight plugin before the gallery plugin');
 	}
 
-	var isTouchAware = 'ontouchstart' in document.documentElement,
+	var isTouchAware = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch,
 		jQueryConstructor = $.event && $.event.special.swipeleft && $,
 		hammerConstructor = window.Hammer && function($el){
 			var mc = new window.Hammer.Manager($el[0]);
