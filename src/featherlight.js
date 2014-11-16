@@ -161,11 +161,15 @@
 			if($content.is('iframe') || $('iframe', $content).length > 0){
 				self.$instance.addClass(self.namespace+'-iframe');
 			}
+
 			self.$content = $content.addClass(self.namespace+'-inner');
 
-			/* remove existing content */
-			self.$instance.find('.'+self.namespace+'-inner').remove();
-			self.$instance.find('.'+self.namespace+'-content').append(self.$content);
+			/* replace content by appending to existing one before it is removed
+			   this insures that featherlight-inner remain at the same relative
+				 position to any other items added to featherlight-content */
+			self.$instance.find('.'+self.namespace+'-inner')
+				.slice(1).remove().end()			/* In the unexpected event where there are many inner elements, remove all but the first one */
+				.replaceWith(self.$content);
 
 			return self;
 		},

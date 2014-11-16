@@ -50,6 +50,24 @@ var expect = chai.expect;
       }]);
     });
 
+    it ('will keep modified background intact', function(done) {
+      $('#basic-test a').featherlightGallery({
+        afterOpen: function() {
+          debugger;
+          this.$instance.find('.featherlight-content').append('<div class="something"/>');
+         }
+      });
+      $('#basic-test a').eq(2).click();
+      patiently(done, [function() {
+        expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?2/);
+        expect($('.featherlight-content *:last-child')).to.have.class('something');
+        $('.featherlight').trigger('next');
+      }, function() {
+        expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?3/);
+        expect($('.featherlight-content *:last-child')).to.have.class('something');
+      }]);
+    });
+
     it ('is chainable', function() {
       var $anchors = $('#basic-test a');
       expect($anchors.featherlight()).to.equal($anchors);
