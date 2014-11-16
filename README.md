@@ -312,7 +312,7 @@ Use Featherlight with ajax using 'ajax' keyword or providing a url. It even supp
 
 or you can provide the link directly as the featherlight-attribute:
 
-	<a href="url.html .jQuery-Selector" data-featherlight="ajax">Open Ajax Content</a>
+	<a href="#" data-featherlight="url.html .jQuery-Selector">Open Ajax Content</a>
 
 
 # IE8 background transparency
