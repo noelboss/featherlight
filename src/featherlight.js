@@ -82,6 +82,7 @@
 							'<span class="'+css+'-close-icon '+ self.namespace + '-close">',
 								self.closeIcon,
 							'</span>',
+							'<div class="'+self.namespace+'-inner"/></div>',
 						'</div>',
 					'</div>'].join('')),
 				closeButtonSelector = '.'+self.namespace+'-close' + (self.otherClose ? ',' + self.otherClose : '');
