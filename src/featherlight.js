@@ -76,7 +76,14 @@
 
 			var self = $.extend(this, config, {target: target}),
 				css = !self.resetCss ? self.namespace : self.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
-				$background = $(self.background || '<div class="'+css+'"><div class="'+css+'-content"><span class="'+css+'-close-icon '+ self.namespace + '-close">'+self.closeIcon+'</span></div></div>'),
+				$background = $(self.background || [
+					'<div class="'+css+'">',
+						'<div class="'+css+'-content">',
+							'<span class="'+css+'-close-icon '+ self.namespace + '-close">',
+								self.closeIcon,
+							'</span>',
+						'</div>',
+					'</div>'].join('')),
 				closeButtonSelector = '.'+self.namespace+'-close' + (self.otherClose ? ',' + self.otherClose : '');
 
 			self.$instance = $background.clone().addClass(self.variant); /* clone DOM for the background, wrapper and the close button */
