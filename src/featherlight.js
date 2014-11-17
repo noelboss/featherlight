@@ -13,7 +13,27 @@
 		return;
 	}
 
-	/* extend jQuery with standalone featherlight method  $.featherlight(elm, config); */
+	/* Featherlight is exported as $.featherlight.
+	   It is a function used to open a featherlight lightbox.
+
+	   [tech]
+	   Featherlight uses prototype inheritance.
+	   Each opened lightbox will have a corresponding object.
+	   That object may have some attributes that override the
+	   prototype's.
+	   Extensions created with Featherlight.extend will have their
+	   own prototype that inherits from Featherlight's prototype,
+	   thus attributes can be overriden either at the object level,
+	   or at the extension level.
+	   To create callbacks that chain themselves instead of overriding,
+	   use chainCallbacks.
+	   For those familiar with CoffeeScript, this correspond to
+	   Featherlight being a class and the Gallery being a class
+	   extending Featherlight.
+	   The chainCallbacks is used since we don't have access to
+	   CoffeeScript's `super`.
+	*/
+
 	function Featherlight($content, config) {
 		if(this instanceof Featherlight) {  /* called with new */
 			this.id = Featherlight.id++;
@@ -26,7 +46,7 @@
 		}
 	}
 
-		/* document wide esc handler, attached in setup method */
+	/* document wide key handler */
 	var keyHelper = function(event) {
 		if (!event.isDefaultPrevented()) { // esc keycode
 			var self = Featherlight.current();
@@ -238,7 +258,13 @@
 			});
 		},
 
-		/* Argument 'chain' has callback names as keys and function(super, event) as values */
+		/* Utility function to chain callbacks
+		   [Warning: guru-level]
+		   Used be extensions that want to let users specify callbacks but
+		   also need themselves to use the callbacks.
+		   The argument 'chain' has callback names as keys and function(super, event)
+		   as values. That function is meant to call `super` at some point.
+		*/
 		chainCallbacks: function(chain) {
 			for (var name in chain) {
 				this[name] = $.proxy(chain[name], this, $.proxy(this[name], this));
@@ -321,7 +347,16 @@
 			return config;
 		},
 
-		/* create a plugin that inherits the prototype chain */
+		/* Used to create a Featherlight extension
+		   [Warning: guru-level]
+		   Creates the extension's prototype that in turn
+		   inherits Featherlight's prototype.
+		   Could be used to extend an extension too...
+		   This is pretty high level wizardy, it comes pretty much straight
+		   from CoffeeScript and won't teach you anything about Featherlight
+		   as it's not really specific to this library.
+		   My suggestion: move along and keep your sanity.
+		*/
 		extend: function(child, defaults) {
 			/* Setup class hierarchy, adapted from CoffeeScript */
 			var Ctor = function(){ this.constructor = child; };
@@ -365,6 +400,9 @@
 			if(cur) { cur.close(); }
 		},
 
+		/* Does the auto binding on startup.
+		   Meant only to be used by Featherlight and its extensions
+		*/
 		_onReady: function() {
 			var Klass = this;
 			if(Klass.autoBind){
@@ -379,6 +417,9 @@
 			}
 		},
 
+		/* Featherlight uses the onKeyDown callback to intercept the escape key.
+		   Private to Featherlight.
+		*/
 		_callbackChain: {
 			onKeyDown: function(_super, event){
 				if(27 === event.keyCode && this.closeOnEsc) {
