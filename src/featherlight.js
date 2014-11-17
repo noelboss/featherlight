@@ -365,6 +365,20 @@
 			if(cur) { cur.close(); }
 		},
 
+		_onReady: function() {
+			var Klass = this;
+			if(Klass.autoBind){
+				/* First, bind click on document, so it will work for items added dynamically */
+				Klass.attach($(document), {filter: Klass.autoBind});
+				/* Auto bound elements with attr-featherlight-filter won't work
+				   (since we already used it to bind on document), so bind these
+				   directly. We can't easily support dynamically added element with filters */
+				$(Klass.autoBind).filter('[data-featherlight-filter]').each(function(){
+					Klass.attach($(this));
+				});
+			}
+		},
+
 		_callbackChain: {
 			onKeyDown: function(_super, event){
 				if(27 === event.keyCode && this.closeOnEsc) {
@@ -388,16 +402,5 @@
 	};
 
 	/* bind featherlight on ready if config autoBind is set */
-	$(document).ready(function(){
-		if(Featherlight.autoBind){
-			/* First, bind click on document, so it will work for items added dynamically */
-			$(document).featherlight({filter: Featherlight.autoBind});
-			/* Auto bound elements with attr-featherlight-filter won't work
-			   (since we already used it to bind on document), so bind these
-			   directly. We can't easily support dynamically added element with filters */
-			$(Featherlight.autoBind).filter('[data-featherlight-filter]').each(function(){
-				$(this).featherlight();
-			});
-		}
-	});
+	$(document).ready(function(){ Featherlight._onReady(); });
 }(jQuery));
