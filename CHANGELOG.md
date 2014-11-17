@@ -3,6 +3,10 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+
+
+1.0.1 - 2014-11-17
+-----------------------------------
 - Re-release, removing afterSlide & beforeSlide and some debugging code
 
 1.0.0 - 2014-11-16
