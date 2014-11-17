@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<title>Featherlight – The ultra slim jQuery lightbox.</title>
-		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="assets/stylesheets/bootstrap.min.css" rel="stylesheet" />
 		<link type="text/css" rel="stylesheet" href="release/featherlight.min.css" title="Featherlight Styles" />
 		<style type="text/css">
 			@media all {
@@ -65,15 +65,15 @@
 						<i class="glyphicon glyphicon-eye-open"></i>
 						github
 					</a>
-					<a class="btn btn-lg btn-success" href="https://github.com/noelboss/featherlight/archive/0.4.9.zip">
+					<a class="btn btn-lg btn-success" href="https://github.com/noelboss/featherlight/archive/1.0.0.zip">
 						<i class="glyphicon glyphicon-arrow-down"></i>
-						Download <span>(0.4.9)</span>
+						Download <span>(1.0.0)</span>
 					</a>
 				</div>
 				<div class="btn-group">
 					<a class="btn btn-default" href="#" data-featherlight="#fl1">Default</a>
 					<a class="btn btn-default" href="#" data-featherlight="#fl2" data-featherlight-variant="fixwidth">Custom Styles</a>
-					<a class="btn btn-default" href="http://farm5.staticflickr.com/4069/4563624740_93430bb907_b.jpg" data-featherlight="image">Image</a>
+					<a class="btn btn-default" href="assets/images/droplets.jpg" data-featherlight="image">Image</a>
 					<a class="btn btn-default" href="#" data-featherlight="#fl3">iFrame</a>
 					<a class="btn btn-default" href="index.html .ajaxcontent" data-featherlight="ajax">Ajax</a>
 				</div>
@@ -88,30 +88,54 @@
 			<div class="row marketing text-center">
 				<div class="col-lg-4">
 					<h4>Lightweight</h4>
-					<p>Featherlight is very, very, very lightweight. Everything together weights less than 6kB and only counts less than 300 lines of JavaScript code. To get started, simply add the <em>"data-featherlight"</em> attribute with a selector, an image- or an ajax-url. <a href="https://github.com/noelboss/featherlight/#usage">It's that simple.</a>
+					<p>
+						Featherlight is very, very lightweight. 400 lines of JavaScript, 100 of CSS, less than 6kB combined.
+					</p>
+					<p>
+						Don't be fooled by Featherlight's small footprint! It's smart, responsive, supports images, ajax and iframes out of the box and <a href="https://github.com/noelboss/featherlight/#configuration">you can adapt it to your needs</a>.
+					</p>
+					<p>
+						To get started, simply add the <em>"data-featherlight"</em> with a selector, an image or an ajax-url. <a href="https://github.com/noelboss/featherlight/#usage">It's that simple.</a>
+					</p>
 				</div>
 
 				<div class="col-lg-4">
 					<h4>For the Pro</h4>
 					<p>
-						Many lightbox plugins try to handle everything for you. Even the ones called «simple» or «lightweight». Featherlight is different. It's for the pro who knows what he’s doing and just needs a barebones plugin. Thanks to very low specific css selectors and little code, it's easy to customize and to understand.
-						It's easy to write <a href="http://noelboss.github.io/featherlight/gallery.html">plugins for Featherlight</a>.
+						Many lightbox plugins try to handle everything for you. Even the ones called «simple» or «lightweight». Featherlight is different. It's for the pro who knows what he’s doing and just needs a barebones plugin.
 					</p>
 					<p>
-						<a class="doc btn btn-lg btn-default" href="https://github.com/noelboss/featherlight/#installation">
-							View Documentation
-						</a>
+						Thanks to very low specific css selectors and little code, it's easy to customize and to understand.
+					</p>
+					<p>
+						It's meant to be extended, like our <a href="http://noelboss.github.io/featherlight/gallery.html">gallery extension</a>.
 					</p>
 				</div>
-
 				<div class="col-lg-4">
-					<h4>Simple yet Powerful</h4>
+					<h4>Battle tested</h4>
 					<p>
-						Don't be fooled by Featherlights small footprint! Featherlight is very flexible and surprisingly smart. It's responsive, supports images, ajax and iframes out of the box and thanks to a range of <a href="https://github.com/noelboss/featherlight/#configuration">configuration options</a>, you can adapt it to your needs. Without rewriting anything.
+						Featherlight works on IE8+, all modern browsers and on mobile platforms.
+					</p>
+					<p>
+						Featherlight has an extensive <a href="https://travis-ci.org/noelboss/featherlight">test suite</a>.
+					</p>
+					<p>
+						Featherlight runs on hundreds of thousands of websites. That we know of.
 					</p>
 				</div>
 			</div>
 
+			<div class="row marketing text-center">
+				<div class="col-lg-3">
+				</div>
+				<div class="col-lg-6">
+					<a class="doc btn btn-lg btn-default" href="https://github.com/noelboss/featherlight/#installation">
+						View Documentation
+					</a>
+				</div>
+				<div class="col-lg-3">
+				</div>
+			</div>
 			<div class="footer text-right">
 				<p><a href="//noelboss.com">&copy; Noël Bossart.</a> Made in Switzerland.</p>
 			</div>

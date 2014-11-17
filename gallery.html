@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<title>Featherlight – The ultra slim jQuery lightbox.</title>
-		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="assets/stylesheets/bootstrap.min.css" rel="stylesheet" />
 		<link type="text/css" rel="stylesheet" href="release/featherlight.min.css" title="Featherlight Styles" />
 		<link type="text/css" rel="stylesheet" href="release/featherlight.gallery.min.css" title="Featherlight Styles" />
 		<style type="text/css">
@@ -59,6 +59,32 @@
 					font-size: 1.2em;
 				}
 
+				/* text slide */
+				.thumbnail a { text-decoration: none; }
+				.blurb {
+					display: inline-block;
+					width: 150px;
+					height: 150px;
+				}
+				.blurb h2 { text-align: center;}
+				.blurb .detail { display: none;}
+				.blurb .teaser {
+					font-style: italic;
+					text-align: center;
+				}
+				.featherlight .blurb {
+					display: inline-block;
+					width: 500px;
+					height: 300px;
+					color: #99f;
+				}
+				.featherlight .blurb .detail {
+					color: #ddf;
+					font-size: large;
+					display: inherit;
+				}
+				.featherlight .blurb .teaser { display: none;}
+
 			}
 			@media(max-width: 768px){
 				.fl-page h1 span { display: block; }
@@ -76,9 +102,9 @@
 						<i class="glyphicon glyphicon-eye-open"></i>
 						github
 					</a>
-					<a class="btn btn-lg btn-success" href="https://github.com/noelboss/featherlight/archive/0.4.9.zip">
+					<a class="btn btn-lg btn-success" href="https://github.com/noelboss/featherlight/archive/1.0.0.zip">
 						<i class="glyphicon glyphicon-arrow-down"></i>
-						Download <span>(0.4.9)</span>
+						Download <span>(1.0.0)</span>
 					</a>
 				</div>
 			</div>
@@ -89,46 +115,52 @@
 					<h2>Example Gallery</h2>
 				</div>
 				<div class="col-lg-2">
-					<a class="thumbnail gallery" href="http://farm8.staticflickr.com/7070/6874560581_dc2b407cc0_b.jpg"><img src="http://farm8.staticflickr.com/7070/6874560581_dc2b407cc0_q.jpg" /></a>
+					<a class="thumbnail gallery" href="assets/images/two_birds.jpg"><img src="assets/images/two_birds.thumb.jpg" /></a>
 				</div>
 				<div class="col-lg-2">
-					<a class="thumbnail gallery" href="http://farm5.staticflickr.com/4005/4400559493_3403152632_o.jpg"><img src="http://farm5.staticflickr.com/4005/4400559493_f652202d1b_q.jpg" /></a>
+					<a class="thumbnail gallery" href="assets/images/droplets.jpg"><img src="assets/images/droplets.thumb.jpg" /></a>
 				</div>
 				<div class="col-lg-2">
-					<a class="thumbnail gallery" href="http://farm1.staticflickr.com/174/396673914_be9d1312b1_o.jpg"><img src="http://farm1.staticflickr.com/174/396673914_be9d1312b1_q.jpg" /></a>
+					<a class="thumbnail gallery" href="assets/images/blue.jpg"><img src="assets/images/blue.thumb.jpg" /></a>
 				</div>
 				<div class="col-lg-2">
-					<a class="thumbnail gallery" href="http://farm9.staticflickr.com/8372/8546484756_cf9c892d91_b.jpg"><img src="http://farm9.staticflickr.com/8372/8546484756_cf9c892d91_q.jpg" /></a>
+					<a class="thumbnail gallery" href="assets/images/feed.jpg"><img src="assets/images/feed.thumb.jpg" /></a>
 				</div>
 				<div class="col-lg-2">
-					<a class="thumbnail gallery" href="http://farm1.staticflickr.com/37/98092870_8c140b8609_b.jpg"><img src="http://farm1.staticflickr.com/37/98092870_8c140b8609_q.jpg" /></a>
+					<a class="thumbnail gallery" href="assets/images/black.jpg"><img src="assets/images/black.thumb.jpg" /></a>
 				</div>
 				<div class="col-lg-2">
-					<a class="thumbnail gallery" href="http://farm8.staticflickr.com/7450/9509465847_dd05decdd7_b.jpg"><img src="http://farm8.staticflickr.com/7450/9509465847_dd05decdd7_q.jpg" /></a>
+					<a class="thumbnail gallery" href="assets/images/red_and_yellow.jpg"><img src="assets/images/red_and_yellow.thumb.jpg" /></a>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-lg-12">
-					<h2>Customized</h2>
+				<div class="col-lg-2">
+					<a class="thumbnail gallery2" href=".blurb">
+						<div class="blurb">
+							<h2>A different example</h2>
+							<p class="teaser">click me!</p>
+							<span class="detail">
+								<p>Featherlight Gallery inherit all the goodies of Featherlight.</p>
+								<p>In particular, the different content filters are available and a gallery can have mixed content. For example, this slide that is not an image.</p>
+								<p>This gallery also demonstrates the use of a css variant.</p>
+						</div>
+					</a>
 				</div>
 				<div class="col-lg-2">
-					<a class="thumbnail gallery2" href="http://farm8.staticflickr.com/7070/6874560581_dc2b407cc0_b.jpg"><img src="http://farm8.staticflickr.com/7070/6874560581_dc2b407cc0_q.jpg" /></a>
+					<a class="thumbnail gallery2" href="assets/images/droplets.jpg"><img src="assets/images/droplets.thumb.jpg" /></a>
 				</div>
 				<div class="col-lg-2">
-					<a class="thumbnail gallery2" href="http://farm5.staticflickr.com/4005/4400559493_3403152632_o.jpg"><img src="http://farm5.staticflickr.com/4005/4400559493_f652202d1b_q.jpg" /></a>
+					<a class="thumbnail gallery2" href="assets/images/blue.jpg"><img src="assets/images/blue.thumb.jpg" /></a>
 				</div>
 				<div class="col-lg-2">
-					<a class="thumbnail gallery2" href="http://farm1.staticflickr.com/174/396673914_be9d1312b1_o.jpg"><img src="http://farm1.staticflickr.com/174/396673914_be9d1312b1_q.jpg" /></a>
+					<a class="thumbnail gallery2" href="assets/images/feed.jpg"><img src="assets/images/feed.thumb.jpg" /></a>
 				</div>
 				<div class="col-lg-2">
-					<a class="thumbnail gallery2" href="http://farm9.staticflickr.com/8372/8546484756_cf9c892d91_b.jpg"><img src="http://farm9.staticflickr.com/8372/8546484756_cf9c892d91_q.jpg" /></a>
+					<a class="thumbnail gallery2" href="assets/images/black.jpg"><img src="assets/images/black.thumb.jpg" /></a>
 				</div>
 				<div class="col-lg-2">
-					<a class="thumbnail gallery2" href="http://farm1.staticflickr.com/37/98092870_8c140b8609_b.jpg"><img src="http://farm1.staticflickr.com/37/98092870_8c140b8609_q.jpg" /></a>
-				</div>
-				<div class="col-lg-2">
-					<a class="thumbnail gallery2" href="http://farm8.staticflickr.com/7450/9509465847_dd05decdd7_b.jpg"><img src="http://farm8.staticflickr.com/7450/9509465847_dd05decdd7_q.jpg" /></a>
+					<a class="thumbnail gallery2" href="assets/images/red_and_yellow.jpg"><img src="assets/images/red_and_yellow.thumb.jpg" /></a>
 				</div>
 			</div>
 
@@ -162,7 +194,7 @@
 			</div>
 		</div>
 
-		<script src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
+		<script src="assets/javascripts/jquery-1.7.0.min.js"></script>
 		<script src="release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="release/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
 

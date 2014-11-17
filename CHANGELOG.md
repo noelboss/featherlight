@@ -3,6 +3,10 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+
+
+1.0.0 - 2014-11-16
+-----------------------------------
 ### Features
 - New option filter to attach lazily like `$(sel).on('click', filter, ...)`. Attaching is done for the whole set, not on each individual element. Attributes of the whole set and the filtered
 element are combined.
