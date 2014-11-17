@@ -3,7 +3,7 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
-
+- Re-release, removing afterSlide & beforeSlide and some debugging code
 
 1.0.0 - 2014-11-16
 -----------------------------------
@@ -15,7 +15,6 @@ element are combined.
 - New content filter 'text' for plain text messages.
 - New callback onKeyDown, beforeContent, afterContent
 - Gallery can display mixed content, not just images.
-- Gallery has new callbacks `beforeSlide` and `afterSlide`.
 - Gallery defaults are accessible with $.featherlightGallery.defaults
 - Callbacks like afterOpen can be set using data-featherlight-after-open
 - Gallery inherits Featherlight's prototype and class methods.

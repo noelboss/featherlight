@@ -82,10 +82,10 @@ var expect = chai.expect;
       expect($anchors.featherlight()).to.equal($anchors);
     });
 
-    it ('accepts an afterSlide config', function(done) {
+    it ('triggers afterContent after each slide', function(done) {
       var lastCurrent = null;
       $('#basic-test a').featherlightGallery({
-        afterSlide: function() { lastCurrent = this.$currentTarget; }
+        afterContent: function() { lastCurrent = this.$currentTarget; }
       });
       $('#basic-test a').eq(2).click();
       patiently(done, [function(){
@@ -105,7 +105,7 @@ var expect = chai.expect;
                     '<img src="fixtures/photo.jpeg?direct_3"/>';
         $.featherlightGallery($(imgs), {
           targetAttr: 'src',
-          afterSlide: function(){ lastCurrent = this.$currentTarget }
+          afterContent: function(){ lastCurrent = this.$currentTarget }
         });
         patiently(done, [function(){
           expect($('.featherlight img')).to.have.attr('src').match(/direct_1$/);
@@ -123,10 +123,9 @@ var expect = chai.expect;
       patiently(done, [function(){
         $cur = $.featherlightGallery.current()
         expect($cur).to.be.an.instanceof($.featherlightGallery)
-        expect($cur).to.not.have.property('called');
+        expect($cur).to.have.property('called', true);
         $('.featherlight').trigger('next');
       }, function(){
-        expect($cur).to.have.property('called', true);
         expect($('.featherlight')).to.contain('Hello');
         expect($('.featherlight img')).to.not.be.visible;
       }]);

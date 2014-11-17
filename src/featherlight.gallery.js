@@ -47,10 +47,6 @@
 							.append(self.createNavigation('next'));
 					}
 			},
-			afterOpen: function(_super, event){
-				_super(event);
-				this.afterSlide(event);
-			},
 			onKeyDown: function(_super, event){
 				var dir = {
 					37: 'previous', /* Left arrow */
@@ -82,8 +78,6 @@
 
 	$.extend(FeatherlightGallery.prototype, {
 		/** Additional settings for Gallery **/
-		beforeSlide: $.noop,         /* Callback before an image is changed */
-		afterSlide: $.noop,          /* Callback after an image is presented */
 		previousIcon: '&#9664;',     /* Code that is used as previous icon */
 		nextIcon: '&#9654;',         /* Code that is used as next icon */
 		galleryFadeIn: 100,          /* fadeIn speed when image is loaded */
@@ -108,7 +102,6 @@
 			index = ((index % len) + len) % len; /* pin index to [0, len[ */
 
 			self.$currentTarget = source.eq(index);
-			self.beforeSlide(event);
 			self.beforeContent();
 			return $.when(
 				self.getContent(),
@@ -116,7 +109,6 @@
 			).done(function($newContent) {
 					self.setContent($newContent);
 					self.afterContent();
-					self.afterSlide(event);
 					$newContent.fadeTo(self.galleryFadeIn,1);
 			});
 		},
@@ -128,10 +120,6 @@
 			});
 		}
 	});
-
-	FeatherlightGallery.functionAttributes = FeatherlightGallery.functionAttributes.concat([
-		'beforeSlide', 'afterSlide'
-	]);
 
 	$.featherlightGallery = FeatherlightGallery;
 
