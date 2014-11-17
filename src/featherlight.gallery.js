@@ -76,7 +76,9 @@
 		}
 	}
 
-	$.featherlight.extend(FeatherlightGallery);
+	$.featherlight.extend(FeatherlightGallery, {
+		autoBind: '[data-featherlight-gallery]'
+	});
 
 	$.extend(FeatherlightGallery.prototype, {
 		/** Additional settings for Gallery **/
@@ -137,5 +139,8 @@
 	$.fn.featherlightGallery = function(config) {
 		return FeatherlightGallery.attach(this, config);
 	};
+
+	/* bind featherlight on ready if config autoBind is set */
+	$(document).ready(function(){ FeatherlightGallery._onReady(); });
 
 }(jQuery));

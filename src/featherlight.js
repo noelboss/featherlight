@@ -329,7 +329,7 @@
 			child.prototype = new Ctor();
 			child.__super__ = this.prototype;
 			/* Copy class methods & attributes */
-			$.extend(child, this);
+			$.extend(child, this, defaults);
 			child.defaults = child.prototype;
 			return child;
 		},

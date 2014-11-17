@@ -350,7 +350,23 @@ The gallery also has a range of configuration options and the following defaults
 	galleryFadeIn: 100,          /* fadeIn speed when slide is loaded */
 	galleryFadeOut: 300          /* fadeOut speed before slide is loaded */
 
-Example:
+It also overrides its `autoBind` global option:
+
+	autoBind: '[data-featherlight-gallery]' /* Will automatically bind elements matching this selector. Clear or set before onReady */
+
+Example in pure HTML:
+
+    <section
+      data-featherlight-gallery
+      data-featherlight-filter="a"
+    >
+      <h>This is a gallery</h>
+      <a href="photo_large.jpg"><img src="photo_thumbnail.jpg"></a>
+      <a href="other_photo_large.jpg"><img src="other_photo_thumbnail.jpg"></a>
+    </section>
+
+
+Example in JavaScript (assuming there are `a` tags of class `gallery` in the page):
 
 	$('a.gallery').featherlightGallery({
 		previousIcon: '«',
@@ -359,6 +375,7 @@ Example:
 
 		openSpeed: 300
 	});
+
 
 The gallery responds to custom events `previous` and `next` to navigate to the previous and next images.
 

@@ -53,7 +53,6 @@ var expect = chai.expect;
     it ('will keep modified background intact', function(done) {
       $('#basic-test a').featherlightGallery({
         afterOpen: function() {
-          debugger;
           this.$instance.find('.featherlight-content').append('<div class="something"/>');
          }
       });
@@ -65,6 +64,16 @@ var expect = chai.expect;
       }, function() {
         expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?3/);
         expect($('.featherlight-content *:last-child')).to.have.class('something');
+      }]);
+    });
+
+    it ('can be setup without JS', function(done) {
+      $('#full-auto a:last').click();
+      patiently(done, [function() {
+        expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?auto_1/);
+        $('.featherlight').trigger('next');
+      }, function() {
+        expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?auto_0/);
       }]);
     });
 

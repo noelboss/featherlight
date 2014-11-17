@@ -17,6 +17,7 @@ element are combined.
 - Gallery inherits Featherlight's prototype and class methods.
 - Gallery can be called entirely from javascript.
 - Gallery can be navigated using left and right arrow keys.
+- Gallery uses its `autoBind` setting to automatically bind galleries. Its recommended to use it with the `filter` setting.
 
 ### Breaking changes
 - `$.featherlight` now always trigger a new lightbox. Use `$.fn.featherlight` for attaching events to elements.
