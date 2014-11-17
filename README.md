@@ -331,7 +331,7 @@ If you want the background in IE8 to be translucent, use data:image before the r
 
 ---
 
-## Featherlight Gallery
+# Featherlight Gallery
 Featherlight was created to be as small and simple as possible. Therefore it does not provide all functionality imaginable. But, since its small and simple, it can be extended easily. featherlight.gallery.js is a small extension that turns your set of links into a [gallery](http://noelboss.github.io/featherlight/gallery.html).
 
 	$('a.gallery').featherlightGallery({
@@ -339,7 +339,7 @@ Featherlight was created to be as small and simple as possible. Therefore it doe
 	});
 
 
-### Gallery configuration
+## Gallery configuration
 
 The gallery also has a range of configuration options and the following defaults:
 
@@ -364,7 +364,7 @@ The gallery responds to custom events `previous` and `next` to navigate to the p
 
 Instead of navigation buttons it will use swipe events on touch devices, assuming that one of the [supported swipe libraries](https://github.com/noelboss/featherlight/wiki/Gallery:-swipe-on-touch-devices) is also installed.
 
-### Gallery installation
+## Gallery installation
 
 Simply include the extension CSS and JavaScript Files after the regular featherlight files like this:
 
