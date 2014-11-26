@@ -46,6 +46,7 @@
 							.append(self.createNavigation('previous'))
 							.append(self.createNavigation('next'));
 					}
+					return _super(event);
 			},
 			onKeyDown: function(_super, event){
 				var dir = {
