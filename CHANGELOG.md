@@ -5,6 +5,10 @@ Master
 -----------------------------------
 
 
+1.0.2 - 2014-11-26
+-----------------------------------
+- Gallery: Bug with beforeOpen callback. Thanks Cristian Bica!
+
 1.0.1 - 2014-11-17
 -----------------------------------
 - Re-release, removing afterSlide & beforeSlide and some debugging code
