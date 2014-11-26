@@ -131,6 +131,26 @@ var expect = chai.expect;
       }]);
     });
 
+    it('can specify callbacks to track the progress of the dialog', function(done) {
+      var callbacks = ['beforeOpen', 'beforeContent', 'afterContent', 'afterOpen', 'beforeClose', 'afterClose'],
+        lastCallback = undefined;
+        options = {targetAttr: 'src'};
+      $.each(callbacks, function(i, cb){
+        options[cb] = function() {
+          expect(lastCallback).to.equal(callbacks[i-1]);
+          lastCallback = cb;
+        }
+      });
+      $.featherlightGallery($('<img src="fixtures/photo.jpeg?direct_1"/>'), options);
+      patiently(done, [function(){
+        expect(lastCallback).to.equal('afterOpen');
+        $.featherlight.current().close();
+      }, function(){
+        expect(lastCallback).to.equal('afterClose');
+      }]);
+
+    });
+
     describe('.current', function() {
       it ('only returns actual featherlight gallery instances', function() {
         $.featherlight('<p>This is a test<p>');
