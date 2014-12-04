@@ -1,4 +1,16 @@
 var expect = chai.expect;
+var stubAjaxLoad = function(content) {
+  var oldLoad = $.fn.load;
+  $.fn.load = function(url, callback) {
+    var $this = this;
+    $.fn.load = oldLoad;
+    window.setTimeout(function() {
+      $this.html(content);
+      callback(null, "success");
+    });
+    return this;
+  };
+};
 
 (function($) {
 	var $htmlFixtures = null;
@@ -223,7 +235,15 @@ var expect = chai.expect;
 				patiently(done, function() {
 					expect($('.featherlight')).to.contain('Hello');
 				});
-			})
+			});
+
+			it('ajax content can be text only', function(done) {
+				stubAjaxLoad('Hello <b>world</b>');
+				$.featherlight({ajax: 'stubbed'});
+				patiently(done, function() {
+					expect($('.featherlight')).to.contain('Hello');
+				});
+			});
 
 			it('can specify an alternate close button selector', function() {
 				var fl = $.featherlight('<div>Test<div class="close-me">close</div></div>', {otherClose: '.close-me'});
