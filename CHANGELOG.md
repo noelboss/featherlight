@@ -5,6 +5,10 @@ Master
 -----------------------------------
 
 
+1.0.3 - 2014-12-09
+-----------------------------------
+- Fix bug in IE8. Thanks a barry!
+
 1.0.2 - 2014-11-26
 -----------------------------------
 - Gallery: Bug with beforeOpen callback. Thanks Cristian Bica!
