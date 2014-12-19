@@ -117,6 +117,32 @@ var expect = chai.expect;
       });
     });
 
+    describe('$.featherlightGallery', function() {
+      it ('does not get confused with same images', function(done) {
+        var imgs =  '<img src="fixtures/photo.jpeg"/>' +
+                    '<img src="fixtures/photo.jpeg"/>' +
+                    '<img src="fixtures/photo.jpeg?direct_3"/>';
+        $.featherlightGallery($(imgs), { targetAttr: 'src' });
+        $.fx.off = false
+        patiently(done, [function(){
+          expect($('.featherlight img')).to.have.attr('src').match(/photo.jpeg$/);
+          $('.featherlight').trigger('next');
+        },
+        function(){
+          expect($('.featherlight img')).to.have.css('opacity').lessThan(1);
+        },
+        function(){
+          expect($('.featherlight img')).to.have.css('opacity').equal('1');
+          $('.featherlight').trigger('next');
+        },
+        function() {
+          expect($('.featherlight img')).to.have.attr('src').match(/direct_3$/);
+          $.fx.off = true;
+        }]);
+      });
+    });
+
+
     it ('accepts config as data-attributes', function(done) {
       var $cur;
       $('#extra-test').featherlightGallery();
