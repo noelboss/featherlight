@@ -40,9 +40,9 @@ By default, featherlight acts on all elements using the 'data-featherlight' attr
 
 Featherlight is smart. 'data-featherlight' can also contain a link to an image, an ajax-url or even DOM code:
 
-	<span data-featherlight="myimage.png">Open image in lightbox</a>
-	<span data-featherlight="myhtml.html .selector">Open ajax content in lightbox</a>
-	<span data-featherlight="<p>Fancy DOM Lightbox!</p>">Open some DOM in lightbox</span>
+	<a href="#" data-featherlight="myimage.png">Open image in lightbox</a>
+	<a href="#" data-featherlight="myhtml.html .selector">Open ajax content in lightbox</a>
+	<a href="#" data-featherlight="<p>Fancy DOM Lightbox!</p>">Open some DOM in lightbox</a>
 
 it also works with links using href and the "image" and "ajax" keywords (this can also be manually set with the configuration options like `{image: 'photo.jpg}` or `{type: 'image'}`):
 
@@ -311,7 +311,7 @@ Us a link and point the data-featherlight attribute to the desired attribute whi
 
 ...or directly provide the link as the data-featherlight attribute:
 
-	<span data-featherlight="myimage.jpg">Open Image</span>
+	<a href="#" data-featherlight="myimage.jpg">Open Image</a>
 
 ## Open lightbox with ajax content
 Use Featherlight with ajax using 'ajax' keyword or providing a url. It even supports selecting elements inside the response document.
