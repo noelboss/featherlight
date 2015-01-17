@@ -396,6 +396,10 @@ Check out the example here: [Gallery with Featherlight](http://noelboss.github.i
 
 # Support
 
+## Questions
+
+For questions, please use [Stack Overflow](http://stackoverflow.com/questions/ask) and be sure to use the `featherlight.js` tag. Please **provide an example**, starting for example from [this jsfiddle](http://jsfiddle.net/JNsu6/15/)
+
 ## Reporting bugs and issues
 
 If you believe you've found a bug, please open an issue on [Github](https://github.com/noelboss/featherlight/issues/new) and **provide an example** starting from [this jsfiddle](http://jsfiddle.net/JNsu6/15/).
