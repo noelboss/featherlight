@@ -135,7 +135,7 @@ var expect = chai.expect;
 				var fl = $.featherlight('<p/>', {closeIcon: '<div class="test">X</div>'});
 				expect($.featherlight.current()).to.equal(fl);
 				$('.test').click();
-				expect($.featherlight.current()).to.equal(undefined);
+				expect($.featherlight.current()).to.be.undefined;
 			});
 
 			it('can specify a key handler', function() {
