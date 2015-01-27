@@ -131,6 +131,13 @@ var expect = chai.expect;
 				expect($.featherlight._keyHandlerInstalled).to.be.false;
 			});
 
+			it('can specify to a close icon', function() {
+				var fl = $.featherlight('<p/>', {closeIcon: '<div class="test">X</div>'});
+				expect($.featherlight.current()).to.equal(fl);
+				$('.test').click();
+				expect($.featherlight.current()).to.equal(undefined);
+			});
+
 			it('can specify a key handler', function() {
 				var lastKeyCode;
 				$.featherlight('<p/>', {

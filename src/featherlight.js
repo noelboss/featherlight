@@ -114,7 +114,7 @@
 				var $target = $(event.target);
 				if( ('background' === self.closeOnClick  && $target.is('.'+self.namespace))
 					|| 'anywhere' === self.closeOnClick
-					|| $target.is(closeButtonSelector) ){
+					|| $target.closest(closeButtonSelector).length ){
 					event.preventDefault();
 					self.close();
 				}
