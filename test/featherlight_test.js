@@ -187,7 +187,7 @@ var expect = chai.expect;
 
 			it('can specify callbacks to track the progress of the dialog', function() {
 				var callbacks = ['beforeOpen', 'beforeContent', 'afterContent', 'afterOpen', 'beforeClose', 'afterClose'],
-					lastCallback = undefined;
+					lastCallback = undefined,
 					options = {};
 				$.each(callbacks, function(i, cb){
 					options[cb] = function() {
