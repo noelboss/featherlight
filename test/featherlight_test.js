@@ -44,7 +44,7 @@ var expect = chai.expect;
 
 			it("won't open a dialog if the event is already prevented", function(){
 				$('#auto-bound').on('click', function(event) { event.preventDefault(); }).click()
-				expect($.featherlight.current()).to.be.undefined;
+				expect($.featherlight.current()).to.be.null;
 			});
 		});
 
@@ -59,15 +59,15 @@ var expect = chai.expect;
 
 		describe('jQuery.featherlight.current', function() {
 			it('returns null if no dialogbox is currently opened', function() {
-				expect($.featherlight.current()).to.be.undefined;
+				expect($.featherlight.current()).to.be.null;
 				/* even if opened and then closed */
 				$.featherlight('<p class="testing">This is a test<p>');
 				$('.featherlight').click();
-				expect($.featherlight.current()).to.be.undefined;
+				expect($.featherlight.current()).to.be.null;
 				/* even if savagely removed */
 				$.featherlight('<p class="testing">This is a test<p>');
 				$('.featherlight').remove();
-				expect($.featherlight.current()).to.be.undefined;
+				expect($.featherlight.current()).to.be.null;
 			});
 
 			it('returns the featherlight object of the last currently opened dialog', function() {
@@ -85,7 +85,7 @@ var expect = chai.expect;
 			it('closes the currently opened window, if any', function() {
 				$.featherlight('<p class="testing">This is a test<p>');
 				$.featherlight.close();
-				expect($.featherlight.current()).to.be.undefined;
+				expect($.featherlight.current()).to.be.null;
 				$.featherlight.close(); /* should not create error */
 			});
 		});
@@ -135,7 +135,7 @@ var expect = chai.expect;
 				var fl = $.featherlight('<p/>', {closeIcon: '<div class="test">X</div>'});
 				expect($.featherlight.current()).to.equal(fl);
 				$('.test').click();
-				expect($.featherlight.current()).to.be.undefined;
+				expect($.featherlight.current()).to.be.null;
 			});
 
 			it('can specify a key handler', function() {
@@ -149,7 +149,7 @@ var expect = chai.expect;
 				expect(lastKeyCode).to.equal(25);
 				triggerKeyCode(27);
 				expect(lastKeyCode).to./* still be */equal(25); /* since event is handled by FL */
-				expect($.featherlight.current()).to.be.undefined;
+				expect($.featherlight.current()).to.be.null;
 			});
 
 			it('can specify a filter for events', function() {
@@ -177,7 +177,7 @@ var expect = chai.expect;
 				var fl = $.featherlight('<div>Test<div class="close-me">close</div></div>', {otherClose: '.close-me'});
 				expect($.featherlight.current()).to.equal(fl);
 				$('.close-me').click();
-				expect($.featherlight.current()).to.be.undefined;
+				expect($.featherlight.current()).to.be.null;
 			});
 
 			it('can specify an alternate root selector', function() {

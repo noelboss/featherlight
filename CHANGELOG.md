@@ -3,7 +3,7 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
-
+- current() now returns null if no lightbox is currently opened
 
 1.0.4 - 2015-01-27
 -----------------------------------

@@ -390,7 +390,7 @@
 		},
 
 		current: function() {
-			var response = {};
+			var response = {currentFeatherlight: null};
 			this._opened.fire(this, response);
 			return response.currentFeatherlight;
 		},
