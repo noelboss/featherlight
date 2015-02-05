@@ -46,6 +46,13 @@
 		}
 	}
 
+	var opened = [],
+		pruneOpened = function(remove) {
+			opened = $.grep(opened, function(fl) {
+				return fl !== remove && fl.$instance.closest('body').length > 0;
+			} );
+		};
+
 	/* document wide key handler */
 	var keyHelper = function(event) {
 		if (!event.isDefaultPrevented()) { // esc keycode
@@ -206,13 +213,7 @@
 				var $content = self.getContent();
 
 				if($content){
-					/* Add to opened registry */
-					self.constructor._opened.add(self._openedCallback = function(klass, response){
-						if ((self instanceof klass) &&
-								(self.$instance.closest('body').length > 0)) {
-							response.opened.push(self);
-						}
-					});
+					opened.push(self);
 
 					/* attach key handler to document if needed */
 					if(!Featherlight._keyHandlerInstalled) {
@@ -244,7 +245,8 @@
 			if(self.beforeClose(event) === false) {
 				return false;
 			}
-			self.constructor._opened.remove(self._openedCallback);
+
+			pruneOpened(self);
 
 			/* attach key handler to document if no opened Featherlight */
 			if(!Featherlight.current()) {
@@ -395,9 +397,9 @@
 		},
 
 		opened: function() {
-			var response = {opened: []};
-			this._opened.fire(this, response);
-			return response.opened;
+			var klass = this;
+			pruneOpened();
+			return $.grep(opened, function(fl) { return fl instanceof klass; } );
 		},
 
 		close: function() {
@@ -435,9 +437,7 @@
 					return _super(event);
 				}
 			}
-		},
-
-		_opened: $.Callbacks()
+		}
 	});
 
 	$.featherlight = Featherlight;

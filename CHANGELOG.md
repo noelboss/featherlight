@@ -4,6 +4,7 @@ Featherlight – Changelog
 Master
 -----------------------------------
 - current() now returns null if no lightbox is currently opened
+- now avoids memory leaks
 
 1.0.4 - 2015-01-27
 -----------------------------------
