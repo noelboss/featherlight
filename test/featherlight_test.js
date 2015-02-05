@@ -81,6 +81,29 @@ var expect = chai.expect;
 
 		});
 
+		describe('jQuery.featherlight.opened', function() {
+			it('returns [] ]if no dialogbox is currently opened', function() {
+				expect($.featherlight.opened()).to.eql([]);
+				/* even if opened and then closed */
+				$.featherlight('<p class="testing">This is a test<p>');
+				$('.featherlight').click();
+				expect($.featherlight.opened()).to.eql([]);
+				/* even if savagely removed */
+				$.featherlight('<p class="testing">This is a test<p>');
+				$('.featherlight').remove();
+				expect($.featherlight.opened()).to.eql([]);
+			});
+
+			it('returns the featherlight objects of the currently opened dialog', function() {
+				var first = $.featherlight('<p>First<p>');
+				expect($.featherlight.opened()).to.eql([first]);
+				var second = $.featherlight('<p>Inner<p>', {namespace: 'different_namespace'});
+				expect($.featherlight.opened()).to.eql([first, second]);
+				$('.different_namespace').click();
+				expect($.featherlight.opened()).to.eql([first]);
+			});
+		});
+
 		describe('jQuery.featherlight.close', function() {
 			it('closes the currently opened window, if any', function() {
 				$.featherlight('<p class="testing">This is a test<p>');

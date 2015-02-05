@@ -210,7 +210,7 @@
 					self.constructor._opened.add(self._openedCallback = function(klass, response){
 						if ((self instanceof klass) &&
 								(self.$instance.closest('body').length > 0)) {
-							response.currentFeatherlight = self;
+							response.opened.push(self);
 						}
 					});
 
@@ -390,9 +390,14 @@
 		},
 
 		current: function() {
-			var response = {currentFeatherlight: null};
+			var all = this.opened();
+			return all[all.length - 1] || null;
+		},
+
+		opened: function() {
+			var response = {opened: []};
 			this._opened.fire(this, response);
-			return response.currentFeatherlight;
+			return response.opened;
 		},
 
 		close: function() {
