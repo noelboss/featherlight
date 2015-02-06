@@ -58,7 +58,7 @@
 		if (!event.isDefaultPrevented()) { // esc keycode
 			var self = Featherlight.current();
 			if (self) {
-				self.onKeyDown(event);
+				self.onKeyUp(event);
 			}
 		}
 	};
@@ -88,7 +88,7 @@
 		afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
 		afterContent: $.noop,                 /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
 		afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
-		onKeyDown:    $.noop,									/* Called on key down for the frontmost featherlight */
+		onKeyUp:      $.noop,									/* Called on key down for the frontmost featherlight */
 		type:         null,                   /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
 		contentFilters: ['jquery', 'image', 'html', 'ajax', 'text'], /* List of content filters to use to determine the content */
 
@@ -424,11 +424,11 @@
 			}
 		},
 
-		/* Featherlight uses the onKeyDown callback to intercept the escape key.
+		/* Featherlight uses the onKeyUp callback to intercept the escape key.
 		   Private to Featherlight.
 		*/
 		_callbackChain: {
-			onKeyDown: function(_super, event){
+			onKeyUp: function(_super, event){
 				if(27 === event.keyCode && this.closeOnEsc) {
 					this.$instance.find('.'+this.namespace+'-close:first').click();
 					event.preventDefault();

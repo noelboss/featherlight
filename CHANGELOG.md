@@ -5,6 +5,7 @@ Master
 -----------------------------------
 - current() now returns null if no lightbox is currently opened
 - now avoids memory leaks
+- onKeyDown() renamed onKeyUp()
 
 1.0.4 - 2015-01-27
 -----------------------------------

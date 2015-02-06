@@ -48,7 +48,7 @@
 					}
 					return _super(event);
 			},
-			onKeyDown: function(_super, event){
+			onKeyUp: function(_super, event){
 				var dir = {
 					37: 'previous', /* Left arrow */
 					39: 'next'			/* Rigth arrow */

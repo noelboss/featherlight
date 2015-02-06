@@ -164,7 +164,7 @@ var expect = chai.expect;
 			it('can specify a key handler', function() {
 				var lastKeyCode;
 				$.featherlight('<p/>', {
-					onKeyDown: function(event) {
+					onKeyUp: function(event) {
 						lastKeyCode = event.keyCode;
 					}
 				});
