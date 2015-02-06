@@ -433,7 +433,6 @@
 					this.$instance.find('.'+this.namespace+'-close:first').click();
 					event.preventDefault();
 				} else {
-					console.log('pass');
 					return _super(event);
 				}
 			}
