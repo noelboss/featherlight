@@ -51,6 +51,7 @@
 			opened = $.grep(opened, function(fl) {
 				return fl !== remove && fl.$instance.closest('body').length > 0;
 			} );
+			return opened;
 		};
 
 	/* document wide key handler */
@@ -62,6 +63,13 @@
 			}
 		}
 	};
+
+	var toggleGlobalEvents = function(set) {
+			if(set !== Featherlight._globalHandlerInstalled) {
+				Featherlight._globalHandlerInstalled = set;
+				$(document)[set ? 'on' : 'off']('keyup.'+Featherlight.prototype.namespace, keyHelper);
+			}
+		};
 
 	Featherlight.prototype = {
 		constructor: Featherlight,
@@ -215,11 +223,7 @@
 				if($content){
 					opened.push(self);
 
-					/* attach key handler to document if needed */
-					if(!Featherlight._globalHandlerInstalled) {
-						$(document).on('keyup.'+Featherlight.prototype.namespace, keyHelper);
-						Featherlight._globalHandlerInstalled = true;
-					}
+					toggleGlobalEvents(true);
 
 					self.$instance.appendTo(self.root).fadeIn(self.openSpeed);
 					self.beforeContent(event);
@@ -246,12 +250,8 @@
 				return false;
 			}
 
-			pruneOpened(self);
-
-			/* attach key handler to document if no opened Featherlight */
-			if(!Featherlight.current()) {
-				$(document).off('keyup.'+Featherlight.namespace, keyHelper);
-				self.constructor._globalHandlerInstalled = false;
+			if (0 === pruneOpened(self).length) {
+				toggleGlobalEvents(false);
 			}
 
 			self.$instance.fadeOut(self.closeSpeed,function(){
