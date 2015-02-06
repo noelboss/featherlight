@@ -140,7 +140,7 @@ var expect = chai.expect;
 					second = $.featherlight('<p/>'),
 					third = $.featherlight('<p/>', {closeOnEsc: false}),
 					last = $.featherlight('<p/>', {closeOnEsc: true});
-				expect($.featherlight._keyHandlerInstalled).to.be.true;
+				expect($.featherlight._globalHandlerInstalled).to.be.true;
 				triggerEscape();
 				expect($.featherlight.current()).to.equal(third);
 				triggerEscape();
@@ -149,9 +149,9 @@ var expect = chai.expect;
 				expect($.featherlight.current()).to.equal(second);
 				triggerEscape();
 				expect($.featherlight.current()).to.equal(first);
-				expect($.featherlight._keyHandlerInstalled).to.be.true;
+				expect($.featherlight._globalHandlerInstalled).to.be.true;
 				$.featherlight.current().close();
-				expect($.featherlight._keyHandlerInstalled).to.be.false;
+				expect($.featherlight._globalHandlerInstalled).to.be.false;
 			});
 
 			it('can specify to a close icon', function() {

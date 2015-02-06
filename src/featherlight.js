@@ -216,9 +216,9 @@
 					opened.push(self);
 
 					/* attach key handler to document if needed */
-					if(!Featherlight._keyHandlerInstalled) {
+					if(!Featherlight._globalHandlerInstalled) {
 						$(document).on('keyup.'+Featherlight.prototype.namespace, keyHelper);
-						Featherlight._keyHandlerInstalled = true;
+						Featherlight._globalHandlerInstalled = true;
 					}
 
 					self.$instance.appendTo(self.root).fadeIn(self.openSpeed);
@@ -251,7 +251,7 @@
 			/* attach key handler to document if no opened Featherlight */
 			if(!Featherlight.current()) {
 				$(document).off('keyup.'+Featherlight.namespace, keyHelper);
-				self.constructor._keyHandlerInstalled = false;
+				self.constructor._globalHandlerInstalled = false;
 			}
 
 			self.$instance.fadeOut(self.closeSpeed,function(){
