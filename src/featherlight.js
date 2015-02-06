@@ -55,19 +55,23 @@
 		};
 
 	/* document wide key handler */
-	var keyHelper = function(event) {
-		if (!event.isDefaultPrevented()) { // esc keycode
-			var self = Featherlight.current();
-			if (self) {
-				self.onKeyUp(event);
+	var eventMap = { keyup: 'onKeyUp' };
+
+	var globalEventHandler = function(event) {
+		$.each(Featherlight.opened().reverse(), function() {
+			if (!event.isDefaultPrevented()) {
+				if (false === this[eventMap[event.type]](event)) {
+					event.preventDefault(); event.stopPropagation(); return false;
+			  }
 			}
-		}
+		});
 	};
 
 	var toggleGlobalEvents = function(set) {
 			if(set !== Featherlight._globalHandlerInstalled) {
 				Featherlight._globalHandlerInstalled = set;
-				$(window)[set ? 'on' : 'off']('keyup.'+Featherlight.prototype.namespace, keyHelper);
+				var events = $.map(eventMap, function(_, name) { return name+'.'+Featherlight.prototype.namespace; } ).join(' ');
+				$(window)[set ? 'on' : 'off'](events, globalEventHandler);
 			}
 		};
 
@@ -429,9 +433,11 @@
 		*/
 		_callbackChain: {
 			onKeyUp: function(_super, event){
-				if(27 === event.keyCode && this.closeOnEsc) {
-					this.$instance.find('.'+this.namespace+'-close:first').click();
-					event.preventDefault();
+				if(27 === event.keyCode) {
+					if (this.closeOnEsc) {
+						this.$instance.find('.'+this.namespace+'-close:first').click();
+					}
+					return false;
 				} else {
 					return _super(event);
 				}

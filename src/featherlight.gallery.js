@@ -55,7 +55,7 @@
 				}[event.keyCode];
 				if(dir) {
 					this.$instance.trigger(dir);
-					event.preventDefault();
+					return false;
 				} else {
 					return _super(event);
 				}
