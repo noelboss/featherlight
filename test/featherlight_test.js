@@ -15,6 +15,7 @@ var expect = chai.expect;
 	};
 
 	$.fx.off = true;
+	$.fn.toJSON = function() { return 'jQuery: ' + this.selector + ' (' + this.length + ')' };
 
 	describe('Featherlight', function() {
 		beforeEach(resetFixtures);

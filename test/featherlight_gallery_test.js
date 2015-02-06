@@ -11,6 +11,7 @@ var expect = chai.expect;
     $(window).trigger($.Event("keyup", { keyCode: keyCode }));
   };
   $.fx.off = true;
+  $.fn.toJSON = function() { return 'jQuery: ' + this.selector + ' (' + this.length + ')' };
 
   describe('Featherlight Gallery', function() {
     beforeEach(resetFixtures);
