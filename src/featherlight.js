@@ -296,9 +296,12 @@
 					var self = this,
 						deferred = $.Deferred(),
 						img = new Image();
-					img.onload  = function() { deferred.resolve(
-						$('<img src="'+url+'" alt="" class="'+self.namespace+'-image" />')
-					); };
+					img.onload  = function() {
+						var $img = $('<img src="'+url+'" alt="" class="'+self.namespace+'-image" />');
+						/* Store naturalWidth & height for IE8 */
+						$img.naturalWidth = img.width; $img.naturalHeight = img.height;
+						deferred.resolve( $img );
+					};
 					img.onerror = function() { deferred.reject(); };
 					img.src = url;
 					return deferred.promise();

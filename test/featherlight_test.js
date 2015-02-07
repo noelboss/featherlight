@@ -114,6 +114,16 @@ var expect = chai.expect;
 			});
 		});
 
+		describe('image content filter', function() {
+			it('stores the natural width & height', function(done) {
+				$('#plain-photo-link').featherlight({
+					afterOpen: function() {
+						expect(this.$content.naturalWidth).to.equal(200);
+						done();
+					}
+				}).click();
+			});
+		});
 
 		describe('configuration', function() {
 			it('can be set using data-feather-*', function() {
