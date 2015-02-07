@@ -55,7 +55,7 @@
 		};
 
 	/* document wide key handler */
-	var eventMap = { keyup: 'onKeyUp' };
+	var eventMap = { keyup: 'onKeyUp', resize: 'onResize' };
 
 	var globalEventHandler = function(event) {
 		$.each(Featherlight.opened().reverse(), function() {
@@ -101,6 +101,7 @@
 		afterContent: $.noop,                 /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
 		afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
 		onKeyUp:      $.noop,									/* Called on key down for the frontmost featherlight */
+		onResize:     $.noop,									/* Called after new content and when a window is resized */
 		type:         null,                   /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
 		contentFilters: ['jquery', 'image', 'html', 'ajax', 'text'], /* List of content filters to use to determine the content */
 
@@ -441,6 +442,12 @@
 				} else {
 					return _super(event);
 				}
+			},
+
+			afterContent: function(_super, event){
+				var r = _super(event);
+				this.onResize(event);
+				return r;
 			}
 		}
 	});

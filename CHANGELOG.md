@@ -3,6 +3,10 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+### Features
+- New callback: onResize called for new content and when the window is resized
+
+### Changes
 - current() now returns null if no lightbox is currently opened
 - now avoids memory leaks
 - onKeyDown() renamed onKeyUp()

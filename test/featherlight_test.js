@@ -176,6 +176,24 @@ var expect = chai.expect;
 				expect($.featherlight.current()).to.be.null;
 			});
 
+			it('can specify a resize handler', function() {
+				var resizes = [],
+				  open = function() {
+						$.featherlight('<p/>', {
+							onResize: function(event) { resizes.push(this.id); }
+						});
+					}
+				open();
+				open();
+				$(window).trigger('resize');
+				open();
+				$.featherlight.current().close();
+				$.featherlight.current().close();
+				$(window).trigger('resize');
+				resizes = $.map(resizes, function(id) { return id - $.featherlight.current().id });
+				expect(resizes).to.eql([0, 1, 1, 0, 2, 0]);
+			});
+
 			it('can specify a filter for events', function() {
 				$("#filter-test .group").featherlight({filter: '.yes', type: 'text'})
 					.append('<span class="yes"  href="filter Appended">Photo</span>');
