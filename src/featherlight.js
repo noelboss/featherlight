@@ -447,6 +447,23 @@
 				}
 			},
 
+			onResize: function(_super, event){
+				if (this.$content.naturalWidth) {
+					var w = this.$content.naturalWidth, h = this.$content.naturalHeight;
+					/* Reset apparent image size first so container grows */
+					this.$content.css('width', '').css('height', '');
+					/* Calculate the worst ratio so that dimensions fit */
+					var ratio = Math.max(
+						w  / parseInt(this.$content.parent().css('width'),10),
+						h / parseInt(this.$content.parent().css('height'),10));
+					/* Resize content */
+					if (ratio > 1) {
+						this.$content.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
+					}
+				}
+				return _super(event);
+			},
+
 			afterContent: function(_super, event){
 				var r = _super(event);
 				this.onResize(event);

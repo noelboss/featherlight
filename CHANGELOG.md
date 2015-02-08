@@ -4,7 +4,8 @@ Featherlight – Changelog
 Master
 -----------------------------------
 ### Features
-- New callback: onResize called for new content and when the window is resized
+- New callback: onResize called for new content and when the window is resized.
+- onResize is used to automatically resize images if needed.
 
 ### Changes
 - current() now returns null if no lightbox is currently opened
