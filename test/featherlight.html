@@ -21,7 +21,7 @@
   <script>
     if (navigator.userAgent.indexOf('PhantomJS') < 0) {
       mocha.checkLeaks();
-      mocha.globals(['jQuery']);
+      mocha.globals(['jQuery*']);
       mocha.run();
     }
   </script>
