@@ -8,7 +8,7 @@ var expect = chai.expect;
     $('body').append($htmlFixtures.clone(true));
   };
   var triggerKeyCode = function(keyCode) {
-    $(document).trigger($.Event("keyup", { keyCode: keyCode }));
+    $(window).trigger($.Event("keyup", { keyCode: keyCode }));
   };
   $.fx.off = true;
 

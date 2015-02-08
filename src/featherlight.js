@@ -67,7 +67,7 @@
 	var toggleGlobalEvents = function(set) {
 			if(set !== Featherlight._globalHandlerInstalled) {
 				Featherlight._globalHandlerInstalled = set;
-				$(document)[set ? 'on' : 'off']('keyup.'+Featherlight.prototype.namespace, keyHelper);
+				$(window)[set ? 'on' : 'off']('keyup.'+Featherlight.prototype.namespace, keyHelper);
 			}
 		};
 
