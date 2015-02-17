@@ -3,6 +3,10 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+
+
+1.1.0 - 2015-02-17
+-----------------------------------
 ### Features
 - New callback: onResize called for new content and when the window is resized.
 - onResize is used to automatically resize images if needed.
