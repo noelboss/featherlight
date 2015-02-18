@@ -98,6 +98,7 @@ You can also modify the `$.featherlight.defaults` directly which holds all the d
 		closeOnClick: 'background',           /* Close lightbox on click ('background', 'anywhere', or false) */
 		closeOnEsc:   true,                   /* Close lightbox when pressing esc */
 		closeIcon:    '&#10005;',             /* Close icon */
+		loading:      '',                     /* Content to show while initial content is loading */
 		otherClose:   null,                   /* Selector for alternate close buttons (e.g. "a.close") */
 		beforeOpen:   $.noop,                 /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		beforeContent: $.noop,                /* Called when content is loaded. Gets event as parameter, this contains all data */
@@ -180,8 +181,13 @@ If true, the lightbox is closed when pressing the ESC key
 
 ================================================
 
-	closeIcon – String: &#10005`;
+	closeIcon – String: '&#10005;';
 Oh the naming...
+
+================================================
+
+	loading – String: '';
+Shown initially while content loads. The lightbox also has a class '.featherlight-loading' while content is loading. This makes it easy to specify a "Loading..." message or a spinner.
 
 ================================================
 

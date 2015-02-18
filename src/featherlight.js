@@ -93,6 +93,7 @@
 		closeOnClick: 'background',           /* Close lightbox on click ('background', 'anywhere' or false) */
 		closeOnEsc:   true,                   /* Close lightbox when pressing esc */
 		closeIcon:    '&#10005;',             /* Close icon */
+		loading:      '',                     /* Content to show while initial content is loading */
 		otherClose:   null,                   /* Selector for alternate close buttons (e.g. "a.close") */
 		beforeOpen:   $.noop,                 /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		beforeContent: $.noop,                /* Called when content is loaded. Gets event as parameter, this contains all data */
@@ -117,12 +118,12 @@
 			var self = $.extend(this, config, {target: target}),
 				css = !self.resetCss ? self.namespace : self.namespace+'-reset', /* by adding -reset to the classname, we reset all the default css */
 				$background = $(self.background || [
-					'<div class="'+css+'">',
+					'<div class="'+css+'-loading '+css+'">',
 						'<div class="'+css+'-content">',
 							'<span class="'+css+'-close-icon '+ self.namespace + '-close">',
 								self.closeIcon,
 							'</span>',
-							'<div class="'+self.namespace+'-inner"></div>',
+							'<div class="'+self.namespace+'-inner">' + self.loading + '</div>',
 						'</div>',
 					'</div>'].join('')),
 				closeButtonSelector = '.'+self.namespace+'-close' + (self.otherClose ? ',' + self.otherClose : '');
@@ -201,6 +202,8 @@
 			if($content.is('iframe') || $('iframe', $content).length > 0){
 				self.$instance.addClass(self.namespace+'-iframe');
 			}
+
+			self.$instance.removeClass(self.namespace+'-loading');
 
 			self.$content = $content.addClass(self.namespace+'-inner');
 

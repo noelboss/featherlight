@@ -273,6 +273,19 @@ var stubAjaxLoad = function(content) {
 				expect(lastCallback).to.equal('afterClose');
 			});
 
+			it('can specify a loading text', function(done) {
+				stubAjaxLoad('<b>Hi</b>');
+				$.featherlight({ajax: 'stubbed', loading: "Spinner!"});
+				expect($('.featherlight')).to.contain('Spinner!');
+				expect($('.featherlight')).to.have.class('featherlight-loading');
+				patiently(done, function() {
+					expect($('.featherlight')).to.contain('Hi');
+					expect($('.featherlight')).not.to.contain('Spinner!');
+					expect($('.featherlight')).not.to.have.class('featherlight-loading');
+				});
+			});
+
+
 		});
 
 	});
