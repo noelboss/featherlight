@@ -210,7 +210,7 @@
 				 position to any other items added to featherlight-content */
 			self.$instance.find('.'+self.namespace+'-inner')
 				.slice(1).remove().end()			/* In the unexpected event where there are many inner elements, remove all but the first one */
-				.replaceWith($content);
+				.replaceWith($.contains(self.$instance[0], $content[0]) ? '' : $content);
 
 			self.$content = $content.addClass(self.namespace+'-inner');
 

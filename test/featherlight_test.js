@@ -47,6 +47,16 @@ var stubAjaxLoad = function(content) {
 			]);
 		});
 
+		it ('does not move content that was already placed in the featherlight by content-filters', function() {
+			$.featherlight.contentFilters.advancedExample = {
+				process: function() {
+					return $('<p>Hello</p>').appendTo(this.$instance);
+				}
+			};
+			$.featherlight({advancedExample: 'dummy'});
+			expect($('.featherlight > p').length).to.equal(1);
+		});
+
 		describe('jQuery#featherlight', function() {
 
 			it('is chainable', function() {
