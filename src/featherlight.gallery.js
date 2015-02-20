@@ -107,7 +107,7 @@
 			return $.when(
 				self.getContent(),
 				$inner.fadeTo(self.galleryFadeOut,0.2)
-			).done(function($newContent) {
+			).always(function($newContent) {
 					self.setContent($newContent);
 					self.afterContent();
 					$newContent.fadeTo(self.galleryFadeIn,1);

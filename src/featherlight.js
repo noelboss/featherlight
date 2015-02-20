@@ -252,7 +252,7 @@
 					self.beforeContent(event);
 
 					/* Set content and show */
-					$.when($content).done(function($content){
+					$.when($content).always(function($content){
 						self.setContent($content);
 						self.afterContent(event);
 						/* Call afterOpen after fadeIn is done */
@@ -313,14 +313,14 @@
 				process: function(url)  {
 					var self = this,
 						deferred = $.Deferred(),
-						img = new Image();
+						img = new Image(),
+						$img = $('<img src="'+url+'" alt="" class="'+self.namespace+'-image" />');
 					img.onload  = function() {
-						var $img = $('<img src="'+url+'" alt="" class="'+self.namespace+'-image" />');
 						/* Store naturalWidth & height for IE8 */
 						$img.naturalWidth = img.width; $img.naturalHeight = img.height;
 						deferred.resolve( $img );
 					};
-					img.onerror = function() { deferred.reject(); };
+					img.onerror = function() { deferred.reject($img); };
 					img.src = url;
 					return deferred.promise();
 				}

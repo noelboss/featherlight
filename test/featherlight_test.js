@@ -298,6 +298,16 @@ var stubAjaxLoad = function(content) {
 
 		});
 
+		describe('error handling', function() {
+			it('is quite basic', function(done) {
+				$.featherlight('does_not_exist.jpg');
+				patiently(done, function() {
+					expect($('.featherlight-image')).to.have.attr('src').equal('does_not_exist.jpg');
+					expect($('.featherlight')).not.to.have.class('featherlight-loading');
+				});
+			});
+		});
+
 		describe('iframe content filter', function() {
 			it('generates an iframe with the right attributes', function() {
 				$('<a data-featherlight-iframe="http://www.apple.com" '+
