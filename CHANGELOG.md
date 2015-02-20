@@ -9,6 +9,9 @@ Master
   Options iframeWidth, iframeMinWidth, etc. or their corresponding data attributes
   are used as CSS when present.
 
+### Changes
+- Basic error handling for images that won't load
+
 1.1.0 - 2015-02-17
 -----------------------------------
 ### Features
