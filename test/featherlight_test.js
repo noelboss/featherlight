@@ -147,14 +147,6 @@ var stubAjaxLoad = function(content) {
 			});
 		});
 
-		describe('iframe content filter', function() {
-			it('generates an iframe', function() {
-				$.featherlight({iframe: 'http://www.apple.com'});
-				expect($('.featherlight iframe')).to.have.attr('src').equal('http://www.apple.com');
-				$.featherlight.close();
-			});
-		});
-
 		describe('configuration', function() {
 			it('can be set using data-feather-*', function() {
 				$('#data-attr-test a').featherlight().click();
@@ -304,6 +296,14 @@ var stubAjaxLoad = function(content) {
 			});
 
 
+		});
+
+		describe('iframe content filter', function() {
+			it('generates an iframe', function() {
+				$.featherlight({iframe: 'http://www.apple.com'});
+				expect($('.featherlight iframe')).to.have.attr('src').equal('http://www.apple.com');
+				$.featherlight.close();
+			});
 		});
 
 	});
