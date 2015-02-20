@@ -333,6 +333,11 @@ Featherlight generates an iframe with the 'iframe' keyword and a given url
 
 	<a href="http://www.example.com" data-featherlight="iframe">Open example.com in an iframe</a>
 
+Options `iframeWidth`, `iframeMinWidth`, etc. or their corresponding data attributes are used as CSS when present.
+
+	$.featherlight({iframe: 'editor.html', iframeMaxWidth: '80%', iframeWidth: 500,
+		iframeHeight: 300});
+
 # IE8 background transparency
 If you want the background in IE8 to be translucent, use data:image before the rgba background:
 

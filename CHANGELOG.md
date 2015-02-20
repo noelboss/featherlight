@@ -6,6 +6,8 @@ Master
 ### Features
 - New setting: loading (default is '') is shown initially while content loads. The lightbox also has a class '.featherlight-loading' while content is loading.
 - New content-filter "iframe" to generate an iframe with the given URL.
+  Options iframeWidth, iframeMinWidth, etc. or their corresponding data attributes
+  are used as CSS when present.
 
 1.1.0 - 2015-02-17
 -----------------------------------

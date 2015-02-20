@@ -54,6 +54,21 @@
 			return opened;
 		};
 
+	// structure({iframeMinHeight: 44, foo: 0}, 'iframe')
+	//   #=> {min-height: 44}
+	var structure = function(obj, prefix) {
+		var result = {},
+			regex = new RegExp('^' + prefix + '([A-Z])(.*)');
+		for (var key in obj) {
+			var match = key.match(regex);
+			if (match) {
+				var dasherized = (match[1] + match[2].replace(/([A-Z])/g, '-$1')).toLowerCase();
+				result[dasherized] = obj[key];
+			}
+		}
+		return result;
+	};
+
 	/* document wide key handler */
 	var eventMap = { keyup: 'onKeyUp', resize: 'onResize' };
 
@@ -335,6 +350,7 @@
 					var $content = $('<iframe/>')
 						.hide()
 						.attr('src', url)
+						.css(structure(this, 'iframe'))
 						.on('load', function() { deferred.resolve($content.show()); })
 						// We can't move an <iframe> and avoid reloading it,
 						// so let's put it in place ourselves right now:
