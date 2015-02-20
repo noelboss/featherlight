@@ -70,9 +70,14 @@
 	.featherlight-previous:hover span {
 		display: inline-block;
 	}
+
+	/* Hide navigation while loading */
+	.featherlight-loading .featherlight-previous, .featherlight-loading .featherlight-next {
+		display:none;
+	}
 }
 
-/* Allways display arrows on touch devices */
+/* Always display arrows on touch devices */
 @media only screen and (max-device-width: 1024px){
 	.featherlight-next:hover,
 	.featherlight-previous:hover {
