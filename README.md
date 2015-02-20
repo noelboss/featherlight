@@ -328,6 +328,10 @@ or you can provide the link directly as the featherlight-attribute:
 
 	<a href="#" data-featherlight="url.html .jQuery-Selector">Open Ajax Content</a>
 
+## Open lightbox with iframe
+Featherlight generates an iframe with the 'iframe' keyword and a given url
+
+	<a href="http://www.example.com" data-featherlight="iframe">Open example.com in an iframe</a>
 
 # IE8 background transparency
 If you want the background in IE8 to be translucent, use data:image before the rgba background:

@@ -104,7 +104,7 @@
 		onKeyUp:      $.noop,                 /* Called on key down for the frontmost featherlight */
 		onResize:     $.noop,                 /* Called after new content and when a window is resized */
 		type:         null,                   /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
-		contentFilters: ['jquery', 'image', 'html', 'ajax', 'text'], /* List of content filters to use to determine the content */
+		contentFilters: ['jquery', 'image', 'html', 'ajax', 'iframe', 'text'], /* List of content filters to use to determine the content */
 
 		/*** methods ***/
 		/* setup iterates over a single instance of featherlight and prepares the background and binds the events */
@@ -326,6 +326,19 @@
 						}
 						deferred.fail();
 					});
+					return deferred.promise();
+				}
+			},
+			iframe: {
+				process: function(url) {
+					var deferred = new $.Deferred();
+					var $content = $('<iframe/>')
+						.hide()
+						.attr('src', url)
+						.on('load', function() { deferred.resolve($content.show()); })
+						// We can't move an <iframe> and avoid reloading it,
+						// so let's put it in place ourselves right now:
+						.appendTo(this.$instance.find('.' + this.namespace + '-content'));
 					return deferred.promise();
 				}
 			},
