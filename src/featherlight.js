@@ -367,12 +367,13 @@
 
 		/*** class methods ***/
 		/* read element's attributes starting with data-featherlight- */
-		readElementConfig: function(element) {
+		readElementConfig: function(element, namespace) {
 			var Klass = this,
+				regexp = new RegExp('^data-' + namespace + '-(.*)'),
 				config = {};
 			if (element && element.attributes) {
 				$.each(element.attributes, function(){
-					var match = this.name.match(/^data-featherlight-(.*)/);
+					var match = this.name.match(regexp);
 					if (match) {
 						var val = this.value,
 							name = $.camelCase(match[1]);
@@ -421,11 +422,16 @@
 			config = $.extend({}, config);
 
 			/* Only for openTrigger and namespace... */
-			var tempConfig = $.extend({}, Klass.defaults, Klass.readElementConfig($source[0]), config);
+			var namespace = config.namespace || Klass.defaults.namespace,
+				tempConfig = $.extend({}, Klass.defaults, Klass.readElementConfig($source[0], namespace), config);
 
 			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, function(event) {
 				/* ... since we might as well compute the config on the actual target */
-				var elemConfig = $.extend({$source: $source, $currentTarget: $(this)}, Klass.readElementConfig($source[0]), Klass.readElementConfig(this), config);
+				var elemConfig = $.extend(
+					{$source: $source, $currentTarget: $(this)},
+					Klass.readElementConfig($source[0], tempConfig.namespace),
+					Klass.readElementConfig(this, tempConfig.namespace),
+					config);
 				new Klass($content, elemConfig).open(event);
 			});
 			return $source;

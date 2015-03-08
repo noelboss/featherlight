@@ -3,6 +3,7 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+- Fixed `namespace` option.
 
 1.2.0 - 2015-02-20
 -----------------------------------

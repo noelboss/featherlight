@@ -295,6 +295,10 @@ var stubAjaxLoad = function(content) {
 				});
 			});
 
+			it('can specify a different namespace', function() {
+				$('#namespace-test a').featherlight({namespace: 'custom-namespace'}).click();
+				expect($.featherlight.current().$instance.find('b')).to.have.text('Namespace ok');
+			});
 
 		});
 
