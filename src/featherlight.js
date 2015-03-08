@@ -371,7 +371,7 @@
 			var Klass = this,
 				config = {};
 			if (element && element.attributes) {
-					$.each(element.attributes, function(){
+				$.each(element.attributes, function(){
 					var match = this.name.match(/^data-featherlight-(.*)/);
 					if (match) {
 						var val = this.value,
