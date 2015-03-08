@@ -148,7 +148,7 @@ var stubAjaxLoad = function(content) {
 		});
 
 		describe('configuration', function() {
-			it('can be set using data-feather-*', function() {
+			it('can be set using data-featherlight-*', function() {
 				$('#data-attr-test a').featherlight().click();
 				expect($.featherlight.current()).to.have.properties({
 					variant: 'test',
@@ -158,7 +158,7 @@ var stubAjaxLoad = function(content) {
 				expect($.featherlight.current().$instance.find('b')).to.have.text('Added in callback');
 			});
 
-			it('can be set using data-feather-* on filtered element too', function() {
+			it('can be set using data-featherlight-* on filtered element too', function() {
 				$('#data-attr-filter-test a:first').click();
 				expect($.featherlight.current()).to.have.property('variant').equal('wrapper');
 				$('#data-attr-filter-test a:last').click();
