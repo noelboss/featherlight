@@ -22,7 +22,7 @@
 
 	var isTouchAware = 'ontouchstart' in document.documentElement,
 		jQueryConstructor = $.event && $.event.special.swipeleft && $,
-		hammerConstructor = ('Hammer' in window) && function($el){ new window.Hammer($el[0]); },
+		hammerConstructor = ('Hammer' in window) && function($el){ return new window.Hammer($el[0]); },
 		swipeAwareConstructor = isTouchAware && (jQueryConstructor || hammerConstructor);
 	if(isTouchAware && !swipeAwareConstructor) {
 		warn('No compatible swipe library detected; one must be included before featherlightGallery for swipe motions to navigate the galleries.');
