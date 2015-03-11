@@ -17,7 +17,7 @@
 
 	var isTouchAware = 'ontouchstart' in document.documentElement,
 		jQueryConstructor = $.event && $.event.special.swipeleft && $,
-		hammerConstructor = ('Hammer' in window) && function($el){ new window.Hammer(el[0]); },
+		hammerConstructor = ('Hammer' in window) && function($el){ new window.Hammer($el[0]); },
 		swipeAwareConstructor = isTouchAware && (jQueryConstructor || hammerConstructor),
 		callbackChain = {
 			afterClose: function(_super, event) {
