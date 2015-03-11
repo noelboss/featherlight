@@ -8,18 +8,27 @@
 (function($) {
 	"use strict";
 
-	if('undefined' === typeof $) {
-		if('console' in window){ window.console.info('Too much lightness, Featherlight needs jQuery.');
-			if(!('featherlight' in $)){	window.console.info('Load the featherlight plugin before the gallery plugin'); }
+	var warn = function(m) {
+		if(window.console && window.console.warn) {
+			window.console.warn('FeatherlightGallery: ' + m);
 		}
-		return;
+	};
+
+	if('undefined' === typeof $) {
+		return warn('Too much lightness, Featherlight needs jQuery.');
+	} else if(!$.featherlight) {
+		return warn('Load the featherlight plugin before the gallery plugin');
 	}
 
 	var isTouchAware = 'ontouchstart' in document.documentElement,
 		jQueryConstructor = $.event && $.event.special.swipeleft && $,
 		hammerConstructor = ('Hammer' in window) && function($el){ new window.Hammer($el[0]); },
-		swipeAwareConstructor = isTouchAware && (jQueryConstructor || hammerConstructor),
-		callbackChain = {
+		swipeAwareConstructor = isTouchAware && (jQueryConstructor || hammerConstructor);
+	if(isTouchAware && !swipeAwareConstructor) {
+		warn('No compatible swipe library detected; one must be included before featherlightGallery for swipe motions to navigate the galleries.');
+	}
+
+	var callbackChain = {
 			afterClose: function(_super, event) {
 					var self = this;
 					self.$instance.off('next.'+self.namespace+' previous.'+self.namespace);
