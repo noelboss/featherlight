@@ -235,6 +235,7 @@
 		/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
 		open: function(event){
 			var self = this;
+			self.$instance.hide().appendTo(self.root);
 			if((!event || !event.isDefaultPrevented())
 				&& self.beforeOpen(event) !== false) {
 
@@ -248,7 +249,7 @@
 
 					toggleGlobalEvents(true);
 
-					self.$instance.appendTo(self.root).fadeIn(self.openSpeed);
+					self.$instance.fadeIn(self.openSpeed);
 					self.beforeContent(event);
 
 					/* Set content and show */
@@ -263,6 +264,7 @@
 					return self;
 				}
 			}
+			self.$instance.detach();
 			return false;
 		},
 
