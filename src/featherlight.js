@@ -232,7 +232,8 @@
 			return self;
 		},
 
-		/* opens the lightbox. "this" contains $instance with the lightbox, and with the config */
+		/* opens the lightbox. "this" contains $instance with the lightbox, and with the config.
+			Returns a promise that is resolved after is successfully opened. */
 		open: function(event){
 			var self = this;
 			self.$instance.hide().appendTo(self.root);
@@ -244,7 +245,7 @@
 				}
 				var $content = self.getContent();
 
-				if($content){
+				if($content) {
 					opened.push(self);
 
 					toggleGlobalEvents(true);
@@ -253,36 +254,41 @@
 					self.beforeContent(event);
 
 					/* Set content and show */
-					$.when($content).always(function($content){
-						self.setContent($content);
-						self.afterContent(event);
+					return $.when($content)
+						.always(function($content){
+							self.setContent($content);
+							self.afterContent(event);
+						})
+						.then(self.$instance.promise())
 						/* Call afterOpen after fadeIn is done */
-						$.when(self.$instance.promise()).done(function(){
-							self.afterOpen(event);
-						});
-					});
-					return self;
+						.done(function(){ self.afterOpen(event); });
 				}
 			}
 			self.$instance.detach();
-			return false;
+			return $.Deferred().reject().promise();
 		},
 
-		/* closes the lightbox. "this" contains $instance with the lightbox, and with the config */
+		/* closes the lightbox. "this" contains $instance with the lightbox, and with the config
+			returns a promise, resolved after the lightbox is successfully closed. */
 		close: function(event){
-			var self = this;
+			var self = this,
+				deferred = $.Deferred();
+
 			if(self.beforeClose(event) === false) {
-				return false;
-			}
+				deferred.reject();
+			} else {
 
-			if (0 === pruneOpened(self).length) {
-				toggleGlobalEvents(false);
-			}
+				if (0 === pruneOpened(self).length) {
+					toggleGlobalEvents(false);
+				}
 
-			self.$instance.fadeOut(self.closeSpeed,function(){
-				self.$instance.detach();
-				self.afterClose(event);
-			});
+				self.$instance.fadeOut(self.closeSpeed,function(){
+					self.$instance.detach();
+					self.afterClose(event);
+					deferred.resolve();
+				});
+			}
+			return deferred.promise();
 		},
 
 		/* Utility function to chain callbacks
@@ -452,7 +458,7 @@
 
 		close: function() {
 			var cur = this.current();
-			if(cur) { cur.close(); }
+			if(cur) { return cur.close(); }
 		},
 
 		/* Does the auto binding on startup.

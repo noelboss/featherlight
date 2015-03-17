@@ -80,6 +80,18 @@ var stubAjaxLoad = function(content) {
 
 		});
 
+		describe('jQuery.featherlight#open', function() {
+			it('returns a promise', function(done) {
+				var fl = new $.featherlight('<p class="testing">This is a test<p>');
+				expect($.featherlight.current()).to.be.null;
+				var evt = $.Event('dummy');
+				evt.preventDefault();
+				expect(fl.open(evt).state()).to.equal('rejected');
+				expect($.featherlight.current()).to.be.null;
+				fl.open().then(function(){ done(); });
+			});
+		});
+
 		describe('jQuery.featherlight.current', function() {
 			it('returns null if no dialogbox is currently opened', function() {
 				expect($.featherlight.current()).to.be.null;
@@ -133,6 +145,13 @@ var stubAjaxLoad = function(content) {
 				$.featherlight.close();
 				expect($.featherlight.current()).to.be.null;
 				$.featherlight.close(); /* should not create error */
+			});
+		});
+
+		describe('jQuery.featherlight.close', function() {
+			it('returns a promise', function(done) {
+				$.featherlight('<p class="testing">This is a test<p>');
+				$.featherlight.close().then(function(){ done() });
 			});
 		});
 

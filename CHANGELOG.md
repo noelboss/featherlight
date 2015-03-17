@@ -3,7 +3,7 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
-
+- Open & Close return promises that are resolved when their action successfully finishes.
 
 1.2.2 - 2015-03-11
 -----------------------------------
