@@ -3,6 +3,7 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+- New `persist` option to persist content [#122]
 
 
 1.2.3 - 2015-03-21

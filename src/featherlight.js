@@ -109,6 +109,7 @@
 		closeOnEsc:   true,                   /* Close lightbox when pressing esc */
 		closeIcon:    '&#10005;',             /* Close icon */
 		loading:      '',                     /* Content to show while initial content is loading */
+		persist:      false,									/* If set, the content persist and will be shown again when opened again. 'shared' is a special value when binding multiple elements for them to share the same content */
 		otherClose:   null,                   /* Selector for alternate close buttons (e.g. "a.close") */
 		beforeOpen:   $.noop,                 /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		beforeContent: $.noop,                /* Called when content is loaded. Gets event as parameter, this contains all data */
@@ -161,6 +162,9 @@
 
 		/* this method prepares the content and converts it into a jQuery object or a promise */
 		getContent: function(){
+			if(this.persist !== false && this.$content) {
+				return this.$content;
+			}
 			var self = this,
 				filters = this.constructor.contentFilters,
 				readTargetAttr = function(name){ return self.$currentTarget && self.$currentTarget.attr(name); },
@@ -224,6 +228,7 @@
 			   this insures that featherlight-inner remain at the same relative
 				 position to any other items added to featherlight-content */
 			self.$instance.find('.'+self.namespace+'-inner')
+				.not($content)                /* excluded new content, important if persisted */
 				.slice(1).remove().end()			/* In the unexpected event where there are many inner elements, remove all but the first one */
 				.replaceWith($.contains(self.$instance[0], $content[0]) ? '' : $content);
 
@@ -314,7 +319,7 @@
 			jquery: {
 				regex: /^[#.]\w/,         /* Anything that starts with a class name or identifiers */
 				test: function(elem)    { return elem instanceof $ && elem; },
-				process: function(elem) { return $(elem).clone(true); }
+				process: function(elem) { return this.persist !== false ? $(elem) : $(elem).clone(true); }
 			},
 			image: {
 				regex: /\.(png|jpg|jpeg|gif|tiff|bmp)(\?\S*)?$/i,
@@ -431,7 +436,8 @@
 
 			/* Only for openTrigger and namespace... */
 			var namespace = config.namespace || Klass.defaults.namespace,
-				tempConfig = $.extend({}, Klass.defaults, Klass.readElementConfig($source[0], namespace), config);
+				tempConfig = $.extend({}, Klass.defaults, Klass.readElementConfig($source[0], namespace), config),
+				sharedPersist;
 
 			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, function(event) {
 				/* ... since we might as well compute the config on the actual target */
@@ -440,7 +446,13 @@
 					Klass.readElementConfig($source[0], tempConfig.namespace),
 					Klass.readElementConfig(this, tempConfig.namespace),
 					config);
-				new Klass($content, elemConfig).open(event);
+				var fl = sharedPersist || $(this).data('featherlight.persisted') || new Klass($content, elemConfig);
+				if(fl.persist === 'shared') {
+					sharedPersist = fl;
+				} else if(fl.persist !== false) {
+					$(this).data('featherlight.persisted', fl);
+				}
+				fl.open(event);
 			});
 			return $source;
 		},

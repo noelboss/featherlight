@@ -319,6 +319,44 @@ var stubAjaxLoad = function(content) {
 				expect($.featherlight.current().$instance.find('b')).to.have.text('Namespace ok');
 			});
 
+			it('can specify to persist the content', function() {
+				var $elem = $('<div class="keepme"/>').appendTo('body');
+				expect($('.keepme')).with.length(1).to.have.text('');
+				var fl = $.featherlight({
+					jquery: $elem,
+					persist: true,
+					afterContent: function() { this.$content.append('<i>1</i>'); },
+					afterOpen: function() { this.$content.append('<b>2</b>'); }
+				});
+				expect($('.keepme')).with.length(1).to.have.text('12');
+				$.featherlight.close();
+				fl.open();
+				expect($('.keepme')).with.length(1).to.have.text('1212');
+				$.featherlight.close();
+			});
+
+			var persistTest = function(setting, lastValue) {
+				$('<div class="keepme">Foo</div>').appendTo('body');
+				$('<div class="other">Bar</div>').appendTo('body');
+				var $buttons = $('<a href=".keepme"/><a href=".other"/>').appendTo('body');
+				$buttons.featherlight({ persist: setting });
+				$buttons.first().click();
+				$.featherlight.close();
+				$buttons.first().click();
+				expect($('.featherlight-inner')).to.have.text('Foo');
+				$.featherlight.close();
+				$buttons.last().click();
+				expect($('.featherlight-inner')).to.have.text(lastValue);
+			};
+
+			it('can specify to persist the content individually', function() {
+				persistTest(true, 'Bar');
+			});
+
+			it('can specify to persist the share the content as a group', function() {
+				persistTest('shared', 'Foo');
+			});
+
 		});
 
 		describe('error handling', function() {

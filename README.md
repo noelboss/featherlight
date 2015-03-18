@@ -99,6 +99,7 @@ You can also modify the `$.featherlight.defaults` directly which holds all the d
 		closeOnEsc:   true,                   /* Close lightbox when pressing esc */
 		closeIcon:    '&#10005;',             /* Close icon */
 		loading:      '',                     /* Content to show while initial content is loading */
+		persist:      false,                  /* If set, the content will persist and will be shown again when opened again. 'shared' is a special value when binding multiple elements for them to share the same content */
 		otherClose:   null,                   /* Selector for alternate close buttons (e.g. "a.close") */
 		beforeOpen:   $.noop,                 /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 		beforeContent: $.noop,                /* Called when content is about to be presented. `this` is the featherlight instance. Gets event as parameter */
@@ -188,6 +189,13 @@ Oh the naming...
 
 	loading – String: '';
 Shown initially while content loads. The lightbox also has a class '.featherlight-loading' while content is loading. This makes it easy to specify a "Loading..." message or a spinner.
+
+================================================
+
+	persist - Boolean or 'shared': false;
+If set, the content will persist and will be shown again when opened again.
+In case where multiple buttons need to persist the same content, use the special value 'shared'.
+The content filter `jquery` (used for links like `.some-class` or `#some-id`) will clone the given content if and only if it is not persisted. Otherwise it will be moved into the lightbox.
 
 ================================================
 
