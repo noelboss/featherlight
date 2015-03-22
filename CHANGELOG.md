@@ -3,6 +3,7 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+- Bump z-index to insure dialogs appear above everything else.
 - Open & Close return promises that are resolved when their action successfully finishes.
 
 1.2.2 - 2015-03-11
