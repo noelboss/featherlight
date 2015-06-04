@@ -446,11 +446,11 @@
 					Klass.readElementConfig($source[0], tempConfig.namespace),
 					Klass.readElementConfig(this, tempConfig.namespace),
 					config);
-				var fl = sharedPersist || $(this).data('featherlight.persisted') || new Klass($content, elemConfig);
+				var fl = sharedPersist || $(this).data('featherlight-persisted') || new Klass($content, elemConfig);
 				if(fl.persist === 'shared') {
 					sharedPersist = fl;
 				} else if(fl.persist !== false) {
-					$(this).data('featherlight.persisted', fl);
+					$(this).data('featherlight-persisted', fl);
 				}
 				fl.open(event);
 			});
