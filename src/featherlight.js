@@ -231,7 +231,8 @@
 				.not($content)                /* excluded new content, important if persisted */
 				.slice(1).remove().end()			/* In the unexpected event where there are many inner elements, remove all but the first one */
 				.replaceWith($.contains(self.$instance[0], $content[0]) ? '' : $content);
-
+				
+			if(!$content.is("script"))
 			self.$content = $content.addClass(self.namespace+'-inner');
 
 			return self;
@@ -506,7 +507,7 @@
 			},
 
 			onResize: function(_super, event){
-				if (this.$content.naturalWidth) {
+				if (!this.$content.is("script") && this.$content.naturalWidth) {
 					var w = this.$content.naturalWidth, h = this.$content.naturalHeight;
 					/* Reset apparent image size first so container grows */
 					this.$content.css('width', '').css('height', '');
