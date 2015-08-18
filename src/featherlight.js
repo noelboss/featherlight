@@ -452,6 +452,7 @@
 				} else if(fl.persist !== false) {
 					$(this).data('featherlight-persisted', fl);
 				}
+				elemConfig.$currentTarget.blur(); // Otherwise 'enter' key might trigger the dialog again
 				fl.open(event);
 			});
 			return $source;
