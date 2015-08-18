@@ -21,7 +21,7 @@ Here you'll find a [list of all the changes](https://github.com/noelboss/feather
 
 All styling is done using CSS so you'll want to include the Featherlight CSS in your head.
 
-	<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" />
+	<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" />
 
 Be aware that Featherlight uses very unspecific CSS selectors to help you overwrite every aspect. This means in turn, that if you're not following a modularized approach to write CSS (which you should! It's terrific!) and have many global and specific definitions (read ID's and such – which you shouldn't), these definitions can break the Featherlight styling.
 
@@ -406,8 +406,8 @@ Instead of navigation buttons it will use swipe events on touch devices, assumin
 
 Simply include the extension CSS and JavaScript Files after the regular featherlight files like this:
 
-	<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" />
-	<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.gallery.min.css" type="text/css" rel="stylesheet" title="Featherlight Gallery Styles" />
+	<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+	<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.2/release/featherlight.gallery.min.css" type="text/css" rel="stylesheet" />
 
 Add the JavaScript at the bottom of the body:
 
