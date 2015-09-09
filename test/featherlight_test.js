@@ -66,7 +66,8 @@ var stubAjaxLoad = function(content) {
 			});
 
 			it("won't open a dialog if the event is already prevented", function(){
-				$('#auto-bound').on('click', function(event) { event.preventDefault(); }).click()
+				$('#plain-photo-link').on('click', function(event) { event.preventDefault(); })
+				.featherlight().click();
 				expect($.featherlight.current()).to.be.null;
 			});
 		});

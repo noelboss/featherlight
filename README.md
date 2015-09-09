@@ -51,7 +51,7 @@ it also works with links using href and the "image" and "ajax" keywords (this ca
 	<a href="#" data-featherlight-ajax="myhtml.html .selector">Open ajax content in lightbox</a>
 	<a href="#" data-featherlight="myhtml.html .selector" data-featherlight-type="ajax">Open ajax content in lightbox</a>
 
-By default, Featherlight initializes all elements matching `defaults.autoBind` on document ready. If you want to prevent this, set `$.featherlight.defaults.autoBind` to false before the DOM is ready.
+By default, Featherlight initializes all elements matching `defaults.autoBind` on document ready. If you want to prevent this, set `$.featherlight.defaults.autoBind` to `false` before the DOM is ready.
 
 ## Bind Featherlight
 You can bind the Featherlight events on any element using the following code:
@@ -156,8 +156,6 @@ In the following example, the first link will make an ajax request while the sec
       <a href="first">Hello</a>
       <a href="second" data-featherlight-type="text">World</a>
     </div>
-
-Limitation: While auto bound elements added dynamically after onReady (e.g. via Ajax) will work fine, those with a `filter` are only supported supported if present before onReady.
 
 ================================================
 

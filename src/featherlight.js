@@ -480,13 +480,20 @@
 		_onReady: function() {
 			var Klass = this;
 			if(Klass.autoBind){
-				/* First, bind click on document, so it will work for items added dynamically */
-				Klass.attach($(document), {filter: Klass.autoBind});
-				/* Auto bound elements with attr-featherlight-filter won't work
-				   (since we already used it to bind on document), so bind these
-				   directly. We can't easily support dynamically added element with filters */
-				$(Klass.autoBind).filter('[data-featherlight-filter]').each(function(){
+				/* Bind existing elements */
+				$(Klass.autoBind).each(function(){
 					Klass.attach($(this));
+				});
+				/* If a click propagates to the document level, then we have an item that was added later on */
+				$(document).on('click', Klass.autoBind, function(evt) {
+					if (evt.isDefaultPrevented()) {
+						return;
+					}
+					evt.preventDefault();
+					/* Bind featherlight */
+					Klass.attach($(evt.currentTarget));
+					/* Click again; this time our binding will catch it */
+					$(evt.target).click();
 				});
 			}
 		},
