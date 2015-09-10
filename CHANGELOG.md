@@ -3,6 +3,10 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+
+
+1.3.4 - 2015-09-09
+-----------------------------------
 - Tweak auto binding to work with persist and remove limitation on filter.
 
 1.3.3 - 2015-08-17
