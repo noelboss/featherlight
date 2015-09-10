@@ -107,7 +107,7 @@
 		closeSpeed:   250,                    /* Duration of closing animation */
 		closeOnClick: 'background',           /* Close lightbox on click ('background', 'anywhere' or false) */
 		closeOnEsc:   true,                   /* Close lightbox when pressing esc */
-		closeIcon:    '&#10005;',             /* Close icon */
+		closeIcon:    '&times;',             /* Close icon */
 		loading:      '',                     /* Content to show while initial content is loading */
 		persist:      false,									/* If set, the content persist and will be shown again when opened again. 'shared' is a special value when binding multiple elements for them to share the same content */
 		otherClose:   null,                   /* Selector for alternate close buttons (e.g. "a.close") */
