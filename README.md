@@ -107,7 +107,7 @@ You can also modify the `$.featherlight.defaults` directly which holds all the d
 		afterOpen:    $.noop,                 /* Called after open. `this` is the featherlight instance. Gets event as parameter  */
 		afterContent: $.noop,                 /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
 		afterClose:   $.noop,                 /* Called after close. `this` is the featherlight instance. Gets event as parameter  */
-		onKeyDown:    $.noop,                 /* Called on key down for the frontmost featherlight */
+		onKeyUp:      $.noop,                 /* Called on key up for the frontmost featherlight */
 		type:         null,                   /* Specify content type. If unset, it will check for the targetAttrs value. */
 		contentFilters: ['jquery', 'image', 'html', 'ajax', 'text'] /* List of content filters to use to determine the content */
 		jquery/image/html/ajax/text: undefined     /* Specify content type and data */
