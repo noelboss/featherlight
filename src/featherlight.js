@@ -94,32 +94,32 @@
 		constructor: Featherlight,
 		/*** defaults ***/
 		/* extend featherlight with defaults and methods */
-		namespace:    'featherlight',         /* Name of the events and css class prefix */
-		targetAttr:   'data-featherlight',    /* Attribute of the triggered element that contains the selector to the lightbox content */
-		variant:      null,                   /* Class that will be added to change look of the lightbox */
-		resetCss:     false,                  /* Reset all css */
-		background:   null,                   /* Custom DOM for the background, wrapper and the closebutton */
-		openTrigger:  'click',                /* Event that triggers the lightbox */
-		closeTrigger: 'click',                /* Event that triggers the closing of the lightbox */
-		filter:       null,                   /* Selector to filter events. Think $(...).on('click', filter, eventHandler) */
-		root:         'body',                 /* Where to append featherlights */
-		openSpeed:    250,                    /* Duration of opening animation */
-		closeSpeed:   250,                    /* Duration of closing animation */
-		closeOnClick: 'background',           /* Close lightbox on click ('background', 'anywhere' or false) */
-		closeOnEsc:   true,                   /* Close lightbox when pressing esc */
-		closeIcon:    '&#10005;',             /* Close icon */
-		loading:      '',                     /* Content to show while initial content is loading */
-		persist:      false,                  /* If set, the content will persist and will be shown again when opened again. 'shared' is a special value when binding multiple elements for them to share the same content */
-		otherClose:   null,                   /* Selector for alternate close buttons (e.g. "a.close") */
-		beforeOpen:   $.noop,                 /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
-		beforeContent: $.noop,                /* Called when content is loaded. Gets event as parameter, this contains all data */
-		beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
-		afterOpen:    $.noop,                 /* Called after open. Gets event as parameter, this contains all data */
-		afterContent: $.noop,                 /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
-		afterClose:   $.noop,                 /* Called after close. Gets event as parameter, this contains all data */
-		onKeyUp:      $.noop,                 /* Called on key up for the frontmost featherlight */
-		onResize:     $.noop,                 /* Called after new content and when a window is resized */
-		type:         null,                   /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
+		namespace:      'featherlight',        /* Name of the events and css class prefix */
+		targetAttr:     'data-featherlight',   /* Attribute of the triggered element that contains the selector to the lightbox content */
+		variant:        null,                  /* Class that will be added to change look of the lightbox */
+		resetCss:       false,                 /* Reset all css */
+		background:     null,                  /* Custom DOM for the background, wrapper and the closebutton */
+		openTrigger:    'click',               /* Event that triggers the lightbox */
+		closeTrigger:   'click',               /* Event that triggers the closing of the lightbox */
+		filter:         null,                  /* Selector to filter events. Think $(...).on('click', filter, eventHandler) */
+		root:           'body',                /* Where to append featherlights */
+		openSpeed:      250,                   /* Duration of opening animation */
+		closeSpeed:     250,                   /* Duration of closing animation */
+		closeOnClick:   'background',          /* Close lightbox on click ('background', 'anywhere' or false) */
+		closeOnEsc:     true,                  /* Close lightbox when pressing esc */
+		closeIcon:      '&#10005;',            /* Close icon */
+		loading:        '',                    /* Content to show while initial content is loading */
+		persist:        false,                 /* If set, the content will persist and will be shown again when opened again. 'shared' is a special value when binding multiple elements for them to share the same content */
+		otherClose:     null,                  /* Selector for alternate close buttons (e.g. "a.close") */
+		beforeOpen:     $.noop,                /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+		beforeContent:  $.noop,                /* Called when content is loaded. Gets event as parameter, this contains all data */
+		beforeClose:    $.noop,                /* Called before close. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+		afterOpen:      $.noop,                /* Called after open. Gets event as parameter, this contains all data */
+		afterContent:   $.noop,                /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
+		afterClose:     $.noop,                /* Called after close. Gets event as parameter, this contains all data */
+		onKeyUp:        $.noop,                /* Called on key up for the frontmost featherlight */
+		onResize:       $.noop,                /* Called after new content and when a window is resized */
+		type:           null,                  /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
 		contentFilters: ['jquery', 'image', 'html', 'ajax', 'iframe', 'text'], /* List of content filters to use to determine the content */
 
 		/*** methods ***/

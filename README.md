@@ -82,36 +82,38 @@ for example, `<a data-featherlight-close-on-esc="false" ...>` has the same effec
 passing `{closeOnEsc: false}`.
 You can also modify the `$.featherlight.defaults` directly which holds all the defaults:
 
-	/* you can access and overwrite all defaults using $.featherlight.defaults */
-	defaults: {
-		namespace:    'featherlight',         /* Name of the events and css class prefix */
-		targetAttr:   'data-featherlight',    /* Attribute of the triggered element that contains the selector to the lightbox content */
-		variant:      null,                   /* Class that will be added to change look of the lightbox */
-		resetCss:     false,                  /* Reset all css */
-		background:   null,                   /* Custom DOM for the background, wrapper and the closebutton */
-		openTrigger:  'click',                /* Event that triggers the lightbox */
-		closeTrigger: 'click',                /* Event that triggers the closing of the lightbox */
-		filter:       null,                   /* Selector to filter events. Think $(...).on('click', filter, eventHandler) */
-		root:         'body',                 /* Where to append featherlights */
-		openSpeed:    250,                    /* Duration of opening animation */
-		closeSpeed:   250,                    /* Duration of closing animation */
-		closeOnClick: 'background',           /* Close lightbox on click ('background', 'anywhere', or false) */
-		closeOnEsc:   true,                   /* Close lightbox when pressing esc */
-		closeIcon:    '&#10005;',             /* Close icon */
-		loading:      '',                     /* Content to show while initial content is loading */
-		persist:      false,                  /* If set, the content will persist and will be shown again when opened again. 'shared' is a special value when binding multiple elements for them to share the same content */
-		otherClose:   null,                   /* Selector for alternate close buttons (e.g. "a.close") */
-		beforeOpen:   $.noop,                 /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
-		beforeContent: $.noop,                /* Called when content is about to be presented. `this` is the featherlight instance. Gets event as parameter */
-		beforeClose:  $.noop,                 /* Called before close. can return false to prevent opening of lightbox. `this` is the featherlight instance. Gets event as parameter  */
-		afterOpen:    $.noop,                 /* Called after open. `this` is the featherlight instance. Gets event as parameter  */
-		afterContent: $.noop,                 /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
-		afterClose:   $.noop,                 /* Called after close. `this` is the featherlight instance. Gets event as parameter  */
-		onKeyUp:      $.noop,                 /* Called on key up for the frontmost featherlight */
-		type:         null,                   /* Specify content type. If unset, it will check for the targetAttrs value. */
-		contentFilters: ['jquery', 'image', 'html', 'ajax', 'text'] /* List of content filters to use to determine the content */
-		jquery/image/html/ajax/text: undefined     /* Specify content type and data */
-	}
+```javascript
+/* you can access and overwrite all defaults using $.featherlight.defaults */
+defaults: {
+	namespace:      'featherlight',        /* Name of the events and css class prefix */
+	targetAttr:     'data-featherlight',   /* Attribute of the triggered element that contains the selector to the lightbox content */
+	variant:        null,                  /* Class that will be added to change look of the lightbox */
+	resetCss:       false,                 /* Reset all css */
+	background:     null,                  /* Custom DOM for the background, wrapper and the closebutton */
+	openTrigger:    'click',               /* Event that triggers the lightbox */
+	closeTrigger:   'click',               /* Event that triggers the closing of the lightbox */
+	filter:         null,                  /* Selector to filter events. Think $(...).on('click', filter, eventHandler) */
+	root:           'body',                /* Where to append featherlights */
+	openSpeed:      250,                   /* Duration of opening animation */
+	closeSpeed:     250,                   /* Duration of closing animation */
+	closeOnClick:   'background',          /* Close lightbox on click ('background', 'anywhere', or false) */
+	closeOnEsc:     true,                  /* Close lightbox when pressing esc */
+	closeIcon:      '&#10005;',            /* Close icon */
+	loading:        '',                    /* Content to show while initial content is loading */
+	persist:        false,                 /* If set, the content will persist and will be shown again when opened again. 'shared' is a special value when binding multiple elements for them to share the same content */
+	otherClose:     null,                  /* Selector for alternate close buttons (e.g. "a.close") */
+	beforeOpen:     $.noop,                /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
+	beforeContent:  $.noop,                /* Called when content is about to be presented. `this` is the featherlight instance. Gets event as parameter */
+	beforeClose:    $.noop,                /* Called before close. can return false to prevent opening of lightbox. `this` is the featherlight instance. Gets event as parameter  */
+	afterOpen:      $.noop,                /* Called after open. `this` is the featherlight instance. Gets event as parameter  */
+	afterContent:   $.noop,                /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
+	afterClose:     $.noop,                /* Called after close. `this` is the featherlight instance. Gets event as parameter  */
+	onKeyUp:        $.noop,                /* Called on key up for the frontmost featherlight */
+	type:           null,                  /* Specify content type. If unset, it will check for the targetAttrs value. */
+	contentFilters: ['jquery', 'image', 'html', 'ajax', 'text'] /* List of content filters to use to determine the content */
+	jquery/image/html/ajax/text: undefined /* Specify content type and data */
+}
+```
 
 ================================================
 
