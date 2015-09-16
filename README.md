@@ -109,6 +109,7 @@ defaults: {
 	afterContent:   $.noop,                /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
 	afterClose:     $.noop,                /* Called after close. `this` is the featherlight instance. Gets event as parameter  */
 	onKeyUp:        $.noop,                /* Called on key up for the frontmost featherlight */
+	onResize:       $.noop,                /* Called after new content and when a window is resized */
 	type:           null,                  /* Specify content type. If unset, it will check for the targetAttrs value. */
 	contentFilters: ['jquery', 'image', 'html', 'ajax', 'text'] /* List of content filters to use to determine the content */
 	jquery/image/html/ajax/text: undefined /* Specify content type and data */
@@ -236,6 +237,11 @@ Called after the open or close method is executed – it is not called, if the `
 		console.log(this); // this contains all related elements
 		alert(this.$content.hasClass('true')); // alert class of content
 	}
+
+================================================
+
+	onKeyUp, onResize – Function: null
+The function receives the event object. `this` is an object and contains the triggering DOM element (if existing) and the related Featherlight objects.
 
 ================================================
 
