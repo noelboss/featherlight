@@ -258,7 +258,7 @@ The type object allows you to manually set what type the lightbox is. Set the va
 
 It's possible to use or change these methods, but the API isn't guaranteed to remain constant; enquire if you have particular needs.
 
-	var current = $.featherlight.current()
+	var current = $.featherlight.current();
 	current.close();
 	// do something else
 	current.open(); // reopen it
@@ -282,7 +282,7 @@ There are many ways to specify content to featherlight. Featherlight uses a set 
 	<a href="photo.gif" data-featherlight>See in a lightbox</a>
 
 	<a id="#example" href="#">See in a lightbox</a>
-	<script>$('#example').featherlight('photo.gif')</script>
+	<script>$('#example').featherlight('photo.gif');</script>
 
 In case the heuristic wouldn't work, you can specify which contentFiter to use:
 
@@ -301,9 +301,9 @@ In case the heuristic wouldn't work, you can specify which contentFiter to use:
 You can add your own heuristics, for example:
 
 	$.featherlight.contentFilters.feed = {
-		regex: /^feed:/
+		regex: /^feed:/,
 		process: function(url) { /* deal with url */ return $('Loading...'); }
-	}
+	};
 	$.featherlight.defaults.contentFilters.unshift('feed');
 
 This way the following would be possible:
