@@ -254,7 +254,7 @@ The type object allows you to manually set what type the lightbox is. Set the va
 
 # Methods
 
-`$.featherlight` is actually a constructor with `$.featherlight.methods` as a prototype and all the configuration options as attributes.
+`$.featherlight` is actually a constructor of new featherlight objects. Modify `$.featherlight.prototype` to change the default properties, or use the `configuration` object passed to the constructor to override the properties of that specific new instance.
 
 It's possible to use or change these methods, but the API isn't guaranteed to remain constant; enquire if you have particular needs.
 
