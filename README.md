@@ -51,7 +51,7 @@ it also works with links using href and the "image" and "ajax" keywords (this ca
 	<a href="#" data-featherlight-ajax="myhtml.html .selector">Open ajax content in lightbox</a>
 	<a href="#" data-featherlight="myhtml.html .selector" data-featherlight-type="ajax">Open ajax content in lightbox</a>
 
-By default, Featherlight initializes all elements matching `defaults.autoBind` on document ready. If you want to prevent this, set `$.featherlight.defaults.autoBind` to `false` before the DOM is ready.
+By default, Featherlight initializes all elements matching `$.featherlight.autoBind` on document ready. If you want to prevent this, set `$.featherlight.autoBind` to `false` before the DOM is ready.
 
 ## Bind Featherlight
 You can bind the Featherlight events on any element using the following code:
@@ -254,11 +254,11 @@ The type object allows you to manually set what type the lightbox is. Set the va
 
 # Methods
 
-`$.featherlight` is actually a constructor with `$.featherlight.methods` as a prototype and all the configuration options as attributes.
+`$.featherlight` is actually a constructor of new featherlight objects. Modify `$.featherlight.prototype` to change the default properties, or use the `configuration` object passed to the constructor to override the properties of that specific new instance.
 
 It's possible to use or change these methods, but the API isn't guaranteed to remain constant; enquire if you have particular needs.
 
-	var current = $.featherlight.current()
+	var current = $.featherlight.current();
 	current.close();
 	// do something else
 	current.open(); // reopen it
@@ -282,7 +282,7 @@ There are many ways to specify content to featherlight. Featherlight uses a set 
 	<a href="photo.gif" data-featherlight>See in a lightbox</a>
 
 	<a id="#example" href="#">See in a lightbox</a>
-	<script>$('#example').featherlight('photo.gif')</script>
+	<script>$('#example').featherlight('photo.gif');</script>
 
 In case the heuristic wouldn't work, you can specify which contentFiter to use:
 
@@ -301,9 +301,9 @@ In case the heuristic wouldn't work, you can specify which contentFiter to use:
 You can add your own heuristics, for example:
 
 	$.featherlight.contentFilters.feed = {
-		regex: /^feed:/
+		regex: /^feed:/,
 		process: function(url) { /* deal with url */ return $('Loading...'); }
-	}
+	};
 	$.featherlight.defaults.contentFilters.unshift('feed');
 
 This way the following would be possible:
