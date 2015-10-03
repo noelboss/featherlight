@@ -361,7 +361,7 @@ If you want the background in IE8 to be translucent, use data:image before the r
 ---
 
 # Featherlight Gallery
-Featherlight was created to be as small and simple as possible. Therefore it does not provide all functionality imaginable. But, since its small and simple, it can be extended easily. featherlight.gallery.js is a small extension that turns your set of links into a [gallery](http://noelboss.github.io/featherlight/gallery.html).
+You will need to use an extension (featherlight.gallery.js).  Since Featherlight was created to be as small and simple as possible, it has selected functionality, and  allwos you to add additional functionality by using extensions.  featherlight.gallery.js is a small extension that turns your set of links into a [gallery](http://noelboss.github.io/featherlight/gallery.html).
 
 	$('a.gallery').featherlightGallery({
 		openSpeed: 300
@@ -422,6 +422,44 @@ Add the JavaScript at the bottom of the body:
 	<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
 
 Check out the example here: [Gallery with Featherlight](http://noelboss.github.io/featherlight/gallery.html)
+
+## Gallery on Mobile Devices
+To support mobile/tablet and all touch devices, you will need to include one of the supported libraries. For example, this code shows how to use swipe_detect:
+
+```html
+<html>
+    <head>
+    <!-- jquery -->
+     <script src="//code.jquery.com/jquery-latest.js"></script>
+
+    <!-- swipe detect , library to check touch devices -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/detect_swipe/2.1.1/jquery.detect_swipe.min.js"></script>    
+    
+    <!-- featherlight -->
+        <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+        <script src="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- featherlight gallery -->
+<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.gallery.min.css" type="text/css" rel="stylesheet" />
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.gallery.min.js" type="text/javascript"></script>
+</head>
+
+    <body>  
+    <!-- example of a gallery showing thumnail images, with links to big images -->
+<a class="thumbnail gallery" href="http://noelboss.github.io/featherlight/assets/images/two_birds.jpg" > <img src="http://noelboss.github.io/featherlight/assets/images/two_birds.thumb.jpg" /> </a>
+<a class="thumbnail gallery" href="http://noelboss.github.io/featherlight/assets/images/black.jpg" > <img src="http://noelboss.github.io/featherlight/assets/images/black.thumb.jpg" /> </a>
+<a class="thumbnail gallery" href="http://noelboss.github.io/featherlight/assets/images/blue.jpg" > <img src="http://noelboss.github.io/featherlight/assets/images/blue.thumb.jpg" /> </a>
+
+    <script>
+    // generate featherlight gallery from elements with class gallery
+    $(document).ready(function(){
+        $('.gallery').featherlightGallery();
+    });
+    </script>
+    </body>
+    </html>
+```
+
 
 # Support
 
