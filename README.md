@@ -361,7 +361,7 @@ If you want the background in IE8 to be translucent, use data:image before the r
 ---
 
 # Featherlight Gallery
-You will need to use an extension (featherlight.gallery.js).  Since Featherlight was created to be as small and simple as possible, it has selected functionality, and  allwos you to add additional functionality by using extensions.  featherlight.gallery.js is a small extension that turns your set of links into a [gallery](http://noelboss.github.io/featherlight/gallery.html).
+You will need to use an extension (featherlight.gallery.js).  Since Featherlight was created to be as small and simple as possible, it has selected functionality, and  allows you to add additional functionality by using extensions.  featherlight.gallery.js is a small extension that turns your set of links into a [gallery](http://noelboss.github.io/featherlight/gallery.html).
 
 	$('a.gallery').featherlightGallery({
 		openSpeed: 300
@@ -387,7 +387,7 @@ Example in pure HTML:
       data-featherlight-gallery
       data-featherlight-filter="a"
     >
-      <h>This is a gallery</h>
+      <h>This is a gallery</h>a
       <a href="photo_large.jpg"><img src="photo_thumbnail.jpg"></a>
       <a href="other_photo_large.jpg"><img src="other_photo_thumbnail.jpg"></a>
     </section>
@@ -421,44 +421,26 @@ Add the JavaScript at the bottom of the body:
 	<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
 
-Check out the example here: [Gallery with Featherlight](http://noelboss.github.io/featherlight/gallery.html)
+Check out the example here: [Gallery with Featherlight](gallery.html)
 
 ## Gallery on Mobile Devices
-To support mobile/tablet and all touch devices, you will need to include one of the supported libraries. For example, this code shows how to use swipe_detect:
+To support mobile/tablet and all touch devices, you will need to include one of the supported libraries. For example, this code shows the order of including javascript files with swipe_detect library:
 
 ```html
-<html>
-    <head>
-    <!-- jquery -->
+    <!-- include jquery latest -->
      <script src="//code.jquery.com/jquery-latest.js"></script>
 
-    <!-- swipe detect , library to check touch devices -->
+    <!-- include swipe detect library to check touch devices -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/detect_swipe/2.1.1/jquery.detect_swipe.min.js"></script>    
     
-    <!-- featherlight -->
-        <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-        <script src="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+    <!-- include featherlightjs  -->
+    ...
 
-<!-- featherlight gallery -->
-<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.gallery.min.css" type="text/css" rel="stylesheet" />
-<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.gallery.min.js" type="text/javascript"></script>
-</head>
-
-    <body>  
-    <!-- example of a gallery showing thumnail images, with links to big images -->
-<a class="thumbnail gallery" href="http://noelboss.github.io/featherlight/assets/images/two_birds.jpg" > <img src="http://noelboss.github.io/featherlight/assets/images/two_birds.thumb.jpg" /> </a>
-<a class="thumbnail gallery" href="http://noelboss.github.io/featherlight/assets/images/black.jpg" > <img src="http://noelboss.github.io/featherlight/assets/images/black.thumb.jpg" /> </a>
-<a class="thumbnail gallery" href="http://noelboss.github.io/featherlight/assets/images/blue.jpg" > <img src="http://noelboss.github.io/featherlight/assets/images/blue.thumb.jpg" /> </a>
-
-    <script>
-    // generate featherlight gallery from elements with class gallery
-    $(document).ready(function(){
-        $('.gallery').featherlightGallery();
-    });
-    </script>
-    </body>
-    </html>
+    <!-- featherlight gallery extension -->
+    ...
 ```
+
+Check out the example here: [Gallery supporting touch devices] (gallery_touch.html)
 
 
 # Support
