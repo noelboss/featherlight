@@ -427,17 +427,7 @@ Check out the example here: [Gallery with Featherlight](gallery.html)
 To support mobile/tablet and all touch devices, you will need to include one of the supported libraries. For example, this code shows the order of including javascript files with swipe_detect library:
 
 ```html
-    <!-- include jquery latest -->
-     <script src="//code.jquery.com/jquery-latest.js"></script>
-
-    <!-- include swipe detect library to check touch devices -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/detect_swipe/2.1.1/jquery.detect_swipe.min.js"></script>    
-    
-    <!-- include featherlightjs  -->
-    ...
-
-    <!-- featherlight gallery extension -->
-    ...
 ```
 
 Check out the example here: [Gallery supporting touch devices] (gallery_touch.html)
