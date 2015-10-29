@@ -1,0 +1,31 @@
+<html>
+    <head>
+    <!-- jquery -->
+     <script src="//code.jquery.com/jquery-latest.js"></script>
+
+    <!-- swipe detect , library to check touch devices -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/detect_swipe/2.1.1/jquery.detect_swipe.min.js"></script>    
+
+    <!-- featherlight -->
+        <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+        <script src="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- featherlight gallery -->
+<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.gallery.min.css" type="text/css" rel="stylesheet" />
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.gallery.min.js" type="text/javascript"></script>
+</head>
+
+    <body>  
+    <!-- example of a gallery showing thumnail images, with links to big images -->
+<a class="thumbnail gallery" href="http://noelboss.github.io/featherlight/assets/images/two_birds.jpg" > <img src="http://noelboss.github.io/featherlight/assets/images/two_birds.thumb.jpg" /> </a>
+<a class="thumbnail gallery" href="http://noelboss.github.io/featherlight/assets/images/black.jpg" > <img src="http://noelboss.github.io/featherlight/assets/images/black.thumb.jpg" /> </a>
+<a class="thumbnail gallery" href="http://noelboss.github.io/featherlight/assets/images/blue.jpg" > <img src="http://noelboss.github.io/featherlight/assets/images/blue.thumb.jpg" /> </a>
+
+    <script>
+    // generate featherlight gallery from elements with class gallery
+    $(document).ready(function(){
+        $('.gallery').featherlightGallery();
+    });
+    </script>
+    </body>
+    </html>
