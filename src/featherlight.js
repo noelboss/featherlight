@@ -152,8 +152,8 @@
 				if( ('background' === self.closeOnClick  && $target.is('.'+self.namespace))
 					|| 'anywhere' === self.closeOnClick
 					|| $target.closest(closeButtonSelector).length ){
+					self.close(event);
 					event.preventDefault();
-					self.close();
 				}
 			});
 
@@ -469,9 +469,9 @@
 			return $.grep(opened, function(fl) { return fl instanceof klass; } );
 		},
 
-		close: function() {
+		close: function(event) {
 			var cur = this.current();
-			if(cur) { return cur.close(); }
+			if(cur) { return cur.close(event); }
 		},
 
 		/* Does the auto binding on startup.
@@ -505,7 +505,7 @@
 			onKeyUp: function(_super, event){
 				if(27 === event.keyCode) {
 					if (this.closeOnEsc) {
-						this.$instance.find('.'+this.namespace+'-close:first').click();
+						$.featherlight.close(event);
 					}
 					return false;
 				} else {

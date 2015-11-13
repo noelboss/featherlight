@@ -313,6 +313,27 @@ var stubAjaxLoad = function(content) {
 				$.featherlight.defaults.beforeOpen = $.noop;
 			});
 
+			it('provides event to beforeClose when close via closebox', function() {
+				$.featherlight({text: "Hello", beforeClose: function(evt) {
+					expect(evt).to.be.an('object');
+				}});
+				$('.featherlight-close').click();
+			});
+
+			it('provides event to beforeClose & al when closed via escape', function() {
+				$.featherlight({text: "Hello", beforeClose: function(evt) {
+					expect(evt).to.be.an('object');
+				}});
+				triggerEscape();
+			});
+
+			it('passes event to beforeClose & al when closed via global function', function() {
+				$.featherlight({text: "Hello", beforeClose: function(evt) {
+					expect(evt).to.eql(42);
+				}});
+				$.featherlight.close(42);
+			});
+
 			it('can specify a loading text', function(done) {
 				stubAjaxLoad('<b>Hi</b>');
 				$.featherlight({ajax: 'stubbed', loading: "Spinner!"});
