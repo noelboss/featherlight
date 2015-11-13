@@ -303,6 +303,16 @@ var stubAjaxLoad = function(content) {
 				expect(lastCallback).to.equal('afterClose');
 			});
 
+			it('can be interrupted via beforeOpen', function() {
+				$.featherlight({text: "Hello", beforeOpen: function() { return false; }});
+				expect($.featherlight.current()).to.be.null;
+				// Tricky case:
+				$.featherlight.defaults.beforeOpen = function() { return false; }
+				$('#auto-bound').click();
+				expect($.featherlight.current()).to.be.null;
+				$.featherlight.defaults.beforeOpen = $.noop;
+			});
+
 			it('can specify a loading text', function(done) {
 				stubAjaxLoad('<b>Hi</b>');
 				$.featherlight({ajax: 'stubbed', loading: "Spinner!"});

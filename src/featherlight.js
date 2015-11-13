@@ -486,14 +486,14 @@
 				});
 				/* If a click propagates to the document level, then we have an item that was added later on */
 				$(document).on('click', Klass.autoBind, function(evt) {
-					if (evt.isDefaultPrevented()) {
+					if (evt.isDefaultPrevented() || evt.namespace === 'featherlight') {
 						return;
 					}
 					evt.preventDefault();
 					/* Bind featherlight */
 					Klass.attach($(evt.currentTarget));
 					/* Click again; this time our binding will catch it */
-					$(evt.target).click();
+					$(evt.target).trigger('click.featherlight');
 				});
 			}
 		},
