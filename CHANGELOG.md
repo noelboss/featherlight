@@ -5,6 +5,10 @@ Master
 -----------------------------------
 
 
+1.3.5 - 2015-11-13
+-----------------------------------
+- Bug fixes
+
 1.3.4 - 2015-09-09
 -----------------------------------
 - Tweak auto binding to work with persist and remove limitation on filter.
