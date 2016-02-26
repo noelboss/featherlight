@@ -408,6 +408,8 @@ The gallery responds to custom events `previous` and `next` to navigate to the p
 
 Instead of navigation buttons it will use swipe events on touch devices, assuming that one of the [supported swipe libraries](https://github.com/noelboss/featherlight/wiki/Gallery:-swipe-on-touch-devices) is also installed.
 
+It sets the classes `'featherlight-first-slide'` and `'featherlight-last-slide'` if the current slide is the first and/or last one.
+
 ## Gallery installation
 
 Simply include the extension CSS and JavaScript Files after the regular featherlight files like this:

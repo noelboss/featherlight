@@ -178,6 +178,27 @@ var expect = chai.expect;
 
     });
 
+    it ('sets last-slide and first-slide classes', function(done) {
+      $('#basic-test a').featherlightGallery();
+      $('#basic-test a').eq(3).click();
+      patiently(done, [function() {
+        expect($('.featherlight')).to.not.have.class('featherlight-first-slide');
+        expect($('.featherlight')).to.have.class('featherlight-last-slide');
+        $('.featherlight').trigger('next');
+      }, function() {
+        expect($('.featherlight')).to.have.class('featherlight-first-slide');
+        expect($('.featherlight')).to.not.have.class('featherlight-last-slide');
+        $('.featherlight-next').click();
+      }, function() {
+        expect($('.featherlight')).to.not.have.class('featherlight-first-slide');
+        expect($('.featherlight')).to.not.have.class('featherlight-last-slide');
+        $('.featherlight').trigger('previous');
+      }, function() {
+        expect($('.featherlight')).to.have.class('featherlight-first-slide');
+        expect($('.featherlight')).to.not.have.class('featherlight-last-slide');
+      }]);
+    });
+
     describe('.current', function() {
       it ('only returns actual featherlight gallery instances', function() {
         $.featherlight('<p>This is a test<p>');

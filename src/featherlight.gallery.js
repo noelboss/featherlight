@@ -63,6 +63,14 @@
 					}
 					return _super(event);
 			},
+			beforeContent: function(_super, event) {
+				var index = this.currentNavigation();
+				var len = this.slides().length;
+				this.$instance
+					.toggleClass(this.namespace+'-first-slide', index === 0)
+					.toggleClass(this.namespace+'-last-slide', index === len - 1);
+				return _super(event);
+			},
 			onKeyUp: function(_super, event){
 				var dir = {
 					37: 'previous', /* Left arrow */
