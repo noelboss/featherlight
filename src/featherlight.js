@@ -296,6 +296,25 @@
 			return deferred.promise();
 		},
 
+		/* resizes the content so it fits in visible area and keeps the same aspect ratio.
+				Does nothing if either the width or the height is not specified.
+				Called automatically on window resize.
+				Override if you want different behavior. */
+		resize: function(w, h) {
+			if (w && h) {
+				/* Reset apparent image size first so container grows */
+				this.$content.css('width', '').css('height', '');
+				/* Calculate the worst ratio so that dimensions fit */
+				var ratio = Math.max(
+					w  / parseInt(this.$content.parent().css('width'),10),
+					h / parseInt(this.$content.parent().css('height'),10));
+				/* Resize content */
+				if (ratio > 1) {
+					this.$content.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
+				}
+			}
+		},
+
 		/* Utility function to chain callbacks
 		   [Warning: guru-level]
 		   Used be extensions that want to let users specify callbacks but
@@ -514,19 +533,7 @@
 			},
 
 			onResize: function(_super, event){
-				if (this.$content.naturalWidth) {
-					var w = this.$content.naturalWidth, h = this.$content.naturalHeight;
-					/* Reset apparent image size first so container grows */
-					this.$content.css('width', '').css('height', '');
-					/* Calculate the worst ratio so that dimensions fit */
-					var ratio = Math.max(
-						w  / parseInt(this.$content.parent().css('width'),10),
-						h / parseInt(this.$content.parent().css('height'),10));
-					/* Resize content */
-					if (ratio > 1) {
-						this.$content.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
-					}
-				}
+				this.resize(this.$content.naturalWidth, this.$content.naturalHeight);
 				return _super(event);
 			},
 
