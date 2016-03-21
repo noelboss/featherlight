@@ -1,6 +1,6 @@
 {
   "name": "featherlight",
-  "version": "1.3.5",
+  "version": "1.4.0",
   "title": "Featherlight – ultra slim jQuery lightbox",
   "author": {
     "name": "Noël Raoul Bossart",
@@ -35,7 +35,9 @@
     "slim",
     "small",
     "ui",
-    "window"
+    "window",
+    "jquery-plugin",
+    "ecosystem:jquery"
   ],
   "docs": "https://github.com/noelboss/featherlight/blob/master/README.md",
   "download": "https://github.com/noelboss/featherlight/archive/master.zip",

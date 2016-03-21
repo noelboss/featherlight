@@ -3,6 +3,10 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+
+
+1.4.0 - 2016-03-21
+-----------------------------------
 - New method `resize` that can be overriden if need be.
 
 1.3.5 - 2015-11-13
