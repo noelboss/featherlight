@@ -47,7 +47,9 @@
 		"slim",
 		"small",
 		"ui",
-		"window"
+		"window",
+		"jquery-plugin",
+		"ecosystem:jquery"
 	],
 	"licenses": [
 		{
