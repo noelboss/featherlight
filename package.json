@@ -57,7 +57,7 @@
 			"url": "https://raw.github.com/noelboss/featherlight/master/LICENSE"
 		}
 	],
-	"main": "Gruntfile.js",
+	"main": "release/featherlight.min.js",
 	"name": "featherlight",
 	"repository": {
 		"type": "git",
