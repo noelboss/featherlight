@@ -27,6 +27,7 @@ module.exports = function(grunt) {
 					eqeqeq: true,
 					eqnull: true,
 					browser: true,
+					reporterOutput: "",
 					globals: {
 						jQuery: true,
 						Hammer: true,
