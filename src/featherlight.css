@@ -111,6 +111,12 @@
 		/* styling */
 		border: none;
 	}
+
+	.featherlight * { /* See https://github.com/noelboss/featherlight/issues/42 */
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
 }
 
 /* handling phones and small screens */

@@ -3,7 +3,7 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
-
+- CSS now sets box-sizing to border-box
 
 1.4.0 - 2016-03-21
 -----------------------------------
