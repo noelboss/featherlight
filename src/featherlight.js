@@ -305,11 +305,13 @@
 				/* Reset apparent image size first so container grows */
 				this.$content.css('width', '').css('height', '');
 				/* Calculate the worst ratio so that dimensions fit */
+				 /* Note: -1 to avoid rounding errors */
 				var ratio = Math.max(
-					w  / parseInt(this.$content.parent().css('width'),10),
-					h / parseInt(this.$content.parent().css('height'),10));
+					w  / (parseInt(this.$content.parent().css('width'),10)-1),
+					h / (parseInt(this.$content.parent().css('height'),10)-1));
 				/* Resize content */
 				if (ratio > 1) {
+					ratio = h / Math.floor(h / ratio); /* Round ratio down so height calc works */
 					this.$content.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
 				}
 			}
