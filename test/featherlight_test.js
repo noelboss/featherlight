@@ -409,6 +409,11 @@ var stubAjaxLoad = function(content) {
 				expect($('.featherlight iframe')).to.have.css('width').equal('323px');
 				expect($('.featherlight iframe')).to.have.css('min-height').equal('212px');
 			});
+
+			it('allows "about:blank"', function() {
+				$('<a data-featherlight-iframe="about:blank">').featherlight().click();
+				expect($('.featherlight iframe')).to.have.attr('src').equal('about:blank');
+			});
 		});
 
 	});

@@ -381,8 +381,8 @@
 			iframe: {
 				process: function(url) {
 					var deferred = new $.Deferred();
-					var $content = $('<iframe/>')
-						.hide()
+					var $content = $('<iframe/>');
+					$content.hide()
 						.attr('src', url)
 						.css(structure(this, 'iframe'))
 						.on('load', function() { deferred.resolve($content.show()); })
