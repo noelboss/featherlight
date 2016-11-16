@@ -535,17 +535,24 @@
 			},
 
 			beforeOpen: function(_super, event) {
+				// Remember focus:
 				this._previouslyActive = document.activeElement;
+
+				// Disable tabbing:
+				// See http://stackoverflow.com/questions/1599660/which-html-elements-can-receive-focus
+				this._$previouslyTabbable = $("a, input, select, textarea, iframe, button, iframe, [tabindex], [contentEditable=true]")
+					.not('[tabindex="-1"]')
+					.attr('tabindex', -1);
+
 				document.activeElement.blur();
 				return _super(event);
 			},
 
 			afterClose: function(_super, event) {
-				if (this._previouslyActive) { // Bulletproofing
-					this._previouslyActive.focus();
-					this._previouslyActive = null;
-				}
-				return _super(event);
+				var r = _super(event);
+				this._previouslyActive.focus();
+				this._$previouslyTabbable.removeAttr('tabindex');
+				return r;
 			},
 
 			onResize: function(_super, event){

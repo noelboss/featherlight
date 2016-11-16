@@ -425,11 +425,13 @@ var stubAjaxLoad = function(content) {
 			});
 
 			it('removes focus and then resets it', function() {
-				$('input').focus();
+				$('.for-focus').focus();
 				$.featherlight({text: 'Hello'});
+				expect($('.for-focus')).to.have.attr('tabindex').equal('-1');
 				expect($(document.activeElement)).not.to.have.class('for-focus');
 				$.featherlight.close();
 				expect($(document.activeElement)).to.have.class('for-focus');
+				expect($('.for-focus')).not.to.have.attr('tabindex');
 			})
 		});
 	});
