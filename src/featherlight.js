@@ -550,8 +550,8 @@
 
 			afterClose: function(_super, event) {
 				var r = _super(event);
-				this._previouslyActive.focus();
 				this._$previouslyTabbable.removeAttr('tabindex');
+				this._previouslyActive.focus();
 				return r;
 			},
 
