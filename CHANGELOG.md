@@ -3,6 +3,10 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
+
+
+1.6.0 - 2016-11-16
+-----------------------------------
 - Changed close icon to a <button>. Be sure to use current CSS files too. [#260]
 - Improved focus handling [#259]
 
