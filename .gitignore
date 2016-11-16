@@ -8,3 +8,4 @@ bower_components
 *.pid
 *.gz
 *~
+yarn.lock
