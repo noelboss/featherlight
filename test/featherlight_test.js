@@ -416,5 +416,13 @@ var stubAjaxLoad = function(content) {
 			});
 		});
 
+		describe('accessibility', function() {
+			it('has a focusable close button', function() {
+				$.featherlight({text: 'Hello'});
+				close = $('.featherlight-close-icon')
+				close.focus();
+				expect($(document.activeElement)).to.have.class('featherlight-close-icon');
+			});
+		});
 	});
 }(jQuery));

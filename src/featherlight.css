@@ -92,8 +92,15 @@
 		background: #fff; /* Set the background in case it overlaps the content */
 		background: rgba(255, 255, 255, 0.3);
 		color: #000;
+		border: none;
+		padding: 0;
 	}
 
+	/* See http://stackoverflow.com/questions/16077341/how-to-reset-all-default-styles-of-the-html5-button-element */
+	.featherlight .featherlight-close-icon::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
 
 	.featherlight .featherlight-image {
 		/* styling */
