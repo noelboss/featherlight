@@ -432,7 +432,13 @@ var stubAjaxLoad = function(content) {
 				$.featherlight.close();
 				expect($(document.activeElement)).to.have.class('for-focus');
 				expect($('.for-focus')).not.to.have.attr('tabindex');
-			})
+			});
+
+			it('focussed on "autofocus" content, if any', function() {
+				$.featherlight({html: '<input><input autofocus class="ok">'});
+				expect($(document.activeElement)).to.have.class('ok');
+				$.featherlight.close();
+			});
 		});
 	});
 }(jQuery));

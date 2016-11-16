@@ -562,6 +562,7 @@
 
 			afterContent: function(_super, event){
 				var r = _super(event);
+				this.$instance.find('[autofocus]:not([disabled])').focus();
 				this.onResize(event);
 				return r;
 			}
