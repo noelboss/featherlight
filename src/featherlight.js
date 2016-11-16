@@ -534,6 +534,20 @@
 				}
 			},
 
+			beforeOpen: function(_super, event) {
+				this._previouslyActive = document.activeElement;
+				document.activeElement.blur();
+				return _super(event);
+			},
+
+			afterClose: function(_super, event) {
+				if (this._previouslyActive) { // Bulletproofing
+					this._previouslyActive.focus();
+					this._previouslyActive = null;
+				}
+				return _super(event);
+			},
+
 			onResize: function(_super, event){
 				this.resize(this.$content.naturalWidth, this.$content.naturalHeight);
 				return _super(event);

@@ -423,6 +423,14 @@ var stubAjaxLoad = function(content) {
 				close.focus();
 				expect($(document.activeElement)).to.have.class('featherlight-close-icon');
 			});
+
+			it('removes focus and then resets it', function() {
+				$('input').focus();
+				$.featherlight({text: 'Hello'});
+				expect($(document.activeElement)).not.to.have.class('for-focus');
+				$.featherlight.close();
+				expect($(document.activeElement)).to.have.class('for-focus');
+			})
 		});
 	});
 }(jQuery));
