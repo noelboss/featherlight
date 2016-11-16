@@ -9,7 +9,9 @@ Featherlight - ultra slim jQuery lightbox [![Build Status](https://travis-ci.org
 * Minimal CSS
 * Name-spaced CSS and JavaScript
 * Responsive
-* Customizable via configuration object
+* Accessible
+* Customizable via javascript or attributes
+
 
 
 ## [» Download Current Release 1.6.0](https://github.com/noelboss/featherlight/archive/1.6.0.zip)
