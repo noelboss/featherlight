@@ -542,6 +542,7 @@
 				// See http://stackoverflow.com/questions/1599660/which-html-elements-can-receive-focus
 				this._$previouslyTabbable = $("a, input, select, textarea, iframe, button, iframe, [tabindex], [contentEditable=true]")
 					.not('[tabindex="-1"]')
+					.not(this.$instance.find('button'))
 					.attr('tabindex', -1);
 
 				document.activeElement.blur();

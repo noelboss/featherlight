@@ -421,6 +421,7 @@ var stubAjaxLoad = function(content) {
 				$.featherlight({text: 'Hello'});
 				close = $('.featherlight-close-icon')
 				close.focus();
+				expect($('.featherlight-close-icon').attr('tabindex')).to.equal(0);
 				expect($(document.activeElement)).to.have.class('featherlight-close-icon');
 			});
 
