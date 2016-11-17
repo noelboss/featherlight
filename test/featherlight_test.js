@@ -421,18 +421,18 @@ var stubAjaxLoad = function(content) {
 				$.featherlight({text: 'Hello'});
 				close = $('.featherlight-close-icon')
 				close.focus();
-				expect($('.featherlight-close-icon').attr('tabindex')).to.equal(0);
+				expect($('.featherlight-close-icon').attr('tabindex')).to.be.undefined;
 				expect($(document.activeElement)).to.have.class('featherlight-close-icon');
 			});
 
 			it('removes focus and then resets it', function() {
 				$('.for-focus').focus();
 				$.featherlight({text: 'Hello'});
-				expect($('.for-focus')).to.have.attr('tabindex', -1);
+				expect($('.for-focus')).to.have.attr('tabindex', '-1');
 				expect($(document.activeElement)).not.to.have.class('for-focus');
 				$.featherlight.close();
 				expect($(document.activeElement)).to.have.class('for-focus');
-				expect($('.for-focus').attr('tabindex')).to.equal(0);
+				expect($('.for-focus').attr('tabindex')).to.be.undefined;
 			});
 
 			it('focussed on "autofocus" content, if any', function() {
