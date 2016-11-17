@@ -144,7 +144,7 @@
 
 		createNavigation: function(target) {
 			var self = this;
-			return $('<span title="'+target+'" class="'+this.namespace+'-'+target+'"><span>'+this[target+'Icon']+'</span></span>').click(function(){
+			return $('<button title="'+target+'" class="'+this.namespace+'-'+target+'"><span>'+this[target+'Icon']+'</span></button>').click(function(){
 				$(this).trigger(target+'.'+self.namespace);
 			});
 		}

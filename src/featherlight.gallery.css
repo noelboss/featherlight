@@ -13,7 +13,6 @@
 		top: 25px;
 		right: 25px;
 		bottom: 0;
-		left: 80%;
 		cursor: pointer;
 		/* preventing text selection */
 		-webkit-touch-callout: none;
@@ -24,11 +23,20 @@
 		user-select: none;
 		/* IE9 hack, otherwise navigation doesn't appear */
 		background: rgba(0,0,0,0);
+		border: none;
+		padding: 0;
+		width: 20%;
+	}
+
+	/* See http://stackoverflow.com/questions/16077341/how-to-reset-all-default-styles-of-the-html5-button-element */
+	.featherlight-next::-moz-focus-inner,
+	.featherlight-previous::-moz-focus-inner {
+		border: 0;
+		padding: 0;
 	}
 
 	.featherlight-previous {
 		left: 25px;
-		right: 80%;
 	}
 
 	.featherlight-next:hover,
@@ -60,6 +68,7 @@
 		font-style: normal;
 		font-weight: normal;
 	}
+
 	.featherlight-next span {
 		right: 5%;
 		left: auto;
