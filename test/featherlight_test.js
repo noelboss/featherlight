@@ -435,6 +435,13 @@ var stubAjaxLoad = function(content) {
 				expect($('.for-focus').attr('tabindex')).to.be.undefined;
 			});
 
+			it('resets tabindex properly', function() {
+				$('.for-focus').attr('tabindex', 42);
+				$.featherlight({text: 'Hello'});
+				$.featherlight.close();
+				expect($('.for-focus')).to.have.attr('tabindex').equal('42');
+			});
+
 			it('focussed on "autofocus" content, if any', function() {
 				$.featherlight({html: '<input><input autofocus class="ok">'});
 				expect($(document.activeElement)).to.have.class('ok');
