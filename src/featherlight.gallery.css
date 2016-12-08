@@ -71,6 +71,11 @@
 		display: inline-block;
 	}
 
+	.featherlight-swipe-aware .featherlight-next,
+	.featherlight-swipe-aware .featherlight-previous {
+		display: none;
+	}
+
 	/* Hide navigation while loading */
 	.featherlight-loading .featherlight-previous, .featherlight-loading .featherlight-next {
 		display:none;
