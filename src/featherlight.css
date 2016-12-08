@@ -38,7 +38,6 @@
 		display: inline-block;
 		height: 100%;
 		vertical-align: middle;
-		margin-right: -0.25em;
 	}
 
 	.featherlight .featherlight-content {
@@ -130,8 +129,8 @@
 @media only screen and (max-width: 1024px) {
 	.featherlight .featherlight-content {
 		/* dimensions: maximize lightbox with for small screens */
-		margin-left: 10px;
-		margin-right: 10px;
+		margin-left: 0;
+		margin-right: 0;
 		max-height: 98%;
 
 		padding: 10px 10px 0;
