@@ -54,20 +54,43 @@
 			return opened;
 		};
 
-	// structure({iframeMinHeight: 44, foo: 0}, 'iframe')
-	//   #=> {min-height: 44}
-	var structure = function(obj, prefix) {
-		var result = {},
+	var iframeStructure = {
+		// iframeStructure.css({iframeMinHeight: 44, foo: 0}, 'iframe') => {min-height: 44}
+		css: function(obj) {
+			return parseAttrs(obj, 'iframe');
+		},
+		// NOTE: List of available [iframe attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe).
+		attr: function(obj) {
+			var whiteList = ['allowfullscreen', 'frameborder', 'height', 'longdesc',
+					'marginheight', 'marginwidth', 'name', 'referrerpolicy', 'scrolling',
+					'sandbox', 'src', 'srcdoc', 'width'],
+				attrs = {};
+
+			$.each(whiteList, function(index, item) {
+				var attrValue = parseAttrs(obj, 'iframe')[item];
+
+				if (attrValue) {
+					attrs[item] = attrValue;
+					return attrs[item];
+				}
+			});
+
+			return attrs;
+		}
+	};
+
+	function parseAttrs(obj, prefix) {
+		var attrs = {},
 			regex = new RegExp('^' + prefix + '([A-Z])(.*)');
 		for (var key in obj) {
 			var match = key.match(regex);
 			if (match) {
 				var dasherized = (match[1] + match[2].replace(/([A-Z])/g, '-$1')).toLowerCase();
-				result[dasherized] = obj[key];
+				attrs[dasherized] = obj[key];
 			}
 		}
-		return result;
-	};
+		return attrs;
+	}
 
 	/* document wide key handler */
 	var eventMap = { keyup: 'onKeyUp', resize: 'onResize' };
@@ -384,7 +407,8 @@
 					var $content = $('<iframe/>');
 					$content.hide()
 						.attr('src', url)
-						.css(structure(this, 'iframe'))
+						.attr(iframeStructure.attr(this))
+						.css(iframeStructure.css(this))
 						.on('load', function() { deferred.resolve($content.show()); })
 						// We can't move an <iframe> and avoid reloading it,
 						// so let's put it in place ourselves right now:

@@ -62,5 +62,9 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/noelboss/featherlight.git"
+	},
+	"scripts": {
+		"build": "grunt",
+		"test": "grunt test"
 	}
 }
