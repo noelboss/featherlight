@@ -66,31 +66,31 @@
 					'sandbox', 'src', 'srcdoc', 'width'],
 				attrs = {};
 
-			whiteList.map(function(item) {
+			$.each(whiteList, function(index, item) {
 				var attrValue = parseAttrs(obj, 'iframe')[item];
 
 				if (attrValue) {
 					attrs[item] = attrValue;
 					return attrs[item];
-			 	}
+				}
 			});
 
 			return attrs;
 		}
 	};
 
-function parseAttrs(obj, prefix) {
-	var attrs = {},
-		regex = new RegExp('^' + prefix + '([A-Z])(.*)');
-	for (var key in obj) {
-		var match = key.match(regex);
-		if (match) {
-			var dasherized = (match[1] + match[2].replace(/([A-Z])/g, '-$1')).toLowerCase();
-			attrs[dasherized] = obj[key];
+	function parseAttrs(obj, prefix) {
+		var attrs = {},
+			regex = new RegExp('^' + prefix + '([A-Z])(.*)');
+		for (var key in obj) {
+			var match = key.match(regex);
+			if (match) {
+				var dasherized = (match[1] + match[2].replace(/([A-Z])/g, '-$1')).toLowerCase();
+				attrs[dasherized] = obj[key];
+			}
 		}
+		return attrs;
 	}
-	return attrs;
-}
 
 	/* document wide key handler */
 	var eventMap = { keyup: 'onKeyUp', resize: 'onResize' };
