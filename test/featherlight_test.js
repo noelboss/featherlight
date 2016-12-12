@@ -409,6 +409,27 @@ var stubAjaxLoad = function(content) {
 				expect($('.featherlight iframe')).to.have.css('width').equal('323px');
 				expect($('.featherlight iframe')).to.have.css('min-height').equal('212px');
 			});
+
+			describe('generates an iframe with tag attributes', function() {
+				it('adds `allowfullescreen` attribute', function() {
+					$('<a data-featherlight-iframe="http://www.apple.com" '+
+						'data-featherlight-iframe-allowfullscreen="true">').featherlight().click();
+
+					expect($('.featherlight iframe')).to.have.attr('src').equal('http://www.apple.com');
+					expect($('.featherlight iframe')).to.have.attr('allowfullscreen').equal('true');
+				});
+
+				it('does not add invalid attributes', function() {
+					$('<a data-featherlight-iframe="http://www.apple.com" '+
+						'data-featherlight-iframe-invalid="foo" '+
+						'data-featherlight-iframe-display="flex">').featherlight().click();
+
+					expect($('.featherlight iframe')).to.have.attr('src').equal('http://www.apple.com');
+					expect($('.featherlight iframe')).to.not.have.css('display').equal('flex');
+					expect($('.featherlight iframe')).to.not.have.attr('display').equal('flex');
+					expect($('.featherlight iframe')).to.not.have.attr('invalid').equal('foo');
+				});
+			});
 		});
 
 	});
