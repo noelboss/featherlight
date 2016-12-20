@@ -349,7 +349,7 @@ Featherlight generates an iframe with the 'iframe' keyword and a given url
 
 	<a href="http://www.example.com" data-featherlight="iframe">Open example.com in an iframe</a>
 
-Options `iframeWidth`, `iframeMinWidth`, etc. or their corresponding data attributes are used as CSS when present.
+Options `iframeWidth`, `iframeMinWidth`, etc. or their corresponding data attributes `data-featherlight-iframe-width`, `data-featherlight-iframe-min-width` are used as CSS when present.
 
 	$.featherlight({iframe: 'editor.html', iframeMaxWidth: '80%', iframeWidth: 500,
 		iframeHeight: 300});
