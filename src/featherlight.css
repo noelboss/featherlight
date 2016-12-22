@@ -111,6 +111,8 @@
 		/* removed the border for image croping since iframe is edge to edge */
 		border-bottom: 0;
 		padding: 0;
+		-webkit-overflow-scrolling: touch;
+		overflow-y: scroll;
 	}
 
 	.featherlight iframe {
