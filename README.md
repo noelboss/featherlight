@@ -363,28 +363,50 @@ If you want the background in IE8 to be translucent, use data:image before the r
 ---
 
 # Featherlight Gallery
-Featherlight was created to be as small and simple as possible. Therefore it does not provide all functionality imaginable. But, since its small and simple, it can be extended easily. featherlight.gallery.js is a small extension that turns your set of links into a [gallery](http://noelboss.github.io/featherlight/gallery.html).
+You will need to use an extension (featherlight.gallery.js).  Since Featherlight was created to be as small and simple as possible, it has selected functionality, and  allows you to add additional functionality by using extensions.  featherlight.gallery.js is a small extension that turns your set of links into a [gallery](http://noelboss.github.io/featherlight/gallery.html).
 
-	$('a.gallery').featherlightGallery({
-		openSpeed: 300
-	});
+## Gallery installation
+
+Simply include the extension CSS and JavaScript Files after the regular featherlight files like this:
+
+	<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+	<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.gallery.min.css" type="text/css" rel="stylesheet" />
+
+Add the JavaScript at the bottom of the body:
+
+```html
+	<script src="//code.jquery.com/jquery-latest.js"></script>
+	<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.4/release/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
+```
+
+Check out the example here: [Gallery with Featherlight](gallery.html)
 
 
 ## Gallery configuration
 
 The gallery also has a range of configuration options and the following defaults:
 
-	previousIcon: '&#9664;',     /* Code that is used as previous icon */
-	nextIcon: '&#9654;',         /* Code that is used as next icon */
-	galleryFadeIn: 100,          /* fadeIn speed when slide is loaded */
-	galleryFadeOut: 300          /* fadeOut speed before slide is loaded */
+
+```javascript
+	$('a.gallery').featherlightGallery({
+		previousIcon: '&#9664;',     /* Code that is used as previous icon */
+		nextIcon: '&#9654;',         /* Code that is used as next icon */
+		galleryFadeIn: 100,          /* fadeIn speed when slide is loaded */
+		galleryFadeOut: 300          /* fadeOut speed before slide is loaded */
+	});
+```
+
 
 It also overrides its `autoBind` global option:
 
+```javascript
 	autoBind: '[data-featherlight-gallery]' /* Will automatically bind elements matching this selector. Clear or set before onReady */
+```
 
 Example in pure HTML:
 
+```html
     <section
       data-featherlight-gallery
       data-featherlight-filter="a"
@@ -393,10 +415,11 @@ Example in pure HTML:
       <a href="photo_large.jpg"><img src="photo_thumbnail.jpg"></a>
       <a href="other_photo_large.jpg"><img src="other_photo_thumbnail.jpg"></a>
     </section>
-
+```
 
 Example in JavaScript (assuming there are `a` tags of class `gallery` in the page):
 
+```javascript
 	$('a.gallery').featherlightGallery({
 		previousIcon: '«',
 		nextIcon: '»',
@@ -404,7 +427,7 @@ Example in JavaScript (assuming there are `a` tags of class `gallery` in the pag
 
 		openSpeed: 300
 	});
-
+```
 
 The gallery responds to custom events `previous` and `next` to navigate to the previous and next images.
 
@@ -418,14 +441,17 @@ Simply include the extension CSS and JavaScript Files after the regular featherl
 
 	<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.css" type="text/css" rel="stylesheet" />
 	<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.gallery.min.css" type="text/css" rel="stylesheet" />
-
-Add the JavaScript at the bottom of the body:
-
 	<script src="//code.jquery.com/jquery-latest.js"></script>
 	<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.0/release/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
 
-Check out the example here: [Gallery with Featherlight](http://noelboss.github.io/featherlight/gallery.html)
+## Gallery on Mobile Devices
+To support mobile/tablet and all touch devices, you will need to include one of the supported libraries. For example, to use swipe_detect library, include it in the header:
+
+```html
+ <script src="//cdnjs.cloudflare.com/ajax/libs/detect_swipe/2.1.1/jquery.detect_swipe.min.js"></script>
+```
+
 
 # Support
 
