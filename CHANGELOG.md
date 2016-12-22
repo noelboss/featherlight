@@ -3,7 +3,7 @@ Featherlight – Changelog
 
 Master
 -----------------------------------
-
+- Can now specify standard iFrame attributes and CSS [#269]
 
 1.6.0 - 2016-11-16
 -----------------------------------
