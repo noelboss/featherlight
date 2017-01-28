@@ -6,6 +6,11 @@
  * MIT Licensed.
 **/
 @media all {
+	html.with-featherlight {
+		/* disable global scrolling when featherlights are visible */
+		overflow: hidden;
+	}
+
 	.featherlight {
 		display: none;
 

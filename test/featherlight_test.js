@@ -467,6 +467,17 @@ var stubAjaxLoad = function(content) {
 				expect($(document.activeElement)).to.have.class('ok');
 				$.featherlight.close();
 			});
+
+			it('sets the "with-featherlight" class correctly on html', function() {
+				expect($('html')).not.to.have.class('with-featherlight');
+				$.featherlight({html: 'hello'});
+				expect($('html')).to.have.class('with-featherlight');
+				$.featherlight({html: 'hello'});
+				$.featherlight.close();
+				$.featherlight.close();
+				expect($('html')).not.to.have.class('with-featherlight');
+			});
+
 		});
 	});
 }(jQuery));
