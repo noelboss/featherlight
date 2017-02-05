@@ -402,14 +402,17 @@ var stubAjaxLoad = function(content) {
 		});
 
 		describe('iframe content filter', function() {
-			it('generates an iframe with the right attributes and css', function() {
-				$('<a data-featherlight-iframe="http://www.apple.com" data-featherlight-iframe-allowfullscreen="true" '+
+			it('generates an iframe with the right attributes and css', function(done) {
+				$('<a data-featherlight-iframe="#test-iframe" data-featherlight-iframe-allowfullscreen="true" '+
 					'data-featherlight-iframe-width="323" data-featherlight-iframe-min-height="212">').featherlight().click();
-				expect($('.featherlight iframe')).to.have.attr('src').equal('http://www.apple.com');
+				expect($('.featherlight iframe')).to.have.attr('src').equal('#test-iframe');
 				expect($('.featherlight iframe')).to.have.css('width').equal('323px');
 				expect($('.featherlight iframe')).to.have.css('min-height').equal('212px');
 				expect($('.featherlight iframe')).to.have.attr('allowfullscreen').equal('true');
 				expect($('.featherlight iframe')).not.to.have.attr('min-height');
+				patiently(done, function() {
+					expect($('.featherlight')).to.have.attr('class').equal('featherlight featherlight-iframe');
+				});
 			});
 
 			it('allows "about:blank"', function() {

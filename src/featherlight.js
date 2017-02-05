@@ -236,7 +236,7 @@
 		setContent: function($content){
 			var self = this;
 			/* we need a special class for the iframe */
-			if($content.is('iframe') || $('iframe', $content).length > 0){
+			if($content.is('iframe')) {
 				self.$instance.addClass(self.namespace+'-iframe');
 			}
 
