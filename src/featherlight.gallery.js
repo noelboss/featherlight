@@ -158,7 +158,8 @@
 
 	/* extend jQuery with selector featherlight method $(elm).featherlight(config, elm); */
 	$.fn.featherlightGallery = function(config) {
-		return FeatherlightGallery.attach(this, config);
+		FeatherlightGallery.attach(this, config);
+		return this;
 	};
 
 	/* bind featherlight on ready if config autoBind is set */

@@ -480,8 +480,7 @@
 			var namespace = config.namespace || Klass.defaults.namespace,
 				tempConfig = $.extend({}, Klass.defaults, Klass.readElementConfig($source[0], namespace), config),
 				sharedPersist;
-
-			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, function(event) {
+			var handler = function(event) {
 				/* ... since we might as well compute the config on the actual target */
 				var elemConfig = $.extend(
 					{$source: $source, $currentTarget: $(this)},
@@ -496,8 +495,11 @@
 				}
 				elemConfig.$currentTarget.blur(); // Otherwise 'enter' key might trigger the dialog again
 				fl.open(event);
-			});
-			return $source;
+			};
+
+			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, handler);
+
+			return handler;
 		},
 
 		current: function() {
@@ -605,7 +607,8 @@
 
 	/* bind jQuery elements to trigger featherlight */
 	$.fn.featherlight = function($content, config) {
-		return Featherlight.attach(this, $content, config);
+		Featherlight.attach(this, $content, config);
+		return this;
 	};
 
 	/* bind featherlight on ready if config autoBind is set */
