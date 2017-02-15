@@ -556,27 +556,6 @@
 				}
 			},
 
-			beforeOpen: function(_super, event) {
-				// Remember focus:
-				this._previouslyActive = document.activeElement;
-
-				// Disable tabbing:
-				// See http://stackoverflow.com/questions/1599660/which-html-elements-can-receive-focus
-				this._$previouslyTabbable = $("a, input, select, textarea, iframe, button, iframe, [contentEditable=true]")
-					.not('[tabindex]')
-					.not(this.$instance.find('button'));
-
-				this._$previouslyWithTabIndex = $('[tabindex]').not('[tabindex="-1"]');
-				this._previousWithTabIndices = this._$previouslyWithTabIndex.map(function(_i, elem) {
-					return $(elem).attr('tabindex');
-				});
-
-				this._$previouslyWithTabIndex.add(this._$previouslyTabbable).attr('tabindex', -1);
-
-				document.activeElement.blur();
-				return _super(event);
-			},
-
 			afterClose: function(_super, event) {
 				var r = _super(event);
 				var self = this;
@@ -595,7 +574,26 @@
 
 			afterContent: function(_super, event){
 				var r = _super(event);
+				// Remember focus:
+				this._previouslyActive = document.activeElement;
+
+				// Disable tabbing:
+				// See http://stackoverflow.com/questions/1599660/which-html-elements-can-receive-focus
+				var focusable = "a, input, select, textarea, iframe, button, iframe, [contentEditable=true]";
+				this._$previouslyTabbable = $(focusable)
+					.not('[tabindex]')
+					.not(this.$instance.find(focusable));
+
+				this._$previouslyWithTabIndex = $('[tabindex]').not('[tabindex="-1"]').not(this.$instance.find('[tabindex]'));
+				this._previousWithTabIndices = this._$previouslyWithTabIndex.map(function(_i, elem) {
+					return $(elem).attr('tabindex');
+				});
+
+				this._$previouslyWithTabIndex.add(this._$previouslyTabbable).attr('tabindex', -1);
+
+				document.activeElement.blur();
 				this.$instance.find('[autofocus]:not([disabled])').focus();
+
 				this.onResize(event);
 				return r;
 			}

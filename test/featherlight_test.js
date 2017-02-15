@@ -441,9 +441,12 @@ var stubAjaxLoad = function(content) {
 
 			it('resets tabindex properly', function() {
 				$('.for-focus').attr('tabindex', 42);
-				$.featherlight({text: 'Hello'});
+				$.featherlight('.focus-test');
+				expect($('.featherlight .for-focus')).to.have.attr('tabindex').equal('42');
+				expect($('#fixtures > .focus-test .for-focus')).to.have.attr('tabindex').equal('-1');
+				expect($('.featherlight br')).to.have.attr('tabindex').equal('2');
 				$.featherlight.close();
-				expect($('.for-focus')).to.have.attr('tabindex').equal('42');
+				expect($('.focus-test input')).to.have.attr('tabindex').equal('42');
 			});
 
 			it('focussed on "autofocus" content, if any', function() {
