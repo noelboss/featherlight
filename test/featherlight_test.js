@@ -170,11 +170,10 @@ var stubAjaxLoad = function(content) {
 		describe('configuration', function() {
 			it('can be set using data-featherlight-*', function() {
 				$('#data-attr-test a').featherlight().click();
-				expect($.featherlight.current()).to.have.properties({
-					variant: 'test',
-					closeOnEsc: false,
-					closeSpeed: 42,
-				});
+				var cur = $.featherlight.current();
+				expect(cur.variant).to.equal('test');
+				expect(cur.closeOnEsc).to.equal(false);
+				expect(cur.closeSpeed).to.equal(42);
 				expect($.featherlight.current().$instance.find('b')).to.have.text('Added in callback');
 			});
 
