@@ -440,11 +440,27 @@ var stubAjaxLoad = function(content) {
 			});
 
 			it('resets tabindex properly', function() {
+				var focusOf = function(path) {
+					return [$(path + ' > .focus-outer input')
+				}
+								expect($('.featherlight .for-focus')).to.have.attr('tabindex').equal('42');
+				expect($('#fixtures > .focus-test .for-focus')).to.have.attr('tabindex').equal('-1');
+				expect($('.featherlight .focus-test br')).to.have.attr('tabindex').equal('2');
+
+
 				$('.for-focus').attr('tabindex', 42);
 				$.featherlight('.focus-test');
-				expect($('.featherlight .for-focus')).to.have.attr('tabindex').equal('42');
-				expect($('#fixtures > .focus-test .for-focus')).to.have.attr('tabindex').equal('-1');
-				expect($('.featherlight br')).to.have.attr('tabindex').equal('2');
+				expect(outsideFocus()).to.equal('disabled');
+				expect(outerFocus()).to.equal('disabled');
+				// Open nested dialog:
+				$('.featherlight .focus-test a').click();
+				expect($('.featherlight .for-focus')).to.have.attr('tabindex').equal('-1');
+				expect($('.featherlight .focus-test br')).to.have.attr('tabindex').equal('-1');
+				expect($('.featherlight .focus-test-2')).to.have.attr('tabindex').equal('-1');
+				expect($('.featherlight .focus-test-2 br').attr('tabindex')).to.be.undefined;
+				$.featherlight.close();
+
+
 				$.featherlight.close();
 				expect($('.focus-test input')).to.have.attr('tabindex').equal('42');
 			});
