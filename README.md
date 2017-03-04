@@ -446,7 +446,7 @@ Simply include the extension CSS and JavaScript Files after the regular featherl
 	<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.1/release/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
 
 ## Gallery on Mobile Devices
-To support mobile/tablet and all touch devices, you will need to include one of the supported libraries. For example, to use swipe_detect library, include it in the header:
+To support mobile/tablet and all touch devices, you will need to include one of the [supported swipe libraries](https://github.com/noelboss/featherlight/wiki/Gallery:-swipe-on-touch-devices). For example, to use `swipe_detect` library, include it in the header:
 
 ```html
  <script src="//cdnjs.cloudflare.com/ajax/libs/detect_swipe/2.1.1/jquery.detect_swipe.min.js"></script>
