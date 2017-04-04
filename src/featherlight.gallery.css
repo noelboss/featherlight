@@ -80,6 +80,12 @@
 	.featherlight-loading .featherlight-previous, .featherlight-loading .featherlight-next {
 		display:none;
 	}
+
+	/* Hide navigation in case of single image */
+	.featherlight-first-slide.featherlight-last-slide .featherlight-previous,
+	.featherlight-first-slide.featherlight-last-slide .featherlight-next {
+		display:none;
+	}
 }
 
 /* Always display arrows on touch devices */
