@@ -573,7 +573,9 @@
 
 				this._$previouslyWithTabIndex.add(this._$previouslyTabbable).attr('tabindex', -1);
 
-				document.activeElement.blur();
+				if (typeof document.activeElement.blur !== 'undefined') {
+					document.activeElement.blur();
+				}
 				return _super(event);
 			},
 
