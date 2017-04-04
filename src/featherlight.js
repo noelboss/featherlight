@@ -575,7 +575,7 @@
 
 				this._$previouslyWithTabIndex.add(this._$previouslyTabbable).attr('tabindex', -1);
 
-				if (typeof document.activeElement.blur !== 'undefined') {
+				if (document.activeElement.blur) {
 					document.activeElement.blur();
 				}
 				return _super(event);
