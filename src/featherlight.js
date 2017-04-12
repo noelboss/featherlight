@@ -330,7 +330,10 @@
 				/* Resize content */
 				if (ratio > 1) {
 					ratio = h / Math.floor(h / ratio); /* Round ratio down so height calc works */
-					this.$content.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
+					var paddingW = this.$content.parent().outerWidth() - this.$content.parent().width();
+					var paddingH = this.$content.parent().outerHeight() - this.$content.parent().height();
+					
+					this.$content.css('width', '' + w / ratio - paddingW + 'px').css('height', '' + h / ratio - paddingH  + 'px');
 				}
 			}
 		},
