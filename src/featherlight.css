@@ -73,6 +73,12 @@
 		display: block;
 	}
 
+	/* don't show these though */
+	.featherlight script.featherlight-inner,
+	.featherlight style.featherlight-inner {
+		display: inherit;
+	}
+
 	.featherlight .featherlight-close-icon {
 		/* position: centering vertical and horizontal */
 		position: absolute;
