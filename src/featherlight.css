@@ -75,8 +75,9 @@
 
 	/* don't show these though */
 	.featherlight script.featherlight-inner,
+	.featherlight link.featherlight-inner,
 	.featherlight style.featherlight-inner {
-		display: inherit;
+		display: hidden;
 	}
 
 	.featherlight .featherlight-close-icon {
