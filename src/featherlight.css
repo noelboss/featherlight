@@ -77,7 +77,7 @@
 	.featherlight script.featherlight-inner,
 	.featherlight link.featherlight-inner,
 	.featherlight style.featherlight-inner {
-		display: hidden;
+		display: none;
 	}
 
 	.featherlight .featherlight-close-icon {
