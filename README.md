@@ -46,7 +46,7 @@ Featherlight is smart. 'data-featherlight' can also contain a link to an image, 
 	<a href="#" data-featherlight="myhtml.html .selector">Open ajax content in lightbox</a>
 	<a href="#" data-featherlight="<p>Fancy DOM Lightbox!</p>">Open some DOM in lightbox</a>
 
-it also works with links using href and the "image" and "ajax" keywords (this can also be manually set with the configuration options like `{image: 'photo.jpg}` or `{type: 'image'}`):
+it also works with links using href and the "image" and "ajax" keywords (this can also be manually set with the configuration options like `{image: 'photo.jpg'}` or `{type: 'image'}`):
 
 	<a href="myimage.png" data-featherlight="image">Open image in lightbox</a>
 	<a href="myhtml.html .selector" data-featherlight="ajax">Open ajax content in lightbox</a>
