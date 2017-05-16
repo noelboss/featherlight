@@ -62,7 +62,7 @@ You can bind the Featherlight events on any element using the following code:
 
 It will then look for the `targetAttr` (by default "data-featherlight") on this element and use its value to find the content that will be opened as lightbox when you click on the element.
 
-***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string (see [content filters](#content-filters)) to be opened in the ligthbox. Optional
+***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string (see [content filters](#content-filters)) to be opened in the lightbox. Optional
 
 ***configuration*** – Object: Object to configure certain aspects of the plugin. See [Configuration](#configuration). Optional
 
@@ -71,7 +71,7 @@ In cases where you don't want an Element to act as Trigger you can call Featherl
 
 	$.featherlight($content, configuration);
 
-***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string (see [content filters](#content-filters)) to be opened in the ligthbox. Optional
+***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string (see [content filters](#content-filters)) to be opened in the lightbox. Optional
 
 ***configuration*** – Object: Object to configure certain aspects of the plugin. See [Configuration](#configuration). Optional
 
