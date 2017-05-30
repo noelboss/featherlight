@@ -481,17 +481,18 @@
 				tempConfig = $.extend({}, Klass.defaults, Klass.readElementConfig($source[0], namespace), config),
 				sharedPersist;
 			var handler = function(event) {
+				var $target = $(event.currentTarget);
 				/* ... since we might as well compute the config on the actual target */
 				var elemConfig = $.extend(
-					{$source: $source, $currentTarget: $(this)},
+					{$source: $source, $currentTarget: $target},
 					Klass.readElementConfig($source[0], tempConfig.namespace),
-					Klass.readElementConfig(this, tempConfig.namespace),
+					Klass.readElementConfig(event.currentTarget, tempConfig.namespace),
 					config);
-				var fl = sharedPersist || $(this).data('featherlight-persisted') || new Klass($content, elemConfig);
+				var fl = sharedPersist || $target.data('featherlight-persisted') || new Klass($content, elemConfig);
 				if(fl.persist === 'shared') {
 					sharedPersist = fl;
 				} else if(fl.persist !== false) {
-					$(this).data('featherlight-persisted', fl);
+					$target.data('featherlight-persisted', fl);
 				}
 				if (elemConfig.$currentTarget.blur) {
 					elemConfig.$currentTarget.blur(); // Otherwise 'enter' key might trigger the dialog again

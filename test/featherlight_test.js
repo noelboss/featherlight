@@ -47,6 +47,21 @@ var stubAjaxLoad = function(content) {
 			]);
 		});
 
+		it ('works on items with data-featherlight by default', function(done) {
+			$('body').append('<div id="auto-bound-2" data-featherlight="fixtures/photo.jpeg">Dynamic</div>')
+			expect($('img')).to.not.be.visible;
+			$('#auto-bound-2').click();
+			patiently(done, [
+				function() {
+					expect($('.featherlight img')).to.be.visible;
+					expect($('.featherlight img')).to.have.attr('src').equal('fixtures/photo.jpeg');
+					$('.featherlight').click();
+				}, function() {
+					expect($('img')).to.not.be.visible;
+				}
+			]);
+		});
+
 		it ('does not move content that was already placed in the featherlight by content-filters', function() {
 			$.featherlight.contentFilters.advancedExample = {
 				process: function() {
