@@ -286,7 +286,7 @@ There are many ways to specify content to featherlight. Featherlight uses a set 
 	<a id="#example" href="#">See in a lightbox</a>
 	<script>$('#example').featherlight('photo.gif');</script>
 
-In case the heuristic wouldn't work, you can specify which contentFiter to use:
+In case the heuristic wouldn't work, you can specify which contentFilter to use:
 
 	<a href="photo_without_extension" data-featherlight="image">See in a lightbox</a>
 
@@ -327,7 +327,7 @@ The content filter 'text' needs to be specified explicitly, it has no heuristic 
 	});
 
 ## Open images with Featherlight
-Us a link and point the data-featherlight attribute to the desired attribute which contains the link...
+Use a link and point the data-featherlight attribute to the desired attribute which contains the link...
 
 	<a href="myimage.jpg" data-featherlight="image">Open Image</a>
 
