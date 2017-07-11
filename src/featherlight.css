@@ -5,133 +5,132 @@
  * Copyright 2017, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
 **/
-@media all {
-	.featherlight {
-		display: none;
 
-		/* dimensions: spanning the background from edge to edge */
-		position:fixed;
-		top: 0; right: 0; bottom: 0; left: 0;
-		z-index: 2147483647; /* z-index needs to be >= elements on the site. */
+.featherlight {
+	display: none;
 
-		/* position: centering content */
-		text-align: center;
+	/* dimensions: spanning the background from edge to edge */
+	position:fixed;
+	top: 0; right: 0; bottom: 0; left: 0;
+	z-index: 2147483647; /* z-index needs to be >= elements on the site. */
 
-		/* insures that the ::before pseudo element doesn't force wrap with fixed width content; */
-		white-space: nowrap;
+	/* position: centering content */
+	text-align: center;
 
-		/* styling */
-		cursor: pointer;
-		background: #333;
-		/* IE8 "hack" for nested featherlights */
-		background: rgba(0, 0, 0, 0);
-	}
+	/* insures that the ::before pseudo element doesn't force wrap with fixed width content; */
+	white-space: nowrap;
 
-	/* support for nested featherlights. Does not work in IE8 (use JS to fix) */
-	.featherlight:last-of-type {
-		background: rgba(0, 0, 0, 0.8);
-	}
+	/* styling */
+	cursor: pointer;
+	background: #333;
+	/* IE8 "hack" for nested featherlights */
+	background: rgba(0, 0, 0, 0);
+}
 
-	.featherlight:before {
-		/* position: trick to center content vertically */
-		content: '';
-		display: inline-block;
-		height: 100%;
-		vertical-align: middle;
-	}
+/* support for nested featherlights. Does not work in IE8 (use JS to fix) */
+.featherlight:last-of-type {
+	background: rgba(0, 0, 0, 0.8);
+}
 
-	.featherlight .featherlight-content {
-		/* make content container for positioned elements (close button) */
-		position: relative;
+.featherlight:before {
+	/* position: trick to center content vertically */
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
 
-		/* position: centering vertical and horizontal */
-		text-align: left;
-		vertical-align: middle;
-		display: inline-block;
+.featherlight .featherlight-content {
+	/* make content container for positioned elements (close button) */
+	position: relative;
 
-		/* dimensions: cut off images */
-		overflow: auto;
-		padding: 25px 25px 0;
-		border-bottom: 25px solid transparent;
+	/* position: centering vertical and horizontal */
+	text-align: left;
+	vertical-align: middle;
+	display: inline-block;
 
-		/* dimensions: handling large content */
-		margin-left: 5%;
-		margin-right: 5%;
-		max-height: 95%;
+	/* dimensions: cut off images */
+	overflow: auto;
+	padding: 25px 25px 0;
+	border-bottom: 25px solid transparent;
 
-		/* styling */
-		background: #fff;
-		cursor: auto;
+	/* dimensions: handling large content */
+	margin-left: 5%;
+	margin-right: 5%;
+	max-height: 95%;
 
-		/* reset white-space wrapping */
-		white-space: normal;
-	}
+	/* styling */
+	background: #fff;
+	cursor: auto;
 
-	/* contains the content */
-	.featherlight .featherlight-inner {
-		/* make sure its visible */
-		display: block;
-	}
+	/* reset white-space wrapping */
+	white-space: normal;
+}
 
-	/* don't show these though */
-	.featherlight script.featherlight-inner,
-	.featherlight link.featherlight-inner,
-	.featherlight style.featherlight-inner {
-		display: none;
-	}
+/* contains the content */
+.featherlight .featherlight-inner {
+	/* make sure its visible */
+	display: block;
+}
 
-	.featherlight .featherlight-close-icon {
-		/* position: centering vertical and horizontal */
-		position: absolute;
-		z-index: 9999;
-		top: 0;
-		right: 0;
+/* don't show these though */
+.featherlight script.featherlight-inner,
+.featherlight link.featherlight-inner,
+.featherlight style.featherlight-inner {
+	display: none;
+}
 
-		/* dimensions: 25px x 25px */
-		line-height: 25px;
-		width: 25px;
+.featherlight .featherlight-close-icon {
+	/* position: centering vertical and horizontal */
+	position: absolute;
+	z-index: 9999;
+	top: 0;
+	right: 0;
 
-		/* styling */
-		cursor: pointer;
-		text-align: center;
-		font-family: Arial, sans-serif;
-		background: #fff; /* Set the background in case it overlaps the content */
-		background: rgba(255, 255, 255, 0.3);
-		color: #000;
-		border: none;
-		padding: 0;
-	}
+	/* dimensions: 25px x 25px */
+	line-height: 25px;
+	width: 25px;
 
-	/* See http://stackoverflow.com/questions/16077341/how-to-reset-all-default-styles-of-the-html5-button-element */
-	.featherlight .featherlight-close-icon::-moz-focus-inner {
-		border: 0;
-		padding: 0;
-	}
+	/* styling */
+	cursor: pointer;
+	text-align: center;
+	font-family: Arial, sans-serif;
+	background: #fff; /* Set the background in case it overlaps the content */
+	background: rgba(255, 255, 255, 0.3);
+	color: #000;
+	border: none;
+	padding: 0;
+}
 
-	.featherlight .featherlight-image {
-		/* styling */
-		width: 100%;
-	}
+/* See http://stackoverflow.com/questions/16077341/how-to-reset-all-default-styles-of-the-html5-button-element */
+.featherlight .featherlight-close-icon::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+.featherlight .featherlight-image {
+	/* styling */
+	width: 100%;
+}
 
 
-	.featherlight-iframe .featherlight-content {
-		/* removed the border for image croping since iframe is edge to edge */
-		border-bottom: 0;
-		padding: 0;
-		-webkit-overflow-scrolling: touch;
-		overflow-y: scroll;
-	}
+.featherlight-iframe .featherlight-content {
+	/* removed the border for image croping since iframe is edge to edge */
+	border-bottom: 0;
+	padding: 0;
+	-webkit-overflow-scrolling: touch;
+	overflow-y: scroll;
+}
 
-	.featherlight iframe {
-		/* styling */
-		border: none;
-	}
+.featherlight iframe {
+	/* styling */
+	border: none;
+}
 
-	.featherlight * { /* See https://github.com/noelboss/featherlight/issues/42 */
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
-	}
+.featherlight * { /* See https://github.com/noelboss/featherlight/issues/42 */
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 /* handling phones and small screens */
