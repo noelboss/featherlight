@@ -467,6 +467,18 @@ var stubAjaxLoad = function(content) {
 				expect($(document.activeElement)).to.have.class('ok');
 				$.featherlight.close();
 			});
+
+			it('has a default z-index', function() {
+				$.featherlight({text: 'hello'});
+				expect($('.featherlight')).to.have.css('z-index').equal('2147483647');
+				$.featherlight.close();
+			});
+
+			it('uses the provided z-index', function() {
+				$.featherlight({zIndex: 9832, text: 'hello'});
+				expect($('.featherlight')).to.have.css('z-index').equal('9832');
+				$.featherlight.close();
+			});
 		});
 	});
 }(jQuery));

@@ -139,6 +139,7 @@
 		onResize:       $.noop,                /* Called after new content and when a window is resized */
 		type:           null,                  /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
 		contentFilters: ['jquery', 'image', 'html', 'ajax', 'iframe', 'text'], /* List of content filters to use to determine the content */
+		zIndex:					2147483647,						 /* Specify which number the z-index of the popup should have. */
 
 		/*** methods ***/
 		/* setup iterates over a single instance of featherlight and prepares the background and binds the events */
@@ -161,7 +162,8 @@
 						'</div>',
 					'</div>'].join('')),
 				closeButtonSelector = '.'+self.namespace+'-close' + (self.otherClose ? ',' + self.otherClose : '');
-
+			
+			$background.css('z-index', self.zIndex);
 			self.$instance = $background.clone().addClass(self.variant); /* clone DOM for the background, wrapper and the close button */
 
 			/* close when click on background/anywhere/null or closebox */

@@ -114,7 +114,8 @@ defaults: {
 	onResize:       $.noop,                /* Called after new content and when a window is resized */
 	type:           null,                  /* Specify content type. If unset, it will check for the targetAttrs value. */
 	contentFilters: ['jquery', 'image', 'html', 'ajax', 'text'] /* List of content filters to use to determine the content */
-	jquery/image/html/ajax/text: undefined /* Specify content type and data */
+	jquery/image/html/ajax/text: undefined,/* Specify content type and data */
+	zIndex:					2147483647,						 /* Specify which number the z-index of the popup should have. */
 }
 ```
 
@@ -252,6 +253,14 @@ The function receives the event object. `this` is an object and contains the tri
 The type object allows you to manually set what type the lightbox is. Set the value to 'image', 'ajax' or any of the content filters. Otherwise, the value from targetAttr will used be to determine the type of the lightbox. Example:
 
 	$('.image-lightbox').featherlight({type: 'image'});
+
+================================================
+
+	zIndex – Number: null
+
+Allows to specify the z-index to be used in the modal. Useful if you're dealing with multiple popups or different elements rendering on top of each other such as tooltips.
+
+	$('.custom-lightbox').featherlight({zIndex: 12345});
 
 
 # Methods
