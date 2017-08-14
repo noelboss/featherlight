@@ -560,8 +560,11 @@
 			},
 
 			beforeOpen: function(_super, event) {
-				// Used to disable scrolling
+				// Disable scrolling in a cross-browser and device-compliant way.
 				$(document.documentElement).addClass('with-featherlight');
+				$(document.body).css({
+					'top': '-' + $(document.body).scrollTop() + 'px'
+				});
 
 				// Remember focus:
 				this._previouslyActive = document.activeElement;
@@ -594,9 +597,14 @@
 					$(elem).attr('tabindex', self._previousWithTabIndices[i]);
 				});
 				this._previouslyActive.focus();
-				// Restore scroll
+				// Restore scroll and reset viewport to the original scroll position.
 				if(Featherlight.opened().length === 0) {
 					$(document.documentElement).removeClass('with-featherlight');
+					var scroll = Math.abs(parseInt($(document.body).css('top')));
+					$(document.body).css({
+						'top': ''
+					});
+					window.scrollTo(0, scroll);
 				}
 				return r;
 			},
