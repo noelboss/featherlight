@@ -151,3 +151,12 @@
 		border-bottom: 10px solid transparent;
 	}
 }
+
+/* hide non featherlight items when printing */
+@media print {
+	@page {size: landscape}
+
+	html.with-featherlight > * > :not(.featherlight) {
+		display: none;
+	}
+}
