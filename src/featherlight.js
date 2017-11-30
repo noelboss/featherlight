@@ -169,6 +169,9 @@
 
 			/* close when click on background/anywhere/null or closebox */
 			self.$instance.on(self.closeTrigger+'.'+self.namespace, function(event) {
+				if(event.isDefaultPrevented()) {
+					return;
+				}
 				var $target = $(event.target);
 				if( ('background' === self.closeOnClick  && $target.is('.'+self.namespace))
 					|| 'anywhere' === self.closeOnClick

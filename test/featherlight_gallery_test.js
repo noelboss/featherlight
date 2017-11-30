@@ -199,6 +199,17 @@ var expect = chai.expect;
       }]);
     });
 
+    it ("supports 'close:anywhere'", function(done) {
+      var gall = $('#basic-test').featherlightGallery({filter: 'a', closeOnClick: 'anywhere'});
+      $('#basic-test a').eq(2).click();
+      patiently(done, [function() {
+        expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?2/);
+        $('.featherlight-next').click();
+      }, function() {
+        expect($('.featherlight img')).to.have.attr('src').match(/photo_large.jpg\?3/);
+      }]);
+    });
+
     describe('.current', function() {
       it ('only returns actual featherlight gallery instances', function() {
         $.featherlight('<p>This is a test<p>');

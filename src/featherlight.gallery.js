@@ -148,8 +148,9 @@
 
 		createNavigation: function(target) {
 			var self = this;
-			return $('<span title="'+target+'" class="'+this.namespace+'-'+target+'"><span>'+this[target+'Icon']+'</span></span>').click(function(){
+			return $('<span title="'+target+'" class="'+this.namespace+'-'+target+'"><span>'+this[target+'Icon']+'</span></span>').click(function(evt){
 				$(this).trigger(target+'.'+self.namespace);
+				evt.preventDefault();
 			});
 		}
 	});
