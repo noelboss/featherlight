@@ -170,8 +170,9 @@
 			/* close when click on background/anywhere/null or closebox */
 			self.$instance.on(self.closeTrigger+'.'+self.namespace, function(event) {
 				var $target = $(event.target);
-				if( ('background' === self.closeOnClick  && $target.is('.'+self.namespace))
-					|| 'anywhere' === self.closeOnClick
+				var eclass = $target.attr('class');
+				if	( ('background' === self.closeOnClick  && $target.is('.'+self.namespace))
+					|| ('anywhere' === self.closeOnClick && eclass!=='featherlight-previous' && eclass!=='featherlight-next' && eclass!==undefined)
 					|| $target.closest(closeButtonSelector).length ){
 					self.close(event);
 					event.preventDefault();
