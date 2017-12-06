@@ -240,24 +240,22 @@
 
 		/* sets the content of $instance to $content */
 		setContent: function($content){
-			var self = this;
+      this.$instance.removeClass(this.namespace+'-loading');
 
-			self.$instance.removeClass(self.namespace+'-loading');
+      /* we need a special class for the iframe */
+      this.$instance.toggleClass(this.namespace+'-iframe', $content.is('iframe'));
 
-			/* we need a special class for the iframe */
-			self.$instance.toggleClass(self.namespace+'-iframe', $content.is('iframe'));
+      /* replace content by appending to existing one before it is removed
+         this insures that featherlight-inner remain at the same relative
+         position to any other items added to featherlight-content */
+      this.$instance.find('.'+this.namespace+'-inner')
+        .not($content)                /* excluded new content, important if persisted */
+        .slice(1).remove().end()      /* In the unexpected event where there are many inner elements, remove all but the first one */
+        .replaceWith($.contains(this.$instance[0], $content[0]) ? '' : $content);
 
-			/* replace content by appending to existing one before it is removed
-			   this insures that featherlight-inner remain at the same relative
-				 position to any other items added to featherlight-content */
-			self.$instance.find('.'+self.namespace+'-inner')
-				.not($content)                /* excluded new content, important if persisted */
-				.slice(1).remove().end()      /* In the unexpected event where there are many inner elements, remove all but the first one */
-				.replaceWith($.contains(self.$instance[0], $content[0]) ? '' : $content);
+      this.$content = $content.addClass(this.namespace+'-inner');
 
-			self.$content = $content.addClass(self.namespace+'-inner');
-
-			return self;
+      return this;
 		},
 
 		/* opens the lightbox. "this" contains $instance with the lightbox, and with the config.
