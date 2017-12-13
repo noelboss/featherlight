@@ -154,8 +154,6 @@
 
 /* hide non featherlight items when printing */
 @media print {
-	@page {size: landscape}
-
 	html.with-featherlight > * > :not(.featherlight) {
 		display: none;
 	}
