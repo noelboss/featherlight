@@ -5,156 +5,152 @@
  * Copyright 2017, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
 **/
-@media all {
-	html.with-featherlight {
-		/* disable global scrolling when featherlights are visible */
-		overflow: hidden;
-	}
 
-	.featherlight {
-		display: none;
+html.with-featherlight {
+	/* disable global scrolling when featherlights are visible */
+	overflow: hidden;
+}
 
-		/* dimensions: spanning the background from edge to edge */
-		position:fixed;
-		top: 0; right: 0; bottom: 0; left: 0;
-		z-index: 2147483647; /* z-index needs to be >= elements on the site. */
+.featherlight {
+	display: none;
+	/* dimensions: spanning the background from edge to edge */
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 2147483647;
+	/* z-index needs to be >= elements on the site. */
+	/* position: centering content */
+	text-align: center;
+	/* insures that the ::before pseudo element doesn't force wrap with fixed width content; */
+	white-space: nowrap;
+	/* styling */
+	cursor: pointer;
+	background: #333;
+	/* IE8 "hack" for nested featherlights */
+	background: rgba(0, 0, 0, 0);
+}
 
-		/* position: centering content */
-		text-align: center;
+/* support for nested featherlights. Does not work in IE8 (use JS to fix) */
 
-		/* insures that the ::before pseudo element doesn't force wrap with fixed width content; */
-		white-space: nowrap;
+.featherlight:last-of-type {
+	background: rgba(0, 0, 0, 0.8);
+}
 
-		/* styling */
-		cursor: pointer;
-		background: #333;
-		/* IE8 "hack" for nested featherlights */
-		background: rgba(0, 0, 0, 0);
-	}
+.featherlight:before {
+	/* position: trick to center content vertically */
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
 
-	/* support for nested featherlights. Does not work in IE8 (use JS to fix) */
-	.featherlight:last-of-type {
-		background: rgba(0, 0, 0, 0.8);
-	}
+.featherlight .featherlight-content {
+	/* make content container for positioned elements (close button) */
+	position: relative;
+	/* position: centering vertical and horizontal */
+	text-align: left;
+	vertical-align: middle;
+	display: inline-block;
+	/* dimensions: cut off images */
+	overflow: auto;
+	padding: 25px 25px 0;
+	border-bottom: 25px solid transparent;
+	/* dimensions: handling large content */
+	margin-left: 5%;
+	margin-right: 5%;
+	max-height: 95%;
+	/* styling */
+	background: #fff;
+	cursor: auto;
+	/* reset white-space wrapping */
+	white-space: normal;
+}
 
-	.featherlight:before {
-		/* position: trick to center content vertically */
-		content: '';
-		display: inline-block;
-		height: 100%;
-		vertical-align: middle;
-	}
+/* contains the content */
 
-	.featherlight .featherlight-content {
-		/* make content container for positioned elements (close button) */
-		position: relative;
+.featherlight .featherlight-inner {
+	/* make sure its visible */
+	display: block;
+}
 
-		/* position: centering vertical and horizontal */
-		text-align: left;
-		vertical-align: middle;
-		display: inline-block;
+/* don't show these though */
 
-		/* dimensions: cut off images */
-		overflow: auto;
-		padding: 25px 25px 0;
-		border-bottom: 25px solid transparent;
+.featherlight script.featherlight-inner, .featherlight link.featherlight-inner, .featherlight style.featherlight-inner {
+	display: none;
+}
 
-		/* dimensions: handling large content */
-		margin-left: 5%;
-		margin-right: 5%;
-		max-height: 95%;
+.featherlight .featherlight-close-icon {
+	/* position: centering vertical and horizontal */
+	position: absolute;
+	z-index: 9999;
+	top: 0;
+	right: 0;
+	/* dimensions: 25px x 25px */
+	line-height: 25px;
+	width: 25px;
+	/* styling */
+	cursor: pointer;
+	text-align: center;
+	font-family: Arial, sans-serif;
+	background: #fff;
+	/* Set the background in case it overlaps the content */
+	background: rgba(255, 255, 255, 0.3);
+	color: #000;
+	border: none;
+	padding: 0;
+}
 
-		/* styling */
-		background: #fff;
-		cursor: auto;
+/* See http://stackoverflow.com/questions/16077341/how-to-reset-all-default-styles-of-the-html5-button-element */
 
-		/* reset white-space wrapping */
-		white-space: normal;
-	}
+.featherlight .featherlight-close-icon::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
 
-	/* contains the content */
-	.featherlight .featherlight-inner {
-		/* make sure its visible */
-		display: block;
-	}
+.featherlight .featherlight-image {
+	/* styling */
+	width: 100%;
+}
 
-	/* don't show these though */
-	.featherlight script.featherlight-inner,
-	.featherlight link.featherlight-inner,
-	.featherlight style.featherlight-inner {
-		display: none;
-	}
+.featherlight-iframe .featherlight-content {
+	/* removed the border for image croping since iframe is edge to edge */
+	border-bottom: 0;
+	padding: 0;
+	-webkit-overflow-scrolling: touch;
+	overflow-y: scroll;
+}
 
-	.featherlight .featherlight-close-icon {
-		/* position: centering vertical and horizontal */
-		position: absolute;
-		z-index: 9999;
-		top: 0;
-		right: 0;
+.featherlight iframe {
+	/* styling */
+	border: none;
+}
 
-		/* dimensions: 25px x 25px */
-		line-height: 25px;
-		width: 25px;
-
-		/* styling */
-		cursor: pointer;
-		text-align: center;
-		font-family: Arial, sans-serif;
-		background: #fff; /* Set the background in case it overlaps the content */
-		background: rgba(255, 255, 255, 0.3);
-		color: #000;
-		border: none;
-		padding: 0;
-	}
-
-	/* See http://stackoverflow.com/questions/16077341/how-to-reset-all-default-styles-of-the-html5-button-element */
-	.featherlight .featherlight-close-icon::-moz-focus-inner {
-		border: 0;
-		padding: 0;
-	}
-
-	.featherlight .featherlight-image {
-		/* styling */
-		width: 100%;
-	}
-
-
-	.featherlight-iframe .featherlight-content {
-		/* removed the border for image croping since iframe is edge to edge */
-		border-bottom: 0;
-		padding: 0;
-		-webkit-overflow-scrolling: touch;
-		overflow-y: scroll;
-	}
-
-	.featherlight iframe {
-		/* styling */
-		border: none;
-	}
-
-	.featherlight * { /* See https://github.com/noelboss/featherlight/issues/42 */
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
-	}
+.featherlight * {
+	/* See https://github.com/noelboss/featherlight/issues/42 */
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 /* handling phones and small screens */
+
 @media only screen and (max-width: 1024px) {
 	.featherlight .featherlight-content {
 		/* dimensions: maximize lightbox with for small screens */
 		margin-left: 0;
 		margin-right: 0;
 		max-height: 98%;
-
 		padding: 10px 10px 0;
 		border-bottom: 10px solid transparent;
 	}
 }
 
 /* hide non featherlight items when printing */
+
 @media print {
-	html.with-featherlight > * > :not(.featherlight) {
+	html.with-featherlight>*> :not(.featherlight) {
 		display: none;
 	}
 }
