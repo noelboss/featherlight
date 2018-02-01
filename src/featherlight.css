@@ -28,13 +28,14 @@
 		/* styling */
 		cursor: pointer;
 		background: #333;
-		/* IE8 "hack" for nested featherlights */
-		background: rgba(0, 0, 0, 0);
+
+		background: rgba(0, 0, 0, 0.8);
 	}
 
-	/* support for nested featherlights. Does not work in IE8 (use JS to fix) */
-	.featherlight:last-of-type {
-		background: rgba(0, 0, 0, 0.8);
+	/* support for multiple featherlights. */
+	.featherlight ~ .featherlight {
+		/* All except first featherlight have transparent background */
+	  background: transparent;	
 	}
 
 	.featherlight:before {
