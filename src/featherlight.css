@@ -11,6 +11,13 @@
 		overflow: hidden;
 	}
 
+	html.with-featherlight body {
+		/* disable global scrolling in a cross-browser and device-compliant way */
+		position: fixed;
+		width: 100%; /* Ensure page width is unaffected by fixed position. */
+		height: initial; /* Because height of 100% will break iOS. */
+	}
+
 	.featherlight {
 		display: none;
 
@@ -70,6 +77,9 @@
 
 		/* reset white-space wrapping */
 		white-space: normal;
+
+		/* Improve scroll experience for ios users on long featherlights. */
+		-webkit-overflow-scrolling: touch;
 	}
 
 	/* contains the content */
