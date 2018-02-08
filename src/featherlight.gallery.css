@@ -5,117 +5,102 @@
  * Copyright 2017, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
 **/
-@media all {
-	.featherlight-next,
-	.featherlight-previous {
-		display: block;
-		position: absolute;
-		top: 25px;
-		right: 25px;
-		bottom: 0;
-		left: 80%;
-		cursor: pointer;
-		/* preventing text selection */
-		-webkit-touch-callout: none;
-		-webkit-user-select: none;
-		-khtml-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-		/* IE9 hack, otherwise navigation doesn't appear */
-		background: rgba(0,0,0,0);
-	}
 
-	.featherlight-previous {
-		left: 25px;
-		right: 80%;
-	}
+.featherlight-next, .featherlight-previous {
+	display: block;
+	position: absolute;
+	top: 25px;
+	right: 25px;
+	bottom: 0;
+	left: 80%;
+	cursor: pointer;
+	/* preventing text selection */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	/* IE9 hack, otherwise navigation doesn't appear */
+	background: rgba(0, 0, 0, 0);
+}
 
-	.featherlight-next:hover,
-	.featherlight-previous:hover {
-		background: rgba(255,255,255,0.25);
-	}
+.featherlight-previous {
+	left: 25px;
+	right: 80%;
+}
 
+.featherlight-next:hover, .featherlight-previous:hover {
+	background: rgba(255, 255, 255, 0.25);
+}
 
-	.featherlight-next span,
-	.featherlight-previous span {
-		display: none;
-		position: absolute;
+.featherlight-next span, .featherlight-previous span {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 5%;
+	width: 82%;
+	/* center horizontally */
+	text-align: center;
+	font-size: 80px;
+	line-height: 80px;
+	/* center vertically */
+	margin-top: -40px;
+	text-shadow: 0px 0px 5px #fff;
+	color: #fff;
+	font-style: normal;
+	font-weight: normal;
+}
 
-		top: 50%;
-		left: 5%;
-		width: 82%;
+.featherlight-next span {
+	right: 5%;
+	left: auto;
+}
 
-		/* center horizontally */
-		text-align: center;
+.featherlight-next:hover span, .featherlight-previous:hover span {
+	display: inline-block;
+}
 
-		font-size: 80px;
-		line-height: 80px;
+.featherlight-swipe-aware .featherlight-next, .featherlight-swipe-aware .featherlight-previous {
+	display: none;
+}
 
-		/* center vertically */
-		margin-top: -40px;
+/* Hide navigation while loading */
 
-		text-shadow: 0px 0px 5px #fff;
-		color: #fff;
-		font-style: normal;
-		font-weight: normal;
-	}
-	.featherlight-next span {
-		right: 5%;
-		left: auto;
-	}
+.featherlight-loading .featherlight-previous, .featherlight-loading .featherlight-next {
+	display: none;
+}
 
+/* Hide navigation in case of single image */
 
-	.featherlight-next:hover span,
-	.featherlight-previous:hover span {
-		display: inline-block;
-	}
-
-	.featherlight-swipe-aware .featherlight-next,
-	.featherlight-swipe-aware .featherlight-previous {
-		display: none;
-	}
-
-	/* Hide navigation while loading */
-	.featherlight-loading .featherlight-previous, .featherlight-loading .featherlight-next {
-		display:none;
-	}
-
-	/* Hide navigation in case of single image */
-	.featherlight-first-slide.featherlight-last-slide .featherlight-previous,
-	.featherlight-first-slide.featherlight-last-slide .featherlight-next {
-		display:none;
-	}
+.featherlight-first-slide.featherlight-last-slide .featherlight-previous, .featherlight-first-slide.featherlight-last-slide .featherlight-next {
+	display: none;
 }
 
 /* Always display arrows on touch devices */
-@media only screen and (max-device-width: 1024px){
-	.featherlight-next:hover,
-	.featherlight-previous:hover {
+
+@media only screen and (max-device-width: 1024px) {
+	.featherlight-next:hover, .featherlight-previous:hover {
 		background: none;
 	}
-	.featherlight-next span,
-	.featherlight-previous span {
+	.featherlight-next span, .featherlight-previous span {
 		display: block;
 	}
 }
 
 /* handling phones and small screens */
+
 @media only screen and (max-width: 1024px) {
-	.featherlight-next,
-	.featherlight-previous {
+	.featherlight-next, .featherlight-previous {
 		top: 10px;
 		right: 10px;
 		left: 85%;
 	}
-
 	.featherlight-previous {
 		left: 10px;
 		right: 85%;
 	}
-
-	.featherlight-next span,
-	.featherlight-previous span {
+	.featherlight-next span, .featherlight-previous span {
 		margin-top: -30px;
 		font-size: 40px;
 	}
