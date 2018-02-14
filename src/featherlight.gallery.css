@@ -5,88 +5,88 @@
  * Copyright 2017, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
 **/
-@media all {
-	.featherlight-next,
-	.featherlight-previous {
-		display: block;
-		position: absolute;
-		top: 25px;
-		right: 25px;
-		bottom: 0;
-		left: 80%;
-		cursor: pointer;
-		/* preventing text selection */
-		-webkit-touch-callout: none;
-		-webkit-user-select: none;
-		-khtml-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-		/* IE9 hack, otherwise navigation doesn't appear */
-		background: rgba(0,0,0,0);
-	}
 
-	.featherlight-previous {
-		left: 25px;
-		right: 80%;
-	}
-
-	.featherlight-next:hover,
-	.featherlight-previous:hover {
-		background: rgba(255,255,255,0.25);
-	}
-
-
-	.featherlight-next span,
-	.featherlight-previous span {
-		display: none;
-		position: absolute;
-
-		top: 50%;
-		left: 5%;
-		width: 82%;
-
-		/* center horizontally */
-		text-align: center;
-
-		font-size: 80px;
-		line-height: 80px;
-
-		/* center vertically */
-		margin-top: -40px;
-
-		text-shadow: 0px 0px 5px #fff;
-		color: #fff;
-		font-style: normal;
-		font-weight: normal;
-	}
-	.featherlight-next span {
-		right: 5%;
-		left: auto;
-	}
-
-
-	.featherlight-next:hover span,
-	.featherlight-previous:hover span {
-		display: inline-block;
-	}
-
-	.featherlight-swipe-aware .featherlight-next,
-	.featherlight-swipe-aware .featherlight-previous {
-		display: none;
-	}
-
-	/* Hide navigation while loading */
-	.featherlight-loading .featherlight-previous, .featherlight-loading .featherlight-next {
-		display:none;
-	}
-
-	/* Hide navigation in case of single image */
-	.featherlight-first-slide.featherlight-last-slide .featherlight-previous,
-	.featherlight-first-slide.featherlight-last-slide .featherlight-next {
-		display:none;
-	}
+.featherlight-next,
+.featherlight-previous {
+	display: block;
+	position: absolute;
+	top: 25px;
+	right: 25px;
+	bottom: 0;
+	left: 80%;
+	cursor: pointer;
+	/* preventing text selection */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	/* IE9 hack, otherwise navigation doesn't appear */
+	background: rgba(0,0,0,0);
 }
+
+.featherlight-previous {
+	left: 25px;
+	right: 80%;
+}
+
+.featherlight-next:hover,
+.featherlight-previous:hover {
+	background: rgba(255,255,255,0.25);
+}
+
+
+.featherlight-next span,
+.featherlight-previous span {
+	display: none;
+	position: absolute;
+
+	top: 50%;
+	left: 5%;
+	width: 82%;
+
+	/* center horizontally */
+	text-align: center;
+
+	font-size: 80px;
+	line-height: 80px;
+
+	/* center vertically */
+	margin-top: -40px;
+
+	text-shadow: 0px 0px 5px #fff;
+	color: #fff;
+	font-style: normal;
+	font-weight: normal;
+}
+.featherlight-next span {
+	right: 5%;
+	left: auto;
+}
+
+
+.featherlight-next:hover span,
+.featherlight-previous:hover span {
+	display: inline-block;
+}
+
+.featherlight-swipe-aware .featherlight-next,
+.featherlight-swipe-aware .featherlight-previous {
+	display: none;
+}
+
+/* Hide navigation while loading */
+.featherlight-loading .featherlight-previous, .featherlight-loading .featherlight-next {
+	display:none;
+}
+
+/* Hide navigation in case of single image */
+.featherlight-first-slide.featherlight-last-slide .featherlight-previous,
+.featherlight-first-slide.featherlight-last-slide .featherlight-next {
+	display:none;
+}
+
 
 /* Always display arrows on touch devices */
 @media only screen and (max-device-width: 1024px){
