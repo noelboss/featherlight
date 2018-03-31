@@ -345,14 +345,52 @@ or you can provide the link directly as the featherlight-attribute:
 	<a href="#" data-featherlight="url.html .jQuery-Selector">Open Ajax Content</a>
 
 ## Open lightbox with iframe
-Featherlight generates an iframe with the 'iframe' keyword and a given url
+Featherlight generates an iframe with the 'iframe' keyword and a given URL.  
+The default size of the iframe is very small (300 x 150).  
 
 	<a href="http://www.example.com" data-featherlight="iframe">Open example.com in an iframe</a>
 
-Options `iframeWidth`, `iframeMinWidth`, etc. or their corresponding data attributes `data-featherlight-iframe-width`, `data-featherlight-iframe-min-width` are used as CSS when present.
+Options:  
+You can use the following iframe attributes:  
+
+	allow, allowfullscreen, frameborder, height, longdesc, marginheight, marginwidth, mozallowfullscreen, name, referrerpolicy, sandbox, scrolling, src, srcdoc, style, webkitallowfullscreen, width  
+
+For example, to set the height and width, you would use
+
+	data-featherlight-iframe-height="640" data-featherlight-iframe-width="480"
+
+or to set some css style:
+
+	data-featherlight-iframe-style="border:none"
+
+You can also set the iframe attributes `iframeWidth`, `iframeMinWidth` etc. using JavaScript:
 
 	$.featherlight({iframe: 'editor.html', iframeMaxWidth: '80%', iframeWidth: 500,
 		iframeHeight: 300});
+
+## Open YouTube video with Featherlight
+Featherlight generates an iframe that contains the embedded video.
+
+Display a clickable thumbnail image that opens a video with a fixed size of 640 x 480 and automatically start playback:
+```
+<a href="http://www.youtube.com/embed/f0BzD1zCye0?rel=0&amp;autoplay=1" data-featherlight="iframe" data-featherlight-iframe-width="640" data-featherlight-iframe-height="480" data-featherlight-iframe-frameborder="0" data-featherlight-iframe-allow="autoplay; encrypted-media" data-featherlight-iframe-allowfullscreen="true">
+<img src="http://img.youtube.com/vi/f0BzD1zCye0/0.jpg" alt="" />
+</a>
+```
+A text link that opens a video in a lightbox that is stretched to 85% height and width of the viewport:
+```
+<a href="http://www.youtube.com/embed/f0BzD1zCye0?rel=0&amp;autoplay=1" data-featherlight="iframe" data-featherlight-iframe-frameborder="0" data-featherlight-iframe-allow="autoplay; encrypted-media" data-featherlight-iframe-allowfullscreen="true" data-featherlight-iframe-style="display:block;border:none;height:85vh;width:85vw;">
+<img src="http://img.youtube.com/vi/f0BzD1zCye0/0.jpg" alt="" />
+</a>
+```
+A link that opens a video in a lightbox that fills 100% of the window:  
+Note: the "close" icon is not visible so this example is not user-friendly.
+```
+<a href="http://www.youtube.com/embed/f0BzD1zCye0?rel=0&amp;autoplay=1" data-featherlight="iframe" data-featherlight-iframe-frameborder="0" data-featherlight-iframe-allow="autoplay; encrypted-media" data-featherlight-iframe-allowfullscreen="true" 
+data-featherlight-iframe-style="position:fixed;background:#000;border:none;top:0;right:0;bottom:0;left:0;width:100%;height:100%;">
+<img src="http://img.youtube.com/vi/f0BzD1zCye0/0.jpg" alt=""  />
+</a>
+```
 
 # IE8 background transparency
 If you want the background in IE8 to be translucent, use data:image before the rgba background:
