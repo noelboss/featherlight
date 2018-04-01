@@ -478,6 +478,17 @@ var stubAjaxLoad = function(content) {
 				expect($('html')).not.to.have.class('with-featherlight');
 			});
 
+			it('works correctly with filters [#235]', function() {
+				var ok = false;
+				var fn = function(evt) {
+					ok = !evt.isDefaultPrevented();
+				};
+				$(document).on('click', fn);
+				$('#bug-235 .unrelated').click();
+				$(document).off('click', fn);
+				expect(ok).to.eql(true);
+			});
+
 		});
 	});
 }(jQuery));

@@ -480,7 +480,7 @@
 			/* make a copy */
 			config = $.extend({}, config);
 
-			/* Only for openTrigger and namespace... */
+			/* Only for openTrigger, filter & namespace... */
 			var namespace = config.namespace || Klass.defaults.namespace,
 				tempConfig = $.extend({}, Klass.defaults, Klass.readElementConfig($source[0], namespace), config),
 				sharedPersist;
@@ -506,7 +506,7 @@
 
 			$source.on(tempConfig.openTrigger+'.'+tempConfig.namespace, tempConfig.filter, handler);
 
-			return handler;
+			return {filter: tempConfig.filter, handler: handler};
 		},
 
 		current: function() {
@@ -541,9 +541,11 @@
 						return;
 					}
 					/* Bind featherlight */
-					var handler = Klass.attach($(evt.currentTarget));
+					var data = Klass.attach($(evt.currentTarget));
 					/* Dispatch event directly */
-					handler(evt);
+					if (!data.filter || $(evt.target).parentsUntil($(evt.currentTarget), data.filter).length > 0) {
+						data.handler(evt);
+					}
 				});
 			}
 		},
