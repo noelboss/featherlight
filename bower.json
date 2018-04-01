@@ -1,6 +1,6 @@
 {
   "name": "featherlight",
-  "version": "1.7.12",
+  "version": "1.7.13",
   "main": [
     "release/featherlight.min.js",
     "release/featherlight.min.css"
