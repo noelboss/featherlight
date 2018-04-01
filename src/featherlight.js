@@ -531,8 +531,9 @@
 		_onReady: function() {
 			var Klass = this;
 			if(Klass.autoBind){
+				var $autobound = $(Klass.autoBind);
 				/* Bind existing elements */
-				$(Klass.autoBind).each(function(){
+				$autobound.each(function(){
 					Klass.attach($(this));
 				});
 				/* If a click propagates to the document level, then we have an item that was added later on */
@@ -540,10 +541,16 @@
 					if (evt.isDefaultPrevented()) {
 						return;
 					}
+					var $cur = $(evt.currentTarget);
+					var len = $autobound.length;
+					$autobound = $autobound.add($cur);
+					if(len === $autobound.length) {
+						return; /* already bound */
+					}
 					/* Bind featherlight */
-					var data = Klass.attach($(evt.currentTarget));
+					var data = Klass.attach($cur);
 					/* Dispatch event directly */
-					if (!data.filter || $(evt.target).parentsUntil($(evt.currentTarget), data.filter).length > 0) {
+					if (!data.filter || $(evt.target).parentsUntil($cur, data.filter).length > 0) {
 						data.handler(evt);
 					}
 				});
