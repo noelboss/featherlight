@@ -242,7 +242,6 @@
 		/* sets the content of $instance to $content */
 		setContent: function($content){
       this.$instance.removeClass(this.namespace+'-loading');
-      this.$instance.removeClass(this.namespace+'-loading-gallery');
 
       /* we need a special class for the iframe */
       this.$instance.toggleClass(this.namespace+'-iframe', $content.is('iframe'));
