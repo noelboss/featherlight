@@ -134,6 +134,7 @@
 				$inner = self.$instance.find('.' + self.namespace + '-inner');
 			index = ((index % len) + len) % len; /* pin index to [0, len[ */
 
+			this.$instance.addClass(this.namespace+'-loading');
 			self.$currentTarget = source.eq(index);
 			self.beforeContent();
 			return $.when(
