@@ -282,9 +282,11 @@
 
 					/* Set content and show */
 					return $.when($content)
-						.always(function($content){
-							self.setContent($content);
-							self.afterContent(event);
+						.always(function($openendContent){
+							if($openendContent) {
+								self.setContent($openendContent);
+								self.afterContent(event);
+							}
 						})
 						.then(self.$instance.promise())
 						/* Call afterOpen after fadeIn is done */
@@ -395,7 +397,7 @@
 						if ( status !== "error" ) {
 							deferred.resolve($container.contents());
 						}
-						deferred.fail();
+						deferred.reject();
 					});
 					return deferred.promise();
 				}
