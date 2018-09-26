@@ -39,7 +39,9 @@
 					if (self._swiper) {
 						self._swiper
 							.off('swipeleft', self._swipeleft) /* See http://stackoverflow.com/questions/17367198/hammer-js-cant-remove-event-listener */
-							.off('swiperight', self._swiperight);
+							.off('swiperight', self._swiperight)
+							.off('swipeup', self._swipeup)
+							.off('swipedown', self._swipedown);
 						self._swiper = null;
 					}
 					return _super(event);
@@ -55,7 +57,9 @@
 					if (swipeAwareConstructor) {
 						self._swiper = swipeAwareConstructor(self.$instance)
 							.on('swipeleft', self._swipeleft = function()  { self.$instance.trigger('next'); })
-							.on('swiperight', self._swiperight = function() { self.$instance.trigger('previous'); });
+							.on('swiperight', self._swiperight = function() { self.$instance.trigger('previous'); })
+							.on('swipeup', self._swipeup = function() { $.featherlight.close(event); })
+							.on('swipedown', self._swipedown = function() { $.featherlight.close(event); });
 
 						self.$instance
 							.addClass(this.namespace+'-swipe-aware', swipeAwareConstructor);
