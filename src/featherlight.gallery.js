@@ -58,8 +58,8 @@
 						self._swiper = swipeAwareConstructor(self.$instance)
 							.on('swipeleft', self._swipeleft = function()  { self.$instance.trigger('next'); })
 							.on('swiperight', self._swiperight = function() { self.$instance.trigger('previous'); })
-							.on('swipeup', self._swipeup = function() { $.featherlight.close(event); })
-							.on('swipedown', self._swipedown = function() { $.featherlight.close(event); });
+							.on('swipeup', self._swipeup = function(event) { $.featherlight.close(event); })
+							.on('swipedown', self._swipedown = function(event) { $.featherlight.close(event); });
 
 						self.$instance
 							.addClass(this.namespace+'-swipe-aware', swipeAwareConstructor);
