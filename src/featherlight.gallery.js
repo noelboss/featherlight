@@ -62,8 +62,8 @@
 					}
 
 					self.$instance.find('.'+self.namespace+'-content')
-						.append(self.createNavigation('previous'))
-						.append(self.createNavigation('next'));
+						.prepend(self.createNavigation('previous'))
+						.prepend(self.createNavigation('next'));
 
 					return _super(event);
 			},
