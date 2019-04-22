@@ -151,7 +151,7 @@
 			return $('<span title="'+target+'" class="'+this.namespace+'-'+target+'"><a href="#" aria-label="' + target + '">'+this[target+'Icon']+'</a></span>').on('click keypress', (function (evt) {
 				$(this).trigger(target+'.'+self.namespace);
 				evt.preventDefault();
-			});
+			}));
 		}
 	});
 
