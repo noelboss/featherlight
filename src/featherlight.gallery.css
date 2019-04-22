@@ -37,8 +37,8 @@
 }
 
 
-.featherlight-next span,
-.featherlight-previous span {
+.featherlight-next a,
+.featherlight-previous a {
 	display: none;
 	position: absolute;
 
@@ -60,14 +60,14 @@
 	font-style: normal;
 	font-weight: normal;
 }
-.featherlight-next span {
+.featherlight-next a {
 	right: 5%;
 	left: auto;
 }
 
 
-.featherlight-next:hover span,
-.featherlight-previous:hover span {
+.featherlight-next:hover a,
+.featherlight-previous:hover a {
 	display: inline-block;
 }
 
@@ -94,8 +94,8 @@
 	.featherlight-previous:hover {
 		background: none;
 	}
-	.featherlight-next span,
-	.featherlight-previous span {
+	.featherlight-next a,
+	.featherlight-previous a {
 		display: block;
 	}
 }
@@ -114,8 +114,8 @@
 		right: 85%;
 	}
 
-	.featherlight-next span,
-	.featherlight-previous span {
+	.featherlight-next a,
+	.featherlight-previous a {
 		margin-top: -30px;
 		font-size: 40px;
 	}
