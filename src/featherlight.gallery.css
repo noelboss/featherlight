@@ -39,7 +39,8 @@
 
 .featherlight-next a,
 .featherlight-previous a {
-	display: none;
+	display: inline-block;
+	opacity: 0.3;
 	position: absolute;
 
 	top: 50%;
@@ -65,11 +66,14 @@
 	left: auto;
 }
 
-
 .featherlight-next:hover a,
-.featherlight-previous:hover a {
-	display: inline-block;
-}
+.featherlight-previous:hover a,
+.featherlight-next a:focus,
+.featherlight-previous a:focus,
+.featherlight-next a:active,
+.featherlight-previous a:active {
+	opacity: 1;
+ }
 
 .featherlight-swipe-aware .featherlight-next,
 .featherlight-swipe-aware .featherlight-previous {
