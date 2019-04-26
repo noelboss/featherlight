@@ -106,7 +106,7 @@ defaults: {
 	otherClose:     null,                  /* Selector for alternate close buttons (e.g. "a.close") */
 	beforeOpen:     $.noop,                /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 	beforeContent:  $.noop,                /* Called when content is about to be presented. `this` is the featherlight instance. Gets event as parameter */
-	beforeClose:    $.noop,                /* Called before close. can return false to prevent opening of lightbox. `this` is the featherlight instance. Gets event as parameter  */
+	beforeClose:    $.noop,                /* Called before close. can return false to prevent closing of lightbox. `this` is the featherlight instance. Gets event as parameter  */
 	afterOpen:      $.noop,                /* Called after open. `this` is the featherlight instance. Gets event as parameter  */
 	afterContent:   $.noop,                /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
 	afterClose:     $.noop,                /* Called after close. `this` is the featherlight instance. Gets event as parameter  */
@@ -345,16 +345,16 @@ or you can provide the link directly as the featherlight-attribute:
 	<a href="#" data-featherlight="url.html .jQuery-Selector">Open Ajax Content</a>
 
 ## Open lightbox with iframe
-Featherlight generates an iframe with the 'iframe' keyword and a given URL.  
-The default size of the iframe is very small (300 x 150).  
+Featherlight generates an iframe with the 'iframe' keyword and a given URL.
+The default size of the iframe is very small (300 x 150).
 
 	<a href="http://www.example.com" data-featherlight="iframe">Open example.com in an iframe</a>
 
-Options:  
-You can use the following iframe attributes:  
+Options:
+You can use the following iframe attributes:
 `
-allow, allowfullscreen, frameborder, height, longdesc, marginheight, marginwidth, mozallowfullscreen, name, referrerpolicy, sandbox, scrolling, src, srcdoc, style, webkitallowfullscreen, width  
-`  
+allow, allowfullscreen, frameborder, height, longdesc, marginheight, marginwidth, mozallowfullscreen, name, referrerpolicy, sandbox, scrolling, src, srcdoc, style, webkitallowfullscreen, width
+`
 
 For example, to set the height and width, you would use
 
@@ -372,22 +372,22 @@ You can also set the iframe attributes `iframeWidth`, `iframeMinWidth` etc. usin
 ## Open YouTube video with Featherlight
 Featherlight generates an iframe that contains the embedded video.
 
-Display a clickable thumbnail image that opens a video with a fixed size of 640 x 480 and automatically start playback:  
+Display a clickable thumbnail image that opens a video with a fixed size of 640 x 480 and automatically start playback:
 `
 <a href="http://www.youtube.com/embed/f0BzD1zCye0?rel=0&amp;autoplay=1" data-featherlight="iframe" data-featherlight-iframe-width="640" data-featherlight-iframe-height="480" data-featherlight-iframe-frameborder="0" data-featherlight-iframe-allow="autoplay; encrypted-media" data-featherlight-iframe-allowfullscreen="true">
 <img src="http://img.youtube.com/vi/f0BzD1zCye0/0.jpg" alt="" />
 </a>
-`  
+`
 
-A text link that opens a video in a lightbox that is stretched to 85% height and width of the viewport:  
+A text link that opens a video in a lightbox that is stretched to 85% height and width of the viewport:
 `
 <a href="http://www.youtube.com/embed/f0BzD1zCye0?rel=0&amp;autoplay=1" data-featherlight="iframe" data-featherlight-iframe-frameborder="0" data-featherlight-iframe-allow="autoplay; encrypted-media" data-featherlight-iframe-allowfullscreen="true" data-featherlight-iframe-style="display:block;border:none;height:85vh;width:85vw;">My video</a>
-`  
-
-A link that opens a video in a lightbox that fills 100% of the window:  
-Note: the "close" icon is not visible so this example is not user-friendly.  
 `
-<a href="http://www.youtube.com/embed/f0BzD1zCye0?rel=0&amp;autoplay=1" data-featherlight="iframe" data-featherlight-iframe-frameborder="0" data-featherlight-iframe-allow="autoplay; encrypted-media" data-featherlight-iframe-allowfullscreen="true" 
+
+A link that opens a video in a lightbox that fills 100% of the window:
+Note: the "close" icon is not visible so this example is not user-friendly.
+`
+<a href="http://www.youtube.com/embed/f0BzD1zCye0?rel=0&amp;autoplay=1" data-featherlight="iframe" data-featherlight-iframe-frameborder="0" data-featherlight-iframe-allow="autoplay; encrypted-media" data-featherlight-iframe-allowfullscreen="true"
 data-featherlight-iframe-style="position:fixed;background:#000;border:none;top:0;right:0;bottom:0;left:0;width:100%;height:100%;">My video</a>
 `
 
