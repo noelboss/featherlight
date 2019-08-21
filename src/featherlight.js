@@ -1,11 +1,36 @@
 /**
  * Featherlight - ultra slim jQuery lightbox
- * Version 1.7.13 - http://noelboss.github.io/featherlight/
+ * Version 1.7.13-UMD - http://noelboss.github.io/featherlight/
  *
  * Copyright 2018, Noël Raoul Bossart (http://www.noelboss.com)
  * MIT Licensed.
 **/
-(function($) {
+(function (factory) {
+	if (typeof define === 'function' && define.amd) {
+		// AMD. Register as an anonymous module.
+		define(['jquery'], factory);
+	} else if (typeof module === 'object' && module.exports) {
+		// Node/CommonJS
+		module.exports = function (root, jQuery) {
+			if (jQuery === undefined) {
+				// require('jQuery') returns a factory that requires window to
+				// build a jQuery instance, we normalize how we use modules
+				// that require this pattern but the window provided is a noop
+				// if it's defined (how jquery works)
+				if (typeof window !== 'undefined') {
+					jQuery = require('jquery');
+				} else {
+					jQuery = require('jquery')(root);
+				}
+			}
+			factory(jQuery);
+			return jQuery;
+		};
+	} else {
+		// Browser globals
+		factory(jQuery);
+	}
+})(function($) {
 	"use strict";
 
 	if('undefined' === typeof $) {
@@ -640,4 +665,4 @@
 
 	/* bind featherlight on ready if config autoBind is set */
 	$(document).ready(function(){ Featherlight._onReady(); });
-}(jQuery));
+});
