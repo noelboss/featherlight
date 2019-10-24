@@ -23,30 +23,30 @@ Here you'll find a [list of all the changes](https://github.com/noelboss/feather
 
 All styling is done using CSS so you'll want to include the Featherlight CSS in your head.
 
-	<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/featherlight/v.1.7.14/featherlight.min.css" integrity="sha256-UHP0vaPqS1SY6G5ySZndoVKzQJYBSVF2pqs4mPrDEcE=" crossorigin="anonymous" />
 
 Be aware that Featherlight uses very unspecific CSS selectors to help you overwrite every aspect. This means in turn, that if you're not following a modularized approach to write CSS (which you should! It's terrific!) and have many global and specific definitions (read ID's and such – which you shouldn't), these definitions can break the Featherlight styling.
 
 Featherlight requires jQuery version 1.7.0 or higher (regular version, not the slim one). It's recommended to include the javascript at the bottom of the page before the closing `</body>` tag.
 
 	<script src="//code.jquery.com/jquery-latest.js"></script>
-	<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/v.1.7.14/featherlight.min.js" integrity="sha256-n/xqYYgRqwjNP/0+0VT5jmenhdqhKCSkSpmFT5aPGZM=" crossorigin="anonymous"></script>
 
 
 # Usage
 
-By default, featherlight acts on all elements using the 'data-featherlight' attribute. An element with this attribute triggers the lightbox. The value of the attribute acts as selector for an element that's opened as lightbox.
+By default, featherlight acts on all elements using the `data-featherlight` attribute. An element with this attribute triggers the lightbox. The value of the attribute acts as selector for an element that's opened as lightbox.
 
 	<a href="#" data-featherlight="#mylightbox">Open element in lightbox</a>
 	<div id="mylightbox">This div will be opened in a lightbox</div>
 
-Featherlight is smart. 'data-featherlight' can also contain a link to an image, an ajax-url or even DOM code:
+Featherlight is smart. `data-featherlight` can also contain a link to an image, an ajax-url or even DOM code:
 
 	<a href="#" data-featherlight="myimage.png">Open image in lightbox</a>
 	<a href="#" data-featherlight="myhtml.html .selector">Open ajax content in lightbox</a>
 	<a href="#" data-featherlight="<p>Fancy DOM Lightbox!</p>">Open some DOM in lightbox</a>
 
-it also works with links using href and the "image" and "ajax" keywords (this can also be manually set with the configuration options like `{image: 'photo.jpg'}` or `{type: 'image'}`):
+It also works with links using href and the "image" and "ajax" keywords (this can also be manually set with the configuration options like `{image: 'photo.jpg'}` or `{type: 'image'}`):
 
 	<a href="myimage.png" data-featherlight="image">Open image in lightbox</a>
 	<a href="myhtml.html .selector" data-featherlight="ajax">Open ajax content in lightbox</a>
@@ -60,7 +60,7 @@ You can bind the Featherlight events on any element using the following code:
 
 	$('.myElement').featherlight($content, configuration);
 
-It will then look for the `targetAttr` (by default "data-featherlight") on this element and use its value to find the content that will be opened as lightbox when you click on the element.
+It will then look for the `targetAttr` (by default `data-featherlight`) on this element and use its value to find the content that will be opened as lightbox when you click on the element.
 
 ***$content*** – jQuery Object or String: You can manually pass a jQuery object or a string (see [content filters](#content-filters)) to be opened in the lightbox. Optional
 
@@ -106,7 +106,7 @@ defaults: {
 	otherClose:     null,                  /* Selector for alternate close buttons (e.g. "a.close") */
 	beforeOpen:     $.noop,                /* Called before open. can return false to prevent opening of lightbox. Gets event as parameter, this contains all data */
 	beforeContent:  $.noop,                /* Called when content is about to be presented. `this` is the featherlight instance. Gets event as parameter */
-	beforeClose:    $.noop,                /* Called before close. can return false to prevent closing of lightbox. `this` is the featherlight instance. Gets event as parameter  */
+	beforeClose:    $.noop,                /* Called before close. Can return false to prevent closing of lightbox. `this` is the featherlight instance. Gets event as parameter  */
 	afterOpen:      $.noop,                /* Called after open. `this` is the featherlight instance. Gets event as parameter  */
 	afterContent:   $.noop,                /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
 	afterClose:     $.noop,                /* Called after close. `this` is the featherlight instance. Gets event as parameter  */
@@ -406,15 +406,15 @@ You will need to use an extension (featherlight.gallery.js).  Since Featherlight
 
 Simply include the extension CSS and JavaScript Files after the regular featherlight files like this:
 
-	<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-	<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.gallery.min.css" type="text/css" rel="stylesheet" />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/featherlight/v.1.7.14/featherlight.min.css" integrity="sha256-UHP0vaPqS1SY6G5ySZndoVKzQJYBSVF2pqs4mPrDEcE=" crossorigin="anonymous" />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/featherlight/v.1.7.14/featherlight.gallery.min.css" integrity="sha256-daCpEGPdf4UfCBSSYSJPw9EQcPDjfvmroY9obVVc3nQ=" crossorigin="anonymous" />
 
 Add the JavaScript at the bottom of the body:
 
 ```html
 	<script src="//code.jquery.com/jquery-latest.js"></script>
-	<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/v.1.7.14/featherlight.min.js" integrity="sha256-n/xqYYgRqwjNP/0+0VT5jmenhdqhKCSkSpmFT5aPGZM=" crossorigin="anonymous"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/v.1.7.14/featherlight.gallery.min.js" integrity="sha256-jVM3nPKst3pnO7NaV1a+YGb+XnbfjWQ/6VmLosrq1ZU=" crossorigin="anonymous"></script>
 ```
 
 Check out the example here: [Gallery with Featherlight](gallery.html)
@@ -476,11 +476,11 @@ It sets the classes `'featherlight-first-slide'` and `'featherlight-last-slide'`
 
 Simply include the extension CSS and JavaScript Files after the regular featherlight files like this:
 
-	<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-	<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.gallery.min.css" type="text/css" rel="stylesheet" />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/featherlight/v.1.7.14/featherlight.min.css" integrity="sha256-UHP0vaPqS1SY6G5ySZndoVKzQJYBSVF2pqs4mPrDEcE=" crossorigin="anonymous" />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/featherlight/v.1.7.14/featherlight.gallery.min.css" integrity="sha256-daCpEGPdf4UfCBSSYSJPw9EQcPDjfvmroY9obVVc3nQ=" crossorigin="anonymous" />
 	<script src="//code.jquery.com/jquery-latest.js"></script>
-	<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/v.1.7.14/featherlight.min.js" integrity="sha256-n/xqYYgRqwjNP/0+0VT5jmenhdqhKCSkSpmFT5aPGZM=" crossorigin="anonymous"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/v.1.7.14/featherlight.gallery.min.js" integrity="sha256-jVM3nPKst3pnO7NaV1a+YGb+XnbfjWQ/6VmLosrq1ZU=" crossorigin="anonymous"></script>
 
 ## Gallery on Mobile Devices
 To support mobile/tablet and all touch devices, you will need to include one of the [supported swipe libraries](https://github.com/noelboss/featherlight/wiki/Gallery:-swipe-on-touch-devices). For example, to use `swipe_detect` library, include it in the header:
