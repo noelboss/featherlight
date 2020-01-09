@@ -23,14 +23,14 @@ Here you'll find a [list of all the changes](https://github.com/noelboss/feather
 
 All styling is done using CSS so you'll want to include the Featherlight CSS in your head.
 
-	<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+	<link href="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
 
 Be aware that Featherlight uses very unspecific CSS selectors to help you overwrite every aspect. This means in turn, that if you're not following a modularized approach to write CSS (which you should! It's terrific!) and have many global and specific definitions (read ID's and such – which you shouldn't), these definitions can break the Featherlight styling.
 
 Featherlight requires jQuery version 1.7.0 or higher (regular version, not the slim one). It's recommended to include the javascript at the bottom of the page before the closing `</body>` tag.
 
 	<script src="//code.jquery.com/jquery-latest.js"></script>
-	<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
 
 
 # Usage
