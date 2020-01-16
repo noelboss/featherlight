@@ -406,15 +406,15 @@ You will need to use an extension (featherlight.gallery.js).  Since Featherlight
 
 Simply include the extension CSS and JavaScript Files after the regular featherlight files like this:
 
-	<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-	<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.gallery.min.css" type="text/css" rel="stylesheet" />
+	<link href="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+	<link href="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.css" type="text/css" rel="stylesheet" />
 
 Add the JavaScript at the bottom of the body:
 
 ```html
 	<script src="//code.jquery.com/jquery-latest.js"></script>
-	<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
 ```
 
 Check out the example here: [Gallery with Featherlight](gallery.html)
@@ -476,11 +476,11 @@ It sets the classes `'featherlight-first-slide'` and `'featherlight-last-slide'`
 
 Simply include the extension CSS and JavaScript Files after the regular featherlight files like this:
 
-	<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-	<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.gallery.min.css" type="text/css" rel="stylesheet" />
+	<link href="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+	<link href="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.css" type="text/css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-latest.js"></script>
-	<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.14/release/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//cdn.jsdelivr.net/npm/featherlight@1.7.14/release/featherlight.gallery.min.js" type="text/javascript" charset="utf-8"></script>
 
 ## Gallery on Mobile Devices
 To support mobile/tablet and all touch devices, you will need to include one of the [supported swipe libraries](https://github.com/noelboss/featherlight/wiki/Gallery:-swipe-on-touch-devices). For example, to use `swipe_detect` library, include it in the header:
