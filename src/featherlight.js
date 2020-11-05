@@ -525,7 +525,7 @@
 				} else if(fl.persist !== false) {
 					$target.data('featherlight-persisted', fl);
 				}
-				if (elemConfig.$currentTarget.blur) {
+				if (elemConfig.$currentTarget) {
 					elemConfig.$currentTarget.blur(); // Otherwise 'enter' key might trigger the dialog again
 				}
 				fl.open(event);
@@ -619,7 +619,7 @@
 
 				this._$previouslyWithTabIndex.add(this._$previouslyTabbable).attr('tabindex', -1);
 
-				if (document.activeElement.blur) {
+				if (document.activeElement) {
 					document.activeElement.blur();
 				}
 				return _super(event);
@@ -633,7 +633,9 @@
 				this._$previouslyWithTabIndex.each(function(i, elem) {
 					$(elem).attr('tabindex', self._previousWithTabIndices[i]);
 				});
-				this._previouslyActive.focus();
+				if (this._previouslyActive) {
+					this._previouslyActive.focus();
+				}
 				// Restore scroll
 				if(Featherlight.opened().length === 0) {
 					$(document.documentElement).removeClass('with-featherlight');
