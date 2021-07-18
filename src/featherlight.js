@@ -392,7 +392,7 @@
 				process: function(elem) { return this.persist !== false ? $(elem) : $(elem).clone(true); }
 			},
 			image: {
-				regex: /\.(png|jpg|jpeg|gif|tiff?|bmp|svg|webp)(\?\S*)?$/i,
+				regex: /\.(png|jpg|jpeg|gif|tiff?|bmp|svg|webp|avif)(\?\S*)?$/i,
 				process: function(url)  {
 					var self = this,
 						deferred = $.Deferred(),
