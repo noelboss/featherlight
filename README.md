@@ -506,3 +506,5 @@ Pull requests are welcome (good tips can be found on [Stack Overflow](http://sta
 
 To run the tests, you can open `test/featherlight.html` or `test/featherlight_gallery.html` in your browser.
 Alternatively, run them from the console with `grunt test`; you will need to run `npm install` the first time.
+
+©️ [Noevu - Schweizer KMU Webseiten Entwicklung](https://www.noevu.ch/#entwicklung)
