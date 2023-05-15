@@ -164,6 +164,7 @@
 		afterOpen:      $.noop,                /* Called after open. Gets event as parameter, this contains all data */
 		afterContent:   $.noop,                /* Called after content is ready and has been set. Gets event as parameter, this contains all data */
 		afterClose:     $.noop,                /* Called after close. Gets event as parameter, this contains all data */
+		afterError:     $.noop,                /* Called after an error loading content. Gets event as parameter, this contains all data */
 		onKeyUp:        $.noop,                /* Called on key up for the frontmost featherlight */
 		onResize:       $.noop,                /* Called after new content and when a window is resized */
 		type:           null,                  /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
@@ -315,7 +316,8 @@
 						})
 						.then(self.$instance.promise())
 						/* Call afterOpen after fadeIn is done */
-						.done(function(){ self.afterOpen(event); });
+						.done(function(){ self.afterOpen(event); })
+						.fail(function(){ self.afterError(event); });
 				}
 			}
 			self.$instance.detach();
@@ -449,7 +451,7 @@
 			}
 		},
 
-		functionAttributes: ['beforeOpen', 'afterOpen', 'beforeContent', 'afterContent', 'beforeClose', 'afterClose'],
+		functionAttributes: ['beforeOpen', 'afterOpen', 'beforeContent', 'afterContent', 'beforeClose', 'afterClose', 'afterError'],
 
 		/*** class methods ***/
 		/* read element's attributes starting with data-featherlight- */
