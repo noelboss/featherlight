@@ -37,9 +37,10 @@
 }
 
 
-.featherlight-next span,
-.featherlight-previous span {
-	display: none;
+.featherlight-next a,
+.featherlight-previous a {
+	display: inline-block;
+	opacity: 0.3;
 	position: absolute;
 
 	top: 50%;
@@ -60,16 +61,19 @@
 	font-style: normal;
 	font-weight: normal;
 }
-.featherlight-next span {
+.featherlight-next a {
 	right: 5%;
 	left: auto;
 }
 
-
-.featherlight-next:hover span,
-.featherlight-previous:hover span {
-	display: inline-block;
-}
+.featherlight-next:hover a,
+.featherlight-previous:hover a,
+.featherlight-next a:focus,
+.featherlight-previous a:focus,
+.featherlight-next a:active,
+.featherlight-previous a:active {
+	opacity: 1;
+ }
 
 .featherlight-swipe-aware .featherlight-next,
 .featherlight-swipe-aware .featherlight-previous {
@@ -94,8 +98,8 @@
 	.featherlight-previous:hover {
 		background: none;
 	}
-	.featherlight-next span,
-	.featherlight-previous span {
+	.featherlight-next a,
+	.featherlight-previous a {
 		display: block;
 	}
 }
@@ -114,8 +118,8 @@
 		right: 85%;
 	}
 
-	.featherlight-next span,
-	.featherlight-previous span {
+	.featherlight-next a,
+	.featherlight-previous a {
 		margin-top: -30px;
 		font-size: 40px;
 	}

@@ -617,7 +617,7 @@
 					return $(elem).attr('tabindex');
 				});
 
-				this._$previouslyWithTabIndex.add(this._$previouslyTabbable).attr('tabindex', -1);
+				this._$previouslyWithTabIndex.add(this._$previouslyTabbable).not("[title='previous'] a").not("[title='next'] a").attr('tabindex', -1);
 
 				if (document.activeElement.blur) {
 					document.activeElement.blur();
