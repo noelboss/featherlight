@@ -526,7 +526,7 @@
 					$target.data('featherlight-persisted', fl);
 				}
 				if (elemConfig.$currentTarget.blur) {
-					elemConfig.$currentTarget.blur(); // Otherwise 'enter' key might trigger the dialog again
+					elemConfig.$currentTarget.trigger('blur'); // Otherwise 'enter' key might trigger the dialog again
 				}
 				fl.open(event);
 			};
@@ -648,7 +648,7 @@
 
 			afterContent: function(_super, event){
 				var r = _super(event);
-				this.$instance.find('[autofocus]:not([disabled])').focus();
+				this.$instance.find('[autofocus]:not([disabled])').trigger('focus');
 				this.onResize(event);
 				return r;
 			}
