@@ -137,7 +137,7 @@
 		nextIcon: '&#9654;',         /* Code that is used as next icon */
 		galleryFadeIn: 100,          /* fadeIn speed when image is loaded */
 		galleryFadeOut: 300,         /* fadeOut speed before image is loaded */
-		allowWrapAround: true,       /* set to false to disable previous on first image and next on last image /*
+		allowWrapAround: true,       /* set to false to disable previous on first image and next on last image */
 
 		slides: function() {
 			if (this.filter) {
