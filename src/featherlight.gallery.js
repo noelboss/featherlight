@@ -90,9 +90,11 @@
 						.append(self.createNavigation('previous'))
 						.append(self.createNavigation('next'));
 
+					self.$instance
+						.toggleClass(self.namespace+'-no-wrap-around', !self.allowWrapAround)
 					return _super(event);
 			},
-			beforeContent: function(_super, event) {
+			afterContent: function(_super, event) {
 				var index = this.currentNavigation();
 				var len = this.slides().length;
 				this.$instance
@@ -135,6 +137,7 @@
 		nextIcon: '&#9654;',         /* Code that is used as next icon */
 		galleryFadeIn: 100,          /* fadeIn speed when image is loaded */
 		galleryFadeOut: 300,         /* fadeOut speed before image is loaded */
+		allowWrapAround: true,       /* set to false to disable previous on first image and next on last image /*
 
 		slides: function() {
 			if (this.filter) {
@@ -157,7 +160,20 @@
 				source = self.slides(),
 				len = source.length,
 				$inner = self.$instance.find('.' + self.namespace + '-inner');
-			index = ((index % len) + len) % len; /* pin index to [0, len[ */
+			// pin index to [0, len[
+			if (self.allowWrapAround) {
+				index = ((index % len) + len) % len;
+			} else {
+				if (index < 0) {
+					index = 0;
+				} else if (index >= len) {
+					index = len - 1;
+				}
+			}
+
+			if (index === self.currentNavigation()) {
+				return;
+			}
 
 			this.$instance.addClass(this.namespace+'-loading');
 			self.$currentTarget = source.eq(index);
