@@ -117,7 +117,7 @@
 	}
 
 	/* document wide key handler */
-	var eventMap = { keyup: 'onKeyUp', resize: 'onResize' };
+	var eventMap = { keyup: 'onKeyUp', resize: 'onResize', popstate: 'onPopState' };
 
 	var globalEventHandler = function(event) {
 		$.each(Featherlight.opened().reverse(), function() {
@@ -166,8 +166,10 @@
 		afterClose:     $.noop,                /* Called after close. Gets event as parameter, this contains all data */
 		onKeyUp:        $.noop,                /* Called on key up for the frontmost featherlight */
 		onResize:       $.noop,                /* Called after new content and when a window is resized */
+		onPopState:     $.noop,                /* Called when the history entry changes (back/forward button, link click, ...) */
 		type:           null,                  /* Specify type of lightbox. If unset, it will check for the targetAttrs value. */
 		contentFilters: ['jquery', 'image', 'html', 'ajax', 'iframe', 'text'], /* List of content filters to use to determine the content */
+		useHistory:     false,                 /* Use Browser History API */
 
 		/*** methods ***/
 		/* setup iterates over a single instance of featherlight and prepares the background and binds the events */
@@ -299,6 +301,9 @@
 
 				if($content) {
 					opened.push(self);
+					if (self.useHistory) {
+						history.pushState({featherlightInstanceCount: Featherlight.opened().length}, '');
+					}
 
 					toggleGlobalEvents(true);
 
@@ -336,6 +341,9 @@
 					toggleGlobalEvents(false);
 				}
 
+				if (self.useHistory && (history.state?.featherlightInstanceCount ?? 0) > $.featherlight.opened().length) {
+					history.back();
+				}
 				self.$instance.fadeOut(self.closeSpeed,function(){
 					self.$instance.detach();
 					self.afterClose(event);
@@ -651,6 +659,14 @@
 				this.$instance.find('[autofocus]:not([disabled])').focus();
 				this.onResize(event);
 				return r;
+			},
+
+			onPopState: function(_super, event){
+				if (this.useHistory && (event.originalEvent.state?.featherlightInstanceCount ?? 0) < $.featherlight.opened().length) {
+					$.featherlight.close(event);
+				}
+				
+				return _super(event);
 			}
 		}
 	});
