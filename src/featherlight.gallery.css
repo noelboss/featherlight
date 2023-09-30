@@ -87,6 +87,11 @@
 	display:none;
 }
 
+/* Hide disabled navigation */
+.featherlight-no-wrap-around.featherlight-last-slide .featherlight-next,
+.featherlight-no-wrap-around.featherlight-first-slide .featherlight-previous {
+    display: none;
+}
 
 /* Always display arrows on touch devices */
 @media only screen and (max-device-width: 1024px){
