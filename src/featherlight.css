@@ -17,7 +17,7 @@ html.with-featherlight {
 	/* dimensions: spanning the background from edge to edge */
 	position:fixed;
 	top: 0; right: 0; bottom: 0; left: 0;
-	z-index: 2147483647; /* z-index needs to be >= elements on the site. */
+	z-index: 1999999999; /* z-index needs to be >= elements on the site. */
 
 	/* position: centering content */
 	text-align: center;
