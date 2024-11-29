@@ -72,6 +72,19 @@ html.with-featherlight {
 	white-space: normal;
 }
 
+/* handling phones and small screens */
+@media only screen and (max-width: 1024px) {
+	.featherlight .featherlight-content {
+		/* dimensions: maximize lightbox width for small screens */
+		margin-left: 0;
+		margin-right: 0;
+		max-height: 98%;
+
+		padding: 10px 10px 0;
+		border-bottom: 10px solid transparent;
+	}
+}
+
 /* contains the content */
 .featherlight .featherlight-inner {
 	/* make sure its visible */
@@ -118,7 +131,6 @@ html.with-featherlight {
 	width: 100%;
 }
 
-
 .featherlight-iframe .featherlight-content {
 	/* removed the border for image croping since iframe is edge to edge */
 	border-bottom: 0;
@@ -135,19 +147,6 @@ html.with-featherlight {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-}
-
-/* handling phones and small screens */
-@media only screen and (max-width: 1024px) {
-	.featherlight .featherlight-content {
-		/* dimensions: maximize lightbox with for small screens */
-		margin-left: 0;
-		margin-right: 0;
-		max-height: 98%;
-
-		padding: 10px 10px 0;
-		border-bottom: 10px solid transparent;
-	}
 }
 
 /* hide non featherlight items when printing */
